@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mental.MathTasksOptionsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label>Choose parameters for tasks</Label>
+            <Label>Operations:</Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button Text="+" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"  FontSize="30"  TextColor="White" Clicked="OperationButtonClicked" BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
+                    <Button Text="-" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"  FontSize="30" TextColor="White"  Clicked="OperationButtonClicked" BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
+                    <Button Text="*" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"   FontSize="30" TextColor="White"  Clicked="OperationButtonClicked" BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
+                    <Button Text="/" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"   FontSize="30" TextColor="White" Clicked="OperationButtonClicked" BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
+            </StackLayout>
+            <Label Text="Chain Length:"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Length Fixed"></Label>
+                <Button x:Name="FixedChainLengthButton" Text="+" Clicked="ChainLengthFixedButtonClicked"></Button>
+            </StackLayout>
+            <Label Text="Maximum Chain Length"></Label>
+            <Label x:Name="MaximumChainLengthValueLabel" Text=""></Label>
+            <Slider x:Name="MaximumChainLengthValueSlider" ValueChanged="MaximumChainLengthValueSlider_ValueChanged" Maximum="8" Minimum="2" ></Slider>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Special Mode"></Label>
+                <Button x:Name="SpecialModeButton" Text="-" Clicked="SpecialModeButtonClicked"></Button>
+            </StackLayout>
+            <StackLayout x:Name="SpecialModeLayout">
+                <Label Text="For operations '*' and '/' as second values are used x-digit numbers"></Label>
+                <Label Text="Amount of digits" HorizontalOptions="Center"></Label>
+                <Label x:Name="SpecialModeXDigitLabel" Text="1" HorizontalOptions="Center"></Label>
+                <Slider x:Name="SpecialModeXDigitSlider" Maximum="8" Minimum="1" ValueChanged="SpecialModeXDigitSlider_ValueChanged"></Slider>
+            </StackLayout>
+            <Label Text="Numbers type:"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="IntegerNumberTypeButton" Text="Integer" Clicked="NumberTypeButtonClick"></Button>
+                <Button x:Name="FractionalNumberTypeButton" Text="Fractional" Clicked="NumberTypeButtonClick"></Button>
+            </StackLayout>
+            <StackLayout x:Name="FractionalNumbersOptions">
+                <Label Text="Digits after dot sign" HorizontalOptions="Center"></Label>
+                <Label x:Name="DigitsAfterDotSignLabel" Text="1" HorizontalOptions="Center"></Label>
+                <Slider x:Name="DigitsAfterDotSignSlider" Maximum="8" Minimum="1" ValueChanged="DigitsAfterDotSignSlider_ValueChanged"></Slider>
+            </StackLayout>
+                <Label Text="Generated Values:"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Minimum value:"></Label>
+                <Editor x:Name="MinValueEditor" Keyboard="Numeric" HorizontalOptions="EndAndExpand"></Editor>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Maximum value:"></Label>
+                <Editor x:Name="MaxValueEditor" Keyboard="Numeric" HorizontalOptions="EndAndExpand"></Editor>
+            </StackLayout>
+                <Label Text="Type of tasks:"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="CountResultButton" Text="Count the result" Clicked="TaskTypeButtonClicked"></Button>
+                    <Button x:Name="CountVariableButton" Text="Count the variable" Clicked="TaskTypeButtonClicked"></Button>
+                </StackLayout>
+                <Label Text="Time Options:"></Label>
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="CountDownTimeOptionButton" Text="Countdown" Clicked="TimeOptionButtonClicked"></Button>
+                    <Button x:Name="LimitedTasksOptionButton" Text="Limited Tasks" Clicked="TimeOptionButtonClicked"></Button>
+                </StackLayout>
+                <StackLayout x:Name="CountdownTimerOptions">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Time for task:"></Label>
+                        <Label x:Name="TimerStartValueLabel"></Label>
+                    </StackLayout>
+                    <Slider x:Name="TimerStartValueSlider" ValueChanged="TimerStartValueSlider_ValueChanged" Maximum="60" Minimum="1"></Slider>
+                </StackLayout>
+                <StackLayout x:Name="LimitedTasksOptions" Orientation="Horizontal">
+                    <Label Text="Amount of operations: "></Label>
+                    <Editor x:Name="AmountOfOperationsEditor" Keyboard="Numeric"></Editor>
+                </StackLayout>
+                <Button x:Name="StartButton" Text="Start" Clicked="StartButtonClicked"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

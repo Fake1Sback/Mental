@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mental.CountVariableTaskView">
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" AlignItems="Center">
+            <StackLayout x:Name="FixedAmountOfOperationsLayout" Orientation="Horizontal" IsVisible="False">
+                <Label Text="Answered:"></Label>
+                <Label x:Name="CompletedTasks" Text="1"></Label>
+                <Label Text="/"></Label>
+                <Label x:Name="TasksInGeneral" Text="0"></Label>
+            </StackLayout>
+            <Label x:Name="Timer_Label" FontSize="Large" Text="00:00" HorizontalTextAlignment="Center"></Label>
+            <Label x:Name="OperationLabel" FontSize="40" HorizontalOptions="CenterAndExpand"></Label>
+            <Label x:Name="EqualsLabel" FontSize="40" HorizontalOptions="CenterAndExpand">=</Label>
+            <Label x:Name="AnswerLabel" FontSize="40" HorizontalOptions="CenterAndExpand"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="1" Clicked="Button_Clicked"></Button>
+                <Button Text="2" Clicked="Button_Clicked"></Button>
+                <Button Text="3" Clicked="Button_Clicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="4" Clicked="Button_Clicked"></Button>
+                <Button Text="5" Clicked="Button_Clicked"></Button>
+                <Button Text="6" Clicked="Button_Clicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="7" Clicked="Button_Clicked"></Button>
+                <Button Text="8" Clicked="Button_Clicked"></Button>
+                <Button Text="9" Clicked="Button_Clicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="0" Clicked="Button_Clicked"></Button>
+                <Button Text="." Clicked="Button_Clicked"></Button>
+                <Button Text="-" Clicked="Minus_Button_Clicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Del" Clicked="Del_Button_Clicked"></Button>
+                <Button Text="OK" Clicked="Ok_Button_Clicked"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="CORRECT" TextColor="Green"></Label>
+                <Label x:Name="AmountOfCorrectAnswersLabel" Text="0" TextColor="Green"></Label>
+                <Label Text="/"></Label>
+                <Label x:Name="AmountOfWrongAnswersLabel" Text="0" TextColor="Red"></Label>
+                <Label Text="WRONG" TextColor="Red"></Label>
+            </StackLayout>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>
