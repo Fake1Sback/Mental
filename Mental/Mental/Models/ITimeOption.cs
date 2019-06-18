@@ -6,8 +6,11 @@ namespace Mental.Models
 {
     public interface ITimeOption
     {
-        void StartTimer();
-        string GetTime();
+        //void StartTimer();
+        void TimerWork();
+        bool CheckTimerEnd();
+        string GetTimeString();
+        int GetMillis();
         bool CanExecuteOperation();
     }
 }

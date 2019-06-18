@@ -6,9 +6,13 @@ E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\App.xaml
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.csproj.CoreCompileInputs.cache
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.AssemblyInfoInputs.cache
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.AssemblyInfo.cs
-E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.dll
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.pdb
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\MathTasksOptionsPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\CountResultTaskView.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\CountVariableTaskView.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\SimilarTasksStatisticsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\GeneralStatisticsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\MathTasksOptionsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\MathTasksPage.xaml.g.cs

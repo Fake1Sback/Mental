@@ -47,6 +47,15 @@ namespace Mental.Models
                 return random.Next(minValue, maxValue) * -1;
         }
 
+        public double GenerateDoubleDigitRestrictedValue()
+        {
+            int integerpart = GenerateDigitRestrictedValue();
+            if (integerpart < 0)
+                return integerpart - random.NextDouble();
+            else
+                return integerpart + random.NextDouble();
+        }
+
         public double GenerateDoubleValue()
         {
             int integerPart = GenerateRandomValue();

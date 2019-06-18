@@ -10,30 +10,41 @@ namespace Mental.Models
         private TimeSpan Time;
         private int GeneralAmountOfTasks;
         private int CurrentAmountOfTasks;
-
+     
         public LimitedTasksTimeOption(MathTasksOptions mathTasksOptions)
         {
             GeneralAmountOfTasks = mathTasksOptions.AmountOfTasks;
             CurrentAmountOfTasks = 1;
         }
 
-
-        public void StartTimer()
+        public void TimerWork()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            if(CheckTimerEnd())
             {
                 Time = Time.Add(TimeSpan.FromSeconds(1));
-                return true;
-            });
+            }
         }
 
-        public string GetTime()
+        public string GetTimeString()
         {
-            return $"Answered: {CurrentAmountOfTasks} / {GeneralAmountOfTasks}\n {Time.ToString()}";
+            return $"Answering: {CurrentAmountOfTasks} / {GeneralAmountOfTasks}\n {Time.ToString()}";
+        }
+
+        public int GetMillis()
+        {
+            return (int)Time.TotalMilliseconds;
+        }
+
+        public bool CheckTimerEnd()
+        {
+            if (CurrentAmountOfTasks < GeneralAmountOfTasks)
+                return true;
+            else
+                return false;
         }
 
         public bool CanExecuteOperation()
-        {
+        {         
             if (CurrentAmountOfTasks < GeneralAmountOfTasks)
             {
                 CurrentAmountOfTasks += 1;

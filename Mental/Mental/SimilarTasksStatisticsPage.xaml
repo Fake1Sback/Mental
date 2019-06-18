@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Mental.SimilarTasksStatisticsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <charts:ChartView x:Name="LineChart1" WidthRequest="100" HeightRequest="200"></charts:ChartView>
+                <Button x:Name="ShowHideDetailedTaskOptions" Text="Show Task Options" Clicked="ShowHideDetailedTaskOptionsButtonClicked"></Button>
+                <StackLayout x:Name="DetailedTaskOptions" IsVisible="False">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Operations: "></Label>
+                        <Label x:Name="PlusLabel" Text="+" IsVisible="False"></Label>
+                        <Label x:Name="MinusLabel" Text="-" IsVisible="False"></Label>
+                        <Label x:Name="MultiplyLabel" Text="*" IsVisible="False"></Label>
+                        <Label x:Name="DivideLabel" Text="/" IsVisible="False"></Label>
+                    </StackLayout>
+                    <Label x:Name="TaskTypeLabel" Text="Task Type: "></Label>
+                    <Label x:Name="TimeOptionLabel" Text="Time Option:"></Label>
+                    <Label x:Name="AmountTaskOrMinutesLabel" Text="Amount of minutes: "></Label>
+                    <Label x:Name="MinValueLabel" Text="Min value: "></Label>
+                    <Label x:Name="MaxValueLabel" Text="Max value: "></Label>
+                    <Label x:Name="ChainLengthFixedLabel" Text="IsChainLengthFixed? "></Label>
+                    <Label x:Name="MaxChainLengthLabel" Text="Max Chain Length: "></Label>
+                    <Label x:Name="DataTypeLabel" Text="Data Type: "></Label>
+                    <Label x:Name="DigitsAfterDotSignLabel" Text="Digits after dot sign: " IsVisible="False"></Label>
+                    <Label x:Name="SpecialModeActiavetedLabel" Text="Special mode activated?:" IsVisible="False"></Label>
+                    <Label x:Name="SpecialModeRestricationsLabel" Text="Special mode restriction: " IsVisible="False"></Label>
+                    <Label x:Name="TaskResultsLabel" Text="Task results:"></Label>
+                    <Label x:Name="LongestTimeSpentForExpressionLabel"  Text="Longest time spent for expression: "></Label>
+                    <Label x:Name="LongestTimeExpressionLabel" Text="Expression"></Label>
+                    <Label x:Name="ShortestTimeSpentForExpressionLabel" Text="Shortest time spent for epxression: "></Label>
+                    <Label x:Name="ShortestTimeExpressionLabel" Text="Expression"></Label>
+                </StackLayout>
+                <Button x:Name="SaveResultButton" Text="Save Results" Clicked="SaveResultsButtonClicked"></Button>
+                <ListView x:Name="SimilarTasksListView" Margin="5,5,5,5" RowHeight="50" ItemTapped="ListViewItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical" Margin="15,0,15,0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="+" IsVisible="{Binding PlusOperation}"></Label>
+                                        <Label Text="-" IsVisible="{Binding MinusOperation}"></Label>
+                                        <Label Text="*" IsVisible="{Binding MultiplyOperation}"></Label>
+                                        <Label Text="/" IsVisible="{Binding DivideOperation}"></Label>
+                                        <Label Margin="10,0,0,0" Text="{Binding MinValue}"></Label>
+                                        <Label Margin="0,0,10,0" Text="{Binding MaxValue}"></Label>
+                                        <Label Text="{Binding TimeOption}"></Label>
+                                        <Label Text="{Binding TaskType}"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding CorrentAnswers}" TextColor="Green"></Label>
+                                        <Label Text=" / "></Label>
+                                        <Label Text="{Binding WrongAnswers}" TextColor="Red"></Label>
+                                        <Label Text="{Binding DataType}"></Label>
+                                        <Label Text="{Binding MaxChainLength}"></Label>
+                                        <Label Text="Special" IsVisible="{Binding SpecialMode}"></Label>
+                                        <Label Text="{Binding SpecialModeDigitsRestriction}" IsVisible="{Binding SpecialMode}"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="LoadMoreButton" Text="Load More" Clicked="LoadMoreButtonClicked"></Button>
+                <Button x:Name="ClearRecords" Text="Clear Records" Clicked="ClearRecordsClicked"></Button>
+                <Button x:Name="GeneralStatistics" Text="General Statistics" Clicked="GeneralStatisticsClicked"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

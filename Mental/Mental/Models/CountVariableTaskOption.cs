@@ -20,6 +20,7 @@ namespace Mental.Models
             tasksOptions = _tasksOptions;
             RandomValuesGenerator = new RandomValuesGenerator(tasksOptions);
             ExpressionValuesGenerator = new ExpressionValuesGenerator(tasksOptions, RandomValuesGenerator);
+            ChainLength = tasksOptions.MaxChainLength;
         }
 
         public override void GenerateExpression()
@@ -116,14 +117,15 @@ namespace Mental.Models
                     {
                         if (tasksOptions.IsSpecialModeActivated)
                         {
-                            if (FirstParamVariable)
-                            {
-                                binaryExpression = Expression.Divide(param1, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
-                            }
-                            else if (SecondParamVariable)
-                            {
-                                binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), param2);
-                            }
+                            //if (FirstParamVariable)
+                            //{
+                            //    binaryExpression = Expression.Divide(param1, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
+                            //}
+                            //else if (SecondParamVariable)
+                            //{
+                            //    binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), param2);
+                            //}
+                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), param2);
                             ParameterDigitsLimitation = true;
                         }
                         else
@@ -190,11 +192,12 @@ namespace Mental.Models
                     {
                         if (tasksOptions.IsSpecialModeActivated)
                         {
-                            int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                            if (valueplace == 0)
-                                binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
-                            else
-                                binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), binaryExpression);
+                            //int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
+                            //if (valueplace == 0)
+                            //    binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
+                            //else
+                            //    binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), binaryExpression);
+                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), binaryExpression);
                         }
                         else
                             binaryExpression = Expression.Divide(binaryExpression, param);
@@ -227,9 +230,9 @@ namespace Mental.Models
             return Result.ToString();
         }
 
-        public override bool CheckAnswer(int Answer)
+        public override bool CheckAnswer(string Answer)
         {
-            if (Answer == XValue)
+            if (Convert.ToInt32(Answer) == XValue)
                 return true;
             else
                 return false;

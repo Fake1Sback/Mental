@@ -41,7 +41,7 @@ namespace Mental.Models
                 case "/":
                     if (tasksOptions.IsSpecialModeActivated)
                     {
-                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
+                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
                         if (valueplace == 0)
                             binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)));
                         else
@@ -82,7 +82,7 @@ namespace Mental.Models
                 case "/":
                     if (tasksOptions.IsSpecialModeActivated)
                     {
-                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
+                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
                         if (valueplace == 0)
                             binaryExpression = Expression.Divide(param1, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue()));
                         else

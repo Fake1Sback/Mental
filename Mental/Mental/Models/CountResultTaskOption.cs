@@ -16,6 +16,7 @@ namespace Mental.Models
             tasksOptions = _tasksOptions;
             RandomValuesGenerator = new RandomValuesGenerator(tasksOptions);
             ExpressionValuesGenerator = new ExpressionValuesGenerator(tasksOptions, RandomValuesGenerator);
+            ChainLength = tasksOptions.MaxChainLength;
         }
 
         public override void GenerateExpression()
@@ -135,11 +136,17 @@ namespace Mental.Models
             return binaryExpression;
         }
 
-        public override bool CheckAnswer(int Answer)
+        public override bool CheckAnswer(string Answer)
         {
             int Result = expression.Compile().Invoke();
-            if (Result == Answer)
-                return true;
+            int ValueToCompare;
+            if (Int32.TryParse(Answer, out ValueToCompare))
+            {
+                if (Result == ValueToCompare)
+                    return true;
+                else
+                    return false;
+            }
             else
                 return false;
         }

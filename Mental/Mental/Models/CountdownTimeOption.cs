@@ -14,21 +14,25 @@ namespace Mental.Models
             TimeLeft = TimeSpan.FromMinutes(_mathTasksOptions.AmountOfMinutes);
         }
 
-        public void StartTimer()
+        public void TimerWork()
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-            {
+            if (CheckTimerEnd())
                 TimeLeft = TimeLeft.Subtract(TimeSpan.FromSeconds(1));
-                if (TimeLeft.TotalSeconds <= 0)
-                    return false;
-                else
-                    return true;
-            });
         }
 
-        public string GetTime()
+        public string GetTimeString()
         {
             return TimeLeft.ToString();
+        }
+
+        public int GetMillis()
+        {
+            return (int)TimeLeft.TotalMilliseconds;
+        }
+
+        public bool CheckTimerEnd()
+        {
+            return CanExecuteOperation();
         }
 
         public bool CanExecuteOperation()

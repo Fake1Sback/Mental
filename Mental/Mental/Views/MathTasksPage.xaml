@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mental.Views.MathTasksPage">
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" AlignItems="Center">
+            <Label x:Name="Timer_Label" FontSize="Large" Text="{Binding TimerValue}" HorizontalTextAlignment="Center"></Label>
+            <Label x:Name="OperationLabel" FontSize="40" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand"></Label>
+            <Label x:Name="EqualsLabel" FontSize="40" HorizontalOptions="CenterAndExpand">=</Label>
+            <Label x:Name="AnswerLabel" FontSize="40" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand"></Label>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="ButtonOne" Text="1" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonOne}"></Button>
+                <Button x:Name="ButtonTwo" Text="2" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonTwo}"></Button>
+                <Button x:Name="ButtonThree" Text="3" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonThree}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="ButtonFour" Text="4" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFour}"></Button>
+                <Button x:Name="ButtonFive" Text="5" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFive}"></Button>
+                <Button x:Name="ButtonSix" Text="6" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSix}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="ButtonSeven" Text="7" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSeven}"></Button>
+                <Button x:Name="ButtonEight" Text="8" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonEight}"></Button>
+                <Button x:Name="ButtonNine" Text="9" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonNine}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button x:Name="ButtonZero" Text="0" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonZero}"></Button>
+                <Button Text="." Command="{Binding DotButtonPressedCommand}"></Button>
+                <Button Text="-" Command="{Binding MinusButtonPressedCommand}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Del" Command="{Binding DelButtonPressedCommand}"></Button>
+                <Button Text="OK" Command="{Binding OkButtonPressedCommand}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="CORRECT" TextColor="Green"></Label>
+                <Label x:Name="AmountOfCorrectAnswersLabel" Text="{Binding AmountOfCorrectAnswers}" TextColor="Green"></Label>
+                <Label Text="/"></Label>
+                <Label x:Name="AmountOfWrongAnswersLabel" Text="{Binding AmountOfWrongAnswers}" TextColor="Red"></Label>
+                <Label Text="WRONG" TextColor="Red"></Label>
+            </StackLayout>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>
