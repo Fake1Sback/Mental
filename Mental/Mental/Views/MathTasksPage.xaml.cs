@@ -16,8 +16,10 @@ namespace Mental.Views
 	{
 		public MathTasksPage (MathTasksOptions _mathTasksOptions,ITimeOption _timeOption)
 		{
-            if (_mathTasksOptions.TaskType == TaskType.CountResult && _mathTasksOptions.IsIntegerNumbers)
-                BindingContext = new CountResultIntVM(this.Navigation,_mathTasksOptions,_timeOption);
+            if (_mathTasksOptions.TaskType == TaskType.CountResult)
+                BindingContext = new CountResultVM(this.Navigation, _mathTasksOptions, _timeOption);
+            else if (_mathTasksOptions.TaskType == TaskType.CountVariable)
+                BindingContext = new CountVariableVM(this.Navigation, _mathTasksOptions, _timeOption);
 
 			InitializeComponent ();
 		}
