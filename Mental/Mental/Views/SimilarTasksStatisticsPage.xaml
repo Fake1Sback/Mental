@@ -7,7 +7,7 @@
         <ScrollView>
             <StackLayout>
                 <charts:ChartView x:Name="LineChart1" Chart="{Binding LineChart}" WidthRequest="100" HeightRequest="200"></charts:ChartView>
-                <Button x:Name="ShowHideDetailedTaskOptions" Text="Show Task Options" Command="{Binding ShowHideDetailedStatisticsCommand}"></Button>
+                <Button x:Name="ShowHideDetailedTaskOptions" Text="Show Task Options" IsVisible="{Binding DetailedStatisticsButtonVisibility}" Command="{Binding ShowHideDetailedStatisticsCommand}"></Button>
                 <StackLayout x:Name="DetailedTaskOptions" IsVisible="{Binding DetailedTaskOptionsVisibility}">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Operations: "></Label>

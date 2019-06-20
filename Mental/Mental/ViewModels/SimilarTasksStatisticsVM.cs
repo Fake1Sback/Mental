@@ -41,6 +41,7 @@ namespace Mental.ViewModels
         private INavigation navigation;
 
         private bool DetailedTasksOptionsLayoutVisibility = false;
+        private bool _DetailedStatisticsButtonVisibility = true;
         private bool _SaveButtonVisibility = true;
         private bool _GeneralStatisticsButtonVisibility = true;
 
@@ -311,6 +312,19 @@ namespace Mental.ViewModels
             }
         }
 
+        public bool DetailedStatisticsButtonVisibility
+        {
+            get
+            {
+                return _DetailedStatisticsButtonVisibility;
+            }
+            set
+            {
+                _DetailedStatisticsButtonVisibility = value;
+                OnPropertyChanged("DetailedStatisticsButtonVisibility");
+            }
+        }
+
         public bool SaveButtonVisibility
         {
             get
@@ -400,6 +414,10 @@ namespace Mental.ViewModels
             LoadMoreCounter = 0;
 
             ListOfMathTasks.Clear();
+
+            DetailedStatisticsButtonVisibility = false;
+            DetailedTaskOptionsVisibility = false;
+            SaveButtonVisibility = false;
 
             FillListView();
             InitializeChart();

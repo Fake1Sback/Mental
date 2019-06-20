@@ -10,6 +10,8 @@ namespace Mental.Models
         private TimeSpan Time;
         private int GeneralAmountOfTasks;
         private int CurrentAmountOfTasks;
+
+        private bool InternalCheck = true;
      
         public LimitedTasksTimeOption(MathTasksOptions mathTasksOptions)
         {
@@ -37,21 +39,25 @@ namespace Mental.Models
 
         public bool CheckTimerEnd()
         {
-            if (CurrentAmountOfTasks < GeneralAmountOfTasks)
-                return true;
-            else
-                return false;
+            return InternalCheck;
+            //if (CurrentAmountOfTasks < GeneralAmountOfTasks)
+            //    return true;
+            //else
+            //    return false;
         }
 
         public bool CanExecuteOperation()
-        {         
+        {
             if (CurrentAmountOfTasks < GeneralAmountOfTasks)
             {
                 CurrentAmountOfTasks += 1;
                 return true;
             }
             else
+            {
+                InternalCheck = false;
                 return false;
+            }
         }
     }
 }
