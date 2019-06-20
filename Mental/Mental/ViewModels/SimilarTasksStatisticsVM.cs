@@ -246,7 +246,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return "Longest time spent for expression: " + SelectedListItemDbMathTask.LongestTimeSpentForExpression.ToString("mm:ss");
+                return "Longest time spent for expression: " + SelectedListItemDbMathTask.LongestTimeSpentForExpression;
             }
             private set { }
         }

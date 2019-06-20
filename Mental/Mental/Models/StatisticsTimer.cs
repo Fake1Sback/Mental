@@ -13,17 +13,17 @@ namespace Mental.Models
         public TimeSpan ShortestTimeSpentForExpression;
         public string ShortestTimeExpressionString;
 
-        private bool IsAnswering;
         private TimeSpan CurrentTime;
+        private TimeSpan LastAnswerTime;
         private string CurrentExpression;
 
-        public void StartAnswering(string expression)
+        private bool IsWorking = true;
+
+        public StatisticsTimer()
         {
-            IsAnswering = true;
-            CurrentExpression = expression;
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (IsAnswering)
+                if (IsWorking)
                 {
                     CurrentTime = CurrentTime.Add(TimeSpan.FromSeconds(1));
                     return true;
@@ -33,38 +33,43 @@ namespace Mental.Models
             });
         }
 
-        public void StopAnswering()
+        public void RegisterTime(string expression)
         {
-            IsAnswering = false;
+            CurrentExpression = expression;
             if(CheckIfInternalDataEmpty())
             {
                 LongestTimeSpentForExpression = CurrentTime;
                 ShortestTimeSpentForExpression = CurrentTime;
                 LongestTimeExpressionString = CurrentExpression;
                 ShortestTimeExpressionString = CurrentExpression;
+                LastAnswerTime = CurrentTime;
             }
             else
             {
-                if(CurrentTime > LongestTimeSpentForExpression)
+                TimeSpan RegisterTime = CurrentTime.Subtract(LastAnswerTime);
+                if (RegisterTime > LongestTimeSpentForExpression)
                 {
-                    LongestTimeSpentForExpression = CurrentTime;
+                    LongestTimeSpentForExpression = RegisterTime;
                     LongestTimeExpressionString = CurrentExpression;
                 }
-                else if(CurrentTime < ShortestTimeSpentForExpression)
+                else if (RegisterTime < ShortestTimeSpentForExpression)
                 {
-                    ShortestTimeSpentForExpression = CurrentTime;
+                    ShortestTimeSpentForExpression = RegisterTime;
                     ShortestTimeExpressionString = CurrentExpression;
                 }
+                LastAnswerTime = CurrentTime;
             }
-            CurrentTime = TimeSpan.FromSeconds(0);
+        }
+
+        public void TurnOffTimer()
+        {
+            IsWorking = false;
         }
 
         private bool CheckIfInternalDataEmpty()
         {
             if (string.IsNullOrEmpty(LongestTimeExpressionString) || string.IsNullOrEmpty(ShortestTimeExpressionString))
-            {
                 return true;
-            }
             else
                 return false;
         }

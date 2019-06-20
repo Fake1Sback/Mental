@@ -37,7 +37,7 @@ namespace Mental.ViewModels
 
             MathTask.GenerateExpression();
             StartTimerCountdown();
-            statisticsTimer.StartAnswering(MathTask.GetExpressionString());
+          //  statisticsTimer.StartAnswering(MathTask.GetExpressionString());
         }
 
         public string TimerValue
@@ -136,7 +136,7 @@ namespace Mental.ViewModels
 
         private void OkButtonPressed()
         {
-            statisticsTimer.StopAnswering();
+        //    statisticsTimer.StopAnswering();
             if (MathTask.CheckAnswer(Answer))
             {
                 MathTask.AmountOfCorrectAnswers += 1;
@@ -151,14 +151,16 @@ namespace Mental.ViewModels
             if (timeOption.CanExecuteOperation())
             {
                 Answer = string.Empty;
+                statisticsTimer.RegisterTime(MathTask.GetExpressionString());
                 MathTask.GenerateExpression();
-                statisticsTimer.StartAnswering(MathTask.GetExpressionString());
+               // statisticsTimer.StartAnswering(MathTask.GetExpressionString());
 
                 OnPropertyChanged("AnswerValue");
                 OnPropertyChanged("OperationValue");
             }
             else
             {
+                statisticsTimer.TurnOffTimer();
                 string Op = string.Empty;
                 foreach (var a in mathTasksOptions.Operations)
                 {
