@@ -11,6 +11,7 @@ using Microcharts.Forms;
 using Microcharts;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Mental.Views;
 
 namespace Mental.ViewModels
 {
@@ -62,7 +63,7 @@ namespace Mental.ViewModels
             LoadMoreRecordsCommand = new Command(LoadMoreRecords);
             ClearRecordsCommand = new Command(ClearRecords);
             LoadGeneralStatistics = new Command(LoadMoreRecords);
-            LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new Mental.Views.GeneralStatisticsPage()); });
+            LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new GeneralStatisticsPage()); });
         }
 
         public bool DetailedTaskOptionsVisibility
@@ -138,14 +139,16 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public string AmountOfMinsOrTasks
+        public string TimeParameters
         {
             get
             {
                 if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return SelectedListItemDbMathTask.AmountOfMinutes.ToString();
-                else //if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return SelectedListItemDbMathTask.AmountOfTasks.ToString();
+                    return "Amount of minutes: " + SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " min";
+                else if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "Amount of tasks: " + SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " tasks";
+                else
+                    return "Amount of seconds: " + SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " sec";
             }
             private set { }
         }
@@ -402,7 +405,7 @@ namespace Mental.ViewModels
             {
                 using (var db = new ApplicationContext("mental.db"))
                 {
-                    DbMathTask[] mathTasksToDelete = db.mathTasks.Where(t => t.TimeOptions == SelectedListItemDbMathTask.TimeOptions && t.TaskType == SelectedListItemDbMathTask.TaskType && t.MinValue == SelectedListItemDbMathTask.MinValue && t.MaxValue == SelectedListItemDbMathTask.MaxValue).ToArray();
+                    DbMathTask[] mathTasksToDelete = db.mathTasks.Where(t => t.TimeOptions == SelectedListItemDbMathTask.TimeOptions && t.TaskType == SelectedListItemDbMathTask.TaskType && t.TaskComplexityParameter == SelectedListItemDbMathTask.TaskComplexityParameter && t.MinValue == SelectedListItemDbMathTask.MinValue && t.MaxValue == SelectedListItemDbMathTask.MaxValue).ToArray();
                     db.mathTasks.RemoveRange(mathTasksToDelete);
                     db.SaveChanges();
                 }
@@ -433,7 +436,7 @@ namespace Mental.ViewModels
             {
                 using (var db = new ApplicationContext("mental.db"))
                 {
-                    dbMathTasksArray = db.mathTasks.Where(t => t.TimeOptions == SelectedListItemDbMathTask.TimeOptions && t.TaskType == SelectedListItemDbMathTask.TaskType && t.MinValue == SelectedListItemDbMathTask.MinValue && t.MaxValue == SelectedListItemDbMathTask.MaxValue).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+                    dbMathTasksArray = db.mathTasks.Where(t => t.TimeOptions == SelectedListItemDbMathTask.TimeOptions && t.TaskType == SelectedListItemDbMathTask.TaskType && t.TaskComplexityParameter == SelectedListItemDbMathTask.TaskComplexityParameter && t.MinValue == SelectedListItemDbMathTask.MinValue && t.MaxValue == SelectedListItemDbMathTask.MaxValue).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
                 }
       
                 LoadMoreCounter += 1;
@@ -478,7 +481,15 @@ namespace Mental.ViewModels
                     if (SelectedListItemDbMathTask == ListOfMathTasks[i])
                         entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("000080"), Label = "Selected", ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     else
-                        entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = "Hello", ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                    {
+                        if(ListOfMathTasks[i].TaskDateTime.Date == DateTime.Now.Date)
+                        {
+                            entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.TimeOfDay.ToString(), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                        }
+                        else
+                            entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.Date.ToString(), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                    }
+                       
                 }
                 if (dbMathTaskToSave != null)
                     entries.Add(new Entry(dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FF1493"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });

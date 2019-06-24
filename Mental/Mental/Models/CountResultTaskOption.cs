@@ -42,46 +42,42 @@ namespace Mental.Models
 
             ConstantExpression constantExpression = Expression.Constant(RandomValuesGenerator.GenerateRandomValue(), typeof(int));
 
-            ExpressionValuesGenerator.GenerateBinaryExpression(Operation, binaryExpression, constantExpression);
-
-            #region
-            //switch (Operation)
-            //{
-            //    case "+":
-            //        binaryExpression = Expression.Add(binaryExpression, constantExpression);
-            //        break;
-            //    case "-":
-            //        binaryExpression = Expression.Subtract(binaryExpression, constantExpression);
-            //        break;
-            //    case "*":
-            //        if (tasksOptions.IsSpecialModeActivated)
-            //        {
-            //            int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 2);
-            //            if (valueplace == 0)
-            //                binaryExpression = Expression.Multiply(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(),typeof(int)));
-            //            else
-            //                binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(),typeof(int)), binaryExpression);
-            //        }
-            //        else
-            //            binaryExpression = Expression.Multiply(binaryExpression, constantExpression);
-            //        break;
-            //    case "/":
-            //        if (tasksOptions.IsSpecialModeActivated)
-            //        {
-            //            int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 2);
-            //            if (valueplace == 0)
-            //                binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)));
-            //            else
-            //                binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), binaryExpression);
-            //        }
-            //        binaryExpression = Expression.Divide(binaryExpression, constantExpression);
-            //        break;
-            //    default:
-            //        binaryExpression = Expression.Add(binaryExpression, constantExpression);
-            //        break;
-            //}
-            #endregion
-
+            switch (Operation)
+            {
+                case "+":
+                    binaryExpression = Expression.Add(binaryExpression, constantExpression);
+                    break;
+                case "-":
+                    binaryExpression = Expression.Subtract(binaryExpression, constantExpression);
+                    break;
+                case "*":
+                    if (tasksOptions.IsSpecialModeActivated)
+                    {
+                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
+                        if (valueplace == 0)
+                            binaryExpression = Expression.Multiply(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)));
+                        else
+                            binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), binaryExpression);
+                    }
+                    else
+                        binaryExpression = Expression.Multiply(binaryExpression, constantExpression);
+                    break;
+                case "/":
+                    if (tasksOptions.IsSpecialModeActivated)
+                    {
+                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
+                        if (valueplace == 0)
+                            binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)));
+                        else
+                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), binaryExpression);
+                    }
+                    binaryExpression = Expression.Divide(binaryExpression, constantExpression);
+                    break;
+                default:
+                    binaryExpression = Expression.Add(binaryExpression, constantExpression);
+                    break;
+            }
+        
             return binaryExpression;
         }
 
@@ -90,48 +86,46 @@ namespace Mental.Models
             ConstantExpression param1 = Expression.Constant(RandomValuesGenerator.GenerateRandomValue(), typeof(int));
             ConstantExpression param2 = Expression.Constant(RandomValuesGenerator.GenerateRandomValue(), typeof(int));
 
-            string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0, tasksOptions.Operations.Count,false)];
+            string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0, tasksOptions.Operations.Count, false)];
 
-            BinaryExpression binaryExpression = ExpressionValuesGenerator.GetBinaryExpression(Operation, param1, param2);
+            BinaryExpression binaryExpression;
 
-            #region
-            //switch (Operation)
-            //{
-            //    case "+":
-            //        binaryExpression = Expression.Add(param1, param2);
-            //        break;
-            //    case "-":
-            //        binaryExpression = Expression.Subtract(param1, param2);
-            //        break;
-            //    case "*":
-            //        if (tasksOptions.IsSpecialModeActivated)
-            //        {
-            //            int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 2);
-            //            if (valueplace == 0)
-            //                binaryExpression = Expression.Multiply(param1, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(),typeof(int)));
-            //            else
-            //                binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), param2);
-            //        }
-            //        else
-            //            binaryExpression = Expression.Multiply(param1, param2);
-            //        break;
-            //    case "/":
-            //        if (tasksOptions.IsSpecialModeActivated)
-            //        {
-            //            int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 2);
-            //            if (valueplace == 0)
-            //                binaryExpression = Expression.Divide(param1, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue()));
-            //            else
-            //                binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), param2);
-            //        }
-            //        else
-            //            binaryExpression = Expression.Divide(param1, param2);
-            //        break;
-            //    default:
-            //        binaryExpression = Expression.Add(param1, param2);
-            //        break;
-            //}
-            #endregion
+            switch (Operation)
+            {
+                case "+":
+                    binaryExpression = Expression.Add(param1, param2);
+                    break;
+                case "-":
+                    binaryExpression = Expression.Subtract(param1, param2);
+                    break;
+                case "*":
+                    if (tasksOptions.IsSpecialModeActivated)
+                    {
+                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
+                        if (valueplace == 0)
+                            binaryExpression = Expression.Multiply(param1, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)));
+                        else
+                            binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), param2);
+                    }
+                    else
+                        binaryExpression = Expression.Multiply(param1, param2);
+                    break;
+                case "/":
+                    if (tasksOptions.IsSpecialModeActivated)
+                    {
+                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
+                        if (valueplace == 0)
+                            binaryExpression = Expression.Divide(param1, Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue()));
+                        else
+                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateDigitRestrictedValue(), typeof(int)), param2);
+                    }
+                    else
+                        binaryExpression = Expression.Divide(param1, param2);
+                    break;
+                default:
+                    binaryExpression = Expression.Add(param1, param2);
+                    break;
+            }
 
             return binaryExpression;
         }

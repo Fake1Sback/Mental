@@ -9,7 +9,8 @@ namespace Mental.Models.DbModels
     public class ApplicationContext : DbContext
     {
         private string databasePath;
-     
+
+        public DbSet<DbMathTaskOptions> LastMathTaskOptions { get; set; }
         public DbSet<DbMathTask> mathTasks { get; set; }
 
         public ApplicationContext(string _databasePath)

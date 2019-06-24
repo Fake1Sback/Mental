@@ -478,7 +478,7 @@ namespace Mental.ViewModels
 
         private async void Start()
         {
-            app.SaveMathTaskOptions(mathTasksOptions);
+            app.SaveLatestMathTaskOptions(mathTasksOptions);
 
             ITimeOption timeOption = null;
             if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)

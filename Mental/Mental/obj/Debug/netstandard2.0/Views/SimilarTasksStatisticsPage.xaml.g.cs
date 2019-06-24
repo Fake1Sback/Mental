@@ -44,7 +44,7 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Label TimeOptionLabel;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Label AmountTaskOrMinutesLabel;
+        private global::Xamarin.Forms.Label TimeOptionsParameters;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Label MinValueLabel;
@@ -112,7 +112,7 @@ namespace Mental.Views {
             DivideLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "DivideLabel");
             TaskTypeLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "TaskTypeLabel");
             TimeOptionLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "TimeOptionLabel");
-            AmountTaskOrMinutesLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "AmountTaskOrMinutesLabel");
+            TimeOptionsParameters = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "TimeOptionsParameters");
             MinValueLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "MinValueLabel");
             MaxValueLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "MaxValueLabel");
             ChainLengthFixedLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "ChainLengthFixedLabel");

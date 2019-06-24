@@ -5,6 +5,7 @@ using Mental.Models.DbModels;
 using Mental.Models;
 using System.Collections.Generic;
 using Mental.Views;
+using System.Linq;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Mental
@@ -15,9 +16,33 @@ namespace Mental
 
         public MathTasksOptions GetStoredMathTaskOptions()
         {
-            return StoredMathTaskOptions;
+            if (StoredMathTaskOptions != null)
+                return StoredMathTaskOptions;
+            else
+            {
+                StoredMathTaskOptions = new MathTasksOptions
+                {
+                    TaskType = TaskType.CountResult,
+                    TimeOptions = TimeOptions.CountdownTimer,
+                    Operations = new List<string> { "+" },
+                    IsSpecialModeActivated = false,
+                    AmountOfXDigits = 1,
+                    IsIntegerNumbers = true,
+                    DigitsAfterDotSign = 1,
+                    MinValue = 0,
+                    MaxValue = 10,
+                    IsChainLengthFixed = true,
+                    MaxChainLength = 2,
+                    AmountOfMinutes = 1,
+                    AmountOfTasks = 1,
+                    AmountOfSecondsForAnswer = 3
+                };
+                return StoredMathTaskOptions;
+            }
         }
 
+        #region
+        /*
         public void SaveMathTaskOptions(MathTasksOptions _mathTasksOption)
         {
             StoredMathTaskOptions = _mathTasksOption;
@@ -49,10 +74,12 @@ namespace Mental
 
             App.Current.Properties["AmountOfTasks"] = _mathTasksOption.AmountOfTasks;
             App.Current.Properties["AmountOfMinutes"] = _mathTasksOption.AmountOfMinutes;
+            App.Current.Properties["AmountOfSecondsForAnswer"] = _mathTasksOption.AmountOfSecondsForAnswer;
         }
 
         public void LoadMathTaskOptions()
         {
+            #region
             bool[] Flags = new bool[9];
 
             MathTasksOptions mathTasksOptions = new MathTasksOptions();
@@ -75,11 +102,18 @@ namespace Mental
                         mathTasksOptions.AmountOfMinutes = (int)obj;
                     }
                 }
-                else
+                else if(mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
                 {
                     if(App.Current.Properties.TryGetValue("AmountOfTasks",out obj))
                     {
                         mathTasksOptions.AmountOfTasks = (int)obj;
+                    }
+                }
+                else
+                {
+                    if(App.Current.Properties.TryGetValue("AmountOfSecondsForAnswer",out obj))
+                    {
+                        mathTasksOptions.AmountOfSecondsForAnswer = (int)obj;
                     }
                 }
             }
@@ -163,13 +197,110 @@ namespace Mental
                         IsChainLengthFixed = true,
                         MaxChainLength = 2,
                         AmountOfMinutes = 1,
-                        AmountOfTasks = 1
+                        AmountOfTasks = 1,
+                        AmountOfSecondsForAnswer = 3
                     };
                     return;
                 }
             }
 
             StoredMathTaskOptions = mathTasksOptions;
+            #endregion
+
+            DbMathTaskOptions dbMathTaskOptions;
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                dbMathTaskOptions = db.LastMathTaskOptions;
+            }
+
+
+        }
+        */
+        #endregion
+
+        private void LoadLatestMathTaskOptions()
+        {
+            DbMathTaskOptions dbMathTaskOptions;
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                dbMathTaskOptions = db.LastMathTaskOptions.FirstOrDefault();
+               // string str = db.LastMathTaskOptions.ToString();
+            }
+
+            if (dbMathTaskOptions != null)
+            {
+                StoredMathTaskOptions = new MathTasksOptions() { Operations = new List<string>() };
+                
+                if (dbMathTaskOptions.Operations.Contains("+"))
+                    StoredMathTaskOptions.Operations.Add("+");
+                if (dbMathTaskOptions.Operations.Contains("-"))
+                    StoredMathTaskOptions.Operations.Add("-");
+                if (dbMathTaskOptions.Operations.Contains("*"))
+                    StoredMathTaskOptions.Operations.Add("*");
+                if (dbMathTaskOptions.Operations.Contains("/"))
+                    StoredMathTaskOptions.Operations.Add("/");
+
+                StoredMathTaskOptions.IsSpecialModeActivated = dbMathTaskOptions.IsSpecialModeActivated;
+                StoredMathTaskOptions.AmountOfXDigits = dbMathTaskOptions.AmountOfXDigits;
+
+                StoredMathTaskOptions.IsIntegerNumbers = dbMathTaskOptions.IsIntegerNumbers;
+                StoredMathTaskOptions.DigitsAfterDotSign = dbMathTaskOptions.DigitsAfterDotSign;
+
+                StoredMathTaskOptions.MaxValue = dbMathTaskOptions.MaxValue;
+                StoredMathTaskOptions.MinValue = dbMathTaskOptions.MinValue;
+
+                StoredMathTaskOptions.IsChainLengthFixed = dbMathTaskOptions.IsChainLengthFixed;
+                StoredMathTaskOptions.MaxChainLength = dbMathTaskOptions.MaxChainLength;
+
+                StoredMathTaskOptions.AmountOfMinutes = dbMathTaskOptions.AmountOfMinutes;
+                StoredMathTaskOptions.AmountOfSecondsForAnswer = dbMathTaskOptions.AmountOfSecondsForAnswer;
+                StoredMathTaskOptions.AmountOfTasks = dbMathTaskOptions.AmountOfTasks;
+
+                StoredMathTaskOptions.TaskType = (TaskType)dbMathTaskOptions.TaskType;
+                StoredMathTaskOptions.TimeOptions = (TimeOptions)dbMathTaskOptions.TimeOptions;
+            }
+        }
+
+        public void SaveLatestMathTaskOptions(MathTasksOptions mathTasksOptions)
+        {
+            DbMathTaskOptions dbMathTaskOptions = new DbMathTaskOptions();
+            StoredMathTaskOptions = mathTasksOptions;
+
+            string operations = string.Empty;
+            for (int i = 0; i < mathTasksOptions.Operations.Count; i++)
+            {
+                operations += mathTasksOptions.Operations[i];
+            }
+
+            dbMathTaskOptions.Operations = operations;
+
+            dbMathTaskOptions.IsSpecialModeActivated = mathTasksOptions.IsSpecialModeActivated;
+            dbMathTaskOptions.AmountOfXDigits = mathTasksOptions.AmountOfXDigits;
+
+            dbMathTaskOptions.IsIntegerNumbers = mathTasksOptions.IsIntegerNumbers;
+            dbMathTaskOptions.DigitsAfterDotSign = mathTasksOptions.DigitsAfterDotSign;
+
+            dbMathTaskOptions.MinValue = mathTasksOptions.MinValue;
+            dbMathTaskOptions.MaxValue = mathTasksOptions.MaxValue;
+
+            dbMathTaskOptions.IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed;
+            dbMathTaskOptions.MaxChainLength = mathTasksOptions.MaxChainLength;
+
+            dbMathTaskOptions.AmountOfTasks = mathTasksOptions.AmountOfTasks;
+            dbMathTaskOptions.AmountOfMinutes = mathTasksOptions.AmountOfMinutes;
+            dbMathTaskOptions.AmountOfSecondsForAnswer = mathTasksOptions.AmountOfSecondsForAnswer;
+
+            dbMathTaskOptions.TaskType = (byte)mathTasksOptions.TaskType;
+            dbMathTaskOptions.TimeOptions = (byte)mathTasksOptions.TimeOptions;
+
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                DbMathTaskOptions optionsToDelete = db.LastMathTaskOptions.FirstOrDefault();
+                if (optionsToDelete != null)
+                    db.LastMathTaskOptions.Remove(optionsToDelete);
+                db.LastMathTaskOptions.Add(dbMathTaskOptions);
+                db.SaveChanges();
+            }
         }
 
         public App()
@@ -177,20 +308,19 @@ namespace Mental
             InitializeComponent();
             using (var a = new ApplicationContext("mental.db"))
             {
-                //a.Database.EnsureDeleted();
+                // a.Database.EnsureDeleted();
                 a.Database.EnsureCreated();
             }
 
             if (StoredMathTaskOptions == null)
-                LoadMathTaskOptions();
+                LoadLatestMathTaskOptions();
 
-            // MainPage = new NavigationPage(new MathTasksOptionsPage());
-            MainPage = new NavigationPage(new Mental.Views.MathTasksOptionsPage());
+            MainPage = new NavigationPage(new MathTasksOptionsPage());
         }
 
         protected override void OnStart()
         {
-            
+
         }
 
         protected override void OnSleep()
@@ -200,7 +330,7 @@ namespace Mental
 
         protected override void OnResume()
         {
-            LoadMathTaskOptions();
+            LoadLatestMathTaskOptions();
         }
     }
 }

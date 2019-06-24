@@ -18,7 +18,7 @@
                     </StackLayout>
                     <Label x:Name="TaskTypeLabel" Text="{Binding TaskTypeLabel}"></Label>
                     <Label x:Name="TimeOptionLabel" Text="{Binding TimeOptionLabel}"></Label>
-                    <Label x:Name="AmountTaskOrMinutesLabel" Text="{Binding AmountOfMinsOrTasks}"></Label>
+                    <Label x:Name="TimeOptionsParameters" Text="{Binding TimeParameters}"></Label>
                     <Label x:Name="MinValueLabel" Text="{Binding MinValue}"></Label>
                     <Label x:Name="MaxValueLabel" Text="{Binding MaxValue}"></Label>
                     <Label x:Name="ChainLengthFixedLabel" Text="{Binding IsChainLengthFixed}"></Label>

@@ -11,8 +11,11 @@ namespace Mental.Models.DbModels
         public byte TaskType { get; set; }
         public byte TimeOptions { get; set; }
 
-        public int AmountOfTasks { get; set; }
-        public int AmountOfMinutes { get; set; }
+        public int TimeParameter { get; set; }
+        public int TaskComplexityParameter { get; set; }
+
+        //public int AmountOfTasks { get; set; }
+        //public int AmountOfMinutes { get; set; }
 
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
@@ -34,5 +37,7 @@ namespace Mental.Models.DbModels
 
         public int ShortestTimeSpentForExpression { get; set; }
         public string ShortestTimeExpressionString { get; set; }
+
+        public DateTime TaskDateTime { get; set; }
     }
 }

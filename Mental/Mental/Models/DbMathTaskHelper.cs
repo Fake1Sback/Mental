@@ -14,22 +14,28 @@ namespace Mental.Models
             {
                 return dbMathTask.AmountOfCorrectAnswers.ToString() + " / " + dbMathTask.AmountOfWrongAnswers.ToString();
             }
+            else if(dbMathTask.TimeOptions == 1)
+            {
+                return TimeSpan.FromMilliseconds(dbMathTask.TimeParameter).ToString(@"mm\:ss");
+            }
             else
             {
-                return TimeSpan.FromMilliseconds(dbMathTask.AmountOfMinutes).ToString(@"mm\:ss");
+                return dbMathTask.AmountOfCorrectAnswers.ToString();
             }
         }
 
         public static float GetEfficiencyParameterValue(this DbMathTask dbMathTask)
         {
-            if(dbMathTask.TimeOptions == 0)
+            if (dbMathTask.TimeOptions == 0)
             {
                 return dbMathTask.AmountOfCorrectAnswers - dbMathTask.AmountOfWrongAnswers;
             }
-            else
+            else if (dbMathTask.TimeOptions == 1)
             {
-                return  -1 * dbMathTask.AmountOfMinutes;
+                return -1 * dbMathTask.TimeParameter;
             }
+            else
+                return dbMathTask.AmountOfCorrectAnswers;
         }
     }
 }

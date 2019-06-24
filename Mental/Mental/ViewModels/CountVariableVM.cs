@@ -1,4 +1,6 @@
 ﻿using Mental.Models;
+using Mental.Models.DbModels;
+using Mental.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +39,6 @@ namespace Mental.ViewModels
 
             MathTask.GenerateExpression();
             StartTimerCountdown();
-          //  statisticsTimer.StartAnswering(MathTask.GetExpressionString());
         }
 
         public string TimerValue
@@ -134,7 +135,7 @@ namespace Mental.ViewModels
 
         public Command OkButtonPressedCommand { get; set; }
 
-        private void OkButtonPressed()
+        private async void OkButtonPressed()
         {
             bool IsAnswerCorrect = MathTask.CheckAnswer(Answer);
             if (IsAnswerCorrect)
@@ -153,7 +154,6 @@ namespace Mental.ViewModels
                 Answer = string.Empty;
                 statisticsTimer.RegisterTime(MathTask.GetExpressionString());
                 MathTask.GenerateExpression();
-               // statisticsTimer.StartAnswering(MathTask.GetExpressionString());
 
                 OnPropertyChanged("AnswerValue");
                 OnPropertyChanged("OperationValue");
@@ -167,19 +167,13 @@ namespace Mental.ViewModels
                     Op += a;
                 }
 
-
-                if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                    mathTasksOptions.AmountOfMinutes = timeOption.GetMillis();
-
-                navigation.PushAsync(new Mental.Views.SimilarTasksStatisticsPage(new Models.DbModels.DbMathTask()
+                DbMathTask dbMathTask = new DbMathTask()
                 {
                     Operations = Op,
                     TaskType = (byte)mathTasksOptions.TaskType,
                     TimeOptions = (byte)mathTasksOptions.TimeOptions,
                     MinValue = mathTasksOptions.MinValue,
                     MaxValue = mathTasksOptions.MaxValue,
-                    AmountOfTasks = mathTasksOptions.AmountOfTasks,
-                    AmountOfMinutes = mathTasksOptions.AmountOfMinutes,
                     IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed,
                     MaxChainLength = mathTasksOptions.MaxChainLength,
                     IsInteger = mathTasksOptions.IsIntegerNumbers,
@@ -191,8 +185,27 @@ namespace Mental.ViewModels
                     LongestTimeSpentForExpression = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
                     LongestTimeExpressionString = statisticsTimer.LongestTimeExpressionString,
                     ShortestTimeSpentForExpression = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
-                    ShortestTimeExpressionString = statisticsTimer.ShortestTimeExpressionString
-                }, true));
+                    ShortestTimeExpressionString = statisticsTimer.ShortestTimeExpressionString,
+                    TaskDateTime = DateTime.Now
+                };
+
+                if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
+                {
+                    dbMathTask.TimeParameter = timeOption.GetMillis();
+                    dbMathTask.TaskComplexityParameter = mathTasksOptions.AmountOfTasks;
+                }
+                else if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)
+                {
+                    dbMathTask.TimeParameter = mathTasksOptions.AmountOfMinutes;
+                    dbMathTask.TaskComplexityParameter = mathTasksOptions.AmountOfMinutes;
+                }
+                else if (mathTasksOptions.TimeOptions == TimeOptions.LastTask)
+                {
+                    dbMathTask.TimeParameter = mathTasksOptions.AmountOfSecondsForAnswer;
+                    dbMathTask.TaskComplexityParameter = mathTasksOptions.AmountOfSecondsForAnswer;
+                }
+
+                await navigation.PushAsync(new SimilarTasksStatisticsPage(dbMathTask, true));
             }
         }
 

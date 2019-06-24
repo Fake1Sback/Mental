@@ -97,9 +97,11 @@ namespace Mental.Models
             get
             {
                 if (dbMathTask.TimeOptions == 0)
-                    return dbMathTask.AmountOfMinutes.ToString() + " min";
+                    return dbMathTask.TaskComplexityParameter + " min";
+                else if (dbMathTask.TimeOptions == 1)
+                    return dbMathTask.TaskComplexityParameter.ToString() + " tasks";
                 else
-                    return dbMathTask.AmountOfTasks.ToString() + " tasks";
+                    return dbMathTask.TaskComplexityParameter.ToString() + " sec";
             }
             private set { }
         }

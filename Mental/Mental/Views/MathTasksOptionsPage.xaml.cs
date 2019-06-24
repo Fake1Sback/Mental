@@ -23,10 +23,10 @@ namespace Mental.Views
         private void InitializeSliders()
         {
             App app = (App)App.Current;
-            MathTasksOptions mathTasksOptions = app.GetStoredMathTaskOptions();
-            SpecialModeXDigitSlider.Value = mathTasksOptions.AmountOfXDigits;
-            DigitsAfterDotSignSlider.Value = mathTasksOptions.DigitsAfterDotSign;
-            TimerStartValueSlider.Value = mathTasksOptions.AmountOfMinutes;
+           // MathTasksOptions mathTasksOptions = app.GetStoredMathTaskOptions();
+           // SpecialModeXDigitSlider.Value = mathTasksOptions.AmountOfXDigits;
+           // DigitsAfterDotSignSlider.Value = mathTasksOptions.DigitsAfterDotSign;
+           // TimerStartValueSlider.Value = mathTasksOptions.AmountOfMinutes;
         }
     }
 }
