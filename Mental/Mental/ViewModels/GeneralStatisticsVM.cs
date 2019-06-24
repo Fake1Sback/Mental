@@ -9,6 +9,8 @@ using Mental.Models;
 using Mental.Models.DbModels;
 using System.Linq;
 using Mental.Views;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
@@ -31,7 +33,6 @@ namespace Mental.ViewModels
         private List<Entry> _ChainLengthChart;
 
         private int _ListViewHeightRequest;
-
 
         public GeneralStatisticsVM(INavigation _navigation)
         {
@@ -147,9 +148,9 @@ namespace Mental.ViewModels
         }
 
 
-        private void InitializeTimeOptionsChart(ApplicationContext db)
-        {
-            int AmountOfCountdownOptionRecords = db.mathTasks.Where(t => t.TimeOptions == 0).Count();
+        private async void InitializeTimeOptionsChart(ApplicationContext db)
+        {           
+            int AmountOfCountdownOptionRecords = await db.mathTasks.Where(t => t.TimeOptions == 0).CountAsync();
             int AmountOfLimitedTasksOptionsRecords = GeneralAmountOfRecords - AmountOfCountdownOptionRecords;
 
             List<Entry> entries = new List<Entry>()
@@ -170,9 +171,9 @@ namespace Mental.ViewModels
             OnPropertyChanged("TimeOptionsChart");
         }
 
-        private void InitializeTaskTypeOptionsChart(ApplicationContext db)
+        private async void InitializeTaskTypeOptionsChart(ApplicationContext db)
         {
-            int AmountOfFindResultOptionsRecords = db.mathTasks.Where(t => t.TaskType == 0).Count();
+            int AmountOfFindResultOptionsRecords = await db.mathTasks.Where(t => t.TaskType == 0).CountAsync();
             int AmountOfFindXOptionsRecords = GeneralAmountOfRecords - AmountOfFindResultOptionsRecords;
 
             List<Entry> entries = new List<Entry>()
@@ -193,9 +194,9 @@ namespace Mental.ViewModels
             OnPropertyChanged("TaskTypeChart");
         }
 
-        private void InitializeDataTypeOptionsChart(ApplicationContext db)
+        private async void InitializeDataTypeOptionsChart(ApplicationContext db)
         {
-            int AmountOfIntOptionsRecords = db.mathTasks.Where(t => t.IsInteger == true).Count();
+            int AmountOfIntOptionsRecords = await db.mathTasks.Where(t => t.IsInteger == true).CountAsync();
             int AmountOfFractionalOptionsRecords = GeneralAmountOfRecords - AmountOfIntOptionsRecords;
 
             List<Entry> entries = new List<Entry>()
@@ -216,9 +217,9 @@ namespace Mental.ViewModels
             OnPropertyChanged("DataTypeChart");
         }
 
-        private void InitializeSpecailModeOptionsChart(ApplicationContext db)
+        private async void InitializeSpecailModeOptionsChart(ApplicationContext db)
         {
-            int AmountOfSpecialModeOptionsRecords = db.mathTasks.Where(t => t.IsSpecialModeActivated == true).Count();
+            int AmountOfSpecialModeOptionsRecords = await db.mathTasks.Where(t => t.IsSpecialModeActivated == true).CountAsync();
             int AmountOfNoSpecialModeOptionsRecords = GeneralAmountOfRecords - AmountOfSpecialModeOptionsRecords;
 
             List<Entry> entries = new List<Entry>()
@@ -239,12 +240,12 @@ namespace Mental.ViewModels
             OnPropertyChanged("SpecialModeChart");
         }
 
-        private void InitializeOperationsModeOptionsChart(ApplicationContext db)
+        private async void InitializeOperationsModeOptionsChart(ApplicationContext db)
         {
-            int AmountOfPlusOperations = db.mathTasks.Where(t => t.Operations.Contains("+")).Count();
-            int AmountOfMinusOperations = db.mathTasks.Where(t => t.Operations.Contains("-")).Count();
-            int AmountOfMultiplyOperations = db.mathTasks.Where(t => t.Operations.Contains("*")).Count();
-            int AmountOfDivideOperations = db.mathTasks.Where(t => t.Operations.Contains("/")).Count();
+            int AmountOfPlusOperations = await db.mathTasks.Where(t => t.Operations.Contains("+")).CountAsync();
+            int AmountOfMinusOperations = await db.mathTasks.Where(t => t.Operations.Contains("-")).CountAsync();
+            int AmountOfMultiplyOperations = await db.mathTasks.Where(t => t.Operations.Contains("*")).CountAsync();
+            int AmountOfDivideOperations = await db.mathTasks.Where(t => t.Operations.Contains("/")).CountAsync();
 
             List<Entry> entries = new List<Entry>()
             {
@@ -274,9 +275,9 @@ namespace Mental.ViewModels
             OnPropertyChanged("OperationsChart");
         }
 
-        private void InitializeFixedChainLengthOptionsChart(ApplicationContext db)
+        private async void InitializeFixedChainLengthOptionsChart(ApplicationContext db)
         {
-            int AmountOfFixedChainLengthOptionRecords = db.mathTasks.Where(t => t.IsChainLengthFixed == true).Count();
+            int AmountOfFixedChainLengthOptionRecords = await db.mathTasks.Where(t => t.IsChainLengthFixed == true).CountAsync();
             int AmountOfNotFixedChainLengthOptionsRecords = GeneralAmountOfRecords - AmountOfFixedChainLengthOptionRecords;
 
             List<Entry> entries = new List<Entry>()
