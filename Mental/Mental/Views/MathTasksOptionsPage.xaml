@@ -19,8 +19,8 @@
                     <Button x:Name="FixedChainLengthButton" Text="{Binding ChainLengthButtonText}" Command="{Binding ChainLengthFixedChangedCommand}" CommandParameter="{x:Reference FixedChainLengthButton}"></Button>
                 </StackLayout>
                 <Label Text="Maximum Chain Length"></Label>
-                <Label x:Name="MaximumChainLengthValueLabel" Text="{Binding MaxChainLength}"></Label>
-                <Slider x:Name="MaximumChainLengthValueSlider" Value="{Binding MaxChainLength, Mode=OneWayToSource}" Maximum="8" Minimum="2" ></Slider>
+                <Label x:Name="MaximumChainLengthValueLabel" Text="{Binding IntMaxChainLength}"></Label>
+                <Slider x:Name="MaximumChainLengthValueSlider" Value="{Binding MaxChainLength}" Maximum="8" Minimum="2" ></Slider>
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Special Mode"></Label>
                     <Button x:Name="SpecialModeButton" Command="{Binding SpecialModeChangedCommand}" Text="{Binding SpecialModeButtonText}"></Button>
@@ -28,8 +28,8 @@
                 <StackLayout x:Name="SpecialModeLayout" IsVisible="{Binding SpecialModeLayoutVisibility}">
                     <Label Text="For operations '*' and '/' as second values are used x-digit numbers"></Label>
                     <Label Text="Amount of digits" HorizontalOptions="Center"></Label>
-                    <Label x:Name="SpecialModeXDigitLabel" Text="{Binding AmountOfXDigits}" HorizontalOptions="Center"></Label>
-                    <Slider x:Name="SpecialModeXDigitSlider" Maximum="8" Minimum="1" Value="{Binding AmountOfXDigits, Mode=OneWayToSource}" ></Slider>
+                    <Label x:Name="SpecialModeXDigitLabel" Text="{Binding IntAmountOfXDigits}" HorizontalOptions="Center"></Label>
+                    <Slider x:Name="SpecialModeXDigitSlider" Maximum="8" Minimum="1" Value="{Binding AmountOfXDigits}" ></Slider>
                 </StackLayout>
                 <Label Text="Numbers type:"></Label>
                 <StackLayout Orientation="Horizontal">
@@ -38,8 +38,8 @@
                 </StackLayout>
                 <StackLayout x:Name="FractionalNumbersOptions" IsVisible="{Binding FractionalNumbersOptionsLabeleVisibility}">
                     <Label Text="Digits after dot sign" HorizontalOptions="Center"></Label>
-                    <Label x:Name="DigitsAfterDotSignLabel" Text="{Binding DigitsAfterDotSign}" HorizontalOptions="Center"></Label>
-                    <Slider x:Name="DigitsAfterDotSignSlider" Maximum="8" Minimum="1" Value="{Binding DigitsAfterDotSign, Mode=OneWayToSource}"></Slider>
+                    <Label x:Name="DigitsAfterDotSignLabel" Text="{Binding IntDigitsAfterDotSign}" HorizontalOptions="Center"></Label>
+                    <Slider x:Name="DigitsAfterDotSignSlider" Maximum="8" Minimum="1" Value="{Binding DigitsAfterDotSign}"></Slider>
                 </StackLayout>
                 <Label Text="Generated Values:"></Label>
                 <StackLayout Orientation="Horizontal">
@@ -64,9 +64,9 @@
                 <StackLayout x:Name="CountdownTimerOptions" IsVisible="{Binding CountdownTimeOptionsLayoutVisibility}">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Time for task:"></Label>
-                        <Label x:Name="TimerStartValueLabel" Text="{Binding AmountOfMinutes}"></Label>
+                        <Label x:Name="TimerStartValueLabel" Text="{Binding IntAmountOfMinutes}"></Label>
                     </StackLayout>
-                    <Slider x:Name="TimerStartValueSlider" Value="{Binding AmountOfMinutes, Mode=OneWayToSource}" Maximum="60" Minimum="1"></Slider>
+                    <Slider x:Name="TimerStartValueSlider" Value="{Binding AmountOfMinutes}" Maximum="60" Minimum="1"></Slider>
                 </StackLayout>
                 <StackLayout x:Name="LimitedTasksOptions" Orientation="Horizontal" IsVisible="{Binding FixedAmountOfOperationsLayoutVisibility}">
                     <Label Text="Amount of operations: "></Label>
@@ -75,9 +75,9 @@
                 <StackLayout x:Name="LastTaskOptions" Orientation="Vertical" IsVisible="{Binding LastTaskLayoutVisibility}">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Amount of seconds for answer: "></Label>
-                        <Label x:Name="AmountOfSecondsForAnswer" Text="{Binding AmountOfSecondsForAnswer}"></Label>
+                        <Label x:Name="AmountOfSecondsForAnswer" Text="{Binding IntAmountOfSecondsForAnswer}"></Label>
                     </StackLayout>
-                    <Slider x:Name="AmountOfSecondsForAnswerSlider" Value="{Binding AmountOfSecondsForAnswer,Mode=OneWayToSource}" Maximum="120" Minimum="3"></Slider>
+                    <Slider x:Name="AmountOfSecondsForAnswerSlider" Value="{Binding AmountOfSecondsForAnswer}" Maximum="120" Minimum="3"></Slider>
                 </StackLayout>
                 <Button x:Name="StartButton" Command="{Binding StartCommand}" Text="Start"></Button>
             </StackLayout>

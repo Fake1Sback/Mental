@@ -14,11 +14,23 @@ namespace Mental.ViewModels
         private INavigation navigation;
         private App app;
 
+        private double _SliderMaxChainLengthValue;
+        private double _XDigitSliderValue;
+        private double _DigitsAfterDotSignSliderValue;
+        private double _TimerCountdownSliderValue;
+        private double _LastAnswerSliderValue;
+
         public MathTasksOptionsVM(INavigation _navigation)
         {
             navigation = _navigation;
             app = (App)App.Current;
             mathTasksOptions = app.GetStoredMathTaskOptions();
+
+            _SliderMaxChainLengthValue = mathTasksOptions.MaxChainLength;
+            _XDigitSliderValue = mathTasksOptions.AmountOfXDigits;
+            _DigitsAfterDotSignSliderValue = mathTasksOptions.DigitsAfterDotSign;
+            _TimerCountdownSliderValue = mathTasksOptions.AmountOfMinutes;
+            _LastAnswerSliderValue = mathTasksOptions.AmountOfSecondsForAnswer;
 
             ListOfOperationsChangedCommand = new Command(OperationButtonClick);
             ChainLengthFixedChangedCommand = new Command(ChainLengthFixedChanged);
@@ -90,17 +102,27 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public int MaxChainLength
+        public int IntMaxChainLength
         {
             get
             {
                 return mathTasksOptions.MaxChainLength;
             }
+            private set { }
+        }
+
+        public double MaxChainLength
+        {
+            get
+            {
+                return _SliderMaxChainLengthValue;
+            }
             set
             {
-                mathTasksOptions.MaxChainLength = value;
+                _SliderMaxChainLengthValue = value;
+                mathTasksOptions.MaxChainLength = (int)_SliderMaxChainLengthValue;
                 OnProperyChanged("MaxChainLength");
-
+                OnProperyChanged("IntMaxChainLength");
             }
         }
 
@@ -128,16 +150,27 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public int AmountOfXDigits
+        public int IntAmountOfXDigits
         {
             get
             {
                 return mathTasksOptions.AmountOfXDigits;
             }
+            private set { }
+        }
+
+        public double AmountOfXDigits
+        {
+            get
+            {
+                return _XDigitSliderValue;
+            }
             set
             {
-                mathTasksOptions.AmountOfXDigits = value;
+                _XDigitSliderValue = value;
+                mathTasksOptions.AmountOfXDigits = (int)value;
                 OnProperyChanged("AmountOfXDigits");
+                OnProperyChanged("IntAmountOfXDigits");
             }
         }
 
@@ -177,16 +210,27 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public int DigitsAfterDotSign
+        public int IntDigitsAfterDotSign
         {
             get
             {
                 return mathTasksOptions.DigitsAfterDotSign;
             }
+            private set { }
+        }
+
+        public double DigitsAfterDotSign
+        {
+            get
+            {
+                return _DigitsAfterDotSignSliderValue;
+            }
             set
             {
-                mathTasksOptions.DigitsAfterDotSign = value;
+                _DigitsAfterDotSignSliderValue = value;
+                mathTasksOptions.DigitsAfterDotSign = (int)value;
                 OnProperyChanged("DigitsAfterDotSign");
+                OnProperyChanged("IntDigitsAfterDotSign");
             }
         }
 
@@ -288,16 +332,27 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public int AmountOfMinutes
+        public int IntAmountOfMinutes
         {
             get
             {
                 return mathTasksOptions.AmountOfMinutes;
             }
+            private set { }
+        }
+
+        public double AmountOfMinutes
+        {
+            get
+            {
+                return _TimerCountdownSliderValue;
+            }
             set
             {
-                mathTasksOptions.AmountOfMinutes = value;
+                _TimerCountdownSliderValue = value;
+                mathTasksOptions.AmountOfMinutes = (int)value;
                 OnProperyChanged("AmountOfMinutes");
+                OnProperyChanged("IntAmountOfMinutes");
             }
         }
 
@@ -338,16 +393,27 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public int AmountOfSecondsForAnswer
+        public int IntAmountOfSecondsForAnswer
         {
             get
             {
                 return mathTasksOptions.AmountOfSecondsForAnswer;
             }
+            private set { }
+        }
+
+        public double AmountOfSecondsForAnswer
+        {
+            get
+            {
+                return _LastAnswerSliderValue;
+            }
             set
             {
-                mathTasksOptions.AmountOfSecondsForAnswer = value;
+                _LastAnswerSliderValue = value;
+                mathTasksOptions.AmountOfSecondsForAnswer = (int)value;
                 OnProperyChanged("AmountOfSecondsForAnswer");
+                OnProperyChanged("IntAmountOfSecondsForAnswer");
             }
         }
 
@@ -429,7 +495,7 @@ namespace Mental.ViewModels
             }
             OnProperyChanged("IntegerDataTypeButtonColor");
             OnProperyChanged("FractionalDataTypeButtonColor");
-            OnProperyChanged("CountdownTimeOptionsLayoutVisibility");
+            OnProperyChanged("FractionalNumbersOptionsLabeleVisibility");
         }
 
         public Command TypeOfTaskChangedCommand { get; set; }
