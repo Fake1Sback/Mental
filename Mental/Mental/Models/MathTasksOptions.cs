@@ -24,6 +24,7 @@ namespace Mental.Models
 
         public int AmountOfTasks;
         public int AmountOfMinutes;
+        public int AmountOfSecondsForAnswer;
 
         public TaskType TaskType;
         public TimeOptions TimeOptions;
@@ -32,7 +33,8 @@ namespace Mental.Models
     public enum TimeOptions
     {
         CountdownTimer,
-        FixedAmountOfOperations
+        FixedAmountOfOperations,
+        LastTask
     }
 
     public enum TaskType

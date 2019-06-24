@@ -46,7 +46,7 @@ namespace Mental.Models
             //    return false;
         }
 
-        public bool CanExecuteOperation()
+        public bool CanExecuteOperation(bool IsAnswerCorrect)
         {
             if (CurrentAmountOfTasks < GeneralAmountOfTasks)
             {

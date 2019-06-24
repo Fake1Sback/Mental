@@ -264,6 +264,18 @@ namespace Mental.ViewModels
             private set { }
         }
 
+        public Color LastTaskTimeOptionButtonColor
+        {
+            get
+            {
+                if (mathTasksOptions.TimeOptions == TimeOptions.LastTask)
+                    return Color.Aqua;
+                else
+                    return Color.LightGray;
+            }
+            private set { }
+        }
+
         public bool CountdownTimeOptionsLayoutVisibility
         {
             get
@@ -311,6 +323,31 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.AmountOfTasks = value;
                 OnProperyChanged("AmountOfTasks");
+            }
+        }
+
+        public bool LastTaskLayoutVisibility
+        {
+            get
+            {
+                if (mathTasksOptions.TimeOptions == TimeOptions.LastTask)
+                    return true;
+                else
+                    return false;
+            }
+            private set { }
+        }
+
+        public int AmountOfSecondsForAnswer
+        {
+            get
+            {
+                return mathTasksOptions.AmountOfSecondsForAnswer;
+            }
+            set
+            {
+                mathTasksOptions.AmountOfSecondsForAnswer = value;
+                OnProperyChanged("AmountOfSecondsForAnswer");
             }
         }
 
@@ -425,10 +462,16 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.TimeOptions = TimeOptions.FixedAmountOfOperations;
             }
+            else if(button.Text == "Last Task")
+            {
+                mathTasksOptions.TimeOptions = TimeOptions.LastTask;
+            }
             OnProperyChanged("CountdownTimeOptionButtonColor");
             OnProperyChanged("FixedAmountOfOperationsTimeOptionButtonColor");
+            OnProperyChanged("LastTaskTimeOptionButtonColor");
             OnProperyChanged("CountdownTimeOptionsLayoutVisibility");
             OnProperyChanged("FixedAmountOfOperationsLayoutVisibility");
+            OnProperyChanged("LastTaskLayoutVisibility");
         }
 
         public Command StartCommand { get; set; }
@@ -443,6 +486,10 @@ namespace Mental.ViewModels
             else if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
             {
                 timeOption = new LimitedTasksTimeOption(mathTasksOptions);
+            }
+            else if(mathTasksOptions.TimeOptions == TimeOptions.LastTask)
+            {
+                timeOption = new LastTaskTimeOption(mathTasksOptions);
             }
 
             await navigation.PushAsync(new MathTasksPage(mathTasksOptions, timeOption));

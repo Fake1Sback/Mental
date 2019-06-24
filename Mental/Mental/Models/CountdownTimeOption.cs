@@ -32,15 +32,15 @@ namespace Mental.Models
 
         public bool CheckTimerEnd()
         {
-            return CanExecuteOperation();
-        }
-
-        public bool CanExecuteOperation()
-        {
             if (TimeLeft.TotalSeconds > 0)
                 return true;
             else
                 return false;
+        }
+
+        public bool CanExecuteOperation(bool IsAnswerCorrect)
+        {
+            return CheckTimerEnd();
         }
     }
 }

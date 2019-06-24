@@ -10,6 +10,6 @@ namespace Mental.Models
         bool CheckTimerEnd();
         string GetTimeString();
         int GetMillis();
-        bool CanExecuteOperation();
+        bool CanExecuteOperation(bool IsAnswerCorrect);
     }
 }

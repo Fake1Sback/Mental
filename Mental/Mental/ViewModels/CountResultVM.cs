@@ -146,8 +146,8 @@ namespace Mental.ViewModels
 
         private void OkButtonPressed()
         {
-           // statisticsTimer.StopAnswering();
-            if (MathTask.CheckAnswer(Answer))
+            bool IsAnswerCorrect = MathTask.CheckAnswer(Answer);
+            if (IsAnswerCorrect)
             {
                 MathTask.AmountOfCorrectAnswers += 1;
                 OnPropertyChanged("AmountOfCorrectAnswers");
@@ -158,7 +158,7 @@ namespace Mental.ViewModels
                 OnPropertyChanged("AmountOfWrongAnswers");
             }
 
-            if (timeOption.CanExecuteOperation())
+            if (timeOption.CanExecuteOperation(IsAnswerCorrect))
             {
                 Answer = string.Empty;
                 statisticsTimer.RegisterTime(MathTask.GetExpressionString());
