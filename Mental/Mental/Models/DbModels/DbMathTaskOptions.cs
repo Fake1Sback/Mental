@@ -9,8 +9,8 @@ namespace Mental.Models.DbModels
         public int Id { get; set; }
         public string Operations { get; set; }
 
-        public bool IsSpecialModeActivated { get; set; }
-        public int AmountOfXDigits { get; set; }
+        public bool IsRestrictionActivated { get; set; }
+        public string RestrictionsString { get; set; }
 
         public bool IsIntegerNumbers { get; set; }
         public int DigitsAfterDotSign { get; set; }

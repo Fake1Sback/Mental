@@ -28,7 +28,7 @@ namespace Mental.ViewModels
         private List<Entry> _TimeOptionsChart;
         private List<Entry> _TaskTypeChart;
         private List<Entry> _DataTypeChart;
-        private List<Entry> _SpecialModeChart;
+        private List<Entry> _RestrictionsChart;
         private List<Entry> _OperationsChart;
         private List<Entry> _ChainLengthChart;
 
@@ -43,7 +43,7 @@ namespace Mental.ViewModels
                 InitializeTimeOptionsChart(db);
                 InitializeTaskTypeOptionsChart(db);
                 InitializeDataTypeOptionsChart(db);
-                InitializeSpecailModeOptionsChart(db);
+                InitializeRestrictionsOptionsChart(db);
                 InitializeOperationsModeOptionsChart(db);
                 InitializeFixedChainLengthOptionsChart(db);
             }
@@ -108,16 +108,16 @@ namespace Mental.ViewModels
             }
         }
 
-        public DonutChart SpecialModeChart
+        public DonutChart RestrictionsChart
         {
             get
             {
-                return new DonutChart() { Entries = _SpecialModeChart };
+                return new DonutChart() { Entries = _RestrictionsChart };
             }
             set
             {
-                _SpecialModeChart = value.Entries.ToList();
-                OnPropertyChanged("SpecialModeChart");
+                _RestrictionsChart = value.Entries.ToList();
+                OnPropertyChanged("RestrictionsChart");
             }
         }
 
@@ -217,27 +217,27 @@ namespace Mental.ViewModels
             OnPropertyChanged("DataTypeChart");
         }
 
-        private async void InitializeSpecailModeOptionsChart(ApplicationContext db)
+        private async void InitializeRestrictionsOptionsChart(ApplicationContext db)
         {
-            int AmountOfSpecialModeOptionsRecords = await db.mathTasks.Where(t => t.IsSpecialModeActivated == true).CountAsync();
-            int AmountOfNoSpecialModeOptionsRecords = GeneralAmountOfRecords - AmountOfSpecialModeOptionsRecords;
+            int AmountOfRestrictedRecords = await db.mathTasks.Where(t => t.IsRestrictionActivated == true).CountAsync();
+            int AmountOfNoSpecialModeOptionsRecords = GeneralAmountOfRecords - AmountOfRestrictedRecords;
 
             List<Entry> entries = new List<Entry>()
             {
-                new Entry(AmountOfSpecialModeOptionsRecords)
+                new Entry(AmountOfRestrictedRecords)
                 {
-                    ValueLabel = "SpecialMode",
+                    ValueLabel = "Restricted",
                     Color = SkiaSharp.SKColor.Parse("000080")
                 },
                 new Entry(AmountOfNoSpecialModeOptionsRecords)
                 {
-                    ValueLabel = "No Special Mode",
+                    ValueLabel = "No Restrictions",
                     Color = SkiaSharp.SKColor.Parse("F55B70")
                 }
             };
 
-            _SpecialModeChart = entries;
-            OnPropertyChanged("SpecialModeChart");
+            _RestrictionsChart = entries;
+            OnPropertyChanged("RestrictionsChart");
         }
 
         private async void InitializeOperationsModeOptionsChart(ApplicationContext db)

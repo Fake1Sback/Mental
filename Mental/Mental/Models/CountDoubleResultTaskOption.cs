@@ -41,58 +41,49 @@ namespace Mental.Models
         {
             string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0, tasksOptions.Operations.Count, false)];
 
-            ConstantExpression constantExpression = Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue(),digits), typeof(double));
-
-            // ExpressionValuesGenerator.GenerateBinaryExpression(Operation, binaryExpression, constantExpression);
-
-            #region
+            int placeFactor = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
+   
             switch (Operation)
             {
                 case "+":
-                    binaryExpression = Expression.Add(binaryExpression, constantExpression);
+                    if (placeFactor == 0)
+                        binaryExpression = Expression.Add(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+", false), digits)));
+                    else
+                        binaryExpression = Expression.Add(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+", true), digits)), binaryExpression);
                     break;
                 case "-":
-                    binaryExpression = Expression.Subtract(binaryExpression, constantExpression);
+                    if (placeFactor == 0)                       
+                        binaryExpression = Expression.Subtract(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("-", false), digits)));
+                    else
+                        binaryExpression = Expression.Subtract(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("-", true), digits)), binaryExpression);
                     break;
                 case "*":
-                    if (tasksOptions.IsSpecialModeActivated)
-                    {
-                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                        if (valueplace == 0)
-                            binaryExpression = Expression.Multiply(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)));
-                        else
-                            binaryExpression = Expression.Multiply(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)), binaryExpression);
-                    }
+                    if (placeFactor == 0)
+                        binaryExpression = Expression.Multiply(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("*", false), digits)));
                     else
-                        binaryExpression = Expression.Multiply(binaryExpression, constantExpression);
+                        binaryExpression = Expression.Multiply(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("*", true), digits)), binaryExpression);
                     break;
                 case "/":
-                    if (tasksOptions.IsSpecialModeActivated)
-                    {
-                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                        if (valueplace == 0)
-                            binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)));
-                        else
-                            binaryExpression = Expression.Divide(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)), binaryExpression);
-                    }
-                    binaryExpression = Expression.Divide(binaryExpression, constantExpression);
+                    if (placeFactor == 0)
+                        binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("/", false), digits)));
+                    else
+                        binaryExpression = Expression.Divide(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("/", true), digits)), binaryExpression);
                     break;
                 default:
-                    binaryExpression = Expression.Add(binaryExpression, constantExpression);
+                    if (placeFactor == 0)
+                        binaryExpression = Expression.Add(binaryExpression, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+", false), digits)));
+                    else
+                        binaryExpression = Expression.Add(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+", true), digits)), binaryExpression);
                     break;
             }
-            #endregion
 
             return binaryExpression;
         }
 
         private BinaryExpression BuildFirstBinaryExpression()
         {
-            ConstantExpression param1 = Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue(),digits), typeof(double));
-            ConstantExpression param2 = Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue(),digits), typeof(double));
-
             string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0, tasksOptions.Operations.Count, false)];
-
+      
             BinaryExpression binaryExpression;
 
             // BinaryExpression binaryExpression = ExpressionValuesGenerator.GetBinaryExpression(Operation, param1, param2);
@@ -101,37 +92,19 @@ namespace Mental.Models
             switch (Operation)
             {
                 case "+":
-                    binaryExpression = Expression.Add(param1, param2);
+                    binaryExpression = Expression.Add(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+",true),digits)), Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+",false),digits)));
                     break;
                 case "-":
-                    binaryExpression = Expression.Subtract(param1, param2);
+                    binaryExpression = Expression.Subtract(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("-", true), digits)), Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("-", false), digits)));
                     break;
                 case "*":
-                    if (tasksOptions.IsSpecialModeActivated)
-                    {
-                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                        if (valueplace == 0)
-                            binaryExpression = Expression.Multiply(param1, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)));
-                        else
-                            binaryExpression = Expression.Multiply(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)), param2);
-                    }
-                    else
-                        binaryExpression = Expression.Multiply(param1, param2);
+                        binaryExpression = Expression.Multiply(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("*", true), digits)), Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("*", false), digits)));
                     break;
                 case "/":
-                    if (tasksOptions.IsSpecialModeActivated)
-                    {
-                        int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                        if (valueplace == 0)
-                            binaryExpression = Expression.Divide(param1, Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits),typeof(double)));
-                        else
-                            binaryExpression = Expression.Divide(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleDigitRestrictedValue(),digits), typeof(double)), param2);
-                    }
-                    else
-                        binaryExpression = Expression.Divide(param1, param2);
+                        binaryExpression = Expression.Divide(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("/", true), digits)), Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("/", false), digits)));
                     break;
                 default:
-                    binaryExpression = Expression.Add(param1, param2);
+                    binaryExpression = Expression.Add(Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+", true), digits)), Expression.Constant(Math.Round(RandomValuesGenerator.GenerateDoubleValue("+", false), digits)));
                     break;
             }
             #endregion

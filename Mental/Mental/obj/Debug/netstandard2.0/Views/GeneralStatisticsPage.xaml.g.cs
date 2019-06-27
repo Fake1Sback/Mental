@@ -26,7 +26,7 @@ namespace Mental.Views {
         private global::Microcharts.Forms.ChartView DataTypeChart;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Microcharts.Forms.ChartView SpecialModeChart;
+        private global::Microcharts.Forms.ChartView RestrictionsChart;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Microcharts.Forms.ChartView OperationsChart;
@@ -49,7 +49,7 @@ namespace Mental.Views {
             TimeOptionsChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "TimeOptionsChart");
             TaskTypeChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "TaskTypeChart");
             DataTypeChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "DataTypeChart");
-            SpecialModeChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "SpecialModeChart");
+            RestrictionsChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "RestrictionsChart");
             OperationsChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "OperationsChart");
             ChainLengthChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "ChainLengthChart");
             LatestTasksListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.ListView>(this, "LatestTasksListView");

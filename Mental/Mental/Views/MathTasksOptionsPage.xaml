@@ -1,17 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
              x:Class="Mental.Views.MathTasksOptionsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="OperationButton" TargetType="Button">
+                <Setter Property="BorderWidth" Value="1"></Setter>
+                <Setter Property="BorderColor" Value="Black"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="30"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="BorderRadius" Value="30"></Setter>
+                <Setter Property="WidthRequest" Value="60"></Setter>
+                <Setter Property="HeightRequest" Value="60"></Setter>
+            </Style>
+            <Style x:Key="HardRestrictionsButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="100"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="BlockRestrictionsButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="HeightRequest" Value="50"></Setter>
+                <Setter Property="BorderRadius" Value="25"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="BackgroundColor" Value="Green"></Setter>
+            </Style>
+            <Style x:Key="DigitRestrictionLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
                 <Label>Choose parameters for tasks</Label>
                 <Label>Operations:</Label>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Button x:Name="PlusButton" BackgroundColor="{Binding PlusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference PlusButton}" Text="+" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"  FontSize="30"  TextColor="White" BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
-                    <Button x:Name="MinusButton" BackgroundColor="{Binding MinusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference MinusButton}" Text="-" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"  FontSize="30" TextColor="White"   BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
-                    <Button x:Name="MultiplyButton" BackgroundColor="{Binding MultiplyButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference MultiplyButton}" Text="*" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"   FontSize="30" TextColor="White"   BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
-                    <Button x:Name="DivideButton" BackgroundColor="{Binding DivideButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference DivideButton}" Text="/" BorderWidth="1" BorderColor="Black" VerticalOptions="Center" HorizontalOptions="Center"   FontSize="30" TextColor="White" BorderRadius="30" WidthRequest="60" HeightRequest="60"></Button>
+                    <Button x:Name="PlusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding PlusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference PlusButton}" Text="+"></Button>
+                    <Button x:Name="MinusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MinusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference MinusButton}" Text="-"></Button>
+                    <Button x:Name="MultiplyButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MultiplyButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference MultiplyButton}" Text="*"></Button>
+                    <Button x:Name="DivideButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding DivideButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference DivideButton}" Text="/"></Button>
                 </StackLayout>
                 <Label Text="Chain Length:"></Label>
                 <StackLayout Orientation="Horizontal">
@@ -21,16 +54,91 @@
                 <Label Text="Maximum Chain Length"></Label>
                 <Label x:Name="MaximumChainLengthValueLabel" Text="{Binding IntMaxChainLength}"></Label>
                 <Slider x:Name="MaximumChainLengthValueSlider" Value="{Binding MaxChainLength}" Maximum="8" Minimum="2" ></Slider>
+                <Label Text="Generated Values:"></Label>
                 <StackLayout Orientation="Horizontal">
+                    <Label Text="Minimum value:"></Label>
+                    <Editor x:Name="MinValueEditor" Text="{Binding MinValue}" Keyboard="Numeric" HorizontalOptions="EndAndExpand"></Editor>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Maximum value:"></Label>
+                    <Editor x:Name="MaxValueEditor" Text="{Binding MaxValue}" Keyboard="Numeric" HorizontalOptions="EndAndExpand"></Editor>
+                </StackLayout>
+                <PartialViews:RestrictionsView ></PartialViews:RestrictionsView>
+                
+                <!--<StackLayout Orientation="Horizontal">
                     <Label Text="Special Mode"></Label>
                     <Button x:Name="SpecialModeButton" Command="{Binding SpecialModeChangedCommand}" Text="{Binding SpecialModeButtonText}"></Button>
-                </StackLayout>
+                </StackLayout>               
                 <StackLayout x:Name="SpecialModeLayout" IsVisible="{Binding SpecialModeLayoutVisibility}">
                     <Label Text="For operations '*' and '/' as second values are used x-digit numbers"></Label>
                     <Label Text="Amount of digits" HorizontalOptions="Center"></Label>
                     <Label x:Name="SpecialModeXDigitLabel" Text="{Binding IntAmountOfXDigits}" HorizontalOptions="Center"></Label>
                     <Slider x:Name="SpecialModeXDigitSlider" Maximum="8" Minimum="1" Value="{Binding AmountOfXDigits}" ></Slider>
-                </StackLayout>
+                </StackLayout> -->
+                <!--<StackLayout x:Name="RestrictionsLayout" Orientation="Vertical">
+                    <Label HorizontalOptions="CenterAndExpand" Text="Restrictions:"></Label>
+                    <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="2"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="+"></Button>
+                                </StackLayout>
+                                <Label Text="+" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="3"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="-"></Button>
+                                </StackLayout>
+                                <Button Style="{StaticResource BlockRestrictionsButton}" Text="+"></Button>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="1"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="+"></Button>
+                                </StackLayout>
+                                <Label Text="-" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="3"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="-"></Button>
+                                </StackLayout>
+                                <Button Style="{StaticResource BlockRestrictionsButton}" Text="+"></Button>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="1"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="+"></Button>
+                                </StackLayout>
+                                <Label Text="*" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="2"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="+"></Button>
+                                </StackLayout>
+                                <Button Style="{StaticResource BlockRestrictionsButton}" Text="+"></Button>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="2"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="-"></Button>
+                                </StackLayout>
+                                <Label Text="/" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="1"></Label>
+                                    <Slider WidthRequest="100"></Slider>
+                                    <Button Style="{StaticResource HardRestrictionsButton}" Text="+"></Button>
+                                </StackLayout>
+                                <Button Style="{StaticResource BlockRestrictionsButton}" Text="+"></Button>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>-->
+                
                 <Label Text="Numbers type:"></Label>
                 <StackLayout Orientation="Horizontal">
                     <Button x:Name="IntegerNumberTypeButton" Command="{Binding NumbersTypeChangedCommand}" BackgroundColor="{Binding IntegerDataTypeButtonColor}" CommandParameter="{x:Reference IntegerNumberTypeButton}" Text="Integer"></Button>
@@ -40,15 +148,6 @@
                     <Label Text="Digits after dot sign" HorizontalOptions="Center"></Label>
                     <Label x:Name="DigitsAfterDotSignLabel" Text="{Binding IntDigitsAfterDotSign}" HorizontalOptions="Center"></Label>
                     <Slider x:Name="DigitsAfterDotSignSlider" Maximum="8" Minimum="1" Value="{Binding DigitsAfterDotSign}"></Slider>
-                </StackLayout>
-                <Label Text="Generated Values:"></Label>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Minimum value:"></Label>
-                    <Editor x:Name="MinValueEditor" Text="{Binding MinValue}" Keyboard="Numeric" HorizontalOptions="EndAndExpand"></Editor>
-                </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Maximum value:"></Label>
-                    <Editor x:Name="MaxValueEditor" Text="{Binding MaxValue}" Keyboard="Numeric" HorizontalOptions="EndAndExpand"></Editor>
                 </StackLayout>
                 <Label Text="Type of tasks:"></Label>
                 <StackLayout Orientation="Horizontal">

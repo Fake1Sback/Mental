@@ -25,8 +25,7 @@
                     <Label x:Name="MaxChainLengthLabel" Text="{Binding MaxChainLength}"></Label>
                     <Label x:Name="DataTypeLabel" Text="{Binding DataType}"></Label>
                     <Label x:Name="DigitsAfterDotSignLabel" Text="{Binding DigitsAfterDotSign}" IsVisible="{Binding DigitsPrecisionLabelVisibility}"></Label>
-                    <Label x:Name="SpecialModeActiavetedLabel" Text="SPECIAL" IsVisible="{Binding SpecialModeLabelVisibility}"></Label>
-                    <Label x:Name="SpecialModeRestricationsLabel" Text="{Binding SpecialModeRestrictions}" IsVisible="{Binding SpecialModeLabelVisibility}"></Label>
+                    <Label x:Name="SpecialModeRestricationsLabel" Text="{Binding RestrictionsString}" IsVisible="{Binding RestrictionsLayoutVisibility}"></Label>
                     <Label x:Name="TaskResultsLabel" Text="Task results:"></Label>
                     <Label x:Name="LongestTimeSpentForExpressionLabel"  Text="{Binding LongestTimeSpentForExpression}"></Label>
                     <Label x:Name="LongestTimeExpressionLabel" Text="{Binding LongestTimeExpressionString}"></Label>
@@ -55,7 +54,6 @@
                                         <Label Text="{Binding WrongAnswers}" TextColor="Red"></Label>
                                         <Label Text="{Binding DataType}"></Label>
                                         <Label Text="{Binding MaxChainLength}"></Label>
-                                        <Label Text="Special" IsVisible="{Binding SpecialMode}"></Label>
                                         <Label Text="{Binding SpecialModeDigitsRestriction}" IsVisible="{Binding SpecialMode}"></Label>
                                     </StackLayout>
                                 </StackLayout>

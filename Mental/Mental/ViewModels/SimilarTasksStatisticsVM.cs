@@ -224,23 +224,20 @@ namespace Mental.ViewModels
             private set { }
         }
 
-        public bool SpecialModeLabelVisibility
+        public bool RestrictionsLayoutVisibility
         {
             get
             {
-                if (SelectedListItemDbMathTask.IsSpecialModeActivated)
-                    return true;
-                else
-                    return false;
+                return SelectedListItemDbMathTask.IsRestrictionActivated;
             }
             private set { }
         }
 
-        public string SpecialModeRestrictions
+        public string RestrictionsString
         {
             get
             {
-                return "Special mode restriction: " + SelectedListItemDbMathTask.AmountOfXDigits.ToString();
+                return SelectedListItemDbMathTask.RestrictionsString;
             }
             private set { }
         }

@@ -5,6 +5,7 @@ using System.Text;
 using Mental.Models;
 using Mental.Views;
 using Xamarin.Forms;
+using Mental.ViewModels.PartialViewModels;
 
 namespace Mental.ViewModels
 {
@@ -13,9 +14,9 @@ namespace Mental.ViewModels
         private MathTasksOptions mathTasksOptions;
         private INavigation navigation;
         private App app;
+        private RestrictionsPVM _restPVM;
 
         private double _SliderMaxChainLengthValue;
-        private double _XDigitSliderValue;
         private double _DigitsAfterDotSignSliderValue;
         private double _TimerCountdownSliderValue;
         private double _LastAnswerSliderValue;
@@ -25,20 +26,31 @@ namespace Mental.ViewModels
             navigation = _navigation;
             app = (App)App.Current;
             mathTasksOptions = app.GetStoredMathTaskOptions();
+            _restPVM = new RestrictionsPVM(mathTasksOptions);
 
             _SliderMaxChainLengthValue = mathTasksOptions.MaxChainLength;
-            _XDigitSliderValue = mathTasksOptions.AmountOfXDigits;
             _DigitsAfterDotSignSliderValue = mathTasksOptions.DigitsAfterDotSign;
             _TimerCountdownSliderValue = mathTasksOptions.AmountOfMinutes;
             _LastAnswerSliderValue = mathTasksOptions.AmountOfSecondsForAnswer;
 
             ListOfOperationsChangedCommand = new Command(OperationButtonClick);
             ChainLengthFixedChangedCommand = new Command(ChainLengthFixedChanged);
-            SpecialModeChangedCommand = new Command(SpecialModeChanged);
             NumbersTypeChangedCommand = new Command(NumberTypeChanged);
             TypeOfTaskChangedCommand = new Command(TypeOfTaskChanged);
             TimeOptionsChangedCommand = new Command(TimeOptionsChanged);
             StartCommand = new Command(Start);
+        }
+
+        public RestrictionsPVM RestPVM
+        {
+            get
+            {
+                return _restPVM;
+            }
+            set
+            {
+                _restPVM = value;
+            }
         }
 
         public Color PlusButtonColor
@@ -126,54 +138,6 @@ namespace Mental.ViewModels
             }
         }
 
-        public string SpecialModeButtonText
-        {
-            get
-            {
-                if (mathTasksOptions.IsSpecialModeActivated)
-                    return "+";
-                else
-                    return "-";
-            }
-            private set { }
-        }
-
-        public bool SpecialModeLayoutVisibility
-        {
-            get
-            {
-                if (mathTasksOptions.IsSpecialModeActivated)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public int IntAmountOfXDigits
-        {
-            get
-            {
-                return mathTasksOptions.AmountOfXDigits;
-            }
-            private set { }
-        }
-
-        public double AmountOfXDigits
-        {
-            get
-            {
-                return _XDigitSliderValue;
-            }
-            set
-            {
-                _XDigitSliderValue = value;
-                mathTasksOptions.AmountOfXDigits = (int)value;
-                OnProperyChanged("AmountOfXDigits");
-                OnProperyChanged("IntAmountOfXDigits");
-            }
-        }
-
         public Color IntegerDataTypeButtonColor
         {
             get
@@ -244,6 +208,9 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.MinValue = value;
                 OnProperyChanged("MinValue");
+              //  OnProperyChanged("RestPVM.MaximumDigitValue");
+                OnProperyChanged("RestPVM");
+                RestPVM.RenewSliderValues();
             }
         }
 
@@ -257,7 +224,25 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.MaxValue = value;
                 OnProperyChanged("MaxValue");
+             //   OnProperyChanged("RestPVM.MaximumDigitValue");
+                OnProperyChanged("RestPVM");
+                RestPVM.RenewSliderValues();
             }
+        }
+
+        private int FindAmountOfDigits(int Value)
+        {
+            int AmountOfDigits = 0;
+            if (Value < 0)
+                Value = Value * -1;
+            while (Value >= 0)
+            {
+                Value = Value / 10;
+                AmountOfDigits += 1;
+                if (Value == 0)
+                    break;
+            }
+            return AmountOfDigits;
         }
 
         public Color CountResultTaskOptionButtonColor
@@ -466,18 +451,6 @@ namespace Mental.ViewModels
             else
                 mathTasksOptions.IsChainLengthFixed = true;
             OnProperyChanged("ChainLengthButtonText");
-        }
-
-        public Command SpecialModeChangedCommand { get; set; }
-
-        private void SpecialModeChanged()
-        {
-            if (mathTasksOptions.IsSpecialModeActivated)
-                mathTasksOptions.IsSpecialModeActivated = false;
-            else
-                mathTasksOptions.IsSpecialModeActivated = true;
-            OnProperyChanged("SpecialModeButtonText");
-            OnProperyChanged("SpecialModeLayoutVisibility");
         }
 
         public Command NumbersTypeChangedCommand { get; set; }

@@ -13,24 +13,26 @@ namespace Mental.Models
         private int XValue;
         private ParameterExpression parameterExpression;
         private int Result;
-        private bool ParameterDigitsLimitation = false;
+
+        private string ParameterOperation = "+";
+        private bool IsParameterFirst = true;
    
         public CountVariableTaskOption(MathTasksOptions _tasksOptions)
         {
             tasksOptions = _tasksOptions;
             RandomValuesGenerator = new RandomValuesGenerator(tasksOptions);
-            ExpressionValuesGenerator = new ExpressionValuesGenerator(tasksOptions, RandomValuesGenerator);
+           // ExpressionValuesGenerator = new ExpressionValuesGenerator(tasksOptions, RandomValuesGenerator);
             ChainLength = tasksOptions.MaxChainLength;
         }
 
         public override void GenerateExpression()
-        {
-            ParameterDigitsLimitation = false;
-
+        { 
             if (!tasksOptions.IsChainLengthFixed)
                 ChainLength = RandomValuesGenerator.GenerateValuesInRange(2,tasksOptions.MaxChainLength,true);
 
             variablePlace = RandomValuesGenerator.GenerateValuesInRange(0, ChainLength,false);
+
+            parameterExpression = Expression.Parameter(typeof(int), "x");
 
             BinaryExpression binaryExpression = BuildFirstBinaryExpression(variablePlace);
                
@@ -43,10 +45,8 @@ namespace Mental.Models
             }
 
             expression = Expression.Lambda<Func<int,int>>(binaryExpression, new ParameterExpression[] { parameterExpression });
-            if (ParameterDigitsLimitation)
-                XValue = RandomValuesGenerator.GenerateDigitRestrictedValue();
-            else
-                XValue = RandomValuesGenerator.GenerateRandomValue();
+            XValue = RandomValuesGenerator.GenerateRandomValue(ParameterOperation, IsParameterFirst);
+
             Result = expression.Compile().Invoke(XValue);
         }
 
@@ -54,90 +54,81 @@ namespace Mental.Models
         {
             BinaryExpression binaryExpression;
 
-            Expression param1;
-            Expression param2;
+            string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0, tasksOptions.Operations.Count, false)];
 
-            bool FirstParamVariable = false;
-            bool SecondParamVariable = false;
-
-            if (variablePlace == 0)
-            {
-                parameterExpression = Expression.Parameter(typeof(int), "x");
-                param1 = parameterExpression;
-                FirstParamVariable = true;
-            }
-            else
-                param1 = Expression.Constant(RandomValuesGenerator.GenerateRandomValue());
-
-            if (variablePlace == 1)
-            {
-                parameterExpression = Expression.Parameter(typeof(int), "x");
-                param2 = parameterExpression;
-                SecondParamVariable = true;
-            }
-            else
-                param2 = Expression.Constant(RandomValuesGenerator.GenerateRandomValue());
-
-            string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0,tasksOptions.Operations.Count,false)];
-
-            //binaryExpression = ExpressionValuesGenerator.GetBinaryExpression(Operation, param1, param2);
-
-            #region
-            
             switch (Operation)
             {
                 case "+":
-                    binaryExpression = Expression.Add(param1, param2);
+                    if (variablePlace == 0)
+                    {
+                        binaryExpression = Expression.Add(parameterExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", false)));
+                        ParameterOperation = "+"; IsParameterFirst = true;
+                    }
+                    else if (variablePlace == 1)
+                    {
+                        binaryExpression = Expression.Add(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", true)), parameterExpression);
+                        ParameterOperation = "+"; IsParameterFirst = false;
+                    }
+                    else
+                        binaryExpression = Expression.Add(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", true)), Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", false)));
                     break;
                 case "-":
-                    binaryExpression = Expression.Subtract(param1, param2);
+                    if (variablePlace == 0)
+                    {
+                        binaryExpression = Expression.Subtract(parameterExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("-", false)));
+                        ParameterOperation = "-"; IsParameterFirst = true;
+                    }
+                    else if (variablePlace == 1)
+                    {
+                        binaryExpression = Expression.Subtract(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("-", true)), parameterExpression);
+                        ParameterOperation = "-"; IsParameterFirst = false;
+                    }
+                    else
+                        binaryExpression = Expression.Subtract(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("-", true)), Expression.Constant(RandomValuesGenerator.GenerateRandomValue("-", false)));
                     break;
                 case "*":
-                    if (FirstParamVariable || SecondParamVariable)
+                    if (variablePlace == 0)
                     {
-                        if (tasksOptions.IsSpecialModeActivated)
-                        {
-                            if (FirstParamVariable)
-                            {
-                                binaryExpression = Expression.Multiply(param1, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
-                            }
-                            else if (SecondParamVariable)
-                            {
-                                binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), param2);
-                            }
-                            ParameterDigitsLimitation = true;
-                        }
-                        else
-                            binaryExpression = Expression.Multiply(param1, param2);
+                        binaryExpression = Expression.Multiply(parameterExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("*", false)));
+                        ParameterOperation = "*"; IsParameterFirst = true;
                     }
-                    binaryExpression = Expression.Multiply(param1, param2);
+                    else if (variablePlace == 1)
+                    {
+                        binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("*", true)), parameterExpression);
+                        ParameterOperation = "*"; IsParameterFirst = false;
+                    }
+                    else
+                        binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("*", true)), Expression.Constant(RandomValuesGenerator.GenerateRandomValue("*", false)));
                     break;
                 case "/":
-                    if(FirstParamVariable || SecondParamVariable)
+                    if (variablePlace == 0)
                     {
-                        if (tasksOptions.IsSpecialModeActivated)
-                        {
-                            //if (FirstParamVariable)
-                            //{
-                            //    binaryExpression = Expression.Divide(param1, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
-                            //}
-                            //else if (SecondParamVariable)
-                            //{
-                            //    binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), param2);
-                            //}
-                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), param2);
-                            ParameterDigitsLimitation = true;
-                        }
-                        else
-                            binaryExpression = Expression.Divide(param1, param2);
+                        binaryExpression = Expression.Divide(parameterExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("/", false)));
+                        ParameterOperation = "/"; IsParameterFirst = true;
                     }
-                    binaryExpression = Expression.Divide(param1, param2);
+                    else if (variablePlace == 1)
+                    {
+                        binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("/", true)), parameterExpression);
+                        ParameterOperation = "/"; IsParameterFirst = false;
+                    }
+                    else
+                        binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("/", true)), Expression.Constant(RandomValuesGenerator.GenerateRandomValue("/", false)));
                     break;
                 default:
-                    binaryExpression = Expression.Add(param1, param2);
+                    if (variablePlace == 0)
+                    {
+                        binaryExpression = Expression.Add(parameterExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", false)));
+                        ParameterOperation = "+"; IsParameterFirst = true;
+                    }
+                    else if (variablePlace == 1)
+                    {
+                        binaryExpression = Expression.Add(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", true)), parameterExpression);
+                        ParameterOperation = "+"; IsParameterFirst = false;
+                    }
+                    else
+                        binaryExpression = Expression.Add(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", true)), Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", false)));
                     break;
             }
-            #endregion;
 
             return binaryExpression;
         }
@@ -146,73 +137,121 @@ namespace Mental.Models
         {
             string Operation = tasksOptions.Operations[RandomValuesGenerator.GenerateValuesInRange(0,tasksOptions.Operations.Count,false)];
 
-            Expression param;
-
-            if (IsVariable)
-            {
-                parameterExpression = Expression.Parameter(typeof(int), "x");
-                param = parameterExpression;
-            }
-            else
-                param = Expression.Constant(RandomValuesGenerator.GenerateRandomValue());
-
-            //ExpressionValuesGenerator.GenerateBinaryExpression(Operation, binaryExpression, param);
-
-            #region
+            int placeFactor = RandomValuesGenerator.GenerateValuesInRange(0, 1, true);
+       
             switch (Operation)
             {
                 case "+":
-                    binaryExpression = Expression.Add(binaryExpression, param);
-                    break;
-                case "-":
-                    binaryExpression = Expression.Subtract(binaryExpression, param);
-                    break;
-                case "*":
-                    if (!IsVariable)
+                    if(placeFactor == 0)
                     {
-                        if (tasksOptions.IsSpecialModeActivated)
+                        if (IsVariable)
                         {
-                            int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                            if (valueplace == 0)
-                                binaryExpression = Expression.Multiply(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
-                            else
-                                binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), binaryExpression);
+                            binaryExpression = Expression.Add(binaryExpression, parameterExpression);
+                            ParameterOperation = "+"; IsParameterFirst = false;
                         }
                         else
-                            binaryExpression = Expression.Multiply(binaryExpression, param);
+                            binaryExpression = Expression.Add(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", false)));
                     }
                     else
                     {
-                        binaryExpression = Expression.Multiply(binaryExpression, param);
-                        ParameterDigitsLimitation = true;
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Add(parameterExpression, binaryExpression);
+                            ParameterOperation = "+"; IsParameterFirst = true;
+                        }
+                        else
+                            binaryExpression = Expression.Add(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", true)), binaryExpression);
+                    }
+                    break;
+                case "-":
+                    if (placeFactor == 0)
+                    {
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Subtract(binaryExpression, parameterExpression);
+                            ParameterOperation = "-"; IsParameterFirst = false;
+                        }
+                        else
+                            binaryExpression = Expression.Subtract(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("-", false)));
+                    }
+                    else
+                    {
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Subtract(parameterExpression, binaryExpression);
+                            ParameterOperation = "-"; IsParameterFirst = true;
+                        }
+                        else
+                            binaryExpression = Expression.Subtract(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("-", true)), binaryExpression);
+                    }
+                    break;
+                case "*":
+                    if (placeFactor == 0)
+                    {
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Multiply(binaryExpression, parameterExpression);
+                            ParameterOperation = "*"; IsParameterFirst = false;
+                        }
+                        else
+                            binaryExpression = Expression.Multiply(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("*", false)));
+                    }
+                    else
+                    {
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Multiply(parameterExpression, binaryExpression);
+                            ParameterOperation = "*"; IsParameterFirst = true;
+                        }
+                        else
+                            binaryExpression = Expression.Multiply(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("*", true)), binaryExpression);
                     }
                     break;
                 case "/":
-                    if (!IsVariable)
+                    if (placeFactor == 0)
                     {
-                        if (tasksOptions.IsSpecialModeActivated)
+                        if (IsVariable)
                         {
-                            //int valueplace = RandomValuesGenerator.GenerateValuesInRange(0, 1,true);
-                            //if (valueplace == 0)
-                            //    binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue()));
-                            //else
-                            //    binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), binaryExpression);
-                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue()), binaryExpression);
+                            binaryExpression = Expression.Divide(binaryExpression, parameterExpression);
+                            ParameterOperation = "/"; IsParameterFirst = false;
                         }
                         else
-                            binaryExpression = Expression.Divide(binaryExpression, param);
+                            binaryExpression = Expression.Divide(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("/", false)));
                     }
                     else
                     {
-                        binaryExpression = Expression.Divide(binaryExpression, param);
-                        ParameterDigitsLimitation = true;
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Divide(parameterExpression, binaryExpression);
+                            ParameterOperation = "/"; IsParameterFirst = true;
+                        }
+                        else
+                            binaryExpression = Expression.Divide(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("/", true)), binaryExpression);
                     }
                     break;
                 default:
-                    binaryExpression = Expression.Add(binaryExpression, param);
+                    if (placeFactor == 0)
+                    {
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Add(binaryExpression, parameterExpression);
+                            ParameterOperation = "+"; IsParameterFirst = false;
+                        }
+                        else
+                            binaryExpression = Expression.Add(binaryExpression, Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", false)));
+                    }
+                    else
+                    {
+                        if (IsVariable)
+                        {
+                            binaryExpression = Expression.Add(parameterExpression, binaryExpression);
+                            ParameterOperation = "+"; IsParameterFirst = true;
+                        }
+                        else
+                            binaryExpression = Expression.Add(Expression.Constant(RandomValuesGenerator.GenerateRandomValue("+", true)), binaryExpression);
+                    }
                     break;
             }
-            #endregion
 
             return binaryExpression;
         }

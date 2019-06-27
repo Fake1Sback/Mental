@@ -25,8 +25,8 @@ namespace Mental
                     TaskType = TaskType.CountResult,
                     TimeOptions = TimeOptions.CountdownTimer,
                     Operations = new List<string> { "+" },
-                    IsSpecialModeActivated = false,
-                    AmountOfXDigits = 1,
+                    IsRestrictionsActivated = false,
+                    restrictions = new TaskRestrictions(),
                     IsIntegerNumbers = true,
                     DigitsAfterDotSign = 1,
                     MinValue = 0,
@@ -240,8 +240,8 @@ namespace Mental
                 if (dbMathTaskOptions.Operations.Contains("/"))
                     StoredMathTaskOptions.Operations.Add("/");
 
-                StoredMathTaskOptions.IsSpecialModeActivated = dbMathTaskOptions.IsSpecialModeActivated;
-                StoredMathTaskOptions.AmountOfXDigits = dbMathTaskOptions.AmountOfXDigits;
+                StoredMathTaskOptions.IsRestrictionsActivated = dbMathTaskOptions.IsRestrictionActivated;
+                StoredMathTaskOptions.restrictions.restrictions = TaskRestrictions.GetTaskRestrictionFromString(dbMathTaskOptions.RestrictionsString);
 
                 StoredMathTaskOptions.IsIntegerNumbers = dbMathTaskOptions.IsIntegerNumbers;
                 StoredMathTaskOptions.DigitsAfterDotSign = dbMathTaskOptions.DigitsAfterDotSign;
@@ -274,8 +274,8 @@ namespace Mental
 
             dbMathTaskOptions.Operations = operations;
 
-            dbMathTaskOptions.IsSpecialModeActivated = mathTasksOptions.IsSpecialModeActivated;
-            dbMathTaskOptions.AmountOfXDigits = mathTasksOptions.AmountOfXDigits;
+            dbMathTaskOptions.IsRestrictionActivated = mathTasksOptions.IsRestrictionsActivated;
+            dbMathTaskOptions.RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions);
 
             dbMathTaskOptions.IsIntegerNumbers = mathTasksOptions.IsIntegerNumbers;
             dbMathTaskOptions.DigitsAfterDotSign = mathTasksOptions.DigitsAfterDotSign;
@@ -308,7 +308,7 @@ namespace Mental
             InitializeComponent();
             using (var a = new ApplicationContext("mental.db"))
             {
-                // a.Database.EnsureDeleted();
+                //  a.Database.EnsureDeleted();
                 a.Database.EnsureCreated();
             }
 

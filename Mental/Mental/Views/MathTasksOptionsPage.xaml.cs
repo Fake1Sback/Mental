@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mental.ViewModels;
 using Mental.Models;
+using System.Diagnostics;
 
 namespace Mental.Views
 {
@@ -16,17 +17,15 @@ namespace Mental.Views
     {
         public MathTasksOptionsPage()
         {
-            BindingContext = new MathTasksOptionsVM(this.Navigation);
-            InitializeComponent();
-        }
-
-        private void InitializeSliders()
-        {
-            App app = (App)App.Current;
-           // MathTasksOptions mathTasksOptions = app.GetStoredMathTaskOptions();
-           // SpecialModeXDigitSlider.Value = mathTasksOptions.AmountOfXDigits;
-           // DigitsAfterDotSignSlider.Value = mathTasksOptions.DigitsAfterDotSign;
-           // TimerStartValueSlider.Value = mathTasksOptions.AmountOfMinutes;
+            try
+            {
+                InitializeComponent();
+                BindingContext = new MathTasksOptionsVM(this.Navigation);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
                 <charts:ChartView x:Name="TimeOptionsChart" Chart="{Binding TimeOptionsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
                 <charts:ChartView x:Name="TaskTypeChart" Chart="{Binding TaskTypeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
                 <charts:ChartView x:Name="DataTypeChart" Chart="{Binding DataTypeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <charts:ChartView x:Name="SpecialModeChart" Chart="{Binding SpecialModeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
+                <charts:ChartView x:Name="RestrictionsChart" Chart="{Binding RestrictionsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
                 <charts:ChartView x:Name="OperationsChart" Chart="{Binding OperationsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
                 <charts:ChartView x:Name="ChainLengthChart" Chart="{Binding ChainLengthChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
                 <Label Text="Latest Math Tasks" HorizontalOptions="Center"></Label>
@@ -34,7 +34,6 @@
                                         <Label Text="{Binding WrongAnswers}" TextColor="Red"></Label>
                                         <Label Text="{Binding DataType}"></Label>
                                         <Label Text="{Binding MaxChainLength}"></Label>
-                                        <Label Text="Special" IsVisible="{Binding SpecialMode}"></Label>
                                         <Label Text="{Binding SpecialModeDigitsRestriction}" IsVisible="{Binding SpecialMode}"></Label>
                                     </StackLayout>
                                 </StackLayout>

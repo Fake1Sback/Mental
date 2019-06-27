@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mental.Views.PartialViews.RestrictionsView">
+    <StackLayout x:Name="RestrictionsLayout" Orientation="Vertical">
+        <StackLayout.Resources>
+            <Style x:Key="HardRestrictionsButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="100"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="BlockRestrictionsButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="HeightRequest" Value="50"></Setter>
+                <Setter Property="BorderRadius" Value="25"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="BackgroundColor" Value="Green"></Setter>
+            </Style>
+            <Style x:Key="DigitRestrictionLabel" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            </Style>
+        </StackLayout.Resources>
+        <StackLayout Orientation="Horizontal">
+            <Label HorizontalOptions="CenterAndExpand" Text="Restrictions:"></Label>
+            <Button Text="{Binding RestPVM.RestrictionsVisibilityText}" Command="{Binding RestPVM.ChangeRestrictionVisibilityCommand}"></Button>
+        </StackLayout>
+        <StackLayout Orientation="Vertical" Padding="10,0,10,0" IsVisible="{Binding RestPVM.RestrictionLayoutVisibility}">
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntPlusDigit1Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.PlusDigit1Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.PlusDigit1HardRestrictionCommand}" Text="{Binding RestPVM.PlusDigit1RestrictionString}"></Button>
+                </StackLayout>
+                <Label Text="+" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntPlusDigit2Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.PlusDigit2Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.PlusDigit2HardRestrictionCommand}" Text="{Binding RestPVM.PlusDigit2RestrictionString}"></Button>
+                </StackLayout>
+                <Button Style="{StaticResource BlockRestrictionsButton}" Command="{Binding RestPVM.PlusBlockActivatedCommand}" Text="{Binding RestPVM.PlusBlockActivatedString}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntMinusDigit1Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.MinusDigit1Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.MinusDigit1HardRestrictionCommand}" Text="{Binding RestPVM.MinusDigit1RestrictionString}"></Button>
+                </StackLayout>
+                <Label Text="-" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntMinusDigit2Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.MinusDigit2Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.MinusDigit2HardRestrictionCommand}" Text="{Binding RestPVM.MinusDigit2RestrictionString}"></Button>
+                </StackLayout>
+                <Button Style="{StaticResource BlockRestrictionsButton}" Command="{Binding RestPVM.MinusBlockActivatedCommand}" Text="{Binding RestPVM.MinusBlockActivatedString}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntMultiplyDigit1Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.MultiplyDigit1Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.MultiplyDigit1HardRestrictionCommand}" Text="{Binding RestPVM.MultiplyDigit1RestrictionString}"></Button>
+                </StackLayout>
+                <Label Text="*" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntMultiplyDigit2Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.MultiplyDigit2Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.MultiplyDigit2HardRestrictionCommand}" Text="{Binding RestPVM.MultiplyDigit2RestrictionString}"></Button>
+                </StackLayout>
+                <Button Style="{StaticResource BlockRestrictionsButton}" Command="{Binding RestPVM.MultiplyBlockActivatedCommand}" Text="{Binding RestPVM.MultiplyBlockActivatedString}"></Button>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntDivideDigit1Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.DivideDigit1Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.DivideDigit1HardRestrictionCommand}" Text="{Binding RestPVM.DivideDigit1RestrictionString}"></Button>
+                </StackLayout>
+                <Label Text="/" HorizontalOptions="Center" VerticalOptions="Center" FontSize="Large"></Label>
+                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                    <Label Style="{StaticResource DigitRestrictionLabel}" Text="{Binding RestPVM.IntDivideDigit2Restriction}"></Label>
+                    <Slider WidthRequest="100" Value="{Binding RestPVM.DivideDigit2Restriction}" Maximum="{Binding RestPVM.MaximumDigitValue}" Minimum="{Binding RestPVM.MinimumDigitValue}"></Slider>
+                    <Button Style="{StaticResource HardRestrictionsButton}" Command="{Binding RestPVM.DivideDigit2HardRestrictionCommand}" Text="{Binding RestPVM.DivideDigit2RestrictionString}"></Button>
+                </StackLayout>
+                <Button Style="{StaticResource BlockRestrictionsButton}" Command="{Binding RestPVM.DivideBlockActivatedCommand}" Text="{Binding RestPVM.DivideBlockActivatedString}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ContentView>

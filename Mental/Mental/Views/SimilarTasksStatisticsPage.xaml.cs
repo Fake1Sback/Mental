@@ -15,17 +15,10 @@ namespace Mental.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SimilarTasksStatisticsPage : ContentPage
 	{
-		public SimilarTasksStatisticsPage (DbMathTask _dbMathTask,bool _save)
-		{
-            try
-            {
-                InitializeComponent();
-                this.BindingContext = new SimilarTasksStatisticsVM(this.Navigation, _dbMathTask, _save);
-            }
-            catch(Exception ex)
-            {
-
-            }
-		}
+        public SimilarTasksStatisticsPage(DbMathTask _dbMathTask, bool _save)
+        {
+            InitializeComponent();
+            this.BindingContext = new SimilarTasksStatisticsVM(this.Navigation, _dbMathTask, _save);
+        }
 	}
 }

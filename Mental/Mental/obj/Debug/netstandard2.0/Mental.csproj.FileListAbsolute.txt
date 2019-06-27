@@ -13,3 +13,4 @@ E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\Ma
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\MathTasksPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\SimilarTasksStatisticsPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\GeneralStatisticsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\PartialViews\RestrictionsView.xaml.g.cs

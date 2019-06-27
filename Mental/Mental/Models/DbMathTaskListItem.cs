@@ -187,10 +187,7 @@ namespace Mental.Models
         {
             get
             {
-                if (dbMathTask.IsSpecialModeActivated)
-                    return true;
-                else
-                    return false;
+                return dbMathTask.IsRestrictionActivated;
             }
         }
 
@@ -198,12 +195,7 @@ namespace Mental.Models
         {
             get
             {
-                string str = string.Empty;
-                for(int i = 0;i < dbMathTask.AmountOfXDigits;i++)
-                {
-                    str += "X";
-                }
-                return str;
+                return "R";
             }
             private set { }
         }

@@ -7,6 +7,7 @@ namespace Mental.Models
 {
     public class ExpressionValuesGenerator
     {
+        /*
         private MathTasksOptions tasksOptions;
         private RandomValuesGenerator RandomValuesGenerator;
 
@@ -98,5 +99,6 @@ namespace Mental.Models
 
             return binaryExpression;
         }
+        */
     }
 }

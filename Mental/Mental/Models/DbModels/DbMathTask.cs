@@ -14,9 +14,6 @@ namespace Mental.Models.DbModels
         public int TimeParameter { get; set; }
         public int TaskComplexityParameter { get; set; }
 
-        //public int AmountOfTasks { get; set; }
-        //public int AmountOfMinutes { get; set; }
-
         public int MinValue { get; set; }
         public int MaxValue { get; set; }
 
@@ -26,8 +23,8 @@ namespace Mental.Models.DbModels
         public bool IsInteger { get; set; }
         public int DigitsAfterDotSing { get; set; }
 
-        public bool IsSpecialModeActivated { get; set; }
-        public int AmountOfXDigits { get; set; }
+        public bool IsRestrictionActivated { get; set; }
+        public string RestrictionsString { get; set; }
 
         public int AmountOfCorrectAnswers { get; set; }
         public int AmountOfWrongAnswers { get; set; }

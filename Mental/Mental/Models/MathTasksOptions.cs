@@ -9,8 +9,8 @@ namespace Mental.Models
     {
         public List<string> Operations = new List<string>();
 
-        public bool IsSpecialModeActivated;
-        public int AmountOfXDigits;
+        public bool IsRestrictionsActivated = false;
+        public TaskRestrictions restrictions = new TaskRestrictions();
 
         public bool IsIntegerNumbers;
         public int DigitsAfterDotSign;
