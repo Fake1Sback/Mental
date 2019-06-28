@@ -481,10 +481,10 @@ namespace Mental.ViewModels
                     {
                         if(ListOfMathTasks[i].TaskDateTime.Date == DateTime.Now.Date)
                         {
-                            entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.TimeOfDay.ToString(), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                         }
                         else
-                            entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.Date.ToString(), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new Entry(ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     }
                        
                 }

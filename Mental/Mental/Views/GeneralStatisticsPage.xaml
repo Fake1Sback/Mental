@@ -34,7 +34,8 @@
                                         <Label Text="{Binding WrongAnswers}" TextColor="Red"></Label>
                                         <Label Text="{Binding DataType}"></Label>
                                         <Label Text="{Binding MaxChainLength}"></Label>
-                                        <Label Text="{Binding SpecialModeDigitsRestriction}" IsVisible="{Binding SpecialMode}"></Label>
+                                        <Label Text="{Binding RestrictionsString}" IsVisible="{Binding RestrictionsVisibility}"></Label>
+                                        <Label Text="{Binding DateTimeString}"></Label>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>

@@ -183,7 +183,7 @@ namespace Mental.Models
             private set { }
         }
 
-        public bool SpecialMode
+        public bool RestrictionsVisibility
         {
             get
             {
@@ -191,13 +191,21 @@ namespace Mental.Models
             }
         }
 
-        public string SpecialModeDigitsRestriction
+        public string RestrictionsString
         {
             get
             {
                 return "R";
             }
             private set { }
+        }
+
+        public string DateTimeString
+        {
+            get
+            {
+                return dbMathTask.TaskDateTime.ToString(@"dd-MM-yy HH:mm");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
