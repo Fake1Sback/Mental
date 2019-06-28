@@ -50,6 +50,7 @@ namespace Mental.ViewModels
             set
             {
                 _restPVM = value;
+                OnProperyChanged("RestPVM");
             }
         }
 
@@ -209,11 +210,6 @@ namespace Mental.ViewModels
                 mathTasksOptions.MinValue = value;
                 OnProperyChanged("MinValue");
                 RestPVM.MinimumDigitValue = value;
-
-              //  OnProperyChanged("RestPVM");
-              //  OnProperyChanged("RestPVM.MaximumDigitValue");
-              //  OnProperyChanged("RestPVM");
-               // RestPVM.RenewSliderValues();
             }
         }
 
@@ -228,10 +224,6 @@ namespace Mental.ViewModels
                 mathTasksOptions.MaxValue = value;
                 OnProperyChanged("MaxValue");
                 RestPVM.MaximumDigitValue = value;
-
-             //   OnProperyChanged("RestPVM.MaximumDigitValue");
-              //  OnProperyChanged("RestPVM");
-              //  RestPVM.RenewSliderValues();
             }
         }
 

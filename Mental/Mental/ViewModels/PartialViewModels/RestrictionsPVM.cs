@@ -42,15 +42,6 @@ namespace Mental.ViewModels.PartialViewModels
         private double _DivideDigit1Restriction;
         private double _DivideDigit2Restriction;
 
-        private double _PlusDigit1SliderPercentage;
-        private double _PlusDigit2SliderPercentage;
-        private double _MinusDigit1SliderPercentage;
-        private double _MinusDigit2SliderPercentage;
-        private double _MultiplyDigit1SliderPercentage;
-        private double _MultiplyDigit2SliderPercentage;
-        private double _DivideDigit1SliderPercentage;
-        private double _DivideDigit2SliderPercentage;
-
         private int _MinimumSliderValue;
         private int _MaximumSliderValue;
 
@@ -93,6 +84,8 @@ namespace Mental.ViewModels.PartialViewModels
             set { }
         }
 
+        //----------------------------------------------
+
         public double PlusDigit1Restriction
         {
             get
@@ -102,10 +95,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _PlusDigit1Restriction = value;
-                taskRestrictions.restrictions[0].Digit1Restriction = (int)Math.Round(value,0);
-                _PlusDigit1SliderPercentage = GetSliderPercentage(PlusDigit1Restriction);
+                IntPlusDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100),0);
                 OnPropertyChanged("PlusDigit1Restriction");
-                OnPropertyChanged("IntPlusDigit1Restriction");
             }
         }
 
@@ -118,10 +109,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _PlusDigit2Restriction = value;
-                taskRestrictions.restrictions[0].Digit2Restriction = (int)Math.Round(value, 0);
-                _PlusDigit2SliderPercentage = GetSliderPercentage(PlusDigit2Restriction);
+                IntPlusDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("PlusDigit2Restriction");
-                OnPropertyChanged("IntPlusDigit2Restriction");
             }
         }
 
@@ -134,10 +123,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _MinusDigit1Restriction = value;
-                taskRestrictions.restrictions[1].Digit1Restriction = (int)Math.Round(value, 0);
-                _MinusDigit1SliderPercentage = GetSliderPercentage(MinusDigit1Restriction);
+                IntMinusDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("MinusDigit1Restriction");
-                OnPropertyChanged("IntMinusDigit1Restriction");
             }
         }
         
@@ -150,10 +137,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _MinusDigit2Restriction = value;
-                taskRestrictions.restrictions[1].Digit2Restriction = (int)Math.Round(value, 0);
-                _MinusDigit2SliderPercentage = GetSliderPercentage(MinusDigit2Restriction);
+                IntMinusDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("MinusDigit2Restriction");
-                OnPropertyChanged("IntMinusDigit2Restriction");
             }
         }
 
@@ -166,10 +151,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _MultiplyDigit1Restriction = value;
-                taskRestrictions.restrictions[2].Digit1Restriction = (int)Math.Round(value, 0);
-                _MultiplyDigit1SliderPercentage = GetSliderPercentage(MultiplyDigit1Restriction);
+                IntMultiplyDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("MultiplyDigit1Restriction");
-                OnPropertyChanged("IntMultiplyDigit1Restriction");
             }
         }
 
@@ -182,10 +165,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _MultiplyDigit2Restriction = value;
-                taskRestrictions.restrictions[2].Digit2Restriction = (int)Math.Round(value, 0);
-                _MultiplyDigit2SliderPercentage = GetSliderPercentage(MultiplyDigit2Restriction);
+                IntMultiplyDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("MultiplyDigit2Restriction");
-                OnPropertyChanged("IntMultiplyDigit2Restriction");
             }
         }
 
@@ -198,10 +179,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _DivideDigit1Restriction = value;
-                taskRestrictions.restrictions[3].Digit1Restriction = (int)Math.Round(value, 0);
-                _DivideDigit1SliderPercentage = GetSliderPercentage(DivideDigit1Restriction);
+                IntDivideDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("DivideDigit1Restriction");
-                OnPropertyChanged("IntDivideDigit1Restriction");
             }
         }
 
@@ -214,10 +193,8 @@ namespace Mental.ViewModels.PartialViewModels
             set
             {
                 _DivideDigit2Restriction = value;
-                taskRestrictions.restrictions[3].Digit2Restriction = (int)Math.Round(value, 0);
-                _DivideDigit2SliderPercentage = GetSliderPercentage(DivideDigit2Restriction);
+                IntDivideDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(value * 100), 0);
                 OnPropertyChanged("DivideDigit2Restriction");
-                OnPropertyChanged("IntDivideDigit2Restriction");
             }
         }
 
@@ -229,7 +206,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[0].Digit1Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[0].Digit1Restriction = value;
+                OnPropertyChanged("IntPlusDigit1Restriction");
+            }
         }
 
         public int IntPlusDigit2Restriction
@@ -238,7 +219,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[0].Digit2Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[0].Digit2Restriction = value;
+                OnPropertyChanged("IntPlusDigit2Restriction");
+            }
         }
 
         public int IntMinusDigit1Restriction
@@ -247,7 +232,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[1].Digit1Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[1].Digit1Restriction = value;
+                OnPropertyChanged("IntMinusDigit1Restriction");
+            }
         }
 
         public int IntMinusDigit2Restriction
@@ -256,7 +245,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[1].Digit2Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[1].Digit2Restriction = value;
+                OnPropertyChanged("IntMinusDigit2Restriction");
+            }
         }
 
         public int IntMultiplyDigit1Restriction
@@ -265,7 +258,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[2].Digit1Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[2].Digit1Restriction = value;
+                OnPropertyChanged("IntMultiplyDigit1Restriction");
+            }
         }
 
         public int IntMultiplyDigit2Restriction
@@ -274,7 +271,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[2].Digit2Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[2].Digit2Restriction = value;
+                OnPropertyChanged("IntMultiplyDigit2Restriction");
+            }
         }
 
         public int IntDivideDigit1Restriction
@@ -283,7 +284,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[3].Digit1Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[3].Digit1Restriction = value;
+                OnPropertyChanged("IntDivideDigit1Restriction");
+            }
         }
 
         public int IntDivideDigit2Restriction
@@ -292,7 +297,11 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return taskRestrictions.restrictions[3].Digit2Restriction;
             }
-            private set { }
+            set
+            {
+                taskRestrictions.restrictions[3].Digit2Restriction = value;
+                OnPropertyChanged("IntDivideDigit2Restriction");
+            }
         }
 
         //---------------------------------------------------------------
@@ -302,16 +311,6 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 return _MinimumSliderValue;
-                #region
-                //if (FindAmountOfDigits(mathTaskOptions.MinValue) == FindAmountOfDigits(mathTaskOptions.MaxValue))
-                //{
-                //    mathTaskOptions.IsRestrictionsActivated = false;
-                //    OnPropertyChanged("RestrictionLayoutVisibility");
-                //    OnPropertyChanged("RestrictionsVisibilityText");
-                //    return mathTaskOptions.MinValue;
-                //}
-                //return FindAmountOfDigits(mathTaskOptions.MinValue);
-                #endregion
             }
             set
             {
@@ -334,6 +333,7 @@ namespace Mental.ViewModels.PartialViewModels
                     }
                     _MinimumSliderValue = FindAmountOfDigits(value);
                     OnPropertyChanged("MinimumSliderValue");
+                    RenewSliderValues();
                 }
             }
         }
@@ -343,17 +343,6 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 return _MaximumSliderValue;
-                #region
-                //if (FindAmountOfDigits(mathTaskOptions.MaxValue) == FindAmountOfDigits(mathTaskOptions.MinValue))
-                //{
-                //    mathTaskOptions.IsRestrictionsActivated = false;
-                //    OnPropertyChanged("RestrictionLayoutVisibility");
-                //    OnPropertyChanged("RestrictionsVisibilityText");
-                //    return mathTaskOptions.MinValue + 1;                   
-                //}
-                //else
-                //    return FindAmountOfDigits(mathTaskOptions.MaxValue);
-                #endregion
             }
             set
             {
@@ -375,6 +364,7 @@ namespace Mental.ViewModels.PartialViewModels
                         }
                         _MaximumSliderValue = FindAmountOfDigits(value);
                         OnPropertyChanged("_MaximumSliderValue");
+                        RenewSliderValues();
                     }
                 }
             }
@@ -399,28 +389,28 @@ namespace Mental.ViewModels.PartialViewModels
 
         private double GetSliderPercentage(double CurrentSliderValue)
         {
-            CurrentSliderValue = CurrentSliderValue - FindAmountOfDigits(mathTaskOptions.MinValue);
-            int MaximumPercentageValue = FindAmountOfDigits(mathTaskOptions.MaxValue) - FindAmountOfDigits(mathTaskOptions.MinValue);
+            CurrentSliderValue = CurrentSliderValue - _MinimumSliderValue;
+            int MaximumPercentageValue = _MaximumSliderValue - _MinimumSliderValue;
 
             return CurrentSliderValue * 100 / MaximumPercentageValue;
         }
 
         private double GetValueFromSliderPercentage(double CurrentSliderPercentage)
         {
-            int MaximumPercentageValue = FindAmountOfDigits(mathTaskOptions.MaxValue) - FindAmountOfDigits(mathTaskOptions.MinValue);
-            return CurrentSliderPercentage * MaximumPercentageValue / 100 + FindAmountOfDigits(mathTaskOptions.MinValue);
+            int MaximumPercentageValue = _MaximumSliderValue - _MinimumSliderValue;
+            return CurrentSliderPercentage * MaximumPercentageValue / 100 + _MinimumSliderValue;
         }
 
         public void RenewSliderValues()
         {
-            _PlusDigit1Restriction = GetValueFromSliderPercentage(_PlusDigit1SliderPercentage);
-            _PlusDigit2Restriction = GetValueFromSliderPercentage(_PlusDigit2SliderPercentage);
-            _MinusDigit1Restriction = GetValueFromSliderPercentage(_MinusDigit1SliderPercentage);
-            _MinusDigit2Restriction = GetValueFromSliderPercentage(_MinusDigit2SliderPercentage);
-            _MultiplyDigit1Restriction = GetValueFromSliderPercentage(_MultiplyDigit1SliderPercentage);
-            _MultiplyDigit2Restriction = GetValueFromSliderPercentage(_MultiplyDigit2SliderPercentage);
-            _DivideDigit1Restriction = GetValueFromSliderPercentage(_DivideDigit1SliderPercentage);
-            _DivideDigit2Restriction = GetValueFromSliderPercentage(_DivideDigit2SliderPercentage);
+            IntPlusDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(_PlusDigit1Restriction * 100), 0);
+            IntPlusDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(_PlusDigit2Restriction * 100), 0);
+            IntMinusDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(_MinusDigit1Restriction * 100), 0);
+            IntMinusDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(_MinusDigit2Restriction * 100), 0);
+            IntMultiplyDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(_MultiplyDigit1Restriction * 100), 0);
+            IntMultiplyDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(_MultiplyDigit2Restriction * 100), 0);
+            IntDivideDigit1Restriction = (int)Math.Round(GetValueFromSliderPercentage(_DivideDigit1Restriction * 100), 0);
+            IntDivideDigit2Restriction = (int)Math.Round(GetValueFromSliderPercentage(_DivideDigit2Restriction* 100), 0);
 
             OnPropertyChanged("PlusDigit1Restriction");
             OnPropertyChanged("PlusDigit2Restriction");
@@ -430,15 +420,6 @@ namespace Mental.ViewModels.PartialViewModels
             OnPropertyChanged("MultiplyDigit2Restriction");
             OnPropertyChanged("DivideDigit1Restriction");
             OnPropertyChanged("DivideDigit2Restriction");
-
-            OnPropertyChanged("IntPlusDigit1Restriction");
-            OnPropertyChanged("IntPlusDigit2Restriction");
-            OnPropertyChanged("IntMinusDigit1Restriction");
-            OnPropertyChanged("IntMinusDigit2Restriction");
-            OnPropertyChanged("IntMultiplyDigit1Restriction");
-            OnPropertyChanged("IntMultiplyDigit2Restriction");
-            OnPropertyChanged("IntDivideDigit1Restriction");
-            OnPropertyChanged("IntDivideDigit2Restriction");
         }
 
         //---------------------------------------------------------------
