@@ -16,7 +16,22 @@ namespace Mental.ViewModels.PartialViewModels
         {
             mathTaskOptions = _mathTasksOptions;
             taskRestrictions = mathTaskOptions.restrictions;
+            IsRestrictionsOriginallyActivated = _mathTasksOptions.IsRestrictionsActivated;
+
+            if(FindAmountOfDigits(mathTaskOptions.MinValue) != FindAmountOfDigits(mathTaskOptions.MaxValue))
+            {
+                _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
+                _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue);
+            }
+            else
+            {
+                _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
+                _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue) + 1;
+                _mathTasksOptions.IsRestrictionsActivated = false;
+            }
         }
+
+        private bool IsRestrictionsOriginallyActivated = false;
 
         private double _PlusDigit1Restriction;
         private double _PlusDigit2Restriction;
@@ -35,6 +50,9 @@ namespace Mental.ViewModels.PartialViewModels
         private double _MultiplyDigit2SliderPercentage;
         private double _DivideDigit1SliderPercentage;
         private double _DivideDigit2SliderPercentage;
+
+        private int _MinimumSliderValue;
+        private int _MaximumSliderValue;
 
         public bool RestrictionLayoutVisibility
         {
@@ -63,9 +81,13 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return new Command(() =>
                          {
-                             mathTaskOptions.IsRestrictionsActivated = !mathTaskOptions.IsRestrictionsActivated;
-                             OnPropertyChanged("RestrictionLayoutVisibility");
-                             OnPropertyChanged("RestrictionsVisibilityText");
+                             if (FindAmountOfDigits(mathTaskOptions.MinValue) != FindAmountOfDigits(mathTaskOptions.MaxValue))
+                             {
+                                 mathTaskOptions.IsRestrictionsActivated = !mathTaskOptions.IsRestrictionsActivated;
+                                 IsRestrictionsOriginallyActivated = !IsRestrictionsOriginallyActivated;
+                                 OnPropertyChanged("RestrictionLayoutVisibility");
+                                 OnPropertyChanged("RestrictionsVisibilityText");
+                             }
                          });
             }
             set { }
@@ -279,33 +301,83 @@ namespace Mental.ViewModels.PartialViewModels
         {
             get
             {
-                if (FindAmountOfDigits(mathTaskOptions.MinValue) == FindAmountOfDigits(mathTaskOptions.MaxValue))
+                return _MinimumSliderValue;
+                #region
+                //if (FindAmountOfDigits(mathTaskOptions.MinValue) == FindAmountOfDigits(mathTaskOptions.MaxValue))
+                //{
+                //    mathTaskOptions.IsRestrictionsActivated = false;
+                //    OnPropertyChanged("RestrictionLayoutVisibility");
+                //    OnPropertyChanged("RestrictionsVisibilityText");
+                //    return mathTaskOptions.MinValue;
+                //}
+                //return FindAmountOfDigits(mathTaskOptions.MinValue);
+                #endregion
+            }
+            set
+            {
+                if (FindAmountOfDigits(value) == FindAmountOfDigits(MaximumDigitValue))
                 {
                     mathTaskOptions.IsRestrictionsActivated = false;
                     OnPropertyChanged("RestrictionLayoutVisibility");
                     OnPropertyChanged("RestrictionsVisibilityText");
-                    return mathTaskOptions.MinValue;
                 }
-                return FindAmountOfDigits(mathTaskOptions.MinValue);
+                else
+                {
+                    if(IsRestrictionsOriginallyActivated)
+                    {
+                        if(!mathTaskOptions.IsRestrictionsActivated)
+                        {
+                            mathTaskOptions.IsRestrictionsActivated = true;
+                            OnPropertyChanged("RestrictionLayoutVisibility");
+                            OnPropertyChanged("RestrictionsVisibilityText");
+                        }
+                    }
+                    _MinimumSliderValue = FindAmountOfDigits(value);
+                    OnPropertyChanged("MinimumSliderValue");
+                }
             }
-            private set { }
         }
 
         public int MaximumDigitValue
         {
             get
             {
-                if (FindAmountOfDigits(mathTaskOptions.MaxValue) == FindAmountOfDigits(mathTaskOptions.MinValue))
+                return _MaximumSliderValue;
+                #region
+                //if (FindAmountOfDigits(mathTaskOptions.MaxValue) == FindAmountOfDigits(mathTaskOptions.MinValue))
+                //{
+                //    mathTaskOptions.IsRestrictionsActivated = false;
+                //    OnPropertyChanged("RestrictionLayoutVisibility");
+                //    OnPropertyChanged("RestrictionsVisibilityText");
+                //    return mathTaskOptions.MinValue + 1;                   
+                //}
+                //else
+                //    return FindAmountOfDigits(mathTaskOptions.MaxValue);
+                #endregion
+            }
+            set
+            {
+                if (FindAmountOfDigits(value) == FindAmountOfDigits(MinimumDigitValue))
                 {
                     mathTaskOptions.IsRestrictionsActivated = false;
                     OnPropertyChanged("RestrictionLayoutVisibility");
                     OnPropertyChanged("RestrictionsVisibilityText");
-                    return mathTaskOptions.MinValue + 1;                   
                 }
                 else
-                    return FindAmountOfDigits(mathTaskOptions.MaxValue);
+                {
+                    if (IsRestrictionsOriginallyActivated)
+                    {
+                        if (!mathTaskOptions.IsRestrictionsActivated)
+                        {
+                            mathTaskOptions.IsRestrictionsActivated = true;
+                            OnPropertyChanged("RestrictionLayoutVisibility");
+                            OnPropertyChanged("RestrictionsVisibilityText");
+                        }
+                        _MaximumSliderValue = FindAmountOfDigits(value);
+                        OnPropertyChanged("_MaximumSliderValue");
+                    }
+                }
             }
-            private set { }
         }
 
         private int FindAmountOfDigits(int Value)

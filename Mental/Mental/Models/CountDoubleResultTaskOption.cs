@@ -17,7 +17,6 @@ namespace Mental.Models
             digits = _tasksOptions.DigitsAfterDotSign;
             RandomValuesGenerator = new RandomValuesGenerator(tasksOptions);
             ChainLength = tasksOptions.MaxChainLength;
-           // ExpressionValuesGenerator = new ExpressionValuesGenerator(tasksOptions, RandomValuesGenerator);
         }
 
         public override void GenerateExpression()
@@ -34,7 +33,14 @@ namespace Mental.Models
 
             expression = Expression.Lambda<Func<double>>(binaryExpression);
 
-            Result = expression.Compile().Invoke();
+            try
+            {
+                Result = expression.Compile().Invoke();
+            }
+            catch(DivideByZeroException)
+            {
+                GenerateExpression();
+            }
         }
 
         private BinaryExpression ChainBinaryExpression(BinaryExpression binaryExpression)

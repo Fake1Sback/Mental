@@ -10,6 +10,8 @@ namespace Mental.Models
         private MathTasksOptions tasksOptions;
         private Random random;
 
+        private bool DivideOperation = false;
+
         public RandomValuesGenerator(MathTasksOptions _tasksOptions)
         {
             tasksOptions = _tasksOptions;
@@ -33,6 +35,12 @@ namespace Mental.Models
 
         public int GenerateRandomValue(string Operation, bool IsFirstValue)
         {
+            int Result;
+            if (Operation == "/")
+                DivideOperation = true;
+            else
+                DivideOperation = false;
+
             if (tasksOptions.IsRestrictionsActivated)
             {
                 OperationRestriction operationRestriction;
@@ -98,13 +106,23 @@ namespace Mental.Models
                         }
                     }
 
-                   return ValueToReturn = random.Next(minValue, maxValue);                 
+                    Result = ValueToReturn = random.Next(minValue, maxValue);                 
                 }
                 else
-                    return random.Next(tasksOptions.MinValue, tasksOptions.MaxValue + 1);
+                    Result = random.Next(tasksOptions.MinValue, tasksOptions.MaxValue + 1);
             }
             else
-                return random.Next(tasksOptions.MinValue, tasksOptions.MaxValue + 1);
+                Result = random.Next(tasksOptions.MinValue, tasksOptions.MaxValue + 1);
+
+            if (DivideOperation && !IsFirstValue && Result == 0)
+            {
+                if (tasksOptions.MaxValue == 0)
+                    Result -= 1;
+                else
+                    Result += 1;
+            }
+ 
+            return Result;
         }
 
         public double GenerateDoubleValue(string Operation,bool FirstValue)

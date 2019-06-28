@@ -49,7 +49,14 @@ namespace Mental.Models
             expression = Expression.Lambda<Func<double, double>>(binaryExpression, new ParameterExpression[] { parameterExpression });
             XValue = RandomValuesGenerator.GenerateDoubleValue(ParameterOperation, IsParameterFirst);
 
-            Result = expression.Compile().Invoke(XValue);
+            try
+            {
+                Result = expression.Compile().Invoke(XValue);
+            }
+            catch(DivideByZeroException)
+            {
+                GenerateExpression();
+            }
         }
 
         private BinaryExpression BuildFirstBinaryExpression(int variablePlace)

@@ -15,7 +15,6 @@ namespace Mental.Models
         {
             tasksOptions = _tasksOptions;
             RandomValuesGenerator = new RandomValuesGenerator(tasksOptions);
-          //  ExpressionValuesGenerator = new ExpressionValuesGenerator(tasksOptions, RandomValuesGenerator);
             ChainLength = tasksOptions.MaxChainLength;
         }
 
@@ -24,7 +23,7 @@ namespace Mental.Models
             BinaryExpression binaryExpression = BuildFirstBinaryExpression();
 
             if (!tasksOptions.IsChainLengthFixed)
-                ChainLength = RandomValuesGenerator.GenerateValuesInRange(2,tasksOptions.MaxChainLength,true);
+                ChainLength = RandomValuesGenerator.GenerateValuesInRange(2, tasksOptions.MaxChainLength, true);
 
             for (int i = 2; i < ChainLength; i++)
             {
@@ -33,7 +32,14 @@ namespace Mental.Models
 
             expression = Expression.Lambda<Func<int>>(binaryExpression);
 
-            Result = expression.Compile().Invoke();
+            try
+            {
+                Result = expression.Compile().Invoke();
+            }
+            catch (DivideByZeroException)
+            {
+                GenerateExpression();
+            }
         }
 
         private BinaryExpression ChainBinaryExpression(BinaryExpression binaryExpression)
