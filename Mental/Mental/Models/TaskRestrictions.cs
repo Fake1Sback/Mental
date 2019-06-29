@@ -56,6 +56,26 @@ namespace Mental.Models
             {
                 if (_restrictions[i] == null)
                     _restrictions[i] = new OperationRestriction();
+
+                switch(i)
+                {
+                    case 0:
+                        _restrictions[i].OperationName = "+";
+                        break;
+                    case 1:
+                        _restrictions[i].OperationName = "-";
+                        break;
+                    case 2:
+                        _restrictions[i].OperationName = "*";
+                        break;
+                    case 3:
+                        _restrictions[i].OperationName = "/";
+                        break;
+                    default:
+                        _restrictions[i].OperationName = "+";
+                        break;
+                }
+
                 if (EncodedOperationRestrictions[i][0] == '1')
                     _restrictions[i].IsBlockActivated = true;
                 else
