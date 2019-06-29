@@ -277,10 +277,20 @@ namespace Mental.Models
 
         public override bool CheckAnswer(string Answer)
         {
+            #region
+            /*
             if (Convert.ToInt32(Answer) == XValue)
                 return true;
             else
                 return false;
-        }     
+                */
+            #endregion
+
+            int AnswerInt = Int32.Parse(Answer);
+            if (expression.Compile().Invoke(AnswerInt) == Result)
+                return true;
+            else
+                return false;
+        }
     }
 }
