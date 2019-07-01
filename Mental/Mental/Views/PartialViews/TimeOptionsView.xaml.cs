@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Mental.ViewModels.PartialViewModels;
-using Mental.Models;
 
 namespace Mental.Views.PartialViews
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class RestrictionsView : ContentView
+	public partial class TimeOptionsView : ContentView
 	{
-		public RestrictionsView ()
+		public TimeOptionsView ()
 		{
-			InitializeComponent ();          
+			InitializeComponent ();
 		}
 	}
 }

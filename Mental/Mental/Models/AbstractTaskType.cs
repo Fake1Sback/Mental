@@ -10,8 +10,6 @@ namespace Mental.Models
         protected MathTasksOptions tasksOptions;
         protected int ChainLength;
         protected RandomValuesGenerator RandomValuesGenerator;
-        protected ExpressionValuesGenerator ExpressionValuesGenerator;
-        //protected Random random;
 
         public int AmountOfCorrectAnswers;
         public int AmountOfWrongAnswers;

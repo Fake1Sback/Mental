@@ -154,7 +154,8 @@
                     <Button x:Name="CountResultButton" Command="{Binding TypeOfTaskChangedCommand}" CommandParameter="{x:Reference CountResultButton}" BackgroundColor="{Binding CountResultTaskOptionButtonColor}" Text="Count the result"></Button>
                     <Button x:Name="CountVariableButton" Command="{Binding TypeOfTaskChangedCommand}" CommandParameter="{x:Reference CountVariableButton}" BackgroundColor="{Binding CountVariableOptionButtonColor}" Text="Count the variable"></Button>
                 </StackLayout>
-                <Label Text="Time Options:"></Label>
+                <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
+                <!--<Label Text="Time Options:"></Label>
                 <StackLayout Orientation="Horizontal">
                     <Button x:Name="CountDownTimeOptionButton" Command="{Binding TimeOptionsChangedCommand}" CommandParameter="{x:Reference CountDownTimeOptionButton}" BackgroundColor="{Binding CountdownTimeOptionButtonColor}" Text="Countdown"></Button>
                     <Button x:Name="LimitedTasksOptionButton" Command="{Binding TimeOptionsChangedCommand}" CommandParameter="{x:Reference LimitedTasksOptionButton}" BackgroundColor="{Binding FixedAmountOfOperationsTimeOptionButtonColor}" Text="Limited Tasks"></Button>
@@ -177,7 +178,7 @@
                         <Label x:Name="AmountOfSecondsForAnswer" Text="{Binding IntAmountOfSecondsForAnswer}"></Label>
                     </StackLayout>
                     <Slider x:Name="AmountOfSecondsForAnswerSlider" Value="{Binding AmountOfSecondsForAnswer}" Maximum="120" Minimum="3"></Slider>
-                </StackLayout>
+                </StackLayout>-->
                 <Button x:Name="StartButton" Command="{Binding StartCommand}" Text="Start"></Button>
             </StackLayout>
         </ScrollView>

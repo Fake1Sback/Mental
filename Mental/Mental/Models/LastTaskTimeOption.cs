@@ -9,15 +9,9 @@ namespace Mental.Models
         private int InitialTime;
         private TimeSpan TimeLeft;
 
-        public LastTaskTimeOption(MathTasksOptions _mathTasksOptions)
+        public LastTaskTimeOption(TaskTimeOptionsContainer taskTimeOptions)
         {
-            InitialTime = _mathTasksOptions.AmountOfSecondsForAnswer;
-            TimeLeft = TimeSpan.FromSeconds(InitialTime);
-        }
-
-        public LastTaskTimeOption(SchulteTableTaskOptions schulteTableTaskOptions)
-        {
-            InitialTime = schulteTableTaskOptions.AmountOfSecondsForAnswer;
+            InitialTime = taskTimeOptions.AmountOfSecondsForAnswer;
             TimeLeft = TimeSpan.FromSeconds(InitialTime);
         }
 

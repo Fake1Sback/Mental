@@ -5,6 +5,7 @@ using System.Text;
 using Xamarin.Forms;
 using Mental.Models;
 using Mental.Views;
+using Mental.ViewModels.PartialViewModels;
 
 namespace Mental.ViewModels
 {
@@ -13,19 +14,31 @@ namespace Mental.ViewModels
         private INavigation navigation;
         private SchulteTableTaskOptions SchulteTableTaskOptions;
         private App app;
+        private TimeOptionsPVM _TimeOptionsPVM;
 
         public SchulteTableTaskOptionsVM(INavigation _navigation)
         {
             app = (App)App.Current;
             navigation = _navigation;
             SchulteTableTaskOptions = app.GetStoredSchulteTableTaskOptions();
-            TimeOptionsChangedCommand = new Command(TimeOptionsChanged);
+            _TimeOptionsPVM = new TimeOptionsPVM(SchulteTableTaskOptions.TaskTimeOptions);
             GridSizeSliderValue = SchulteTableTaskOptions.GridSize;
         }
 
         private double _GridSizeSliderValue;
-        private double _TimerCountdownSliderValue;
-        private double _LastAnswerSliderValue;
+
+        public TimeOptionsPVM TimeOptionsPVM
+        {
+            get
+            {
+                return _TimeOptionsPVM;
+            }
+            set
+            {
+                _TimeOptionsPVM = value;
+                OnPropertyChanged("TimeOptionsPVM");
+            }
+        }
 
         public double GridSizeSliderValue
         {
@@ -37,8 +50,8 @@ namespace Mental.ViewModels
             {
                 _GridSizeSliderValue = value;
                 SchulteTableTaskOptions.GridSize = (int)Math.Round(_GridSizeSliderValue,0);
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                    AmountOfTasks = (int)Math.Pow(IntGridSizeSliderValue, 2);
+                if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                    TimeOptionsPVM.AmountOfTasks = (int)Math.Pow(IntGridSizeSliderValue, 2);
                 OnPropertyChanged("GridSizeSliderValue");
                 OnPropertyChanged("IntGridSizeSliderValue");
             }
@@ -83,169 +96,7 @@ namespace Mental.ViewModels
                 });
             }
         }
-
-        public Color CountdownTimeOptionButtonColor
-        {
-            get
-            {
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.CountdownTimer)
-                    return Color.Aqua;
-                else
-                    return Color.LightGray;
-            }
-            private set { }
-        }
-
-        public Color FixedAmountOfOperationsTimeOptionButtonColor
-        {
-            get
-            {
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                    return Color.Aqua;
-                else
-                    return Color.LightGray;
-            }
-            private set { }
-        }
-
-        public Color LastTaskTimeOptionButtonColor
-        {
-            get
-            {
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.LastTask)
-                    return Color.Aqua;
-                else
-                    return Color.LightGray;
-            }
-            private set { }
-        }
-
-        public bool CountdownTimeOptionsLayoutVisibility
-        {
-            get
-            {
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.CountdownTimer)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public bool FixedAmountOfOperationsLayoutVisibility
-        {
-            get
-            {
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public bool LastTaskLayoutVisibility
-        {
-            get
-            {
-                if (SchulteTableTaskOptions.TimeOptions == TimeOptions.LastTask)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public int IntAmountOfMinutes
-        {
-            get
-            {
-                return SchulteTableTaskOptions.AmountOfMinutes;
-            }
-            private set { }
-        }
-
-        public double AmountOfMinutes
-        {
-            get
-            {
-                return _TimerCountdownSliderValue;
-            }
-            set
-            {
-                _TimerCountdownSliderValue = value;
-                SchulteTableTaskOptions.AmountOfMinutes = (int)value;
-                OnPropertyChanged("AmountOfMinutes");
-                OnPropertyChanged("IntAmountOfMinutes");
-            }
-        }
-      
-        public int AmountOfTasks
-        {
-            get
-            {
-                return SchulteTableTaskOptions.AmountOfTasks;
-            }
-            set
-            {
-                SchulteTableTaskOptions.AmountOfTasks = value;
-                OnPropertyChanged("AmountOfTasks");
-            }
-        }
      
-        public int IntAmountOfSecondsForAnswer
-        {
-            get
-            {
-                return SchulteTableTaskOptions.AmountOfSecondsForAnswer;
-            }
-            private set { }
-        }
-
-        public double AmountOfSecondsForAnswer
-        {
-            get
-            {
-                return _LastAnswerSliderValue;
-            }
-            set
-            {
-                _LastAnswerSliderValue = value;
-                SchulteTableTaskOptions.AmountOfSecondsForAnswer = (int)value;
-                OnPropertyChanged("AmountOfSecondsForAnswer");
-                OnPropertyChanged("IntAmountOfSecondsForAnswer");
-            }
-        }
-
-        public Command TimeOptionsChangedCommand { get; set; }
-
-        private void TimeOptionsChanged(object obj)
-        {
-            Button button = obj as Button;
-            if (button.Text == "Countdown")
-            {
-                SchulteTableTaskOptions.TimeOptions = TimeOptions.CountdownTimer;
-            }
-            else if (button.Text == "Limited Tasks")
-            {
-                SchulteTableTaskOptions.TimeOptions = TimeOptions.FixedAmountOfOperations;
-            }
-            else if (button.Text == "Last Task")
-            {
-                SchulteTableTaskOptions.TimeOptions = TimeOptions.LastTask;
-            }
-            OnPropertyChanged("CountdownTimeOptionButtonColor");
-            OnPropertyChanged("FixedAmountOfOperationsTimeOptionButtonColor");
-            OnPropertyChanged("LastTaskTimeOptionButtonColor");
-            OnPropertyChanged("CountdownTimeOptionsLayoutVisibility");
-            OnPropertyChanged("FixedAmountOfOperationsLayoutVisibility");
-            OnPropertyChanged("LastTaskLayoutVisibility");
-
-            OnPropertyChanged("IntAmountOfSecondsForAnswer");
-            OnPropertyChanged(" AmountOfTasks");
-            OnPropertyChanged("IntAmountOfMinutes");
-        }
-
         public Command StartCommand
         {
             get
@@ -253,17 +104,17 @@ namespace Mental.ViewModels
                 return new Command(async ()=> {
                     app.SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions);
                     ITimeOption timeOption;
-                    if (SchulteTableTaskOptions.TimeOptions == TimeOptions.CountdownTimer)
+                    if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
                     {
-                        timeOption = new CountdownTimeOption(SchulteTableTaskOptions);
+                        timeOption = new CountdownTimeOption(SchulteTableTaskOptions.TaskTimeOptions);
                     }
-                    else if (SchulteTableTaskOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
+                    else if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
                     {
-                        timeOption = new LimitedTasksTimeOption(SchulteTableTaskOptions);
+                        timeOption = new LimitedTasksTimeOption(SchulteTableTaskOptions.TaskTimeOptions);
                     }
                     else
                     {
-                        timeOption = new LastTaskTimeOption(SchulteTableTaskOptions);
+                        timeOption = new LastTaskTimeOption(SchulteTableTaskOptions.TaskTimeOptions);
                     }
 
                     await navigation.PushAsync(new SchulteTableTaskPage(SchulteTableTaskOptions,timeOption));

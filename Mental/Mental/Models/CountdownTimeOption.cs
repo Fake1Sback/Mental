@@ -9,14 +9,9 @@ namespace Mental.Models
     {
         private TimeSpan TimeLeft;
    
-        public CountdownTimeOption(MathTasksOptions _mathTasksOptions)
+        public CountdownTimeOption(TaskTimeOptionsContainer taskTimeOptions)
         {    
-            TimeLeft = TimeSpan.FromMinutes(_mathTasksOptions.AmountOfMinutes);
-        }
-
-        public CountdownTimeOption(SchulteTableTaskOptions _schulteTableTaskOptions)
-        {
-            TimeLeft = TimeSpan.FromMinutes(_schulteTableTaskOptions.AmountOfMinutes);
+            TimeLeft = TimeSpan.FromMinutes(taskTimeOptions.AmountOfMinutes);
         }
 
         public void TimerWork()

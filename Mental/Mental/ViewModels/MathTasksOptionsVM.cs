@@ -15,11 +15,10 @@ namespace Mental.ViewModels
         private INavigation navigation;
         private App app;
         private RestrictionsPVM _restPVM;
+        private TimeOptionsPVM _TimeOptionsPVM;
 
         private double _SliderMaxChainLengthValue;
         private double _DigitsAfterDotSignSliderValue;
-        private double _TimerCountdownSliderValue;
-        private double _LastAnswerSliderValue;
 
         public MathTasksOptionsVM(INavigation _navigation)
         {
@@ -27,17 +26,15 @@ namespace Mental.ViewModels
             app = (App)App.Current;
             mathTasksOptions = app.GetStoredMathTaskOptions();
             _restPVM = new RestrictionsPVM(mathTasksOptions);
+            _TimeOptionsPVM = new TimeOptionsPVM(mathTasksOptions.TaskTimeOptions);
 
             _SliderMaxChainLengthValue = mathTasksOptions.MaxChainLength;
             _DigitsAfterDotSignSliderValue = mathTasksOptions.DigitsAfterDotSign;
-            _TimerCountdownSliderValue = mathTasksOptions.AmountOfMinutes;
-            _LastAnswerSliderValue = mathTasksOptions.AmountOfSecondsForAnswer;
 
             ListOfOperationsChangedCommand = new Command(OperationButtonClick);
             ChainLengthFixedChangedCommand = new Command(ChainLengthFixedChanged);
             NumbersTypeChangedCommand = new Command(NumberTypeChanged);
             TypeOfTaskChangedCommand = new Command(TypeOfTaskChanged);
-            TimeOptionsChangedCommand = new Command(TimeOptionsChanged);
             StartCommand = new Command(Start);
         }
 
@@ -51,6 +48,19 @@ namespace Mental.ViewModels
             {
                 _restPVM = value;
                 OnPropertyChanged("RestPVM");
+            }
+        }
+
+        public TimeOptionsPVM TimeOptionsPVM
+        {
+            get
+            {
+                return _TimeOptionsPVM;
+            }
+            set
+            {
+                _TimeOptionsPVM = value;
+                OnPropertyChanged("TimeOptionsPVM");
             }
         }
 
@@ -265,141 +275,7 @@ namespace Mental.ViewModels
             }
             private set { }
         }
-
-        public Color CountdownTimeOptionButtonColor
-        {
-            get
-            {
-                if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)
-                    return Color.Aqua;
-                else
-                    return Color.LightGray;
-            }
-            private set { }
-        }
-
-        public Color FixedAmountOfOperationsTimeOptionButtonColor
-        {
-            get
-            {
-                if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                    return Color.Aqua;
-                else
-                    return Color.LightGray;
-            }
-            private set { }
-        }
-
-        public Color LastTaskTimeOptionButtonColor
-        {
-            get
-            {
-                if (mathTasksOptions.TimeOptions == TimeOptions.LastTask)
-                    return Color.Aqua;
-                else
-                    return Color.LightGray;
-            }
-            private set { }
-        }
-
-        public bool CountdownTimeOptionsLayoutVisibility
-        {
-            get
-            {
-                if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public int IntAmountOfMinutes
-        {
-            get
-            {
-                return mathTasksOptions.AmountOfMinutes;
-            }
-            private set { }
-        }
-
-        public double AmountOfMinutes
-        {
-            get
-            {
-                return _TimerCountdownSliderValue;
-            }
-            set
-            {
-                _TimerCountdownSliderValue = value;
-                mathTasksOptions.AmountOfMinutes = (int)value;
-                OnPropertyChanged("AmountOfMinutes");
-                OnPropertyChanged("IntAmountOfMinutes");
-            }
-        }
-
-        public bool FixedAmountOfOperationsLayoutVisibility
-        {
-            get
-            {
-                if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public int AmountOfTasks
-        {
-            get
-            {
-                return mathTasksOptions.AmountOfTasks;
-            }
-            set
-            {
-                mathTasksOptions.AmountOfTasks = value;
-                OnPropertyChanged("AmountOfTasks");
-            }
-        }
-
-        public bool LastTaskLayoutVisibility
-        {
-            get
-            {
-                if (mathTasksOptions.TimeOptions == TimeOptions.LastTask)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public int IntAmountOfSecondsForAnswer
-        {
-            get
-            {
-                return mathTasksOptions.AmountOfSecondsForAnswer;
-            }
-            private set { }
-        }
-
-        public double AmountOfSecondsForAnswer
-        {
-            get
-            {
-                return _LastAnswerSliderValue;
-            }
-            set
-            {
-                _LastAnswerSliderValue = value;
-                mathTasksOptions.AmountOfSecondsForAnswer = (int)value;
-                OnPropertyChanged("AmountOfSecondsForAnswer");
-                OnPropertyChanged("IntAmountOfSecondsForAnswer");
-            }
-        }
-
-
+   
         public Command ListOfOperationsChangedCommand { get; set; }
 
         private void OperationButtonClick(object obj)
@@ -484,32 +360,7 @@ namespace Mental.ViewModels
             OnPropertyChanged("CountResultTaskOptionButtonColor");
             OnPropertyChanged("CountVariableOptionButtonColor");
         }
-
-        public Command TimeOptionsChangedCommand { get; set; }
-
-        private void TimeOptionsChanged(object obj)
-        {
-            Button button = obj as Button;
-            if(button.Text == "Countdown")
-            {
-                mathTasksOptions.TimeOptions = TimeOptions.CountdownTimer;
-            }
-            else if(button.Text == "Limited Tasks")
-            {
-                mathTasksOptions.TimeOptions = TimeOptions.FixedAmountOfOperations;
-            }
-            else if(button.Text == "Last Task")
-            {
-                mathTasksOptions.TimeOptions = TimeOptions.LastTask;
-            }
-            OnPropertyChanged("CountdownTimeOptionButtonColor");
-            OnPropertyChanged("FixedAmountOfOperationsTimeOptionButtonColor");
-            OnPropertyChanged("LastTaskTimeOptionButtonColor");
-            OnPropertyChanged("CountdownTimeOptionsLayoutVisibility");
-            OnPropertyChanged("FixedAmountOfOperationsLayoutVisibility");
-            OnPropertyChanged("LastTaskLayoutVisibility");
-        }
-
+      
         public Command StartCommand { get; set; }
 
         private async void Start()
@@ -517,15 +368,15 @@ namespace Mental.ViewModels
             app.SaveLatestMathTaskOptions(mathTasksOptions);
 
             ITimeOption timeOption = null;
-            if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)
-                timeOption = new CountdownTimeOption(mathTasksOptions);
-            else if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
+            if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
+                timeOption = new CountdownTimeOption(mathTasksOptions.TaskTimeOptions);
+            else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
             {
-                timeOption = new LimitedTasksTimeOption(mathTasksOptions);
+                timeOption = new LimitedTasksTimeOption(mathTasksOptions.TaskTimeOptions);
             }
-            else if(mathTasksOptions.TimeOptions == TimeOptions.LastTask)
+            else if(mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.LastTask)
             {
-                timeOption = new LastTaskTimeOption(mathTasksOptions);
+                timeOption = new LastTaskTimeOption(mathTasksOptions.TaskTimeOptions);
             }
 
             await navigation.PushAsync(new MathTasksPage(mathTasksOptions, timeOption));

@@ -87,7 +87,7 @@ namespace Mental.ViewModels
                     {
                         DbSchulteTableTask dbSchulteTableTask = new DbSchulteTableTask()
                         {
-                            TimeOption = (byte)SchulteTableTaskOptions.TimeOptions,
+                            TimeOption = (byte)SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption,
                             AmountOfCorrectAnswers = _AmountOfCorrectAnswers,
                             AmountOfWrongAnswers = _AmountOfWrongAnswers,
                             IsEasyModeActivated = SchulteTableTaskOptions.IsEasyModeActivated,
@@ -99,20 +99,20 @@ namespace Mental.ViewModels
                             TaskDateTime = DateTime.Now,
                         };
 
-                        if(SchulteTableTaskOptions.TimeOptions == TimeOptions.CountdownTimer)
+                        if(SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
                         {
-                            dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.AmountOfMinutes;
-                            dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.AmountOfMinutes;
+                            dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
+                            dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
                         }
-                        else if(SchulteTableTaskOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
+                        else if(SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
                         {
                             dbSchulteTableTask.TimeParameter = timeOption.GetMillis();
                             dbSchulteTableTask.TaskComplexityParameter = (int)Math.Pow(SchulteTableTaskOptions.GridSize, 2);
                         }
                         else
                         {
-                            dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.AmountOfSecondsForAnswer;
-                            dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.AmountOfSecondsForAnswer;
+                            dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+                            dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
                         }
 
                         await navigation.PushAsync(new SimilarSchulteTableTasksStatisticsPage(dbSchulteTableTask,true));

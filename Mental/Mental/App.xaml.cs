@@ -24,7 +24,6 @@ namespace Mental
                 StoredMathTaskOptions = new MathTasksOptions
                 {
                     TaskType = TaskType.CountResult,
-                    TimeOptions = TimeOptions.CountdownTimer,
                     Operations = new List<string> { "+" },
                     IsRestrictionsActivated = false,
                     restrictions = new TaskRestrictions(),
@@ -34,9 +33,13 @@ namespace Mental
                     MaxValue = 10,
                     IsChainLengthFixed = true,
                     MaxChainLength = 2,
-                    AmountOfMinutes = 1,
-                    AmountOfTasks = 1,
-                    AmountOfSecondsForAnswer = 3
+                    TaskTimeOptions = new TaskTimeOptionsContainer
+                    {
+                        CurrentTimeOption = TimeOptions.CountdownTimer,
+                        AmountOfMinutes = 1,
+                        AmountOfTasks = 1,
+                        AmountOfSecondsForAnswer = 3
+                    }                    
                 };
                 return StoredMathTaskOptions;
             }
@@ -51,10 +54,13 @@ namespace Mental
                 {
                     GridSize = 3,
                     IsEasyModeActivated = false,
-                    TimeOptions = TimeOptions.CountdownTimer,
-                    AmountOfMinutes = 1,
-                    AmountOfSecondsForAnswer = 10,
-                    AmountOfTasks = 9
+                    TaskTimeOptions = new TaskTimeOptionsContainer
+                    {
+                        CurrentTimeOption = TimeOptions.CountdownTimer,
+                        AmountOfMinutes = 1,
+                        AmountOfSecondsForAnswer = 10,
+                        AmountOfTasks = 9
+                    }                     
                 };
                 return StoredSchulteTableTaskOptions;
             }
@@ -66,7 +72,6 @@ namespace Mental
             using (var db = new ApplicationContext("mental.db"))
             {
                 dbMathTaskOptions = db.LastMathTaskOptions.FirstOrDefault();
-               // string str = db.LastMathTaskOptions.ToString();
             }
 
             if (dbMathTaskOptions != null)
@@ -82,6 +87,16 @@ namespace Mental
                 if (dbMathTaskOptions.Operations.Contains("/"))
                     StoredMathTaskOptions.Operations.Add("/");
 
+                StoredMathTaskOptions.TaskType = (TaskType)dbMathTaskOptions.TaskType;
+
+                StoredMathTaskOptions.TaskTimeOptions = new TaskTimeOptionsContainer
+                {
+                    CurrentTimeOption = (TimeOptions)dbMathTaskOptions.TimeOptions,
+                    AmountOfMinutes = dbMathTaskOptions.AmountOfMinutes,
+                    AmountOfTasks = dbMathTaskOptions.AmountOfTasks,
+                    AmountOfSecondsForAnswer = dbMathTaskOptions.AmountOfSecondsForAnswer
+                };
+
                 StoredMathTaskOptions.IsRestrictionsActivated = dbMathTaskOptions.IsRestrictionActivated;
                 StoredMathTaskOptions.restrictions.restrictions = TaskRestrictions.GetTaskRestrictionFromString(dbMathTaskOptions.RestrictionsString);
 
@@ -92,14 +107,7 @@ namespace Mental
                 StoredMathTaskOptions.MinValue = dbMathTaskOptions.MinValue;
 
                 StoredMathTaskOptions.IsChainLengthFixed = dbMathTaskOptions.IsChainLengthFixed;
-                StoredMathTaskOptions.MaxChainLength = dbMathTaskOptions.MaxChainLength;
-
-                StoredMathTaskOptions.AmountOfMinutes = dbMathTaskOptions.AmountOfMinutes;
-                StoredMathTaskOptions.AmountOfSecondsForAnswer = dbMathTaskOptions.AmountOfSecondsForAnswer;
-                StoredMathTaskOptions.AmountOfTasks = dbMathTaskOptions.AmountOfTasks;
-
-                StoredMathTaskOptions.TaskType = (TaskType)dbMathTaskOptions.TaskType;
-                StoredMathTaskOptions.TimeOptions = (TimeOptions)dbMathTaskOptions.TimeOptions;
+                StoredMathTaskOptions.MaxChainLength = dbMathTaskOptions.MaxChainLength;               
             }
         }
 
@@ -128,12 +136,12 @@ namespace Mental
             dbMathTaskOptions.IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed;
             dbMathTaskOptions.MaxChainLength = mathTasksOptions.MaxChainLength;
 
-            dbMathTaskOptions.AmountOfTasks = mathTasksOptions.AmountOfTasks;
-            dbMathTaskOptions.AmountOfMinutes = mathTasksOptions.AmountOfMinutes;
-            dbMathTaskOptions.AmountOfSecondsForAnswer = mathTasksOptions.AmountOfSecondsForAnswer;
+            dbMathTaskOptions.AmountOfTasks = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
+            dbMathTaskOptions.AmountOfMinutes = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
+            dbMathTaskOptions.AmountOfSecondsForAnswer = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
 
             dbMathTaskOptions.TaskType = (byte)mathTasksOptions.TaskType;
-            dbMathTaskOptions.TimeOptions = (byte)mathTasksOptions.TimeOptions;
+            dbMathTaskOptions.TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -159,10 +167,13 @@ namespace Mental
                 {
                     GridSize = dbSchulteTableTaskOptions.GridSize,
                     IsEasyModeActivated = dbSchulteTableTaskOptions.IsEasyModeActivated,
-                    TimeOptions = (TimeOptions)dbSchulteTableTaskOptions.TimeOptions,
-                    AmountOfMinutes = dbSchulteTableTaskOptions.AmountOfMinutes,
-                    AmountOfTasks = dbSchulteTableTaskOptions.AmountOfTasks,
-                    AmountOfSecondsForAnswer = dbSchulteTableTaskOptions.AmountOfSecondsForAnswer
+                    TaskTimeOptions = new TaskTimeOptionsContainer
+                    {
+                        CurrentTimeOption = (TimeOptions)dbSchulteTableTaskOptions.TimeOptions,
+                        AmountOfMinutes = dbSchulteTableTaskOptions.AmountOfMinutes,
+                        AmountOfTasks = dbSchulteTableTaskOptions.AmountOfTasks,
+                        AmountOfSecondsForAnswer = dbSchulteTableTaskOptions.AmountOfSecondsForAnswer
+                    }
                 };               
             }
         }
@@ -174,10 +185,10 @@ namespace Mental
 
             dbSchulteTableTaskOptions.GridSize = _schulteTableTaskOptions.GridSize;
             dbSchulteTableTaskOptions.IsEasyModeActivated = _schulteTableTaskOptions.IsEasyModeActivated;
-            dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TimeOptions;
-            dbSchulteTableTaskOptions.AmountOfMinutes = _schulteTableTaskOptions.AmountOfMinutes;
-            dbSchulteTableTaskOptions.AmountOfTasks = _schulteTableTaskOptions.AmountOfTasks;
-            dbSchulteTableTaskOptions.AmountOfSecondsForAnswer = _schulteTableTaskOptions.AmountOfSecondsForAnswer;
+            dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption;
+            dbSchulteTableTaskOptions.AmountOfMinutes = _schulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
+            dbSchulteTableTaskOptions.AmountOfTasks = _schulteTableTaskOptions.TaskTimeOptions.AmountOfTasks;
+            dbSchulteTableTaskOptions.AmountOfSecondsForAnswer = _schulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -204,8 +215,8 @@ namespace Mental
             if (StoredSchulteTableTaskOptions == null)
                 LoadLatestSchulteTableTaskOptions();
 
-               MainPage = new NavigationPage(new MathTasksOptionsPage());
-           // MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
+           //    MainPage = new NavigationPage(new MathTasksOptionsPage());
+            MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
         }
 
         protected override void OnStart()

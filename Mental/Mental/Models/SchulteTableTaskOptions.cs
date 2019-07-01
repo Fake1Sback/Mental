@@ -8,10 +8,6 @@ namespace Mental.Models
     {
         public int GridSize;
         public bool IsEasyModeActivated;
-        public TimeOptions TimeOptions;
-
-        public int AmountOfTasks;
-        public int AmountOfMinutes;
-        public int AmountOfSecondsForAnswer;
+        public TaskTimeOptionsContainer TaskTimeOptions;  
     }
 }

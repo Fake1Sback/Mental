@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
              x:Class="Mental.Views.SchulteTableTaskOptionsPage">
     <ContentPage.Content>
         <StackLayout>
@@ -8,34 +9,11 @@
             <Label Text="Grid size" HorizontalOptions="Center"></Label>
             <Label Text="{Binding IntGridSizeSliderValue}" HorizontalOptions="Center"></Label>
             <Slider x:Name="SchulteTableSliderValue" Value="{Binding GridSizeSliderValue}" Maximum="7" Minimum="3"></Slider>
-            <Label Text="Time Options:" HorizontalOptions="Center"></Label>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Easy Mode"></Label>
                 <Button Text="{Binding EasyModeActivatedString}" Command="{Binding EasyModeActivatedSwitchedCommand}"></Button>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="CountDownTimeOptionButton" Command="{Binding TimeOptionsChangedCommand}" CommandParameter="{x:Reference CountDownTimeOptionButton}" BackgroundColor="{Binding CountdownTimeOptionButtonColor}" Text="Countdown"></Button>
-                <Button x:Name="LimitedTasksOptionButton" Command="{Binding TimeOptionsChangedCommand}" CommandParameter="{x:Reference LimitedTasksOptionButton}" BackgroundColor="{Binding FixedAmountOfOperationsTimeOptionButtonColor}" Text="Limited Tasks"></Button>
-                <Button x:Name="LastTaskOptionButton" Command="{Binding TimeOptionsChangedCommand}" CommandParameter="{x:Reference LastTaskOptionButton}" BackgroundColor="{Binding LastTaskTimeOptionButtonColor}" Text="Last Task"></Button>
-            </StackLayout>
-            <StackLayout x:Name="CountdownTimerOptions" IsVisible="{Binding CountdownTimeOptionsLayoutVisibility}">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Time for task:"></Label>
-                    <Label x:Name="TimerStartValueLabel" Text="{Binding IntAmountOfMinutes}"></Label>
-                </StackLayout>
-                <Slider x:Name="TimerStartValueSlider" Value="{Binding AmountOfMinutes}" Maximum="60" Minimum="1"></Slider>
-            </StackLayout>
-            <StackLayout x:Name="LimitedTasksOptions" Orientation="Horizontal" IsVisible="{Binding FixedAmountOfOperationsLayoutVisibility}">
-                <Label Text="Amount of operations: "></Label>
-                <Editor x:Name="AmountOfOperationsEditor" Keyboard="Numeric" Text="{Binding AmountOfTasks}"></Editor>
-            </StackLayout>
-            <StackLayout x:Name="LastTaskOptions" Orientation="Vertical" IsVisible="{Binding LastTaskLayoutVisibility}">
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Amount of seconds for answer: "></Label>
-                    <Label x:Name="AmountOfSecondsForAnswer" Text="{Binding IntAmountOfSecondsForAnswer}"></Label>
-                </StackLayout>
-                <Slider x:Name="AmountOfSecondsForAnswerSlider" Value="{Binding AmountOfSecondsForAnswer}" Maximum="120" Minimum="3"></Slider>
-            </StackLayout>
+            <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
             <Button Text="Start" Command="{Binding StartCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>

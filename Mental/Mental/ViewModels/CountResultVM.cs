@@ -181,7 +181,7 @@ namespace Mental.ViewModels
                 {
                     Operations = Op,
                     TaskType = (byte)mathTasksOptions.TaskType,
-                    TimeOptions = (byte)mathTasksOptions.TimeOptions,
+                    TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption,
                     MinValue = mathTasksOptions.MinValue,
                     MaxValue = mathTasksOptions.MaxValue,
                     IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed,
@@ -199,20 +199,20 @@ namespace Mental.ViewModels
                     TaskDateTime = DateTime.Now
                 };
 
-                if (mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
+                if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
                 {
                     dbMathTask.TimeParameter = timeOption.GetMillis();
-                    dbMathTask.TaskComplexityParameter = mathTasksOptions.AmountOfTasks;
+                    dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
                 }
-                else if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)
+                else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
                 {
-                    dbMathTask.TimeParameter = mathTasksOptions.AmountOfMinutes;
-                    dbMathTask.TaskComplexityParameter = mathTasksOptions.AmountOfMinutes;
+                    dbMathTask.TimeParameter = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
+                    dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
                 }
-                else if (mathTasksOptions.TimeOptions == TimeOptions.LastTask)
+                else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.LastTask)
                 {
-                    dbMathTask.TimeParameter = mathTasksOptions.AmountOfSecondsForAnswer;
-                    dbMathTask.TaskComplexityParameter = mathTasksOptions.AmountOfSecondsForAnswer;
+                    dbMathTask.TimeParameter = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+                    dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
                 }
 
                await navigation.PushAsync(new SimilarTasksStatisticsPage(dbMathTask, true));

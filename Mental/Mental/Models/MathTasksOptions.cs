@@ -23,12 +23,15 @@ namespace Mental.Models
         public const int MinAvailableChainLength = 2;
         public const int MaxAvailableChainLength = 8;
 
-        public int AmountOfTasks;
-        public int AmountOfMinutes;
-        public int AmountOfSecondsForAnswer;
-
         public TaskType TaskType;
-        public TimeOptions TimeOptions;
+        public TaskTimeOptionsContainer TaskTimeOptions;
+
+        //public int AmountOfTasks;
+        //public int AmountOfMinutes;
+        //public int AmountOfSecondsForAnswer;
+
+
+        //public TimeOptions TimeOptions;
     }
 
     public enum TimeOptions

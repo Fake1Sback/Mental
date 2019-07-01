@@ -13,15 +13,9 @@ namespace Mental.Models
 
         private bool InternalCheck = true;
      
-        public LimitedTasksTimeOption(MathTasksOptions mathTasksOptions)
+        public LimitedTasksTimeOption(TaskTimeOptionsContainer taskTimeOptions)
         {
-            GeneralAmountOfTasks = mathTasksOptions.AmountOfTasks;
-            CurrentAmountOfTasks = 1;
-        }
-
-        public LimitedTasksTimeOption(SchulteTableTaskOptions schulteTableTaskOptions)
-        {
-            GeneralAmountOfTasks = schulteTableTaskOptions.AmountOfTasks;
+            GeneralAmountOfTasks = taskTimeOptions.AmountOfTasks;
             CurrentAmountOfTasks = 1;
         }
 
