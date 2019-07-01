@@ -15,6 +15,12 @@ namespace Mental.Models
             TimeLeft = TimeSpan.FromSeconds(InitialTime);
         }
 
+        public LastTaskTimeOption(SchulteTableTaskOptions schulteTableTaskOptions)
+        {
+            InitialTime = schulteTableTaskOptions.AmountOfSecondsForAnswer;
+            TimeLeft = TimeSpan.FromSeconds(InitialTime);
+        }
+
         public bool CanExecuteOperation(bool IsCorrectAnswer)
         {
             if (CheckTimerEnd() && IsCorrectAnswer)

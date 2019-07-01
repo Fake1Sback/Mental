@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Mental.Views.SchulteTableTasksGeneralStatisticsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <charts:ChartView x:Name="TimeOptionsChart" Chart="{Binding TimeOptionsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
+                <charts:ChartView x:Name="EasyModeChart" Chart="{Binding EasyModeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
+                <charts:ChartView x:Name="GridSizeChart" Chart="{Binding GridSizeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
+                <Label Text="Latest Schulte Table Tasks" HorizontalOptions="Center"></Label>
+                <ListView x:Name="LatestSchulteTableTasksListView" Margin="5,5,5,5" ItemsSource="{Binding DbSchulteTableTasksListItems}" RowHeight="50" SelectedItem="{Binding SelectedSchulteTableTaskListItem}" HeightRequest="{Binding ListViewHeightRequest}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical" Padding="15,0,15,0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding GridSizeString}" Margin="5,0,5,0"></Label>
+                                        <Label Text="{Binding EasyModeString}" Margin="5,0,5,0"></Label>
+                                        <Label Text="{Binding TimeOptionString}" Margin="5,0,5,0"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding EfficiencyString}" Margin="5,0,5,0"></Label>
+                                        <Label Text="{Binding DateTimeString}" Margin="5,0,5,0"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="LoadSimilarStatistics" Text="Load Similar" Command="{Binding LoadSimilarCommand}"></Button>
+                <Button x:Name="LoadMoreDbInfoButton" Text="Load More" Command="{Binding LoadMoreDbMathTasksCommand}"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

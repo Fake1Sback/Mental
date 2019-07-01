@@ -13,6 +13,7 @@ namespace Mental
     public partial class App : Application
     {
         private MathTasksOptions StoredMathTaskOptions;
+        private SchulteTableTaskOptions StoredSchulteTableTaskOptions;
 
         public MathTasksOptions GetStoredMathTaskOptions()
         {
@@ -40,184 +41,25 @@ namespace Mental
                 return StoredMathTaskOptions;
             }
         }
-
-        #region
-        /*
-        public void SaveMathTaskOptions(MathTasksOptions _mathTasksOption)
+        public SchulteTableTaskOptions GetStoredSchulteTableTaskOptions()
         {
-            StoredMathTaskOptions = _mathTasksOption;
-
-            App.Current.Properties["TaskType"] = (byte)_mathTasksOption.TaskType;
-            App.Current.Properties["TimeOptions"] = (byte)_mathTasksOption.TimeOptions;
-
-            string str = string.Empty;
-            for(int i = 0;i < _mathTasksOption.Operations.Count;i++)
+            if (StoredSchulteTableTaskOptions != null)
+                return StoredSchulteTableTaskOptions;
+            else
             {
-                str += _mathTasksOption.Operations[i];
+                StoredSchulteTableTaskOptions = new  SchulteTableTaskOptions
+                {
+                    GridSize = 3,
+                    IsEasyModeActivated = false,
+                    TimeOptions = TimeOptions.CountdownTimer,
+                    AmountOfMinutes = 1,
+                    AmountOfSecondsForAnswer = 10,
+                    AmountOfTasks = 9
+                };
+                return StoredSchulteTableTaskOptions;
             }
-
-            App.Current.Properties["Operations"] = str;
-
-            App.Current.Properties["SpecialMode"] = _mathTasksOption.IsSpecialModeActivated;
-            if (_mathTasksOption.IsSpecialModeActivated)
-                App.Current.Properties["AmountOfXDigits"] = _mathTasksOption.AmountOfXDigits;
-
-            App.Current.Properties["IsIntegerNumbers"] = _mathTasksOption.IsIntegerNumbers;
-            if (!_mathTasksOption.IsIntegerNumbers)
-                App.Current.Properties["DigitsAfterDotSign"] = _mathTasksOption.DigitsAfterDotSign;
-
-            App.Current.Properties["MinValue"] = _mathTasksOption.MinValue;
-            App.Current.Properties["MaxValue"] = _mathTasksOption.MaxValue;
-
-            App.Current.Properties["IsChainLengthFixed"] = _mathTasksOption.IsChainLengthFixed;
-            App.Current.Properties["MaxChainLength"] = _mathTasksOption.MaxChainLength;
-
-            App.Current.Properties["AmountOfTasks"] = _mathTasksOption.AmountOfTasks;
-            App.Current.Properties["AmountOfMinutes"] = _mathTasksOption.AmountOfMinutes;
-            App.Current.Properties["AmountOfSecondsForAnswer"] = _mathTasksOption.AmountOfSecondsForAnswer;
         }
-
-        public void LoadMathTaskOptions()
-        {
-            #region
-            bool[] Flags = new bool[9];
-
-            MathTasksOptions mathTasksOptions = new MathTasksOptions();
-            object obj;
-
-            if (App.Current.Properties.TryGetValue("TaskType",out obj))
-            {
-                mathTasksOptions.TaskType = (TaskType)(byte)obj;
-                Flags[0] = true;
-            }
-
-            if(App.Current.Properties.TryGetValue("TimeOptions",out obj))
-            {
-                mathTasksOptions.TimeOptions = (TimeOptions)(byte)obj;
-                Flags[1] = true;
-                if (mathTasksOptions.TimeOptions == TimeOptions.CountdownTimer)
-                {
-                    if(App.Current.Properties.TryGetValue("AmountOfMinutes",out obj))
-                    {
-                        mathTasksOptions.AmountOfMinutes = (int)obj;
-                    }
-                }
-                else if(mathTasksOptions.TimeOptions == TimeOptions.FixedAmountOfOperations)
-                {
-                    if(App.Current.Properties.TryGetValue("AmountOfTasks",out obj))
-                    {
-                        mathTasksOptions.AmountOfTasks = (int)obj;
-                    }
-                }
-                else
-                {
-                    if(App.Current.Properties.TryGetValue("AmountOfSecondsForAnswer",out obj))
-                    {
-                        mathTasksOptions.AmountOfSecondsForAnswer = (int)obj;
-                    }
-                }
-            }
-
-            List<string> operations = new List<string>();
-
-            if (App.Current.Properties.TryGetValue("Operations", out obj))
-            {
-                string str = (string)obj;
-                for (int i = 0; i < str.Length; i++)
-                {
-                    operations.Add(str.Substring(i, 1));
-                }
-                mathTasksOptions.Operations = operations;
-                Flags[2] = true;
-            }
-
-            if (App.Current.Properties.TryGetValue("SpecialMode",out obj))
-            {
-                mathTasksOptions.IsSpecialModeActivated = (bool)obj;
-                Flags[3] = true;
-
-                if (mathTasksOptions.IsSpecialModeActivated)
-                {
-                    if(App.Current.Properties.TryGetValue("AmountOfXDigits",out obj))
-                    {
-                        mathTasksOptions.AmountOfXDigits = (int)obj;
-                    }
-                }
-            }
-
-            if(App.Current.Properties.TryGetValue("IsIntegerNumbers",out obj))
-            {
-                mathTasksOptions.IsIntegerNumbers = (bool)obj;
-                Flags[4] = true;
-
-                if (mathTasksOptions.IsIntegerNumbers)
-                {
-                    if(App.Current.Properties.TryGetValue("DigitsAfterDotSign",out obj))
-                    {
-                        mathTasksOptions.DigitsAfterDotSign = (int)obj;
-                    }
-                }
-            }
-
-            if(App.Current.Properties.TryGetValue("MinValue",out obj))
-            {
-                mathTasksOptions.MinValue = (int)obj;
-                Flags[5] = true;
-            }
-            if(App.Current.Properties.TryGetValue("MaxValue",out obj))
-            {
-                mathTasksOptions.MaxValue = (int)obj;
-                Flags[6] = true;
-            }
-            if(App.Current.Properties.TryGetValue("IsChainLengthFixed",out obj))
-            {
-                mathTasksOptions.IsChainLengthFixed = (bool)obj;
-                Flags[7] = true;
-            }
-            if(App.Current.Properties.TryGetValue("MaxChainLength",out obj))
-            {
-                mathTasksOptions.MaxChainLength = (int)obj;
-                Flags[8] = true;
-            }
-
-            for(int i = 0;i < Flags.Length;i++)
-            {
-                if (Flags[i] == false)
-                {
-                    StoredMathTaskOptions = new MathTasksOptions() {
-                        TaskType = TaskType.CountResult,
-                        TimeOptions = TimeOptions.CountdownTimer,
-                        Operations = new List<string> { "+" },
-                        IsSpecialModeActivated = false,
-                        AmountOfXDigits = 1,
-                        IsIntegerNumbers = true,
-                        DigitsAfterDotSign = 1,
-                        MinValue = 0,
-                        MaxValue = 10,
-                        IsChainLengthFixed = true,
-                        MaxChainLength = 2,
-                        AmountOfMinutes = 1,
-                        AmountOfTasks = 1,
-                        AmountOfSecondsForAnswer = 3
-                    };
-                    return;
-                }
-            }
-
-            StoredMathTaskOptions = mathTasksOptions;
-            #endregion
-
-            DbMathTaskOptions dbMathTaskOptions;
-            using (var db = new ApplicationContext("mental.db"))
-            {
-                dbMathTaskOptions = db.LastMathTaskOptions;
-            }
-
-
-        }
-        */
-        #endregion
-
+      
         private void LoadLatestMathTaskOptions()
         {
             DbMathTaskOptions dbMathTaskOptions;
@@ -303,19 +145,67 @@ namespace Mental
             }
         }
 
+        private void LoadLatestSchulteTableTaskOptions()
+        {
+            DbSchulteTableTaskOptions dbSchulteTableTaskOptions;
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                dbSchulteTableTaskOptions = db.LastSchulteTableTaskOptions.FirstOrDefault();
+            }
+
+            if(dbSchulteTableTaskOptions != null)
+            {
+                StoredSchulteTableTaskOptions = new SchulteTableTaskOptions()
+                {
+                    GridSize = dbSchulteTableTaskOptions.GridSize,
+                    IsEasyModeActivated = dbSchulteTableTaskOptions.IsEasyModeActivated,
+                    TimeOptions = (TimeOptions)dbSchulteTableTaskOptions.TimeOptions,
+                    AmountOfMinutes = dbSchulteTableTaskOptions.AmountOfMinutes,
+                    AmountOfTasks = dbSchulteTableTaskOptions.AmountOfTasks,
+                    AmountOfSecondsForAnswer = dbSchulteTableTaskOptions.AmountOfSecondsForAnswer
+                };               
+            }
+        }
+
+        public void SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions _schulteTableTaskOptions)
+        {
+            DbSchulteTableTaskOptions dbSchulteTableTaskOptions = new DbSchulteTableTaskOptions();
+            StoredSchulteTableTaskOptions = _schulteTableTaskOptions;
+
+            dbSchulteTableTaskOptions.GridSize = _schulteTableTaskOptions.GridSize;
+            dbSchulteTableTaskOptions.IsEasyModeActivated = _schulteTableTaskOptions.IsEasyModeActivated;
+            dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TimeOptions;
+            dbSchulteTableTaskOptions.AmountOfMinutes = _schulteTableTaskOptions.AmountOfMinutes;
+            dbSchulteTableTaskOptions.AmountOfTasks = _schulteTableTaskOptions.AmountOfTasks;
+            dbSchulteTableTaskOptions.AmountOfSecondsForAnswer = _schulteTableTaskOptions.AmountOfSecondsForAnswer;
+
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                DbSchulteTableTaskOptions dbSchulteTableTaskOptionsToDelete = db.LastSchulteTableTaskOptions.FirstOrDefault();
+                if (dbSchulteTableTaskOptionsToDelete != null)
+                    db.LastSchulteTableTaskOptions.Remove(dbSchulteTableTaskOptionsToDelete);
+                db.LastSchulteTableTaskOptions.Add(dbSchulteTableTaskOptions);
+                db.SaveChanges();
+            }          
+        }
+
         public App()
         {
             InitializeComponent();
             using (var a = new ApplicationContext("mental.db"))
             {
-                //  a.Database.EnsureDeleted();
+                //   a.Database.EnsureDeleted();
                 a.Database.EnsureCreated();
             }
 
             if (StoredMathTaskOptions == null)
                 LoadLatestMathTaskOptions();
 
-            MainPage = new NavigationPage(new MathTasksOptionsPage());
+            if (StoredSchulteTableTaskOptions == null)
+                LoadLatestSchulteTableTaskOptions();
+
+            //   MainPage = new NavigationPage(new MathTasksOptionsPage());
+            MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
         }
 
         protected override void OnStart()

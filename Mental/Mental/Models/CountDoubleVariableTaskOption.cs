@@ -289,10 +289,10 @@ namespace Mental.Models
 
         public override bool CheckAnswer(string Answer)
         {
-            bool FirstCheck = CompareResults(Answer, false);
+            bool FirstCheck = NewCompareResults(Answer, false);
             if (!FirstCheck)
             {
-                bool SecondCheck = CompareResults(Answer, true);
+                bool SecondCheck = NewCompareResults(Answer, true);
                 if (SecondCheck)
                     return true;
                 else
@@ -300,6 +300,20 @@ namespace Mental.Models
             }
             else
                 return true;
+
+            #region
+            //bool FirstCheck = CompareResults(Answer, false);
+            //if (!FirstCheck)
+            //{
+            //    bool SecondCheck = CompareResults(Answer, true);
+            //    if (SecondCheck)
+            //        return true;
+            //    else
+            //        return false;
+            //}
+            //else
+            //    return true;
+            #endregion
         }
 
         private bool CompareResults(string Answer,bool IsRounded)
@@ -342,6 +356,55 @@ namespace Mental.Models
                 for (int i = dotIndex + 1; i <= dotIndex + digits; i++)
                 {
                     if (resultString[i] != answerString[i])
+                        return false;
+                }
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        private bool NewCompareResults(string Answer,bool IsRounded)
+        {
+            double resultWithUserXValue = expression.Compile().Invoke(Convert.ToDouble(Answer));
+            double result;
+
+            if (IsRounded)
+                result = Math.Round(Result, digits);
+            else
+                result = Result;
+
+
+            if ((int)result == (int)resultWithUserXValue)
+            {
+                string resultString = result.ToString();
+                string resultWithUserXValueString = resultWithUserXValue.ToString();
+
+                int dotIndex = 0;
+
+                for (int i = 0; i < resultString.Length; i++)
+                {
+                    if (resultString[i] == ',' || resultString[i] == '.')
+                    {
+                        dotIndex = i;
+                        break;
+                    }
+                }
+
+                int requiredLength = dotIndex + digits + 1;
+
+                while (resultString.Length < requiredLength || resultWithUserXValueString.Length < requiredLength)
+                {
+                    if (resultString.Length < requiredLength)
+                        resultString += "0";
+                    else if (resultWithUserXValueString.Length < requiredLength)
+                        resultWithUserXValueString += "0";
+                }
+
+                for (int i = dotIndex + 1; i <= dotIndex + digits; i++)
+                {
+                    if (resultString[i] != resultWithUserXValueString[i])
                         return false;
                 }
 

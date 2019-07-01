@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="Mental.Views.SimilarSchulteTableTasksStatisticsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <charts:ChartView x:Name="LineChart1" Chart="{Binding LineChart}" WidthRequest="100" HeightRequest="200"></charts:ChartView>
+                <Button x:Name="ShowHideDetailedTaskOptions" Text="Show Task Options" IsVisible="{Binding DetailedTaskOptionsButtonVisibility}" Command="{Binding ShowHideDetailedStatisticsCommand}"></Button>
+                <StackLayout IsVisible="{Binding DetailedTaskOptionsLayoutVisibility}">
+                    <Label x:Name="TimeOptionLabel" Text="{Binding TimeOptionLabel}"></Label>
+                    <Label x:Name="EasyModeLabel" Text="{Binding EasyModeLabel}"></Label>
+                    <Label x:Name="GridSizeLabel" Text="{Binding GridSizeLabel}"></Label>
+                    <Label x:Name="EfficiencyLabel" Text="{Binding EfficiencyLabel}"></Label>
+                    <Label x:Name="LongestTimeSpentForFindingNumberLabel" Text="{Binding LongestTimeSpentForFindingNumberLabel}"></Label>
+                    <Label x:Name="LongestTimeNumber" Text="{Binding LongestTimeLabel}"></Label>
+                    <Label x:Name="ShortestTimeSpentForFindingNumberLabel" Text="{Binding ShortestTimeSpentForFindingNumberLabel}"></Label>
+                    <Label x:Name="ShortestTimeNumber" Text="{Binding ShortestTimeNumberLabel}"></Label>
+                    <Label x:Name="DateTimeLabel" Text="{Binding DateTimeLabel}"></Label>
+                </StackLayout>
+                <Button x:Name="SaveResultButton" Text="Save Results" Command="{Binding SaveRecordToDbCommand}" IsVisible="{Binding SaveButtonVisibility}"></Button>
+                <ListView x:Name="SimilarTasksListView" ItemsSource="{Binding dbSchulteTableTaskListItems}" SelectedItem="{Binding SelectedDbSchulteTableListViewItem, Mode=OneWayToSource}"  Margin="5,5,5,5" RowHeight="50" HeightRequest="{Binding SimilarTasksListViewHeightRequest}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical" Padding="15,0,15,0">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding GridSizeString}" Margin="5,0,5,0"></Label>
+                                        <Label Text="{Binding EasyModeString}" Margin="5,0,5,0"></Label>
+                                        <Label Text="{Binding TimeOptionString}" Margin="5,0,5,0"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding EfficiencyString}" Margin="5,0,5,0"></Label>
+                                        <Label Text="{Binding DateTimeString}" Margin="5,0,5,0"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button x:Name="LoadMoreButton" Text="Load More" Command="{Binding LoadMoreRecordsCommand}"></Button>
+                <Button x:Name="ClearRecords" Text="Clear Records" Command="{Binding ClearRecordsCommand}"></Button>
+                <Button x:Name="GeneralStatistics" Text="General Statistics" Command="{Binding LoadGeneralStatistics}" IsVisible="{Binding GeneralStatisticsButtonVisibility}"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

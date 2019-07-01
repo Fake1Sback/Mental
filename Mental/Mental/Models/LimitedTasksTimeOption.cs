@@ -19,6 +19,12 @@ namespace Mental.Models
             CurrentAmountOfTasks = 1;
         }
 
+        public LimitedTasksTimeOption(SchulteTableTaskOptions schulteTableTaskOptions)
+        {
+            GeneralAmountOfTasks = schulteTableTaskOptions.AmountOfTasks;
+            CurrentAmountOfTasks = 1;
+        }
+
         public void TimerWork()
         {
             if(CheckTimerEnd())

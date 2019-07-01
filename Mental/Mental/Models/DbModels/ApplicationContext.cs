@@ -12,6 +12,8 @@ namespace Mental.Models.DbModels
 
         public DbSet<DbMathTaskOptions> LastMathTaskOptions { get; set; }
         public DbSet<DbMathTask> mathTasks { get; set; }
+        public DbSet<DbSchulteTableTask> SchulteTableTasks { get; set; }
+        public DbSet<DbSchulteTableTaskOptions> LastSchulteTableTaskOptions { get; set; }
 
         public ApplicationContext(string _databasePath)
         {
