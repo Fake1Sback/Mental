@@ -15,6 +15,7 @@ namespace Mental.ViewModels
         private int _CurrentNumberToAnswer;
         private ITimeOption timeOption;
         private INavigation navigation;
+        private StatisticsTimer statisticsTimer;
 
         private int _AmountOfCorrectAnswers;
         private int _AmountOfWrongAnswers;
@@ -27,6 +28,7 @@ namespace Mental.ViewModels
             StartTimerCountdown();
             _CurrentNumberToAnswer = 1;
             OnPropertyChanged("CurrentNumberString");
+            statisticsTimer = new StatisticsTimer();
         }
 
         public string TimerValue
@@ -67,10 +69,12 @@ namespace Mental.ViewModels
                 return new Command(async (obj) =>
                 {
                     Button button = obj as Button;
-                    bool IsCorrectAnswer = _CurrentNumberToAnswer == Convert.ToInt32(button.Text);
+                    int Answer = Convert.ToInt32(button.Text);
+                    bool IsCorrectAnswer = _CurrentNumberToAnswer == Answer;
                     if (IsCorrectAnswer)
                     {
                         _AmountOfCorrectAnswers += 1;
+                        statisticsTimer.RegisterTime(Answer.ToString());
                         if (SchulteTableTaskOptions.IsEasyModeActivated)
                             button.BackgroundColor = Color.Red;
                     }
@@ -79,12 +83,13 @@ namespace Mental.ViewModels
 
                     if (timeOption.CanExecuteOperation(IsCorrectAnswer) && _CurrentNumberToAnswer < SchulteTableTaskOptions.GridSize * SchulteTableTaskOptions.GridSize)
                     {
-                        if (_CurrentNumberToAnswer == Convert.ToInt32(button.Text))
+                        if (_CurrentNumberToAnswer == Answer)
                             _CurrentNumberToAnswer += 1;
                         OnPropertyChanged("CurrentNumberString");
                     }
                     else
                     {
+                        statisticsTimer.TurnOffTimer();
                         DbSchulteTableTask dbSchulteTableTask = new DbSchulteTableTask()
                         {
                             TimeOption = (byte)SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption,
@@ -92,10 +97,10 @@ namespace Mental.ViewModels
                             AmountOfWrongAnswers = _AmountOfWrongAnswers,
                             IsEasyModeActivated = SchulteTableTaskOptions.IsEasyModeActivated,
                             GridSize = SchulteTableTaskOptions.GridSize,
-                            LongestTimeNumberString = "-",
-                            LongestTimeSpentForFindingNumber = 1,
-                            ShortestTimeNumberString = "+",
-                            ShortestTimeSpentForFindingNumber = 2,
+                            LongestTimeNumberString = statisticsTimer.LongestTimeExpressionString,
+                            LongestTimeSpentForFindingNumber = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
+                            ShortestTimeNumberString = statisticsTimer.ShortestTimeExpressionString,
+                            ShortestTimeSpentForFindingNumber = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
                             TaskDateTime = DateTime.Now,
                         };
 

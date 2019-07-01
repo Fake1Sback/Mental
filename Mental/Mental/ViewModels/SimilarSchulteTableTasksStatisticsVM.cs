@@ -148,11 +148,11 @@ namespace Mental.ViewModels
             get
             {
                 if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
-                    return (SelectedDbSchulteTableTask.AmountOfCorrectAnswers / (SelectedDbSchulteTableTask.AmountOfCorrectAnswers + SelectedDbSchulteTableTask.AmountOfWrongAnswers) * 100).ToString() + "%";
+                    return "Efficiency: " + (SelectedDbSchulteTableTask.AmountOfCorrectAnswers / (SelectedDbSchulteTableTask.AmountOfCorrectAnswers + SelectedDbSchulteTableTask.AmountOfWrongAnswers) * 100).ToString() + "%";
                 else if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
-                    return SelectedDbSchulteTableTask.TimeParameter.ToString();
+                    return "Efficiency: " + TimeSpan.FromMilliseconds(SelectedDbSchulteTableTask.TimeParameter).ToString(@"mm\:ss");
                 else
-                    return SelectedDbSchulteTableTask.TimeParameter.ToString();
+                    return "Efficiency: " + SelectedDbSchulteTableTask.TimeParameter.ToString() + "%";
             }
         }
 
@@ -160,7 +160,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return "Longest time spent for finding number: " + SelectedDbSchulteTableTask.LongestTimeSpentForFindingNumber;
+                return "Longest time spent for finding number: " + SelectedDbSchulteTableTask.LongestTimeSpentForFindingNumber + " sec";
             }
         }
 
@@ -176,7 +176,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return "Shortest time spent for finding number: " + SelectedDbSchulteTableTask.ShortestTimeSpentForFindingNumber;
+                return "Shortest time spent for finding number: " + SelectedDbSchulteTableTask.ShortestTimeSpentForFindingNumber + " sec";
             }
         }
 

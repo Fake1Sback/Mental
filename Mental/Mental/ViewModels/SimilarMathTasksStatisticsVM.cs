@@ -246,7 +246,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return "Longest time spent for expression: " + SelectedListItemDbMathTask.LongestTimeSpentForExpression;
+                return "Longest time spent for expression: " + SelectedListItemDbMathTask.LongestTimeSpentForExpression + " sec";
             }
             private set { }
         }
@@ -264,7 +264,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return "Shortest time spent for expression: " + SelectedListItemDbMathTask.ShortestTimeSpentForExpression;
+                return "Shortest time spent for expression: " + SelectedListItemDbMathTask.ShortestTimeSpentForExpression + " sec";
             }
             private set { }
         }
@@ -426,6 +426,7 @@ namespace Mental.ViewModels
         public Command LoadGeneralStatistics { get; set; }
 
         //--------------------------------------------
+
         private void GetMathTasksFromDb()
         {
             DbMathTask[] dbMathTasksArray;
