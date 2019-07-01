@@ -2,3 +2,4 @@
 packages/*
 *.sln
 /Mental/Mental/bin/Debug/netstandard2.0/*
+Mental/Mental/Mental/obj/*
