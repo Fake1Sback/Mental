@@ -9,7 +9,7 @@ using Mental.Models.DbModels;
 
 namespace Mental.ViewModels
 {
-    public class SchulteTableVM : INotifyPropertyChanged
+    public class SchulteTableVM : BaseVM
     {
         private SchulteTableTaskOptions SchulteTableTaskOptions;
         private int _CurrentNumberToAnswer;
@@ -119,13 +119,6 @@ namespace Mental.ViewModels
                     }
                 });
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

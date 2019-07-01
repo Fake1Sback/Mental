@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Mental.Models.DbModels;
+using Mental.ViewModels;
 
 namespace Mental.Models
 {
-    public class DbSchulteTableTaskListItem : INotifyPropertyChanged
+    public class DbSchulteTableTaskListItem : BaseVM
     {
         public DbSchulteTableTask DbSchulteTableTask;
 
@@ -68,13 +69,6 @@ namespace Mental.Models
             {
                 return "Date: " + DbSchulteTableTask.TaskDateTime.ToString(@"dd-MM-yy HH:mm");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

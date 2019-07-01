@@ -9,7 +9,7 @@ using Mental.ViewModels.PartialViewModels;
 
 namespace Mental.ViewModels
 {
-    public class MathTasksOptionsVM : INotifyPropertyChanged
+    public class MathTasksOptionsVM : BaseVM
     {
         private MathTasksOptions mathTasksOptions;
         private INavigation navigation;
@@ -50,7 +50,7 @@ namespace Mental.ViewModels
             set
             {
                 _restPVM = value;
-                OnProperyChanged("RestPVM");
+                OnPropertyChanged("RestPVM");
             }
         }
 
@@ -134,8 +134,8 @@ namespace Mental.ViewModels
             {
                 _SliderMaxChainLengthValue = value;
                 mathTasksOptions.MaxChainLength = (int)_SliderMaxChainLengthValue;
-                OnProperyChanged("MaxChainLength");
-                OnProperyChanged("IntMaxChainLength");
+                OnPropertyChanged("MaxChainLength");
+                OnPropertyChanged("IntMaxChainLength");
             }
         }
 
@@ -194,8 +194,8 @@ namespace Mental.ViewModels
             {
                 _DigitsAfterDotSignSliderValue = value;
                 mathTasksOptions.DigitsAfterDotSign = (int)value;
-                OnProperyChanged("DigitsAfterDotSign");
-                OnProperyChanged("IntDigitsAfterDotSign");
+                OnPropertyChanged("DigitsAfterDotSign");
+                OnPropertyChanged("IntDigitsAfterDotSign");
             }
         }
 
@@ -208,7 +208,7 @@ namespace Mental.ViewModels
             set
             {
                 mathTasksOptions.MinValue = value;
-                OnProperyChanged("MinValue");
+                OnPropertyChanged("MinValue");
                 RestPVM.MinimumDigitValue = value;
             }
         }
@@ -222,7 +222,7 @@ namespace Mental.ViewModels
             set
             {
                 mathTasksOptions.MaxValue = value;
-                OnProperyChanged("MaxValue");
+                OnPropertyChanged("MaxValue");
                 RestPVM.MaximumDigitValue = value;
             }
         }
@@ -333,8 +333,8 @@ namespace Mental.ViewModels
             {
                 _TimerCountdownSliderValue = value;
                 mathTasksOptions.AmountOfMinutes = (int)value;
-                OnProperyChanged("AmountOfMinutes");
-                OnProperyChanged("IntAmountOfMinutes");
+                OnPropertyChanged("AmountOfMinutes");
+                OnPropertyChanged("IntAmountOfMinutes");
             }
         }
 
@@ -359,7 +359,7 @@ namespace Mental.ViewModels
             set
             {
                 mathTasksOptions.AmountOfTasks = value;
-                OnProperyChanged("AmountOfTasks");
+                OnPropertyChanged("AmountOfTasks");
             }
         }
 
@@ -394,8 +394,8 @@ namespace Mental.ViewModels
             {
                 _LastAnswerSliderValue = value;
                 mathTasksOptions.AmountOfSecondsForAnswer = (int)value;
-                OnProperyChanged("AmountOfSecondsForAnswer");
-                OnProperyChanged("IntAmountOfSecondsForAnswer");
+                OnPropertyChanged("AmountOfSecondsForAnswer");
+                OnPropertyChanged("IntAmountOfSecondsForAnswer");
             }
         }
 
@@ -411,7 +411,7 @@ namespace Mental.ViewModels
                     mathTasksOptions.Operations.Remove("+");
                 else
                     mathTasksOptions.Operations.Add("+");
-                OnProperyChanged("PlusButtonColor");
+                OnPropertyChanged("PlusButtonColor");
             }
             else if (button.Text == "-")
             {
@@ -419,7 +419,7 @@ namespace Mental.ViewModels
                     mathTasksOptions.Operations.Remove("-");
                 else
                     mathTasksOptions.Operations.Add("-");
-                OnProperyChanged("MinusButtonColor");
+                OnPropertyChanged("MinusButtonColor");
             }
             else if (button.Text == "*")
             {
@@ -427,7 +427,7 @@ namespace Mental.ViewModels
                     mathTasksOptions.Operations.Remove("*");
                 else
                     mathTasksOptions.Operations.Add("*");
-                OnProperyChanged("MultiplyButtonColor");
+                OnPropertyChanged("MultiplyButtonColor");
             }
             else if (button.Text == "/")
             {
@@ -435,7 +435,7 @@ namespace Mental.ViewModels
                     mathTasksOptions.Operations.Remove("/");
                 else
                     mathTasksOptions.Operations.Add("/");
-                OnProperyChanged("DivideButtonColor");
+                OnPropertyChanged("DivideButtonColor");
             }
         }
 
@@ -447,7 +447,7 @@ namespace Mental.ViewModels
                 mathTasksOptions.IsChainLengthFixed = false;
             else
                 mathTasksOptions.IsChainLengthFixed = true;
-            OnProperyChanged("ChainLengthButtonText");
+            OnPropertyChanged("ChainLengthButtonText");
         }
 
         public Command NumbersTypeChangedCommand { get; set; }
@@ -463,9 +463,9 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.IsIntegerNumbers = false;
             }
-            OnProperyChanged("IntegerDataTypeButtonColor");
-            OnProperyChanged("FractionalDataTypeButtonColor");
-            OnProperyChanged("FractionalNumbersOptionsLabeleVisibility");
+            OnPropertyChanged("IntegerDataTypeButtonColor");
+            OnPropertyChanged("FractionalDataTypeButtonColor");
+            OnPropertyChanged("FractionalNumbersOptionsLabeleVisibility");
         }
 
         public Command TypeOfTaskChangedCommand { get; set; }
@@ -481,8 +481,8 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.TaskType = TaskType.CountVariable;
             }
-            OnProperyChanged("CountResultTaskOptionButtonColor");
-            OnProperyChanged("CountVariableOptionButtonColor");
+            OnPropertyChanged("CountResultTaskOptionButtonColor");
+            OnPropertyChanged("CountVariableOptionButtonColor");
         }
 
         public Command TimeOptionsChangedCommand { get; set; }
@@ -502,12 +502,12 @@ namespace Mental.ViewModels
             {
                 mathTasksOptions.TimeOptions = TimeOptions.LastTask;
             }
-            OnProperyChanged("CountdownTimeOptionButtonColor");
-            OnProperyChanged("FixedAmountOfOperationsTimeOptionButtonColor");
-            OnProperyChanged("LastTaskTimeOptionButtonColor");
-            OnProperyChanged("CountdownTimeOptionsLayoutVisibility");
-            OnProperyChanged("FixedAmountOfOperationsLayoutVisibility");
-            OnProperyChanged("LastTaskLayoutVisibility");
+            OnPropertyChanged("CountdownTimeOptionButtonColor");
+            OnPropertyChanged("FixedAmountOfOperationsTimeOptionButtonColor");
+            OnPropertyChanged("LastTaskTimeOptionButtonColor");
+            OnPropertyChanged("CountdownTimeOptionsLayoutVisibility");
+            OnPropertyChanged("FixedAmountOfOperationsLayoutVisibility");
+            OnPropertyChanged("LastTaskLayoutVisibility");
         }
 
         public Command StartCommand { get; set; }
@@ -529,14 +529,6 @@ namespace Mental.ViewModels
             }
 
             await navigation.PushAsync(new MathTasksPage(mathTasksOptions, timeOption));
-        }
-            
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnProperyChanged(string prop)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        }           
     }
 }

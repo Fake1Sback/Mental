@@ -8,7 +8,7 @@ using Mental.Views;
 
 namespace Mental.ViewModels
 {
-    public class SchulteTableTaskOptionsVM : INotifyPropertyChanged
+    public class SchulteTableTaskOptionsVM : BaseVM
     {
         private INavigation navigation;
         private SchulteTableTaskOptions SchulteTableTaskOptions;
@@ -269,13 +269,6 @@ namespace Mental.ViewModels
                     await navigation.PushAsync(new SchulteTableTaskPage(SchulteTableTaskOptions,timeOption));
                 });
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

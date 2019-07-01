@@ -13,7 +13,7 @@ using Mental.Views;
 
 namespace Mental.ViewModels
 {
-    public class SchulteTableTasksGeneralStatisticsVM : INotifyPropertyChanged
+    public class SchulteTableTasksGeneralStatisticsVM : BaseVM
     {
         private int GeneralAmountOfRecords;
         private int LoadCounter = 0;
@@ -240,13 +240,6 @@ namespace Mental.ViewModels
         {
             if (_SelectedSchulteTableTaskListItem != null)
                 await navigation.PushAsync(new SimilarSchulteTableTasksStatisticsPage(_SelectedSchulteTableTaskListItem.DbSchulteTableTask, false));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

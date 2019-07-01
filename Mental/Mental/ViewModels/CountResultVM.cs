@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Mental.ViewModels
 {
-    public class CountResultVM : INotifyPropertyChanged
+    public class CountResultVM : BaseVM
     {
         private AbstractTaskType MathTask;
         private ITimeOption timeOption;
@@ -232,15 +232,6 @@ namespace Mental.ViewModels
                 else
                     return false;
             });
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

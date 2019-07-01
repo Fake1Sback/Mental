@@ -12,7 +12,7 @@ using Mental.Views;
 
 namespace Mental.ViewModels
 {
-    public class SimilarSchulteTableTasksStatisticsVM : INotifyPropertyChanged
+    public class SimilarSchulteTableTasksStatisticsVM : BaseVM
     {
         private int AmountOfData = 3;
         private int LoadMoreCounter = 0;
@@ -364,14 +364,6 @@ namespace Mental.ViewModels
         private void InitializeChart()
         {
             OnPropertyChanged("LineChart");
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

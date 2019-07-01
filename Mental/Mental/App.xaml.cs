@@ -204,8 +204,8 @@ namespace Mental
             if (StoredSchulteTableTaskOptions == null)
                 LoadLatestSchulteTableTaskOptions();
 
-            //   MainPage = new NavigationPage(new MathTasksOptionsPage());
-            MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
+               MainPage = new NavigationPage(new MathTasksOptionsPage());
+           // MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
         }
 
         protected override void OnStart()

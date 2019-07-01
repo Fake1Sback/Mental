@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Mental.Models.DbModels;
+using Mental.ViewModels;
 
 namespace Mental.Models
 {
-    public class DbMathTaskListItem : INotifyPropertyChanged
+    public class DbMathTaskListItem : BaseVM
     {
         public DbMathTask dbMathTask;
         private string srcUrl1 = "someurl";
@@ -206,14 +207,6 @@ namespace Mental.Models
             {
                 return dbMathTask.TaskDateTime.ToString(@"dd-MM-yy HH:mm");
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

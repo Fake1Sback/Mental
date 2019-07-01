@@ -15,7 +15,7 @@ using Mental.Views;
 
 namespace Mental.ViewModels
 {
-    public class SimilarMathTasksStatisticsVM : INotifyPropertyChanged
+    public class SimilarMathTasksStatisticsVM : BaseVM
     {
         private int AmountOfData = 3;
         private int LoadMoreCounter = 0;
@@ -493,16 +493,6 @@ namespace Mental.ViewModels
                 return new LineChart() { Entries = entries };
             }
             private set { }
-        }
-
-        //------------------------------------------------
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Mental.ViewModels.PartialViewModels
 {
-    public class RestrictionsPVM : INotifyPropertyChanged
+    public class RestrictionsPVM : BaseVM
     {
         private TaskRestrictions taskRestrictions;
         private MathTasksOptions mathTaskOptions;
@@ -575,12 +575,5 @@ namespace Mental.ViewModels.PartialViewModels
         public Command DivideBlockActivatedCommand { get { return new Command(() => { taskRestrictions.restrictions[3].IsBlockActivated = !taskRestrictions.restrictions[3].IsBlockActivated; OnPropertyChanged("DivideBlockActivatedString"); }); } set { } }
 
         //----------------------------------------------------------------
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
-    public class GeneralStatisticsVM : INotifyPropertyChanged
+    public class GeneralStatisticsVM : BaseVM
     {
         private int GeneralAmountOfRecords;
         private int LoadCounter = 0;
@@ -337,14 +337,6 @@ namespace Mental.ViewModels
         {
             if (_SelectedMathTaskListItem != null)
                 await navigation.PushAsync(new SimilarTasksStatisticsPage(_SelectedMathTaskListItem.dbMathTask, false));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string prop)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
