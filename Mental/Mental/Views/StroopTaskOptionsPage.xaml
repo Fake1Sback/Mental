@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
+             x:Class="Mental.Views.StroopTaskOptionsPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Buttons Amount" HorizontalOptions="Center"></Label>
+                    <Label HorizontalOptions="Center" Text="{Binding IntButtonsAmount}"></Label>
+                    <Slider Maximum="5" Minimum="1" Value="{Binding ButtonsAmountSliderValue}"></Slider>
+                </StackLayout>
+                <!--<StackLayout Orientation="Vertical">
+                    <Label Text="Color Show Options" HorizontalOptions="Center"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="BackgroundColorShowingButton" Text="Background" BackgroundColor="{Binding BackgroundColorShowingOptionsColor}" Command="{Binding ColorShowingOptionsClickedCommand}" CommandParameter="{x:Reference BackgroundColorShowingButton}"></Button>
+                        <Button x:Name="BorderColorShowingButton" Text="Border" BackgroundColor="{Binding  BorderColorShowingOptionsColor}" Command="{Binding ColorShowingOptionsClickedCommand}" CommandParameter="{x:Reference BorderColorShowingButton}"></Button>
+                    </StackLayout>
+                </StackLayout>-->
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Task type:" HorizontalOptions="Center"></Label>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="FindCorrectTaskTypeButton" Text="Find Correct" BackgroundColor="{Binding FindOneCorrectColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindCorrectTaskTypeButton}"></Button>
+                        <Button x:Name="TrueOrFalseTaskTypeButton" Text="True or False" BackgroundColor="{Binding TrueOrFalseColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference TrueOrFalseTaskTypeButton}"></Button>
+                        <Button x:Name="FindTextByColorTypeButton" Text="Find Text By Color" BackgroundColor="{Binding FindTextColorColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindTextByColorTypeButton}"></Button>
+                    </StackLayout>
+                </StackLayout>
+                <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
+                <Button Text="Start" Command="{Binding StartCommand}"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

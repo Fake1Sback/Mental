@@ -19,3 +19,7 @@ E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\Sc
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\SimilarSchulteTableTasksStatisticsPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\SchulteTableTasksGeneralStatisticsPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\PartialViews\TimeOptionsView.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskOptionsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskSimilarStatisticsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskGeneralStatisticsPage.xaml.g.cs

@@ -25,13 +25,6 @@ namespace Mental.Models
 
         public TaskType TaskType;
         public TaskTimeOptionsContainer TaskTimeOptions;
-
-        //public int AmountOfTasks;
-        //public int AmountOfMinutes;
-        //public int AmountOfSecondsForAnswer;
-
-
-        //public TimeOptions TimeOptions;
     }
 
     public enum TimeOptions

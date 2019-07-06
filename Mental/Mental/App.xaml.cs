@@ -14,6 +14,7 @@ namespace Mental
     {
         private MathTasksOptions StoredMathTaskOptions;
         private SchulteTableTaskOptions StoredSchulteTableTaskOptions;
+        private StroopTaskOptions StoredStroopTaskOptions;
 
         public MathTasksOptions GetStoredMathTaskOptions()
         {
@@ -63,6 +64,27 @@ namespace Mental
                     }                     
                 };
                 return StoredSchulteTableTaskOptions;
+            }
+        }
+        public StroopTaskOptions GetStoredStroopTaskOptions()
+        {
+            if (StoredStroopTaskOptions != null)
+                return StoredStroopTaskOptions;
+            else
+            {
+                StoredStroopTaskOptions = new StroopTaskOptions
+                {
+                    ButtonsAmount = 2,
+                    StroopTaskType = StroopTaskType.FindOneCorrect,
+                    TaskTimeOptionsContainer = new TaskTimeOptionsContainer
+                    {
+                        CurrentTimeOption = TimeOptions.CountdownTimer,
+                        AmountOfMinutes = 1,
+                        AmountOfTasks = 1,
+                        AmountOfSecondsForAnswer = 10
+                    }
+                };
+                return StoredStroopTaskOptions;
             }
         }
       
@@ -200,12 +222,57 @@ namespace Mental
             }          
         }
 
+        public void LoadLatestStroopTaskOptions()
+        {
+            DbStroopTaskOptions dbStroopTaskOptions;
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                dbStroopTaskOptions = db.LastStroopTaskOptions.FirstOrDefault();
+            }
+
+            if(dbStroopTaskOptions != null)
+            {
+                StoredStroopTaskOptions = new StroopTaskOptions();
+                StoredStroopTaskOptions.StroopTaskType = (StroopTaskType)dbStroopTaskOptions.StroopTaskType;
+                StoredStroopTaskOptions.ButtonsAmount = dbStroopTaskOptions.ButtonsAmount;
+                StoredStroopTaskOptions.TaskTimeOptionsContainer = new TaskTimeOptionsContainer
+                {
+                    AmountOfMinutes = dbStroopTaskOptions.AmountOfMinutes,
+                    AmountOfSecondsForAnswer = dbStroopTaskOptions.AmountOfSecondsForAnswer,
+                    AmountOfTasks = dbStroopTaskOptions.AmountOfTasks,
+                    CurrentTimeOption = (TimeOptions)dbStroopTaskOptions.TimeOptions
+                };
+            }
+        }
+
+        public void SaveLatestStroopTaskOptions(StroopTaskOptions _stroopTaskOptions)
+        {
+            DbStroopTaskOptions dbStroopTaskOptions = new DbStroopTaskOptions();
+            StoredStroopTaskOptions = _stroopTaskOptions;
+
+            dbStroopTaskOptions.TimeOptions = (byte)_stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption;
+            dbStroopTaskOptions.AmountOfMinutes = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
+            dbStroopTaskOptions.AmountOfTasks = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfTasks;
+            dbStroopTaskOptions.AmountOfSecondsForAnswer = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
+            dbStroopTaskOptions.ButtonsAmount = _stroopTaskOptions.ButtonsAmount;
+            dbStroopTaskOptions.StroopTaskType = (byte)_stroopTaskOptions.StroopTaskType;
+
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                DbStroopTaskOptions dbStroopTaskOptionsToDelete = db.LastStroopTaskOptions.FirstOrDefault();
+                if (dbStroopTaskOptionsToDelete != null)
+                    db.LastStroopTaskOptions.Remove(dbStroopTaskOptionsToDelete);
+                db.LastStroopTaskOptions.Add(dbStroopTaskOptions);
+                db.SaveChanges();
+            }
+        }
+
         public App()
         {
             InitializeComponent();
             using (var a = new ApplicationContext("mental.db"))
             {
-                //   a.Database.EnsureDeleted();
+                //a.Database.EnsureDeleted();
                 a.Database.EnsureCreated();
             }
 
@@ -215,8 +282,12 @@ namespace Mental
             if (StoredSchulteTableTaskOptions == null)
                 LoadLatestSchulteTableTaskOptions();
 
-           //    MainPage = new NavigationPage(new MathTasksOptionsPage());
-            MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
+            if (StoredStroopTaskOptions == null)
+                LoadLatestStroopTaskOptions();
+
+            // MainPage = new NavigationPage(new MathTasksOptionsPage());
+            // MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
+            MainPage = new NavigationPage(new StroopTaskOptionsPage());
         }
 
         protected override void OnStart()
