@@ -54,12 +54,7 @@ namespace Mental.Models
         {
             get
             {
-                if (DbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
-                    return (DbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(DbSchulteTableTask.GridSize,2) * 100).ToString() + "%";
-                else if (DbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
-                    return TimeSpan.FromMilliseconds(DbSchulteTableTask.TimeParameter).ToString(@"mm\:ss");
-                else
-                    return (DbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(DbSchulteTableTask.GridSize, 2) * 100).ToString() + "%";
+                return DbSchulteTableTask.GetEfficiencyParameterString();
             }
         }
 

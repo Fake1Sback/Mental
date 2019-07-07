@@ -41,7 +41,12 @@ namespace Mental.Models
         {
             if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
             {
-                return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100).ToString() + "%";
+                float val1 = (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100);
+                float val2 = dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1;
+                float val3 = dbSchulteTableTask.TimeParameter / val2 * 100;
+                return ((int)val1 + (int)val3).ToString() + "%";
+
+                //  return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100 + (dbSchulteTableTask.TimeParameter / (dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1) * 100)).ToString() + "%";
             }
             else if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
             {
@@ -57,7 +62,12 @@ namespace Mental.Models
         {
             if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
             {
-                return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100);
+                float val1 = (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100);
+                float val2 = dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1;
+                float val3 = dbSchulteTableTask.TimeParameter / val2 * 100;
+                return (int)val1 + (int)val3;
+
+              //  return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100) + (dbSchulteTableTask.TimeParameter / (dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1) * 100);
             }
             else if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
             {

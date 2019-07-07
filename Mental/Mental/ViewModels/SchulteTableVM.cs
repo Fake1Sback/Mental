@@ -106,7 +106,7 @@ namespace Mental.ViewModels
 
                         if(SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
                         {
-                            dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
+                            dbSchulteTableTask.TimeParameter = timeOption.GetMillis();
                             dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
                         }
                         else if(SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)

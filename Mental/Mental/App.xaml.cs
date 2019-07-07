@@ -286,8 +286,8 @@ namespace Mental
                 LoadLatestStroopTaskOptions();
 
             // MainPage = new NavigationPage(new MathTasksOptionsPage());
-            // MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
-            MainPage = new NavigationPage(new StroopTaskOptionsPage());
+             MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
+           // MainPage = new NavigationPage(new StroopTaskOptionsPage());
         }
 
         protected override void OnStart()
