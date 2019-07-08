@@ -148,12 +148,12 @@ namespace Mental.ViewModels
             get
             {
                 return "Efficiency: " + SelectedDbSchulteTableTask.GetEfficiencyParameterString();
-                if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
-                    return "Efficiency: " + (SelectedDbSchulteTableTask.AmountOfCorrectAnswers / (SelectedDbSchulteTableTask.AmountOfCorrectAnswers + SelectedDbSchulteTableTask.AmountOfWrongAnswers) * 100).ToString() + "%";
-                else if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "Efficiency: " + TimeSpan.FromMilliseconds(SelectedDbSchulteTableTask.TimeParameter).ToString(@"mm\:ss");
-                else
-                    return "Efficiency: " + SelectedDbSchulteTableTask.TimeParameter.ToString() + "%";
+                //if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
+                //    return "Efficiency: " + (SelectedDbSchulteTableTask.AmountOfCorrectAnswers / (SelectedDbSchulteTableTask.AmountOfCorrectAnswers + SelectedDbSchulteTableTask.AmountOfWrongAnswers) * 100).ToString() + "%";
+                //else if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
+                //    return "Efficiency: " + TimeSpan.FromMilliseconds(SelectedDbSchulteTableTask.TimeParameter).ToString(@"mm\:ss");
+                //else
+                //    return "Efficiency: " + SelectedDbSchulteTableTask.TimeParameter.ToString() + "%";
             }
         }
 

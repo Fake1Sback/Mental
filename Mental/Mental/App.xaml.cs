@@ -98,72 +98,74 @@ namespace Mental
 
             if (dbMathTaskOptions != null)
             {
-                StoredMathTaskOptions = new MathTasksOptions() { Operations = new List<string>() };
+                StoredMathTaskOptions = dbMathTaskOptions.ToMathTaskOptions();
+
+                //StoredMathTaskOptions = new MathTasksOptions() { Operations = new List<string>() };
                 
-                if (dbMathTaskOptions.Operations.Contains("+"))
-                    StoredMathTaskOptions.Operations.Add("+");
-                if (dbMathTaskOptions.Operations.Contains("-"))
-                    StoredMathTaskOptions.Operations.Add("-");
-                if (dbMathTaskOptions.Operations.Contains("*"))
-                    StoredMathTaskOptions.Operations.Add("*");
-                if (dbMathTaskOptions.Operations.Contains("/"))
-                    StoredMathTaskOptions.Operations.Add("/");
+                //if (dbMathTaskOptions.Operations.Contains("+"))
+                //    StoredMathTaskOptions.Operations.Add("+");
+                //if (dbMathTaskOptions.Operations.Contains("-"))
+                //    StoredMathTaskOptions.Operations.Add("-");
+                //if (dbMathTaskOptions.Operations.Contains("*"))
+                //    StoredMathTaskOptions.Operations.Add("*");
+                //if (dbMathTaskOptions.Operations.Contains("/"))
+                //    StoredMathTaskOptions.Operations.Add("/");
 
-                StoredMathTaskOptions.TaskType = (TaskType)dbMathTaskOptions.TaskType;
+                //StoredMathTaskOptions.TaskType = (TaskType)dbMathTaskOptions.TaskType;
 
-                StoredMathTaskOptions.TaskTimeOptions = new TaskTimeOptionsContainer
-                {
-                    CurrentTimeOption = (TimeOptions)dbMathTaskOptions.TimeOptions,
-                    AmountOfMinutes = dbMathTaskOptions.AmountOfMinutes,
-                    AmountOfTasks = dbMathTaskOptions.AmountOfTasks,
-                    AmountOfSecondsForAnswer = dbMathTaskOptions.AmountOfSecondsForAnswer
-                };
+                //StoredMathTaskOptions.TaskTimeOptions = new TaskTimeOptionsContainer
+                //{
+                //    CurrentTimeOption = (TimeOptions)dbMathTaskOptions.TimeOptions,
+                //    AmountOfMinutes = dbMathTaskOptions.AmountOfMinutes,
+                //    AmountOfTasks = dbMathTaskOptions.AmountOfTasks,
+                //    AmountOfSecondsForAnswer = dbMathTaskOptions.AmountOfSecondsForAnswer
+                //};
 
-                StoredMathTaskOptions.IsRestrictionsActivated = dbMathTaskOptions.IsRestrictionActivated;
-                StoredMathTaskOptions.restrictions.restrictions = TaskRestrictions.GetTaskRestrictionFromString(dbMathTaskOptions.RestrictionsString);
+                //StoredMathTaskOptions.IsRestrictionsActivated = dbMathTaskOptions.IsRestrictionActivated;
+                //StoredMathTaskOptions.restrictions.restrictions = TaskRestrictions.GetTaskRestrictionFromString(dbMathTaskOptions.RestrictionsString);
 
-                StoredMathTaskOptions.IsIntegerNumbers = dbMathTaskOptions.IsIntegerNumbers;
-                StoredMathTaskOptions.DigitsAfterDotSign = dbMathTaskOptions.DigitsAfterDotSign;
+                //StoredMathTaskOptions.IsIntegerNumbers = dbMathTaskOptions.IsIntegerNumbers;
+                //StoredMathTaskOptions.DigitsAfterDotSign = dbMathTaskOptions.DigitsAfterDotSign;
 
-                StoredMathTaskOptions.MaxValue = dbMathTaskOptions.MaxValue;
-                StoredMathTaskOptions.MinValue = dbMathTaskOptions.MinValue;
+                //StoredMathTaskOptions.MaxValue = dbMathTaskOptions.MaxValue;
+                //StoredMathTaskOptions.MinValue = dbMathTaskOptions.MinValue;
 
-                StoredMathTaskOptions.IsChainLengthFixed = dbMathTaskOptions.IsChainLengthFixed;
-                StoredMathTaskOptions.MaxChainLength = dbMathTaskOptions.MaxChainLength;               
+                //StoredMathTaskOptions.IsChainLengthFixed = dbMathTaskOptions.IsChainLengthFixed;
+                //StoredMathTaskOptions.MaxChainLength = dbMathTaskOptions.MaxChainLength;               
             }
         }
 
         public void SaveLatestMathTaskOptions(MathTasksOptions mathTasksOptions)
         {
-            DbMathTaskOptions dbMathTaskOptions = new DbMathTaskOptions();
             StoredMathTaskOptions = mathTasksOptions;
+            DbMathTaskOptions dbMathTaskOptions = mathTasksOptions.ToDbMathTaskOptions();
+            
+            //string operations = string.Empty;
+            //for (int i = 0; i < mathTasksOptions.Operations.Count; i++)
+            //{
+            //    operations += mathTasksOptions.Operations[i];
+            //}
 
-            string operations = string.Empty;
-            for (int i = 0; i < mathTasksOptions.Operations.Count; i++)
-            {
-                operations += mathTasksOptions.Operations[i];
-            }
+            //dbMathTaskOptions.Operations = operations;
 
-            dbMathTaskOptions.Operations = operations;
+            //dbMathTaskOptions.IsRestrictionActivated = mathTasksOptions.IsRestrictionsActivated;
+            //dbMathTaskOptions.RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions);
 
-            dbMathTaskOptions.IsRestrictionActivated = mathTasksOptions.IsRestrictionsActivated;
-            dbMathTaskOptions.RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions);
+            //dbMathTaskOptions.IsIntegerNumbers = mathTasksOptions.IsIntegerNumbers;
+            //dbMathTaskOptions.DigitsAfterDotSign = mathTasksOptions.DigitsAfterDotSign;
 
-            dbMathTaskOptions.IsIntegerNumbers = mathTasksOptions.IsIntegerNumbers;
-            dbMathTaskOptions.DigitsAfterDotSign = mathTasksOptions.DigitsAfterDotSign;
+            //dbMathTaskOptions.MinValue = mathTasksOptions.MinValue;
+            //dbMathTaskOptions.MaxValue = mathTasksOptions.MaxValue;
 
-            dbMathTaskOptions.MinValue = mathTasksOptions.MinValue;
-            dbMathTaskOptions.MaxValue = mathTasksOptions.MaxValue;
+            //dbMathTaskOptions.IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed;
+            //dbMathTaskOptions.MaxChainLength = mathTasksOptions.MaxChainLength;
 
-            dbMathTaskOptions.IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed;
-            dbMathTaskOptions.MaxChainLength = mathTasksOptions.MaxChainLength;
+            //dbMathTaskOptions.AmountOfTasks = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
+            //dbMathTaskOptions.AmountOfMinutes = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
+            //dbMathTaskOptions.AmountOfSecondsForAnswer = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
 
-            dbMathTaskOptions.AmountOfTasks = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
-            dbMathTaskOptions.AmountOfMinutes = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
-            dbMathTaskOptions.AmountOfSecondsForAnswer = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-
-            dbMathTaskOptions.TaskType = (byte)mathTasksOptions.TaskType;
-            dbMathTaskOptions.TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption;
+            //dbMathTaskOptions.TaskType = (byte)mathTasksOptions.TaskType;
+            //dbMathTaskOptions.TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -185,32 +187,34 @@ namespace Mental
 
             if(dbSchulteTableTaskOptions != null)
             {
-                StoredSchulteTableTaskOptions = new SchulteTableTaskOptions()
-                {
-                    GridSize = dbSchulteTableTaskOptions.GridSize,
-                    IsEasyModeActivated = dbSchulteTableTaskOptions.IsEasyModeActivated,
-                    TaskTimeOptions = new TaskTimeOptionsContainer
-                    {
-                        CurrentTimeOption = (TimeOptions)dbSchulteTableTaskOptions.TimeOptions,
-                        AmountOfMinutes = dbSchulteTableTaskOptions.AmountOfMinutes,
-                        AmountOfTasks = dbSchulteTableTaskOptions.AmountOfTasks,
-                        AmountOfSecondsForAnswer = dbSchulteTableTaskOptions.AmountOfSecondsForAnswer
-                    }
-                };               
+                StoredSchulteTableTaskOptions = dbSchulteTableTaskOptions.ToSchulteTableTaskOptions();
+
+                //StoredSchulteTableTaskOptions = new SchulteTableTaskOptions()
+                //{
+                //    GridSize = dbSchulteTableTaskOptions.GridSize,
+                //    IsEasyModeActivated = dbSchulteTableTaskOptions.IsEasyModeActivated,
+                //    TaskTimeOptions = new TaskTimeOptionsContainer
+                //    {
+                //        CurrentTimeOption = (TimeOptions)dbSchulteTableTaskOptions.TimeOptions,
+                //        AmountOfMinutes = dbSchulteTableTaskOptions.AmountOfMinutes,
+                //        AmountOfTasks = dbSchulteTableTaskOptions.AmountOfTasks,
+                //        AmountOfSecondsForAnswer = dbSchulteTableTaskOptions.AmountOfSecondsForAnswer
+                //    }
+                //};               
             }
         }
 
         public void SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions _schulteTableTaskOptions)
         {
-            DbSchulteTableTaskOptions dbSchulteTableTaskOptions = new DbSchulteTableTaskOptions();
             StoredSchulteTableTaskOptions = _schulteTableTaskOptions;
-
-            dbSchulteTableTaskOptions.GridSize = _schulteTableTaskOptions.GridSize;
-            dbSchulteTableTaskOptions.IsEasyModeActivated = _schulteTableTaskOptions.IsEasyModeActivated;
-            dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption;
-            dbSchulteTableTaskOptions.AmountOfMinutes = _schulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
-            dbSchulteTableTaskOptions.AmountOfTasks = _schulteTableTaskOptions.TaskTimeOptions.AmountOfTasks;
-            dbSchulteTableTaskOptions.AmountOfSecondsForAnswer = _schulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+            DbSchulteTableTaskOptions dbSchulteTableTaskOptions = _schulteTableTaskOptions.ToDbSchulteTableTaskOptions();
+           
+            //dbSchulteTableTaskOptions.GridSize = _schulteTableTaskOptions.GridSize;
+            //dbSchulteTableTaskOptions.IsEasyModeActivated = _schulteTableTaskOptions.IsEasyModeActivated;
+            //dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption;
+            //dbSchulteTableTaskOptions.AmountOfMinutes = _schulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
+            //dbSchulteTableTaskOptions.AmountOfTasks = _schulteTableTaskOptions.TaskTimeOptions.AmountOfTasks;
+            //dbSchulteTableTaskOptions.AmountOfSecondsForAnswer = _schulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -230,32 +234,35 @@ namespace Mental
                 dbStroopTaskOptions = db.LastStroopTaskOptions.FirstOrDefault();
             }
 
-            if(dbStroopTaskOptions != null)
+            if (dbStroopTaskOptions != null)
             {
-                StoredStroopTaskOptions = new StroopTaskOptions();
-                StoredStroopTaskOptions.StroopTaskType = (StroopTaskType)dbStroopTaskOptions.StroopTaskType;
-                StoredStroopTaskOptions.ButtonsAmount = dbStroopTaskOptions.ButtonsAmount;
-                StoredStroopTaskOptions.TaskTimeOptionsContainer = new TaskTimeOptionsContainer
-                {
-                    AmountOfMinutes = dbStroopTaskOptions.AmountOfMinutes,
-                    AmountOfSecondsForAnswer = dbStroopTaskOptions.AmountOfSecondsForAnswer,
-                    AmountOfTasks = dbStroopTaskOptions.AmountOfTasks,
-                    CurrentTimeOption = (TimeOptions)dbStroopTaskOptions.TimeOptions
-                };
+                StoredStroopTaskOptions = dbStroopTaskOptions.ToStroopTaskOptions();
+
+                //StoredStroopTaskOptions = new StroopTaskOptions();
+                //StoredStroopTaskOptions.StroopTaskType = (StroopTaskType)dbStroopTaskOptions.StroopTaskType;
+                //StoredStroopTaskOptions.ButtonsAmount = dbStroopTaskOptions.ButtonsAmount;
+                //StoredStroopTaskOptions.TaskTimeOptionsContainer = new TaskTimeOptionsContainer
+                //{
+                //    AmountOfMinutes = dbStroopTaskOptions.AmountOfMinutes,
+                //    AmountOfSecondsForAnswer = dbStroopTaskOptions.AmountOfSecondsForAnswer,
+                //    AmountOfTasks = dbStroopTaskOptions.AmountOfTasks,
+                //    CurrentTimeOption = (TimeOptions)dbStroopTaskOptions.TimeOptions
+                //};
             }
         }
 
         public void SaveLatestStroopTaskOptions(StroopTaskOptions _stroopTaskOptions)
         {
-            DbStroopTaskOptions dbStroopTaskOptions = new DbStroopTaskOptions();
             StoredStroopTaskOptions = _stroopTaskOptions;
+            DbStroopTaskOptions dbStroopTaskOptions = _stroopTaskOptions.ToDbStroopTaskOptions();
+            
 
-            dbStroopTaskOptions.TimeOptions = (byte)_stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption;
-            dbStroopTaskOptions.AmountOfMinutes = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
-            dbStroopTaskOptions.AmountOfTasks = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfTasks;
-            dbStroopTaskOptions.AmountOfSecondsForAnswer = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
-            dbStroopTaskOptions.ButtonsAmount = _stroopTaskOptions.ButtonsAmount;
-            dbStroopTaskOptions.StroopTaskType = (byte)_stroopTaskOptions.StroopTaskType;
+            //dbStroopTaskOptions.TimeOptions = (byte)_stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption;
+            //dbStroopTaskOptions.AmountOfMinutes = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
+            //dbStroopTaskOptions.AmountOfTasks = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfTasks;
+            //dbStroopTaskOptions.AmountOfSecondsForAnswer = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
+            //dbStroopTaskOptions.ButtonsAmount = _stroopTaskOptions.ButtonsAmount;
+            //dbStroopTaskOptions.StroopTaskType = (byte)_stroopTaskOptions.StroopTaskType;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -285,8 +292,8 @@ namespace Mental
             if (StoredStroopTaskOptions == null)
                 LoadLatestStroopTaskOptions();
 
-            // MainPage = new NavigationPage(new MathTasksOptionsPage());
-             MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
+             MainPage = new NavigationPage(new MathTasksOptionsPage());
+            // MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
            // MainPage = new NavigationPage(new StroopTaskOptionsPage());
         }
 

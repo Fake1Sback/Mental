@@ -29,6 +29,15 @@ namespace Mental.ViewModels.PartialViewModels
                 _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue) + 1;
                 _mathTasksOptions.IsRestrictionsActivated = false;
             }
+
+            PlusDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit1Restriction) / 100;
+            PlusDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit2Restriction) / 100;
+            MinusDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[1].Digit1Restriction) / 100;
+            MinusDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[1].Digit2Restriction) / 100;
+            MultiplyDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[2].Digit1Restriction) / 100;
+            MultiplyDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[2].Digit2Restriction) / 100;
+            DivideDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[3].Digit1Restriction) / 100;
+            DivideDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[3].Digit2Restriction) / 100;
         }
 
         private bool IsRestrictionsOriginallyActivated = false;
