@@ -73,14 +73,14 @@ namespace Mental.ViewModels
             }
         }
 
-        public string EasyModeActivatedString
+        public string EasyModeActivatedImgSrc
         {
             get
             {
-                if (SchulteTableTaskOptions.IsEasyModeActivated)
-                    return "+";
+                if(SchulteTableTaskOptions.IsEasyModeActivated)
+                    return "done_black_18.png";
                 else
-                    return "-";
+                    return "";
             }
         }
 
@@ -92,7 +92,7 @@ namespace Mental.ViewModels
                 {
                     SchulteTableTaskOptions.IsEasyModeActivated = !SchulteTableTaskOptions.IsEasyModeActivated;
                     OnPropertyChanged("EasyModeActivated");
-                    OnPropertyChanged("EasyModeActivatedString");
+                    OnPropertyChanged("EasyModeActivatedImgSrc");
                 });
             }
         }

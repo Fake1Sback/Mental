@@ -12,6 +12,9 @@ namespace Mental.ViewModels.PartialViewModels
         private double _TimerCountdownSliderValue;
         private double _LastAnswerSliderValue;
 
+        private Color DefaultOptionButtonBackgroundColor = Color.FromHex("#80aaff");
+        private Color ActiveOptionButtonBackgroundColor = Color.FromHex("#99ffcc");
+
         public TimeOptionsPVM(TaskTimeOptionsContainer _taskTimeOptionsContainer)
         {
             TaskTimeOptionsContainer = _taskTimeOptionsContainer;
@@ -27,9 +30,9 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 if (TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.CountdownTimer)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -39,9 +42,9 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 if (TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -51,9 +54,9 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 if (TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.LastTask)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }

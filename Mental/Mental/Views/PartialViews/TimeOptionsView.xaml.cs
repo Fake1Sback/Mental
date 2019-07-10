@@ -16,5 +16,10 @@ namespace Mental.Views.PartialViews
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void TimeOptionsExpandMoreButton_Clicked(object sender, EventArgs e)
+        {
+            TimeOptionsFrame.IsVisible = !TimeOptionsFrame.IsVisible;
+        }
+    }
 }

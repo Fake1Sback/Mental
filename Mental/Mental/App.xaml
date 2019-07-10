@@ -3,6 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mental.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style x:Key="InfoButton" TargetType="Button">
+                <Setter Property="Margin" Value="7,0,7,0"></Setter>
+                <Setter Property="HeightRequest" Value="50"></Setter>
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Start"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            </Style>
+            <Style x:Key="ExpandButton" TargetType="Button">
+                <Setter Property="Margin" Value="7,-2,7,0"></Setter>
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="WidthRequest" Value="40"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="End"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            </Style>
+            <Style x:Key="LabelFrame" TargetType="Frame">
+                <Setter Property="Margin" Value="10,3,10,0"></Setter>
+                <Setter Property="Padding" Value="0,3,0,3"></Setter>
+                <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
+                <Setter Property="CornerRadius" Value="25"></Setter>
+            </Style>
+            <Style x:Key="OptionsContainerFrame" TargetType="Frame">
+                <Setter Property="Margin" Value="30,-7,30,0"></Setter>
+                <Setter Property="Padding" Value="5,5,5,15"></Setter>
+                <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
+            </Style>
+            <Style x:Key="Navigation" TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#6699ff"></Setter>
+                <Setter Property="BarTextColor" Value="White"></Setter>
+            </Style>
+            <Style x:Key="OptionButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#80aaff"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="BorderRadius" Value="15"></Setter>
+                <Setter Property="BorderWidth" Value="0.8"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="Margin" Value="2,2,2,2"></Setter>
+            </Style>
+            <Style x:Key="StartButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="White"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="TextColor" Value="#6699ff"></Setter>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

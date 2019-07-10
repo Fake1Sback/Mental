@@ -18,5 +18,15 @@ namespace Mental.Views
 			InitializeComponent ();
             this.BindingContext = new StroopTaskOptionsVM(this.Navigation); 
 		}
-	}
+
+        private void ButtonsAmountExpandMoreButton_Clicked(object sender, EventArgs e)
+        {
+            ButtonsAmountFrame.IsVisible = !ButtonsAmountFrame.IsVisible;
+        }
+
+        private void StroopTaskTypeExpandMoreButton_Clicked(object sender, EventArgs e)
+        {
+            StroopTaskTypeFrame.IsVisible = !StroopTaskTypeFrame.IsVisible;
+        }
+    }
 }

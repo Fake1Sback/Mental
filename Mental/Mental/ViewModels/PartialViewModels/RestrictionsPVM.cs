@@ -16,19 +16,26 @@ namespace Mental.ViewModels.PartialViewModels
         {
             mathTaskOptions = _mathTasksOptions;
             taskRestrictions = mathTaskOptions.restrictions;
-            IsRestrictionsOriginallyActivated = _mathTasksOptions.IsRestrictionsActivated;
+            CheckIfRestrictionsActivated();
 
-            if(FindAmountOfDigits(mathTaskOptions.MinValue) != FindAmountOfDigits(mathTaskOptions.MaxValue))
-            {
-                _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
-                _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue);
-            }
-            else
-            {
-                _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
-                _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue) + 1;
-                _mathTasksOptions.IsRestrictionsActivated = false;
-            }
+            MinimumDigitValue = mathTaskOptions.MinValue;
+            MaximumDigitValue = mathTaskOptions.MaxValue;
+
+            //_MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
+            //_MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue);
+
+            //   IsRestrictionsOriginallyActivated = _mathTasksOptions.IsRestrictionsActivated;
+
+            //if(FindAmountOfDigits(mathTaskOptions.MinValue) != FindAmountOfDigits(mathTaskOptions.MaxValue))
+            //{
+
+            //}
+            //else
+            //{
+            //    _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
+            //    _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue) + 1;
+            //    _mathTasksOptions.IsRestrictionsActivated = false;
+            //}
 
             PlusDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit1Restriction) / 100;
             PlusDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit2Restriction) / 100;
@@ -323,27 +330,10 @@ namespace Mental.ViewModels.PartialViewModels
             }
             set
             {
-                if (FindAmountOfDigits(value) == FindAmountOfDigits(MaximumDigitValue))
-                {
-                    mathTaskOptions.IsRestrictionsActivated = false;
-                    OnPropertyChanged("RestrictionLayoutVisibility");
-                    OnPropertyChanged("RestrictionsVisibilityText");
-                }
-                else
-                {
-                    if(IsRestrictionsOriginallyActivated)
-                    {
-                        if(!mathTaskOptions.IsRestrictionsActivated)
-                        {
-                            mathTaskOptions.IsRestrictionsActivated = true;
-                            OnPropertyChanged("RestrictionLayoutVisibility");
-                            OnPropertyChanged("RestrictionsVisibilityText");
-                        }
-                    }
-                    _MinimumSliderValue = FindAmountOfDigits(value);
-                    OnPropertyChanged("MinimumSliderValue");
-                    RenewSliderValues();
-                }
+                _MinimumSliderValue = FindAmountOfDigits(value);
+                OnPropertyChanged("MinimumDigitValue");
+                mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
+                RenewSliderValues();
             }
         }
 
@@ -355,29 +345,76 @@ namespace Mental.ViewModels.PartialViewModels
             }
             set
             {
-                if (FindAmountOfDigits(value) == FindAmountOfDigits(MinimumDigitValue))
-                {
-                    mathTaskOptions.IsRestrictionsActivated = false;
-                    OnPropertyChanged("RestrictionLayoutVisibility");
-                    OnPropertyChanged("RestrictionsVisibilityText");
-                }
-                else
-                {
-                    if (IsRestrictionsOriginallyActivated)
-                    {
-                        if (!mathTaskOptions.IsRestrictionsActivated)
-                        {
-                            mathTaskOptions.IsRestrictionsActivated = true;
-                            OnPropertyChanged("RestrictionLayoutVisibility");
-                            OnPropertyChanged("RestrictionsVisibilityText");
-                        }
-                        _MaximumSliderValue = FindAmountOfDigits(value);
-                        OnPropertyChanged("_MaximumSliderValue");
-                        RenewSliderValues();
-                    }
-                }
+                _MaximumSliderValue = FindAmountOfDigits(value);
+                OnPropertyChanged("MaximumDigitValue");
+                mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
+                RenewSliderValues();
             }
         }
+
+        //public int MinimumDigitValue
+        //{
+        //    get
+        //    {
+        //        return _MinimumSliderValue;
+        //    }
+        //    set
+        //    {
+        //        if (FindAmountOfDigits(value) == FindAmountOfDigits(MaximumDigitValue))
+        //        {
+        //            mathTaskOptions.IsRestrictionsActivated = false;
+        //            OnPropertyChanged("RestrictionLayoutVisibility");
+        //            OnPropertyChanged("RestrictionsVisibilityText");
+        //        }
+        //        else
+        //        {
+        //            if(IsRestrictionsOriginallyActivated)
+        //            {
+        //                if(!mathTaskOptions.IsRestrictionsActivated)
+        //                {
+        //                    mathTaskOptions.IsRestrictionsActivated = true;
+        //                    OnPropertyChanged("RestrictionLayoutVisibility");
+        //                    OnPropertyChanged("RestrictionsVisibilityText");
+        //                }
+        //            }
+        //            _MinimumSliderValue = FindAmountOfDigits(value);
+        //            OnPropertyChanged("MinimumSliderValue");
+        //            RenewSliderValues();
+        //        }
+        //    }
+        //}
+
+        //public int MaximumDigitValue
+        //{
+        //    get
+        //    {
+        //        return _MaximumSliderValue;
+        //    }
+        //    set
+        //    {
+        //        if (FindAmountOfDigits(value) == FindAmountOfDigits(MinimumDigitValue))
+        //        {
+        //            mathTaskOptions.IsRestrictionsActivated = false;
+        //            OnPropertyChanged("RestrictionLayoutVisibility");
+        //            OnPropertyChanged("RestrictionsVisibilityText");
+        //        }
+        //        else
+        //        {
+        //            if (IsRestrictionsOriginallyActivated)
+        //            {
+        //                if (!mathTaskOptions.IsRestrictionsActivated)
+        //                {
+        //                    mathTaskOptions.IsRestrictionsActivated = true;
+        //                    OnPropertyChanged("RestrictionLayoutVisibility");
+        //                    OnPropertyChanged("RestrictionsVisibilityText");
+        //                }
+        //                _MaximumSliderValue = FindAmountOfDigits(value);
+        //                OnPropertyChanged("_MaximumSliderValue");
+        //                RenewSliderValues();
+        //            }
+        //        }
+        //    }
+        //}
 
         private int FindAmountOfDigits(int Value)
         {
@@ -536,52 +573,114 @@ namespace Mental.ViewModels.PartialViewModels
 
         //----------------------------------------------------------------
 
-        private string CheckBlockRestrictionActivatedText(int OperationIndex)
+        private string CheckBlockRestrictionImgSrc(int OperationIndex)
         {
             if (taskRestrictions.restrictions[OperationIndex].IsBlockActivated)
-                return "+";
+                return "done_black_18.png";
             else
-                return "-";
+                return "";
+
         }
 
-        public string PlusBlockActivatedString
+        public string PlusBlockActivatedImgSrc
         {
             get
             {
-                return CheckBlockRestrictionActivatedText(0);
+                return CheckBlockRestrictionImgSrc(0);
             }
-            private set { }
-        }
-        public string MinusBlockActivatedString
-        {
-            get
-            {
-                return CheckBlockRestrictionActivatedText(1);
-            }
-            private set { }
-        }
-        public string MultiplyBlockActivatedString
-        {
-            get
-            {
-                return CheckBlockRestrictionActivatedText(2);
-            }
-            private set { 
-}
-        }
-        public string DivideBlockActivatedString
-        {
-            get
-            {
-                return CheckBlockRestrictionActivatedText(3);
-            }
-            private set { }
         }
 
-        public Command PlusBlockActivatedCommand { get { return new Command(() => { taskRestrictions.restrictions[0].IsBlockActivated = !taskRestrictions.restrictions[0].IsBlockActivated; OnPropertyChanged("PlusBlockActivatedString"); }); } set { } }
-        public Command MinusBlockActivatedCommand { get { return new Command(() => { taskRestrictions.restrictions[1].IsBlockActivated = !taskRestrictions.restrictions[1].IsBlockActivated; OnPropertyChanged("MinusBlockActivatedString"); }); } set { } }
-        public Command MultiplyBlockActivatedCommand { get { return new Command(() => { taskRestrictions.restrictions[2].IsBlockActivated = !taskRestrictions.restrictions[2].IsBlockActivated; OnPropertyChanged("MultiplyBlockActivatedString"); }); } set { } }
-        public Command DivideBlockActivatedCommand { get { return new Command(() => { taskRestrictions.restrictions[3].IsBlockActivated = !taskRestrictions.restrictions[3].IsBlockActivated; OnPropertyChanged("DivideBlockActivatedString"); }); } set { } }
+        public string MinusBlockActivatedImgSrc
+        {
+            get
+            {
+                return CheckBlockRestrictionImgSrc(1);
+            }
+        }
+
+        public string MultiplyBlockActivatedImgSrc
+        {
+            get
+            {
+                return CheckBlockRestrictionImgSrc(2);
+            }
+        }
+
+        public string DivideBlockActivatedImgSrc
+        {
+            get
+            {
+                return CheckBlockRestrictionImgSrc(3);
+            }
+        }
+
+        private bool CheckIfRestrictionsActivated()
+        {
+            if (_MaximumSliderValue == _MinimumSliderValue)
+                return false;
+
+            for(int i = 0;i < taskRestrictions.restrictions.Length;i++)
+            {
+                if(taskRestrictions.restrictions[i].IsBlockActivated)
+                    return true;
+            }
+            return false;
+        }
+
+        public Command PlusBlockActivatedCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    taskRestrictions.restrictions[0].IsBlockActivated = !taskRestrictions.restrictions[0].IsBlockActivated;
+                    mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
+                    OnPropertyChanged("PlusBlockActivatedImgSrc");
+                });
+            }
+            set
+            { }
+        }
+        public Command MinusBlockActivatedCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    taskRestrictions.restrictions[1].IsBlockActivated = !taskRestrictions.restrictions[1].IsBlockActivated;
+                    mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
+                    OnPropertyChanged("MinusBlockActivatedImgSrc");
+                });
+            }
+            set
+            { }
+        }
+        public Command MultiplyBlockActivatedCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    taskRestrictions.restrictions[2].IsBlockActivated = !taskRestrictions.restrictions[2].IsBlockActivated;
+                    mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
+                    OnPropertyChanged("MultiplyBlockActivatedImgSrc");
+                });
+            }
+            set { }
+        }
+        public Command DivideBlockActivatedCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    taskRestrictions.restrictions[3].IsBlockActivated = !taskRestrictions.restrictions[3].IsBlockActivated;
+                    mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
+                    OnPropertyChanged("DivideBlockActivatedImgSrc");
+                });
+            }
+            set { }
+        }
 
         //----------------------------------------------------------------
     }

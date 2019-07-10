@@ -3,29 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mental.Views.PartialViews.TimeOptionsView">
     <StackLayout>
-        <Label Text="Time Options:"></Label>
-        <StackLayout Orientation="Horizontal">
-            <Button x:Name="CountDownTimeOptionButton" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference CountDownTimeOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.CountdownTimeOptionButtonColor}" Text="Countdown"></Button>
-            <Button x:Name="LimitedTasksOptionButton" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference LimitedTasksOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.FixedAmountOfOperationsTimeOptionButtonColor}" Text="Limited Tasks"></Button>
-            <Button x:Name="LastTaskOptionButton" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference LastTaskOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.LastTaskTimeOptionButtonColor}" Text="Last Task"></Button>
-        </StackLayout>
-        <StackLayout x:Name="CountdownTimerOptions" IsVisible="{Binding TimeOptionsPVM.CountdownTimeOptionsLayoutVisibility}">
+        <Frame Style="{StaticResource LabelFrame}">
             <StackLayout Orientation="Horizontal">
-                <Label Text="Time for task:"></Label>
-                <Label x:Name="TimerStartValueLabel" Text="{Binding TimeOptionsPVM.IntAmountOfMinutes}"></Label>
+                <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Time Options</Label>
+                <Button x:Name="TimeOptionsExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="TimeOptionsExpandMoreButton_Clicked"></Button>
             </StackLayout>
-            <Slider x:Name="TimerStartValueSlider" Value="{Binding TimeOptionsPVM.AmountOfMinutes}" Maximum="60" Minimum="1"></Slider>
-        </StackLayout>
-        <StackLayout x:Name="LimitedTasksOptions" Orientation="Horizontal" IsVisible="{Binding TimeOptionsPVM.FixedAmountOfOperationsLayoutVisibility}">
-            <Label Text="Amount of operations: "></Label>
-            <Editor x:Name="AmountOfOperationsEditor" Keyboard="Numeric" Text="{Binding TimeOptionsPVM.AmountOfTasks}"></Editor>
-        </StackLayout>
-        <StackLayout x:Name="LastTaskOptions" Orientation="Vertical" IsVisible="{Binding TimeOptionsPVM.LastTaskLayoutVisibility}">
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Amount of seconds for answer: "></Label>
-                <Label x:Name="AmountOfSecondsForAnswer" Text="{Binding TimeOptionsPVM.IntAmountOfSecondsForAnswer}"></Label>
+        </Frame>
+        <Frame x:Name="TimeOptionsFrame" Margin="30,-7,30,0" Padding="5,5,5,5" BackgroundColor="#6699ff">
+            <StackLayout Orientation="Vertical">
+                <StackLayout Orientation="Vertical">
+                    <Button x:Name="CountDownTimeOptionButton" Style="{StaticResource OptionButton}" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference CountDownTimeOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.CountdownTimeOptionButtonColor}" Text="Countdown"></Button>
+                    <Button x:Name="LimitedTasksOptionButton" Style="{StaticResource OptionButton}" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference LimitedTasksOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.FixedAmountOfOperationsTimeOptionButtonColor}" Text="Limited Tasks"></Button>
+                    <Button x:Name="LastTaskOptionButton" Style="{StaticResource OptionButton}" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference LastTaskOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.LastTaskTimeOptionButtonColor}" Text="Last Task"></Button>
+                </StackLayout>
+                <StackLayout x:Name="CountdownTimerOptions" IsVisible="{Binding TimeOptionsPVM.CountdownTimeOptionsLayoutVisibility}">
+                    <Label Text="Time for task:" TextColor="White" FontSize="18" HorizontalOptions="Center"></Label>
+                    <Label x:Name="TimerStartValueLabel" Text="{Binding TimeOptionsPVM.IntAmountOfMinutes}" TextColor="White" FontSize="18" HorizontalOptions="Center"></Label>
+                    <Slider x:Name="TimerStartValueSlider" Value="{Binding TimeOptionsPVM.AmountOfMinutes}" Maximum="60" Minimum="1"></Slider>
+                </StackLayout>
+                <StackLayout x:Name="LimitedTasksOptions" Orientation="Vertical" IsVisible="{Binding TimeOptionsPVM.FixedAmountOfOperationsLayoutVisibility}">
+                    <Label Text="Amount of operations:" TextColor="White" FontSize="18" HorizontalOptions="Center"></Label>
+                    <Editor x:Name="AmountOfOperationsEditor" TextColor="White" FontSize="18" HorizontalOptions="Center" WidthRequest="60" Keyboard="Numeric" Text="{Binding TimeOptionsPVM.AmountOfTasks}"></Editor>
+                </StackLayout>
+                <StackLayout x:Name="LastTaskOptions" Orientation="Vertical" IsVisible="{Binding TimeOptionsPVM.LastTaskLayoutVisibility}">
+                    <Label Text="Seconds for answer:" HorizontalOptions="Center" TextColor="White" FontSize="18"></Label>
+                    <Label x:Name="AmountOfSecondsForAnswer" HorizontalOptions="Center" TextColor="White" FontSize="18" Text="{Binding TimeOptionsPVM.IntAmountOfSecondsForAnswer}"></Label>
+                    <Slider x:Name="AmountOfSecondsForAnswerSlider" Value="{Binding TimeOptionsPVM.AmountOfSecondsForAnswer}" Maximum="120" Minimum="3"></Slider>
+                </StackLayout>
             </StackLayout>
-            <Slider x:Name="AmountOfSecondsForAnswerSlider" Value="{Binding TimeOptionsPVM.AmountOfSecondsForAnswer}" Maximum="120" Minimum="3"></Slider>
-        </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentView>

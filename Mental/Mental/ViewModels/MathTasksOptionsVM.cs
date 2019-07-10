@@ -20,6 +20,11 @@ namespace Mental.ViewModels
         private double _SliderMaxChainLengthValue;
         private double _DigitsAfterDotSignSliderValue;
 
+        private Color ActiveColor = Color.FromHex("#6699ff");
+
+        private Color DefaultOptionButtonBackgroundColor = Color.FromHex("#80aaff");
+        private Color ActiveOptionButtonBackgroundColor = Color.FromHex("#99ffcc");
+
         public MathTasksOptionsVM(INavigation _navigation)
         {
             navigation = _navigation;
@@ -69,9 +74,9 @@ namespace Mental.ViewModels
             get
             {
                 if (mathTasksOptions.Operations.Contains("+"))
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
 
             private set { }
@@ -81,10 +86,10 @@ namespace Mental.ViewModels
         {
             get
             {
-                if(mathTasksOptions.Operations.Contains("-"))
-                    return Color.Aqua;
+                if (mathTasksOptions.Operations.Contains("-"))
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -93,10 +98,10 @@ namespace Mental.ViewModels
         {
             get
             {
-                if(mathTasksOptions.Operations.Contains("*"))
-                    return Color.Aqua;
+                if (mathTasksOptions.Operations.Contains("*"))
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -105,10 +110,10 @@ namespace Mental.ViewModels
         {
             get
             {
-                if(mathTasksOptions.Operations.Contains("/"))
-                    return Color.Aqua;
+                if (mathTasksOptions.Operations.Contains("/"))
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -123,6 +128,17 @@ namespace Mental.ViewModels
                     return "-";
             }
             private set { }
+        }
+
+        public string ChainLengthImageSrc
+        {
+            get
+            {
+                if (mathTasksOptions.IsChainLengthFixed)
+                    return "done_black_18.png";
+                else
+                    return "";
+            }
         }
 
         public int IntMaxChainLength
@@ -154,9 +170,9 @@ namespace Mental.ViewModels
             get
             {
                 if (mathTasksOptions.IsIntegerNumbers)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -165,10 +181,10 @@ namespace Mental.ViewModels
         {
             get
             {
-                if (mathTasksOptions.IsIntegerNumbers)
-                    return Color.LightGray;
+                if (!mathTasksOptions.IsIntegerNumbers)
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.Aqua;
+                    return DefaultOptionButtonBackgroundColor;
 
             }
         }
@@ -257,9 +273,9 @@ namespace Mental.ViewModels
             get
             {
                 if (mathTasksOptions.TaskType == TaskType.CountResult)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -269,9 +285,9 @@ namespace Mental.ViewModels
             get
             {
                 if (mathTasksOptions.TaskType == TaskType.CountVariable)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
             private set { }
         }
@@ -324,6 +340,7 @@ namespace Mental.ViewModels
             else
                 mathTasksOptions.IsChainLengthFixed = true;
             OnPropertyChanged("ChainLengthButtonText");
+            OnPropertyChanged("ChainLengthImageSrc");
         }
 
         public Command NumbersTypeChangedCommand { get; set; }

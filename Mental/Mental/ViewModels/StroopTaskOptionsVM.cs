@@ -17,6 +17,9 @@ namespace Mental.ViewModels
 
         private double _ButtonsAmountSliderValue;
 
+        private Color DefaultOptionButtonBackgroundColor = Color.FromHex("#80aaff");
+        private Color ActiveOptionButtonBackgroundColor = Color.FromHex("#99ffcc");
+
         public StroopTaskOptionsVM(INavigation _navigation)
         {
             navigation = _navigation;
@@ -136,9 +139,9 @@ namespace Mental.ViewModels
             get
             {
                 if (StroopTaskOptions.StroopTaskType == StroopTaskType.FindOneCorrect)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
         }
 
@@ -147,9 +150,9 @@ namespace Mental.ViewModels
             get
             {
                 if (StroopTaskOptions.StroopTaskType == StroopTaskType.TrueOrFalse)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
         }
 
@@ -158,9 +161,9 @@ namespace Mental.ViewModels
             get
             {
                 if (StroopTaskOptions.StroopTaskType == StroopTaskType.FindColorByText)
-                    return Color.Aqua;
+                    return ActiveOptionButtonBackgroundColor;
                 else
-                    return Color.LightGray;
+                    return DefaultOptionButtonBackgroundColor;
             }
         }
 

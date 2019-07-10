@@ -18,5 +18,15 @@ namespace Mental.Views
 			InitializeComponent ();
             BindingContext = new SchulteTableTaskOptionsVM(this.Navigation);
 		}
-	}
+
+        private void GridSizeExpandMoreButton_Clicked(object sender, EventArgs e)
+        {
+            GridSizeFrame.IsVisible = !GridSizeFrame.IsVisible;
+        }
+
+        private void ModeExpandMoreButton_Clicked(object sender, EventArgs e)
+        {
+            ModeFrame.IsVisible = !ModeFrame.IsVisible;
+        }
+    }
 }

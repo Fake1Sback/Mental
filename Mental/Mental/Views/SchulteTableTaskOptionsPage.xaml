@@ -2,19 +2,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
-             x:Class="Mental.Views.SchulteTableTaskOptionsPage">
+             x:Class="Mental.Views.SchulteTableTaskOptionsPage"
+             Title="Schulte Tables Tasks Options">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Schulte table" HorizontalOptions="Center"></Label>
-            <Label Text="Grid size" HorizontalOptions="Center"></Label>
-            <Label Text="{Binding IntGridSizeSliderValue}" HorizontalOptions="Center"></Label>
-            <Slider x:Name="SchulteTableSliderValue" Value="{Binding GridSizeSliderValue}" Maximum="7" Minimum="3"></Slider>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Easy Mode"></Label>
-                <Button Text="{Binding EasyModeActivatedString}" Command="{Binding EasyModeActivatedSwitchedCommand}"></Button>
+        <ScrollView>
+            <StackLayout>
+                <Frame Style="{StaticResource LabelFrame}">
+                    <StackLayout Orientation="Horizontal">
+                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Grid Options</Label>
+                        <Button x:Name="GridSizeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="GridSizeExpandMoreButton_Clicked"></Button>
+                    </StackLayout>
+                </Frame>
+                <Frame x:Name="GridSizeFrame" Style="{StaticResource OptionsContainerFrame}">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Grid size" HorizontalOptions="Center" FontSize="18" TextColor="White"></Label>
+                        <Label Text="{Binding IntGridSizeSliderValue}" FontSize="18" TextColor="White" HorizontalOptions="Center"></Label>
+                        <Slider x:Name="SchulteTableSliderValue" Value="{Binding GridSizeSliderValue}" Maximum="7" Minimum="3"></Slider>
+                    </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource LabelFrame}">
+                    <StackLayout Orientation="Horizontal">
+                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Mode</Label>
+                        <Button x:Name="ModeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="ModeExpandMoreButton_Clicked"></Button>
+                    </StackLayout>
+                </Frame>
+                <Frame x:Name="ModeFrame" Style="{StaticResource OptionsContainerFrame}">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Margin="15,0,0,0" Text="Easy Mode" TextColor="White" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
+                        <Button Margin="0,0,15,0" Image="{Binding EasyModeActivatedImgSrc}" BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" BorderRadius="20" BorderColor="Black" BorderWidth="1" Command="{Binding EasyModeActivatedSwitchedCommand}"></Button>
+                    </StackLayout>
+                </Frame>
+                <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
+                <Frame CornerRadius="25" Margin="10,0,10,10" Padding="7,7,7,7" BorderColor="#6699ff">
+                    <StackLayout Orientation="Horizontal">
+                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="flag_blue_36.png"></Button>
+                        <Button x:Name="StartButton"  Style="{StaticResource StartButton}" Command="{Binding StartCommand}" Text="START"></Button>
+                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="flag_blue_36.png"></Button>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-            <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
-            <Button Text="Start" Command="{Binding StartCommand}"></Button>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

@@ -2,32 +2,47 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
-             x:Class="Mental.Views.StroopTaskOptionsPage">
+             x:Class="Mental.Views.StroopTaskOptionsPage"
+             Title="Stroop Tasks Options">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Buttons Amount" HorizontalOptions="Center"></Label>
-                    <Label HorizontalOptions="Center" Text="{Binding IntButtonsAmount}"></Label>
-                    <Slider Maximum="5" Minimum="1" Value="{Binding ButtonsAmountSliderValue}"></Slider>
-                </StackLayout>
-                <!--<StackLayout Orientation="Vertical">
-                    <Label Text="Color Show Options" HorizontalOptions="Center"></Label>
+                <Frame Style="{StaticResource LabelFrame}">
                     <StackLayout Orientation="Horizontal">
-                        <Button x:Name="BackgroundColorShowingButton" Text="Background" BackgroundColor="{Binding BackgroundColorShowingOptionsColor}" Command="{Binding ColorShowingOptionsClickedCommand}" CommandParameter="{x:Reference BackgroundColorShowingButton}"></Button>
-                        <Button x:Name="BorderColorShowingButton" Text="Border" BackgroundColor="{Binding  BorderColorShowingOptionsColor}" Command="{Binding ColorShowingOptionsClickedCommand}" CommandParameter="{x:Reference BorderColorShowingButton}"></Button>
+                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Buttons Options</Label>
+                        <Button x:Name="ButtonsAmountExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="ButtonsAmountExpandMoreButton_Clicked"></Button>
                     </StackLayout>
-                </StackLayout>-->
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Task type:" HorizontalOptions="Center"></Label>
+                </Frame>
+                <Frame x:Name="ButtonsAmountFrame" Style="{StaticResource OptionsContainerFrame}">
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Buttons Amount" HorizontalOptions="Center" TextColor="White" FontSize="18"></Label>
+                        <Label HorizontalOptions="Center" TextColor="White" FontSize="18" Text="{Binding IntButtonsAmount}"></Label>
+                        <Slider Maximum="5" Minimum="1" Value="{Binding ButtonsAmountSliderValue}"></Slider>
+                    </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource LabelFrame}">
                     <StackLayout Orientation="Horizontal">
-                        <Button x:Name="FindCorrectTaskTypeButton" Text="Find Correct" BackgroundColor="{Binding FindOneCorrectColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindCorrectTaskTypeButton}"></Button>
-                        <Button x:Name="TrueOrFalseTaskTypeButton" Text="True or False" BackgroundColor="{Binding TrueOrFalseColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference TrueOrFalseTaskTypeButton}"></Button>
-                        <Button x:Name="FindTextByColorTypeButton" Text="Find Text By Color" BackgroundColor="{Binding FindTextColorColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindTextByColorTypeButton}"></Button>
+                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Task type</Label>
+                        <Button x:Name="StroopTaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="StroopTaskTypeExpandMoreButton_Clicked"></Button>
                     </StackLayout>
-                </StackLayout>
+                </Frame>
+                <Frame x:Name="StroopTaskTypeFrame" Style="{StaticResource OptionsContainerFrame}">
+                    <StackLayout Orientation="Vertical">
+                        <Button x:Name="FindCorrectTaskTypeButton" Style="{StaticResource OptionButton}" Text="Find Correct" BackgroundColor="{Binding FindOneCorrectColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindCorrectTaskTypeButton}"></Button>
+                        <Button x:Name="TrueOrFalseTaskTypeButton" Style="{StaticResource OptionButton}" Text="True or False" BackgroundColor="{Binding TrueOrFalseColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference TrueOrFalseTaskTypeButton}"></Button>
+                        <Button x:Name="FindTextByColorTypeButton" Style="{StaticResource OptionButton}" Text="Find Text By Color" BackgroundColor="{Binding FindTextColorColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindTextByColorTypeButton}"></Button>
+                    </StackLayout>
+                </Frame>
                 <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
-                <Button Text="Start" Command="{Binding StartCommand}"></Button>
+                <Frame CornerRadius="25" Margin="10,0,10,10" Padding="7,7,7,7" BorderColor="#6699ff">
+                    <StackLayout Orientation="Horizontal">
+                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="flag_blue_36.png"></Button>
+                        <Button x:Name="StartButton"  Style="{StaticResource StartButton}" Command="{Binding StartCommand}" Text="START"></Button>
+                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="flag_blue_36.png"></Button>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -283,18 +283,18 @@ namespace Mental
                 a.Database.EnsureCreated();
             }
 
-            if (StoredMathTaskOptions == null)
-                LoadLatestMathTaskOptions();
+            //  if (StoredMathTaskOptions == null)
+            //    LoadLatestMathTaskOptions();
 
-            if (StoredSchulteTableTaskOptions == null)
-                LoadLatestSchulteTableTaskOptions();
+            //            if (StoredSchulteTableTaskOptions == null)
+            //              LoadLatestSchulteTableTaskOptions();
 
-            if (StoredStroopTaskOptions == null)
-                LoadLatestStroopTaskOptions();
+            //        if (StoredStroopTaskOptions == null)
+            //          LoadLatestStroopTaskOptions();
 
-             MainPage = new NavigationPage(new MathTasksOptionsPage());
-            // MainPage = new NavigationPage(new SchulteTableTaskOptionsPage());
-           // MainPage = new NavigationPage(new StroopTaskOptionsPage());
+            //MainPage = new NavigationPage(new MathTasksOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            MainPage = new NavigationPage(new StroopTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
         }
 
         protected override void OnStart()

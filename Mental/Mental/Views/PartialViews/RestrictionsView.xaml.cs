@@ -18,5 +18,10 @@ namespace Mental.Views.PartialViews
 		{
 			InitializeComponent ();          
 		}
-	}
+
+        private void RestrictionsExpandMoreButton_Clicked(object sender, EventArgs e)
+        {
+            RestrictionsFrame.IsVisible = !RestrictionsFrame.IsVisible;
+        }
+    }
 }
