@@ -20,12 +20,21 @@ namespace Mental.Views
         {
             InitializeComponent();
             if (_stroopTaskOptions.StroopTaskType == StroopTaskType.FindOneCorrect)
+            {
                 BaseStroopTaskVM = new StroopFindOneCorrectTaskVM(this.Navigation, _stroopTaskOptions, _timeOption);
+                this.Title = "Find 1 Correct";
+            }
             else if (_stroopTaskOptions.StroopTaskType == StroopTaskType.TrueOrFalse)
+            {
                 BaseStroopTaskVM = new StroopTrueOrFalseTaskVM(this.Navigation, _stroopTaskOptions, _timeOption);
+                this.Title = "True / False";
+            }
             else if (_stroopTaskOptions.StroopTaskType == StroopTaskType.FindColorByText)
+            {
                 BaseStroopTaskVM = new StroopFindColorByTextTaskVM(this.Navigation, _stroopTaskOptions, _timeOption);
+                this.Title = "Find Color by Text";
+            }
             BindingContext = BaseStroopTaskVM;
-        }      
+        }
     }
 }

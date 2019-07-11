@@ -20,7 +20,7 @@ namespace Mental.Views
 
         private int[] FontSizes = new int[]
         {
-            22,20,18,16,13,10,7
+            30,28,26,24,22
         };
 
         public SchulteTableTaskPage(SchulteTableTaskOptions _schulteTableTaskOptions, ITimeOption _timeOption)
@@ -49,16 +49,15 @@ namespace Mental.Views
                     int randomNumberFromList = random.Next(0, ListOfSchulteTableNumbers.Count);
                     button.Text = ListOfSchulteTableNumbers[randomNumberFromList].ToString();
                     ListOfSchulteTableNumbers.RemoveAt(randomNumberFromList);
+                    button.Style = (Style)this.Resources["GridButton"];
                     button.Command = SchulteTableVM.SchulteTableButtonClicked;
                     button.CommandParameter = button;
-                    button.FontSize = FontSizes[_schulteTableTaskOptions.GridSize - 2];
-                    button.BorderWidth = 1;
-                    button.BorderColor = Color.Black;
-                    button.Margin = new Thickness(0, 0, 0, 0);
-                    button.Padding = new Thickness(0, 0, 0, 0);
+                    button.FontSize = FontSizes[_schulteTableTaskOptions.GridSize - 3];
                     SchulteTableGrid.Children.Add(button, i, j);
                 }
             }
+
+            this.Title = "Schulte Table " + _schulteTableTaskOptions.GridSize.ToString() + " x " + _schulteTableTaskOptions.GridSize.ToString();
         }
     }
 }

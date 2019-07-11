@@ -16,7 +16,8 @@ namespace Mental.Views
 		public StroopTaskOptionsPage ()
 		{
 			InitializeComponent ();
-            this.BindingContext = new StroopTaskOptionsVM(this.Navigation); 
+            this.BindingContext = new StroopTaskOptionsVM(this.Navigation);
+           
 		}
 
         private void ButtonsAmountExpandMoreButton_Clicked(object sender, EventArgs e)

@@ -26,6 +26,10 @@ namespace Mental.ViewModels
         private int _AmountOfCorrectAnswers;
         private int _AmountOfWrongAnswers;
 
+        private int _ColorButtonFontSize;
+        private int _ColorButtonHeight;
+        private StackOrientation _FirstColorButtonsStackLayoutOrientation;
+
         protected Color[] colors = new Color[]
        {
             Color.Blue,
@@ -89,6 +93,8 @@ namespace Mental.ViewModels
             _ColorButtonText = new BaseArrayProperty<string>(dic1);
             _ColorButtonColor = new BaseArrayProperty<Color>(dic2);
 
+            ColorButtonFontSize = 25 - _stroopTaskOptions.ButtonsAmount;
+            ColorButtonHeight = 120 - _stroopTaskOptions.ButtonsAmount * 7;
 
             StartTimerCountdown();
         }
@@ -129,6 +135,55 @@ namespace Mental.ViewModels
             {
                 _QuestionLabelColor = value;
                 OnPropertyChanged("QuestrionLabelTextColor");
+            }
+        }
+
+
+        public int ColorButtonFontSize
+        {
+            get
+            {
+                return _ColorButtonFontSize;
+            }
+            set
+            {
+                _ColorButtonFontSize = value;
+                OnPropertyChanged("ColorButtonFontSize");
+            }
+        }
+
+        public int ColorButtonHeight
+        {
+            get
+            {
+                return _ColorButtonHeight;
+            }
+            set
+            {
+                _ColorButtonHeight = value;
+                OnPropertyChanged("ColorButtonHeight");
+            }
+        }
+
+        public StackOrientation FirstColorButtonsStackLayoutOrientation
+        {
+            get
+            {
+                if (stroopTaskOptions.ButtonsAmount <= 2)
+                    return StackOrientation.Vertical;
+                else
+                    return StackOrientation.Horizontal;
+            }
+        }
+
+        public int ColorButtonWidth
+        {
+            get
+            {
+                if (stroopTaskOptions.ButtonsAmount <= 2)
+                    return 290;
+                else
+                    return 140;
             }
         }
 

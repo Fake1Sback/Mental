@@ -181,6 +181,12 @@ namespace Mental.ViewModels.PartialViewModels
             OnPropertyChanged("CountdownTimeOptionsLayoutVisibility");
             OnPropertyChanged("FixedAmountOfOperationsLayoutVisibility");
             OnPropertyChanged("LastTaskLayoutVisibility");
+
+            OnPropertyChanged("AmountOfMinutes");
+            OnPropertyChanged("IntAmountOfMinutes");
+            OnPropertyChanged("AmountOfTasks");
+            OnPropertyChanged("AmountOfSecondsForAnswer");
+            OnPropertyChanged("IntAmountOfSecondsForAnswer");           
         }
     }
 }

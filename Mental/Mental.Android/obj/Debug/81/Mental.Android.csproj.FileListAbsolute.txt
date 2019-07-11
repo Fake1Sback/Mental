@@ -136,6 +136,11 @@ E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-xhdpi\flag_blue_36.png
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-xxhdpi\flag_blue_36.png
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-xxxhdpi\flag_blue_36.png
+E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable\access_time_white_36.png
+E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-hdpi\access_time_white_36.png
+E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-xhdpi\access_time_white_36.png
+E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-xxhdpi\access_time_white_36.png
+E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\res\drawable-xxxhdpi\access_time_white_36.png
 E:\Visual Studio Projects\Mental\Mental\Mental\bin\Debug\netstandard2.0\Mental.dll
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\bin\Debug\Mental.dll.mdb
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\linksrc\Mental.dll.mdb

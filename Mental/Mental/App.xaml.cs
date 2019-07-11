@@ -293,8 +293,9 @@ namespace Mental
             //          LoadLatestStroopTaskOptions();
 
             //MainPage = new NavigationPage(new MathTasksOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            MainPage = new NavigationPage(new StroopTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //MainPage = new NavigationPage(new StroopTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //MainPage = new NavigationPage(new StroopTaskPage(GetStoredStroopTaskOptions(),new CountdownTimeOption(new TaskTimeOptionsContainer() { AmountOfMinutes = 2})));
         }
 
         protected override void OnStart()

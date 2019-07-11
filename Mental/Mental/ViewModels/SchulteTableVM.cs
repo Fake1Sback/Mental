@@ -76,7 +76,7 @@ namespace Mental.ViewModels
                         _AmountOfCorrectAnswers += 1;
                         statisticsTimer.RegisterTime(Answer.ToString());
                         if (SchulteTableTaskOptions.IsEasyModeActivated)
-                            button.BackgroundColor = Color.Red;
+                            button.BackgroundColor = Color.FromHex("#ff8566");
                     }
                     else
                         _AmountOfWrongAnswers += 1;
@@ -90,7 +90,7 @@ namespace Mental.ViewModels
                     else
                     {
                         statisticsTimer.TurnOffTimer();
-                        DbSchulteTableTask dbSchulteTableTask = new DbSchulteTableTask()
+                        DbSchulteTableTask dbSchulteTableTask =  new DbSchulteTableTask()
                         {
                             TimeOption = (byte)SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption,
                             AmountOfCorrectAnswers = _AmountOfCorrectAnswers,
@@ -125,5 +125,6 @@ namespace Mental.ViewModels
                 });
             }
         }
+              
     }
 }

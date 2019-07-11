@@ -68,7 +68,7 @@ namespace Mental.ViewModels
                 StroopTaskOptions.ButtonsAmount = value;
                 OnPropertyChanged("IntButtonsAmount");
             }
-        }
+        }      
 
         public Command ColorShowingOptionsClickedCommand
         {
@@ -182,7 +182,7 @@ namespace Mental.ViewModels
                     else
                         timeOption = new LastTaskTimeOption(StroopTaskOptions.TaskTimeOptionsContainer);
                                                 
-                    await navigation.PushAsync(new StroopTaskPage(StroopTaskOptions,timeOption));
+                    await navigation.PushAsync(new StroopTaskPage(StroopTaskOptions, timeOption));
                 });
             }
         }

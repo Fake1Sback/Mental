@@ -91,20 +91,20 @@ namespace Mental.ViewModels
                 for (int i = DbSchulteTableTasksList.Count - 1; i >= 0; i--)
                 {
                     if (SelectedDbSchulteTableTask == DbSchulteTableTasksList[i])
-                        entries.Add(new Entry(DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("000080"), Label = "Selected", ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                        entries.Add(new Entry((float)DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("000080"), Label = "Selected", ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
                     else
                     {
                         if (DbSchulteTableTasksList[i].TaskDateTime.Date == DateTime.Now.Date)
                         {
-                            entries.Add(new Entry(DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = DbSchulteTableTasksList[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                            entries.Add(new Entry((float)DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = DbSchulteTableTasksList[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
                         }
                         else
-                            entries.Add(new Entry(DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = DbSchulteTableTasksList[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                            entries.Add(new Entry((float)DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = DbSchulteTableTasksList[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
                     }
 
                 }
                 if (DbSchulteTaskToSave != null)
-                    entries.Add(new Entry(DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FF1493"), Label = "Current", ValueLabel = DbSchulteTaskToSave.GetEfficiencyParameterString() });
+                    entries.Add(new Entry((float)DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FF1493"), Label = "Current", ValueLabel = DbSchulteTaskToSave.GetEfficiencyParameterString() });
                 return new LineChart() { Entries = entries };
             }
             private set { }

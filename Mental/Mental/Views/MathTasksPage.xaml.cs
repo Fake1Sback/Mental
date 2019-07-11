@@ -22,6 +22,11 @@ namespace Mental.Views
                 BindingContext = new CountVariableVM(this.Navigation, _mathTasksOptions, _timeOption);
 
 			InitializeComponent ();
+
+            if (_mathTasksOptions.TaskType == TaskType.CountResult)
+                this.Title = "Find Result";
+            else if (_mathTasksOptions.TaskType == TaskType.CountVariable)
+                this.Title = "Find X";
 		}
 	}
 }

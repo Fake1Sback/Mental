@@ -23,7 +23,7 @@ namespace Mental.Models
             }
         }
 
-        public static float GetEfficiencyParameterValue(this DbMathTask dbMathTask)
+        public static double GetEfficiencyParameterValue(this DbMathTask dbMathTask)
         {
             if (dbMathTask.TimeOptions == 0)
             {
@@ -41,12 +41,11 @@ namespace Mental.Models
         {
             if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
             {
-                float val1 = (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100);
-                float val2 = dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1;
-                float val3 = dbSchulteTableTask.TimeParameter / val2 * 100;
-                return ((int)val1 + (int)val3).ToString() + "%";
-
-                //  return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100 + (dbSchulteTableTask.TimeParameter / (dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1) * 100)).ToString() + "%";
+                double val1 = dbSchulteTableTask.AmountOfCorrectAnswers / Math.Pow(dbSchulteTableTask.GridSize, 2);
+                double val2 = val1 * 100;
+                double val3 = dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1;
+                double val4 = (dbSchulteTableTask.TimeParameter / val3) * 100;
+                return ((int)val2 + (int)val4).ToString() + "%";               
             }
             else if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
             {
@@ -54,27 +53,26 @@ namespace Mental.Models
             }
             else
             {
-                return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100).ToString() + "%";
+                return ((dbSchulteTableTask.AmountOfCorrectAnswers / Math.Pow(dbSchulteTableTask.GridSize, 2)) * 100).ToString() + "%";
             }
         }
 
-        public static float GetEfficiencyParameterValue(this DbSchulteTableTask dbSchulteTableTask)
+        public static double GetEfficiencyParameterValue(this DbSchulteTableTask dbSchulteTableTask)
         {
             if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
             {
-                float val1 = (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100);
-                float val2 = dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1;
-                float val3 = dbSchulteTableTask.TimeParameter / val2 * 100;
-                return (int)val1 + (int)val3;
-
-              //  return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100) + (dbSchulteTableTask.TimeParameter / (dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1) * 100);
+                double val1 = dbSchulteTableTask.AmountOfCorrectAnswers / Math.Pow(dbSchulteTableTask.GridSize, 2);
+                double val2 = val1 * 100;
+                double val3 = dbSchulteTableTask.TaskComplexityParameter * 1000 * 60 + 1;
+                double val4 = (dbSchulteTableTask.TimeParameter / val3) * 100;
+                return (int)val2 + (int)val4;       
             }
             else if (dbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
             {
                 return -1 * dbSchulteTableTask.TimeParameter;
             }
             else
-                return (dbSchulteTableTask.AmountOfCorrectAnswers / (int)Math.Pow(dbSchulteTableTask.GridSize, 2) * 100);
+                return (int)((dbSchulteTableTask.AmountOfCorrectAnswers / Math.Pow(dbSchulteTableTask.GridSize, 2)) * 100);
         }
 
         public static string GetEfficiencyParameterString(this DbStroopTask dbStroopTask)
@@ -93,7 +91,7 @@ namespace Mental.Models
             }
         }
 
-        public static float GetEfficiencyParameterValue(this DbStroopTask dbStroopTask)
+        public static double GetEfficiencyParameterValue(this DbStroopTask dbStroopTask)
         {
             if (dbStroopTask.TimeOption == (byte)TimeOptions.CountdownTimer)
             {

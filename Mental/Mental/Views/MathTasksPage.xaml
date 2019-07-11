@@ -2,31 +2,53 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mental.Views.MathTasksPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="KeyBoardButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="BorderColor" Value="Transparent"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <FlexLayout Direction="Column" AlignItems="Center">
-            <Label x:Name="Timer_Label" FontSize="Large" Text="{Binding TimerValue}" HorizontalTextAlignment="Center"></Label>
+        <StackLayout Orientation="Vertical">
+            <Frame Style="{StaticResource LabelFrame}">
+                <StackLayout Orientation="Horizontal">
+                    <Button Margin="10,0,0,0" HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="access_time_white_36.png"></Button>
+                    <Label x:Name="Timer_Label" FontSize="20" TextColor="White" Text="{Binding TimerValue}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Label>
+                    <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End"></Button>
+                </StackLayout>
+            </Frame>
             <Label x:Name="OperationLabel" FontSize="40" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand"></Label>
             <Label x:Name="EqualsLabel" FontSize="40" HorizontalOptions="CenterAndExpand">=</Label>
             <Label x:Name="AnswerLabel" FontSize="40" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand"></Label>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="ButtonOne" Text="1" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonOne}"></Button>
-                <Button x:Name="ButtonTwo" Text="2" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonTwo}"></Button>
-                <Button x:Name="ButtonThree" Text="3" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonThree}"></Button>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="ButtonOne" Style="{StaticResource KeyBoardButton}" Text="1" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonOne}"></Button>
+                <Label BackgroundColor="Black" HeightRequest="5" Rotation="90"></Label>
+                <Button x:Name="ButtonTwo" Style="{StaticResource KeyBoardButton}" Text="2" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonTwo}"></Button>
+                <Label BackgroundColor="Black" HeightRequest="5" Rotation="-90"></Label>
+                <Button x:Name="ButtonThree" Style="{StaticResource KeyBoardButton}" Text="3" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonThree}"></Button>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="ButtonFour" Text="4" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFour}"></Button>
-                <Button x:Name="ButtonFive" Text="5" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFive}"></Button>
-                <Button x:Name="ButtonSix" Text="6" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSix}"></Button>
+            <Label BackgroundColor="Black" HeightRequest="1" Margin="10,0,10,0"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="ButtonFour" Style="{StaticResource KeyBoardButton}" Text="4" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFour}"></Button>
+                <Button x:Name="ButtonFive" Style="{StaticResource KeyBoardButton}" Text="5" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFive}"></Button>
+                <Button x:Name="ButtonSix" Style="{StaticResource KeyBoardButton}" Text="6" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSix}"></Button>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="ButtonSeven" Text="7" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSeven}"></Button>
-                <Button x:Name="ButtonEight" Text="8" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonEight}"></Button>
-                <Button x:Name="ButtonNine" Text="9" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonNine}"></Button>
+            <Label BackgroundColor="Black" HeightRequest="1" Margin="10,0,10,0"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="ButtonSeven" Style="{StaticResource KeyBoardButton}" Text="7" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSeven}"></Button>
+                <Button x:Name="ButtonEight" Style="{StaticResource KeyBoardButton}" Text="8" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonEight}"></Button>
+                <Button x:Name="ButtonNine" Style="{StaticResource KeyBoardButton}" Text="9" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonNine}"></Button>
             </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="ButtonZero" Text="0" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonZero}"></Button>
-                <Button Text="." Command="{Binding DotButtonPressedCommand}"></Button>
-                <Button Text="-" Command="{Binding MinusButtonPressedCommand}"></Button>
+            <Label BackgroundColor="Black" HeightRequest="1" Margin="10,0,10,0"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button x:Name="ButtonZero" Style="{StaticResource KeyBoardButton}" Text="0" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonZero}"></Button>
+                <Button Text="." Style="{StaticResource KeyBoardButton}" Command="{Binding DotButtonPressedCommand}"></Button>
+                <Button Text="-" Style="{StaticResource KeyBoardButton}" Command="{Binding MinusButtonPressedCommand}"></Button>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <Button Text="Del" Command="{Binding DelButtonPressedCommand}"></Button>
@@ -39,6 +61,6 @@
                 <Label x:Name="AmountOfWrongAnswersLabel" Text="{Binding AmountOfWrongAnswers}" TextColor="Red"></Label>
                 <Label Text="WRONG" TextColor="Red"></Label>
             </StackLayout>
-        </FlexLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -29,7 +29,7 @@ namespace Mental.Models
 
         public string GetTimeString()
         {
-            return $"Answering: {CurrentAmountOfTasks} / {GeneralAmountOfTasks}\n {Time.ToString()}";
+            return $"Answering: {CurrentAmountOfTasks} / {GeneralAmountOfTasks}\n" + Time.ToString(@"mm\:ss");
         }
 
         public int GetMillis()

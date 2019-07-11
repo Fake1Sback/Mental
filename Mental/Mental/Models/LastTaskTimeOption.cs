@@ -41,7 +41,7 @@ namespace Mental.Models
 
         public string GetTimeString()
         {
-            return TimeLeft.ToString();
+            return TimeLeft.ToString(@"mm\:ss");
         }
 
         public void TimerWork()
