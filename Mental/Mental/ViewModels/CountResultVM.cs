@@ -38,6 +38,8 @@ namespace Mental.ViewModels
             OkButtonPressedCommand = new Command(OkButtonPressed);
 
             MathTask.GenerateExpression();
+            OnPropertyChanged("LabelFontSize");
+
             StartTimerCountdown();
         }
 
@@ -93,6 +95,14 @@ namespace Mental.ViewModels
             }
         }
 
+        public int LabelFontSize
+        {
+            get
+            {
+                return GetFontSize(MathTask.GetExpressionString());
+            }
+        }
+
         public int AmountOfCorrectAnswers
         {
             get
@@ -111,6 +121,11 @@ namespace Mental.ViewModels
             private set { }
         }
 
+        public int GetFontSize(string ExpressionString)
+        {
+            int ExpressionStringLengthFactor = ExpressionString.Length / 5;
+            return 36 - 1 * ExpressionStringLengthFactor;
+        }
 
         public Command DigitButtonPressedCommand { get; set; }
 
@@ -165,6 +180,7 @@ namespace Mental.ViewModels
                 statisticsTimer.RegisterTime(MathTask.GetExpressionString());
                 MathTask.GenerateExpression();
 
+                OnPropertyChanged("LabelFontSize");
                 OnPropertyChanged("AnswerValue");
                 OnPropertyChanged("OperationValue");
             }

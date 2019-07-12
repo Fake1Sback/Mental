@@ -16,7 +16,6 @@ namespace Mental.Models
 
         public abstract void GenerateExpression();
         public abstract string GetExpressionString();
-        //  public abstract bool CheckAnswer(int Answer);
         public abstract bool CheckAnswer(string Answer);
         public abstract string GetResult();
     }

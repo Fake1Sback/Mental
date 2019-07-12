@@ -66,6 +66,77 @@ namespace Mental.ViewModels
             LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new GeneralStatisticsPage()); });
         }
 
+
+        //--------Top Frame values----------------
+
+        public string TopFrameOperationsString
+        {
+            get
+            {
+                string str = string.Empty;
+                for(int i = 0;i < SelectedListItemDbMathTask.Operations.Length;i++)
+                {
+                    str += SelectedListItemDbMathTask.Operations[i] + " ";
+                }
+                str = str.Remove(str.Length - 1);
+                return str;
+            }
+        }
+
+        public int TopFrameMinValue
+        {
+            get
+            {
+                return SelectedListItemDbMathTask.MinValue;
+            }
+        }
+
+        public int TopFrameMaxValue
+        {
+            get
+            {
+                return SelectedListItemDbMathTask.MaxValue;
+            }
+        }
+
+        public string TopFrameTaskTypeString
+        {
+            get
+            {
+                if (SelectedListItemDbMathTask.TaskType == (byte)TaskType.CountResult)
+                    return "Result";
+                else
+                    return " X ";
+            }
+        }
+
+        public string TopFrameTimeParametersImgSrc
+        {
+            get
+            {
+                if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "list_numbered_white_24.png";
+                else
+                    return "access_time_white_24.png";
+            }
+        }
+
+        public string TopFrameTimeParameters
+        {
+            get
+            {
+                if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
+                    return SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " min";
+                else if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                    return  SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " tasks";
+                else
+                    return SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " sec";
+            }
+        }
+
+        //-------------------------------
+
+
         public bool DetailedTaskOptionsVisibility
         {
             get
@@ -477,21 +548,21 @@ namespace Mental.ViewModels
                 for (int i = ListOfMathTasks.Count - 1; i >= 0; i--)
                 {
                     if (SelectedListItemDbMathTask == ListOfMathTasks[i])
-                        entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("000080"), Label = "Selected", ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                        entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#99ffcc"), TextColor = SkiaSharp.SKColor.Parse("#99ffcc"), Label = "Selected", ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     else
                     {
                         if(ListOfMathTasks[i].TaskDateTime.Date == DateTime.Now.Date)
                         {
-                            entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                         }
                         else
-                            entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"),  Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     }
                        
                 }
                 if (dbMathTaskToSave != null)
-                    entries.Add(new Entry((float)dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FF1493"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });
-                return new LineChart() { Entries = entries };
+                    entries.Add(new Entry((float)dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });
+                return new LineChart() { Entries = entries, LineMode = LineMode.Spline, PointMode = PointMode.Circle,  PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff")};
             }
             private set { }
         }

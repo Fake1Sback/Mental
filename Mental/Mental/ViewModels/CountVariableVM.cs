@@ -38,6 +38,8 @@ namespace Mental.ViewModels
             OkButtonPressedCommand = new Command(OkButtonPressed);
 
             MathTask.GenerateExpression();
+            OnPropertyChanged("LabelFontSize");
+
             StartTimerCountdown();
         }
 
@@ -71,6 +73,14 @@ namespace Mental.ViewModels
             private set { }
         }
 
+        public int LabelFontSize
+        {
+            get
+            {
+                return GetFontSize(OperationValue);
+            }
+        }
+
         public int AmountOfCorrectAnswers
         {
             get
@@ -89,6 +99,11 @@ namespace Mental.ViewModels
             private set { }
         }
 
+        public int GetFontSize(string ExpressionString)
+        {
+            int ExpressionStringLengthFactor = ExpressionString.Length / 5;
+            return 36 - 1 * ExpressionStringLengthFactor;
+        }
 
         public Command DigitButtonPressedCommand { get; set; }
 
@@ -97,6 +112,7 @@ namespace Mental.ViewModels
             Button button = obj as Button;
             Answer += button.Text;
             OnPropertyChanged("OperationValue");
+            OnPropertyChanged("LabelFontSize");
         }
 
         public Command DelButtonPressedCommand { get; set; }
@@ -106,6 +122,7 @@ namespace Mental.ViewModels
             if (Answer.Length != 0)
                 Answer = Answer.Remove(Answer.Length - 1);
             OnPropertyChanged("OperationValue");
+            OnPropertyChanged("LabelFontSize");
         }
 
         public Command MinusButtonPressedCommand { get; set; }
@@ -122,6 +139,7 @@ namespace Mental.ViewModels
                     Answer = Answer.Insert(0, "-");
             }              
             OnPropertyChanged("OperationValue");
+            OnPropertyChanged("LabelFontSize");
         }
 
         public Command DotButtonPressedCommand { get; set; }
@@ -131,6 +149,7 @@ namespace Mental.ViewModels
             if (Answer.Length != 0 && !Answer.Contains("."))
                 Answer += ".";
             OnPropertyChanged("OperationValue");
+            OnPropertyChanged("LabelFontSize");
         }
 
         public Command OkButtonPressedCommand { get; set; }
@@ -154,9 +173,10 @@ namespace Mental.ViewModels
                 Answer = string.Empty;
                 statisticsTimer.RegisterTime(MathTask.GetExpressionString());
                 MathTask.GenerateExpression();
-
+              
                 OnPropertyChanged("AnswerValue");
                 OnPropertyChanged("OperationValue");
+                OnPropertyChanged("LabelFontSize");
             }
             else
             {

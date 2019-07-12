@@ -292,8 +292,11 @@ namespace Mental
             //        if (StoredStroopTaskOptions == null)
             //          LoadLatestStroopTaskOptions();
 
+
+            MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 8, AmountOfWrongAnswers = 4, DigitsAfterDotSing = 1, IsChainLengthFixed = true, IsInteger = true, IsRestrictionActivated = false, LongestTimeExpressionString = "4 +3 ", LongestTimeSpentForExpression = 4, MaxChainLength = 3, MaxValue = 10, MinValue = 0, Operations = "+-*/", ShortestTimeExpressionString = "3 + 1", ShortestTimeSpentForExpression = 3, TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 3 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
+
             //MainPage = new NavigationPage(new MathTasksOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
             //MainPage = new NavigationPage(new StroopTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
             //MainPage = new NavigationPage(new StroopTaskPage(GetStoredStroopTaskOptions(),new CountdownTimeOption(new TaskTimeOptionsContainer() { AmountOfMinutes = 2})));
         }

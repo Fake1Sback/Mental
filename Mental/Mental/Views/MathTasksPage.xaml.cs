@@ -14,19 +14,19 @@ namespace Mental.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MathTasksPage : ContentPage
 	{
-		public MathTasksPage (MathTasksOptions _mathTasksOptions,ITimeOption _timeOption)
-		{
+        public MathTasksPage(MathTasksOptions _mathTasksOptions, ITimeOption _timeOption)
+        {
             if (_mathTasksOptions.TaskType == TaskType.CountResult)
                 BindingContext = new CountResultVM(this.Navigation, _mathTasksOptions, _timeOption);
             else if (_mathTasksOptions.TaskType == TaskType.CountVariable)
                 BindingContext = new CountVariableVM(this.Navigation, _mathTasksOptions, _timeOption);
 
-			InitializeComponent ();
+            InitializeComponent();
 
             if (_mathTasksOptions.TaskType == TaskType.CountResult)
                 this.Title = "Find Result";
             else if (_mathTasksOptions.TaskType == TaskType.CountVariable)
                 this.Title = "Find X";
-		}
+        }
 	}
 }
