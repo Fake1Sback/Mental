@@ -694,6 +694,18 @@
           "build/Xamarin.Forms.targets": {}
         }
       },
+      "Xamarin.Forms.CarouselView/2.3.0-pre2": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.3.0.42-pre3"
+        },
+        "compile": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        }
+      },
       "Mental/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -702,7 +714,8 @@
           "Microcharts.Forms": "0.7.1",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",
           "System.Buffers": "4.5.0",
-          "Xamarin.Forms": "3.4.0.1008975"
+          "Xamarin.Forms": "3.4.0.1008975",
+          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -1381,6 +1394,18 @@
           "build/Xamarin.Forms.targets": {}
         }
       },
+      "Xamarin.Forms.CarouselView/2.3.0-pre2": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.3.0.42-pre3"
+        },
+        "compile": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        }
+      },
       "Mental/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -1389,7 +1414,8 @@
           "Microcharts.Forms": "0.7.1",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",
           "System.Buffers": "4.5.0",
-          "Xamarin.Forms": "3.4.0.1008975"
+          "Xamarin.Forms": "3.4.0.1008975",
+          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -2068,6 +2094,18 @@
           "build/Xamarin.Forms.targets": {}
         }
       },
+      "Xamarin.Forms.CarouselView/2.3.0-pre2": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.3.0.42-pre3"
+        },
+        "compile": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        }
+      },
       "Mental/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -2076,7 +2114,8 @@
           "Microcharts.Forms": "0.7.1",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",
           "System.Buffers": "4.5.0",
-          "Xamarin.Forms": "3.4.0.1008975"
+          "Xamarin.Forms": "3.4.0.1008975",
+          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -2755,6 +2794,18 @@
           "build/Xamarin.Forms.targets": {}
         }
       },
+      "Xamarin.Forms.CarouselView/2.3.0-pre2": {
+        "type": "package",
+        "dependencies": {
+          "Xamarin.Forms": "2.3.0.42-pre3"
+        },
+        "compile": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        },
+        "runtime": {
+          "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll": {}
+        }
+      },
       "Mental/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
@@ -2763,7 +2814,8 @@
           "Microcharts.Forms": "0.7.1",
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",
           "System.Buffers": "4.5.0",
-          "Xamarin.Forms": "3.4.0.1008975"
+          "Xamarin.Forms": "3.4.0.1008975",
+          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -4413,6 +4465,24 @@
         "xamarin.forms.nuspec"
       ]
     },
+    "Xamarin.Forms.CarouselView/2.3.0-pre2": {
+      "sha512": "1QJzPUm9dLBu+i3NGHPZmk7w58kCb74i8QbtrDLbPZesqVjAaEnRrGjKTvZlxJCEKWPKgqZMb0af30+Al82KEQ==",
+      "type": "package",
+      "path": "xamarin.forms.carouselview/2.3.0-pre2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/MonoAndroid10/Xamarin.Forms.CarouselView.dll",
+        "lib/MonoTouch10/Xamarin.Forms.CarouselView.dll",
+        "lib/Xamarin.iOS10/Xamarin.Forms.CarouselView.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Xamarin.Forms.CarouselView.dll",
+        "lib/uap10.0/Xamarin.Forms.CarouselView.dll",
+        "lib/win81/Xamarin.Forms.CarouselView.dll",
+        "lib/wpa81/Xamarin.Forms.CarouselView.dll",
+        "xamarin.forms.carouselview.2.3.0-pre2.nupkg.sha512",
+        "xamarin.forms.carouselview.nuspec"
+      ]
+    },
     "Mental/1.0.0": {
       "type": "project",
       "path": "../Mental/Mental.csproj",
@@ -4426,7 +4496,8 @@
       "Microcharts.Forms >= 0.7.1",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.2.4",
       "System.Buffers >= 4.5.0",
-      "Xamarin.Forms >= 3.4.0.1008975"
+      "Xamarin.Forms >= 3.4.0.1008975",
+      "Xamarin.Forms.CarouselView >= 2.3.0-pre2"
     ]
   },
   "packageFolders": {
@@ -4485,6 +4556,10 @@
           "Xamarin.Forms": {
             "target": "Package",
             "version": "[3.4.0.1008975, )"
+          },
+          "Xamarin.Forms.CarouselView": {
+            "target": "Package",
+            "version": "[2.3.0-pre2, )"
           }
         }
       }

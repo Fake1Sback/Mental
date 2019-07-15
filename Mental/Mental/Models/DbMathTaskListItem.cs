@@ -4,18 +4,46 @@ using System.ComponentModel;
 using System.Text;
 using Mental.Models.DbModels;
 using Mental.ViewModels;
+using Xamarin.Forms;
 
 namespace Mental.Models
 {
     public class DbMathTaskListItem : BaseVM
     {
         public DbMathTask dbMathTask;
-        private string srcUrl1 = "someurl";
-        private string srcUrl2 = "someurl2";
+
+        private Color ActiveColor = Color.FromHex("#99ffcc");
+        private Color DefaultColor = Color.FromHex("#80aaff");
+
+        private Color _FrameBackgroundColor;
 
         public DbMathTaskListItem(DbMathTask _dbMathTask)
         {
             dbMathTask = _dbMathTask;
+            _FrameBackgroundColor = DefaultColor;
+        }
+
+        public Color FrameBackgroundColor
+        {
+            get
+            {
+                return _FrameBackgroundColor;
+            }
+            set
+            {
+                _FrameBackgroundColor = value;
+                OnPropertyChanged("FrameBackgroundColor");
+            }
+        }
+
+        public void SetActiveColor()
+        {
+            FrameBackgroundColor = ActiveColor;
+        }
+
+        public void SetDefaultColor()
+        {
+            FrameBackgroundColor = DefaultColor;
         }
 
         public string Operations
@@ -111,12 +139,11 @@ namespace Mental.Models
         {
             get
             {
-                if (dbMathTask.TimeOptions == 0)
-                    return srcUrl1;
+                if (dbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "list_numbered_white_18.png";
                 else
-                    return srcUrl2;
+                    return "access_time_white_18.png";
             }
-            private set { }
         }
 
         public string TaskType
@@ -163,17 +190,17 @@ namespace Mental.Models
             private set { }
         }
 
-        public string ChainLengthImageSrcUrl
-        {
-            get
-            {
-                if (dbMathTask.IsChainLengthFixed)
-                    return srcUrl1;
-                else
-                    return srcUrl2;
-            }
-            private set { }
-        }
+        //public string ChainLengthImageSrcUrl
+        //{
+        //    get
+        //    {
+        //        if (dbMathTask.IsChainLengthFixed)
+        //            return srcUrl1;
+        //        else
+        //            return srcUrl2;
+        //    }
+        //    private set { }
+        //}
 
         public int MaxChainLength
         {

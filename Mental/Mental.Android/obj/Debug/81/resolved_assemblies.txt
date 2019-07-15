@@ -64,6 +64,7 @@ E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\asse
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Android.Support.v7.Palette.dll
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Android.Support.v7.RecyclerView.dll
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Android.Support.Vector.Drawable.dll
+E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Forms.CarouselView.dll
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Forms.Core.dll
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Forms.Platform.Android.dll
 E:\Visual Studio Projects\Mental\Mental\Mental.Android\obj\Debug\81\android\assets\Xamarin.Forms.Platform.dll

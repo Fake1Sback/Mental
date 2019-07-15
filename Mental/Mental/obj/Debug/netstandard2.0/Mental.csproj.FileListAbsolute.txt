@@ -8,7 +8,6 @@ E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.A
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.AssemblyInfo.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.dll
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.pdb
-E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\MathTasksOptionsPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\MathTasksPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\SimilarTasksStatisticsPage.xaml.g.cs
@@ -23,3 +22,4 @@ E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\St
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskSimilarStatisticsPage.xaml.g.cs
 E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskGeneralStatisticsPage.xaml.g.cs
+E:\Visual Studio Projects\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp

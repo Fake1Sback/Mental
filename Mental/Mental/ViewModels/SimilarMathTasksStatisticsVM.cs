@@ -17,9 +17,10 @@ namespace Mental.ViewModels
 {
     public class SimilarMathTasksStatisticsVM : BaseVM
     {
-        private int AmountOfData = 3;
+        private int AmountOfData = 4;
         private int LoadMoreCounter = 0;
 
+        private DbMathTask PatternDbMathTask;
         private DbMathTask SelectedListItemDbMathTask;
         private DbMathTask dbMathTaskToSave;
 
@@ -38,11 +39,25 @@ namespace Mental.ViewModels
                 OnPropertyChanged("DbMathTaskListItemsProp");
             }
         }
+        public DbMathTaskListItem SelectedListViewItem
+        {
+            set
+            {
+                DbMathTaskListItem dbMathTaskListItem = value;
+                if (dbMathTaskListItem != null)
+                {
+                    SelectedListItemDbMathTask = dbMathTaskListItem.dbMathTask;
+                    foreach (DbMathTaskListItem item in DbMathTaskListItems)
+                    {
+                        item.SetDefaultColor();
+                    }
+                    dbMathTaskListItem.SetActiveColor();
+                    InitializeChart();
+                }
+            }
+        }
 
         private INavigation navigation;
-
-        private bool DetailedTasksOptionsLayoutVisibility = false;
-        private bool _DetailedStatisticsButtonVisibility = true;
         private bool _SaveButtonVisibility = true;
         private bool _GeneralStatisticsButtonVisibility = true;
 
@@ -54,11 +69,11 @@ namespace Mental.ViewModels
             if (Save)
                 dbMathTaskToSave = _dbMathTask;
             SelectedListItemDbMathTask = _dbMathTask;
+            PatternDbMathTask = _dbMathTask;
             GetMathTasksFromDb();
             FillListView();
             InitializeChart();
 
-            ShowHideDetailedStatisticsCommand = new Command(ShowHideDetailedStatistics);
             SaveRecordToDbCommand = new Command(SaveRecordToDb);
             LoadMoreRecordsCommand = new Command(LoadMoreRecords);
             ClearRecordsCommand = new Command(ClearRecords);
@@ -74,9 +89,9 @@ namespace Mental.ViewModels
             get
             {
                 string str = string.Empty;
-                for(int i = 0;i < SelectedListItemDbMathTask.Operations.Length;i++)
+                for(int i = 0;i < PatternDbMathTask.Operations.Length;i++)
                 {
-                    str += SelectedListItemDbMathTask.Operations[i] + " ";
+                    str += PatternDbMathTask.Operations[i] + " ";
                 }
                 str = str.Remove(str.Length - 1);
                 return str;
@@ -87,7 +102,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return SelectedListItemDbMathTask.MinValue;
+                return PatternDbMathTask.MinValue;
             }
         }
 
@@ -95,7 +110,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return SelectedListItemDbMathTask.MaxValue;
+                return PatternDbMathTask.MaxValue;
             }
         }
 
@@ -103,7 +118,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                if (SelectedListItemDbMathTask.TaskType == (byte)TaskType.CountResult)
+                if (PatternDbMathTask.TaskType == (byte)TaskType.CountResult)
                     return "Result";
                 else
                     return " X ";
@@ -114,7 +129,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                if (PatternDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
                     return "list_numbered_white_24.png";
                 else
                     return "access_time_white_24.png";
@@ -125,277 +140,84 @@ namespace Mental.ViewModels
         {
             get
             {
-                if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " min";
-                else if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return  SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " tasks";
+                if (PatternDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
+                    return PatternDbMathTask.TaskComplexityParameter.ToString() + " min";
+                else if (PatternDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                    return PatternDbMathTask.TaskComplexityParameter.ToString() + " tasks";
                 else
-                    return SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " sec";
+                    return PatternDbMathTask.TaskComplexityParameter.ToString() + " sec";
+            }
+        }
+
+        public string TopFrameNumbersType
+        {
+            get
+            {
+                if (PatternDbMathTask.IsInteger)
+                    return "INTEGER";
+                else
+                    return "FRACTIONAL";
+            }
+        }
+
+        public string TopFrameChainLengthImgSrc
+        {
+            get
+            {
+                if (PatternDbMathTask.IsChainLengthFixed)
+                    return "Chain_24.png";
+                else
+                    return "Broken_Chain_2_24.png";
+            }
+        }
+
+        public string TopFrameMaxChainLength
+        {
+            get
+            {
+                return "Max" +
+                    ": " + PatternDbMathTask.MaxChainLength.ToString();
+            }
+        }
+
+        public string TopFrameRestrictionsImgSrc
+        {
+            get
+            {
+                if (PatternDbMathTask.IsRestrictionActivated)
+                    return "Restrictions_24.png";
+                else
+                    return "";
+
+            }
+        }
+
+        public string TopFrameDigitsAfterDotSign
+        {
+            get
+            {
+                string str = ".";
+                for(int i = 0;i < PatternDbMathTask.DigitsAfterDotSing;i++)
+                {
+                    str += "X";
+                }
+                return str;
+            }
+        }
+
+        public bool TopFrameDigitsAfterDotSignVisibility
+        {
+            get
+            {
+                if (!PatternDbMathTask.IsInteger)
+                    return true;
+                else
+                    return false;
             }
         }
 
         //-------------------------------
-
-
-        public bool DetailedTaskOptionsVisibility
-        {
-            get
-            {
-                return DetailedTasksOptionsLayoutVisibility;
-            }
-            set
-            {
-                DetailedTasksOptionsLayoutVisibility = value;
-                OnPropertyChanged("DetailedTaskOptionsVisibility");
-            }
-        }
-
-        public bool PlusLabelVisibility
-        {
-            get
-            {
-                return SelectedListItemDbMathTask.Operations.Contains("+");
-            }
-            private set { }
-        }
-
-        public bool MinusLabelVisibility
-        {
-            get
-            {
-                return SelectedListItemDbMathTask.Operations.Contains("-");
-            }
-            private set { }
-        }
-
-        public bool MultiplyLabelVisibility
-        {
-            get
-            {
-                return SelectedListItemDbMathTask.Operations.Contains("*");
-            }
-            private set { }
-        }
-
-        public bool DivideLabelVisibility
-        {
-            get
-            {
-                return SelectedListItemDbMathTask.Operations.Contains("/");
-            }
-            private set { }
-        }
-
-        public string TaskTypeLabel
-        {
-            get
-            {
-                if (SelectedListItemDbMathTask.TaskType == (byte)TaskType.CountResult)
-                    return "Task Type: Find Result";
-                else
-                    return "Task Type: Find X";
-            }
-            private set { }
-        }
-
-        public string TimeOptionLabel
-        {
-            get
-            {
-                if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return "Time Option: Countdown";
-                else //(SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "Time Option: Limited Operations";
-            }
-            private set { }
-        }
-
-        public string TimeParameters
-        {
-            get
-            {
-                if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return "Amount of minutes: " + SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " min";
-                else if (SelectedListItemDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "Amount of tasks: " + SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " tasks";
-                else
-                    return "Amount of seconds: " + SelectedListItemDbMathTask.TaskComplexityParameter.ToString() + " sec";
-            }
-            private set { }
-        }
-
-        public string MinValue
-        {
-            get
-            {
-                return "MinValue: " + SelectedListItemDbMathTask.MinValue.ToString();
-            }
-            private set { }
-        }
-
-        public string MaxValue
-        {
-            get
-            {
-                return "MaxValue: " + SelectedListItemDbMathTask.MaxValue.ToString();
-            }
-            private set { }
-        }
-
-        public bool IsChainLengthFixed
-        {
-            get
-            {
-                if (SelectedListItemDbMathTask.IsChainLengthFixed)
-                    return true;
-                else
-                    return false;
-            }
-            private set { }
-        }
-
-        public string MaxChainLength
-        {
-            get
-            {
-                return "Max Chain Length: " + SelectedListItemDbMathTask.MaxChainLength.ToString();
-            }
-            private set { }
-        }
-
-        public string DataType
-        {
-            get
-            {
-                if (SelectedListItemDbMathTask.IsInteger)
-                    return "Data Type: INT";
-                else
-                    return "Data Type: FRACTIONAL";
-            }
-        }
-
-        public bool DigitsPrecisionLabelVisibility
-        {
-            get
-            {
-                if (SelectedListItemDbMathTask.IsInteger)
-                    return false;
-                else
-                    return true;
-            }
-            private set { }
-        }
-
-        public string DigitsAfterDotSign
-        {
-            get
-            {
-                return "Digits after dot sign: " + SelectedListItemDbMathTask.DigitsAfterDotSing.ToString();
-            }
-            private set { }
-        }
-
-        public bool RestrictionsLayoutVisibility
-        {
-            get
-            {
-                return SelectedListItemDbMathTask.IsRestrictionActivated;
-            }
-            private set { }
-        }
-
-        public string RestrictionsString
-        {
-            get
-            {
-                return SelectedListItemDbMathTask.RestrictionsString;
-            }
-            private set { }
-        }
-
-        public string LongestTimeSpentForExpression
-        {
-            get
-            {
-                return "Longest time spent for expression: " + SelectedListItemDbMathTask.LongestTimeSpentForExpression + " sec";
-            }
-            private set { }
-        }
-
-        public string LongestTimeExpressionString
-        {
-            get
-            {
-                return "Expression: " + SelectedListItemDbMathTask.LongestTimeExpressionString;
-            }
-            private set { }
-        }
-
-        public string ShortestTimeSpentForExpression
-        {
-            get
-            {
-                return "Shortest time spent for expression: " + SelectedListItemDbMathTask.ShortestTimeSpentForExpression + " sec";
-            }
-            private set { }
-        }
-
-        public string ShortestTimeExpressionString
-        {
-            get
-            {
-                return "Expression: " + SelectedListItemDbMathTask.ShortestTimeExpressionString;
-            }
-            private set { }
-        }
-    
-        public DbMathTaskListItem SelectedListViewItem
-        {
-            set
-            {
-                DbMathTaskListItem dbMathTaskListItem = value;
-                if (dbMathTaskListItem != null)
-                {
-                    SelectedListItemDbMathTask = dbMathTaskListItem.dbMathTask;
-                    OnPropertyChanged("DetailedTaskOptionsVisibility");
-                    OnPropertyChanged("PlusLabelVisibility");
-                    OnPropertyChanged("MinusLabelVisibility");
-                    OnPropertyChanged("MultiplyLabelVisibility");
-                    OnPropertyChanged("DivideLabelVisibility");
-                    OnPropertyChanged("TaskTypeLabel");
-                    OnPropertyChanged("TimeOptionLabel");
-                    OnPropertyChanged("AmountOfMinsOrTasks");
-                    OnPropertyChanged("MinValue");
-                    OnPropertyChanged("MaxValue");
-                    OnPropertyChanged("IsChainLengthFixed");
-                    OnPropertyChanged("MaxChainLength");
-                    OnPropertyChanged("DataType");
-                    OnPropertyChanged("DigitsPrecisionLabelVisibility");
-                    OnPropertyChanged("DigitsAfterDotSign");
-                    OnPropertyChanged("SpecialModeLabelVisibility");
-                    OnPropertyChanged("SpecialModeRestrictions");
-                    OnPropertyChanged("LongestTimeSpentForExpression");
-                    OnPropertyChanged("LongestTimeExpressionString");
-                    OnPropertyChanged("ShortestTimeSpentForExpression");
-                    OnPropertyChanged("ShortestTimeExpressionString");
-                    InitializeChart();
-                }
-            }
-        }
-
-        public bool DetailedStatisticsButtonVisibility
-        {
-            get
-            {
-                return _DetailedStatisticsButtonVisibility;
-            }
-            set
-            {
-                _DetailedStatisticsButtonVisibility = value;
-                OnPropertyChanged("DetailedStatisticsButtonVisibility");
-            }
-        }
-
+   
         public bool SaveButtonVisibility
         {
             get
@@ -424,16 +246,6 @@ namespace Mental.ViewModels
 
         //--------------------------------------------
 
-        public Command ShowHideDetailedStatisticsCommand { get; set; }
-
-        private void ShowHideDetailedStatistics()
-        {
-            if (DetailedTaskOptionsVisibility)
-                DetailedTaskOptionsVisibility = false;
-            else
-                DetailedTaskOptionsVisibility = true;
-        }
-
         public Command SaveRecordToDbCommand { get; set; }
 
         private void SaveRecordToDb()
@@ -449,7 +261,6 @@ namespace Mental.ViewModels
                 LoadMoreCounter = 0;
                 ListOfMathTasks.Clear();
                 GetMathTasksFromDb();
-                SelectedListItemDbMathTask = ListOfMathTasks[0];
                 FillListView();
                 InitializeChart();
                 SaveButtonVisibility = false;
@@ -462,6 +273,7 @@ namespace Mental.ViewModels
         {
             GetMathTasksFromDb();
             FillListView();
+            SelectedListItemDbMathTask = null;
             InitializeChart();
         }
 
@@ -469,26 +281,38 @@ namespace Mental.ViewModels
 
         private void ClearRecords()
         {
-            if (SelectedListItemDbMathTask != null)
+            using (var db = new ApplicationContext("mental.db"))
             {
-                using (var db = new ApplicationContext("mental.db"))
+                DbMathTask[] mathTasksToDelete = db.mathTasks.Where(t => t.TimeOptions == PatternDbMathTask.TimeOptions &&
+                t.Operations == PatternDbMathTask.Operations &&
+                t.TaskType == PatternDbMathTask.TaskType &&
+                t.TaskComplexityParameter == PatternDbMathTask.TaskComplexityParameter &&
+                t.MinValue == PatternDbMathTask.MinValue &&
+                t.MaxValue == PatternDbMathTask.MaxValue &&
+                t.IsChainLengthFixed == PatternDbMathTask.IsChainLengthFixed &&
+                t.MaxChainLength == PatternDbMathTask.MaxChainLength &&
+                t.IsInteger == PatternDbMathTask.IsInteger &&
+                t.IsRestrictionActivated == PatternDbMathTask.IsRestrictionActivated).ToArray();
+
+                if (mathTasksToDelete != null)
                 {
-                    DbMathTask[] mathTasksToDelete = db.mathTasks.Where(t => t.TimeOptions == SelectedListItemDbMathTask.TimeOptions && t.TaskType == SelectedListItemDbMathTask.TaskType && t.TaskComplexityParameter == SelectedListItemDbMathTask.TaskComplexityParameter && t.MinValue == SelectedListItemDbMathTask.MinValue && t.MaxValue == SelectedListItemDbMathTask.MaxValue).ToArray();
-                    db.mathTasks.RemoveRange(mathTasksToDelete);
-                    db.SaveChanges();
+                    if (mathTasksToDelete.Length != 0)
+                    {
+                        if (!PatternDbMathTask.IsInteger)
+                            mathTasksToDelete = mathTasksToDelete.Where(t => t.DigitsAfterDotSing == PatternDbMathTask.DigitsAfterDotSing).ToArray();
+
+                        if (PatternDbMathTask.IsRestrictionActivated)
+                            mathTasksToDelete = mathTasksToDelete.Where(t => t.RestrictionsString == PatternDbMathTask.RestrictionsString).ToArray();
+
+                        db.mathTasks.RemoveRange(mathTasksToDelete);
+                        db.SaveChanges();
+                    }
                 }
             }
 
-            dbMathTaskToSave = null;
             SelectedListItemDbMathTask = null;
-
             LoadMoreCounter = 0;
-
             ListOfMathTasks.Clear();
-
-            DetailedStatisticsButtonVisibility = false;
-            DetailedTaskOptionsVisibility = false;
-            SaveButtonVisibility = false;
 
             FillListView();
             InitializeChart();
@@ -501,15 +325,34 @@ namespace Mental.ViewModels
         private void GetMathTasksFromDb()
         {
             DbMathTask[] dbMathTasksArray;
-            if (SelectedListItemDbMathTask != null)
+
+            using (var db = new ApplicationContext("mental.db"))
             {
-                using (var db = new ApplicationContext("mental.db"))
+                dbMathTasksArray = db.mathTasks.Where(t => t.TimeOptions == PatternDbMathTask.TimeOptions &&
+                t.Operations == PatternDbMathTask.Operations &&
+                t.TaskType == PatternDbMathTask.TaskType &&
+                t.TaskComplexityParameter == PatternDbMathTask.TaskComplexityParameter &&
+                t.MinValue == PatternDbMathTask.MinValue &&
+                t.MaxValue == PatternDbMathTask.MaxValue &&
+                t.IsChainLengthFixed == PatternDbMathTask.IsChainLengthFixed &&
+                t.MaxChainLength == PatternDbMathTask.MaxChainLength &&
+                t.IsInteger == PatternDbMathTask.IsInteger &&
+                t.IsRestrictionActivated == PatternDbMathTask.IsRestrictionActivated).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+            }
+
+            if (dbMathTasksArray != null)
+            {
+                if (dbMathTasksArray.Length != 0)
                 {
-                    dbMathTasksArray = db.mathTasks.Where(t => t.TimeOptions == SelectedListItemDbMathTask.TimeOptions && t.TaskType == SelectedListItemDbMathTask.TaskType && t.TaskComplexityParameter == SelectedListItemDbMathTask.TaskComplexityParameter && t.MinValue == SelectedListItemDbMathTask.MinValue && t.MaxValue == SelectedListItemDbMathTask.MaxValue).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+                    if (!PatternDbMathTask.IsInteger)
+                        dbMathTasksArray = dbMathTasksArray.Where(t => t.DigitsAfterDotSing == PatternDbMathTask.DigitsAfterDotSing).ToArray();
+
+                    if (PatternDbMathTask.IsRestrictionActivated)
+                        dbMathTasksArray = dbMathTasksArray.Where(t => t.RestrictionsString == PatternDbMathTask.RestrictionsString).ToArray();
+
+                    LoadMoreCounter += 1;
+                    ListOfMathTasks.AddRange(dbMathTasksArray);
                 }
-      
-                LoadMoreCounter += 1;
-                ListOfMathTasks.AddRange(dbMathTasksArray);
             }
         }
 
@@ -522,17 +365,7 @@ namespace Mental.ViewModels
                 DbMathTaskListItems.Add(new DbMathTaskListItem(ListOfMathTasks[i]));
             }
 
-            OnPropertyChanged("SimilarTasksListViewHeightRequest");
             OnPropertyChanged("DbMathTaskListItemsProp");
-        }
-
-        public int SimilarTasksListViewHeightRequest
-        {
-            get
-            {
-                return ListOfMathTasks.Count * 50;
-            }
-            private set { }
         }
 
         private void InitializeChart()
@@ -562,9 +395,8 @@ namespace Mental.ViewModels
                 }
                 if (dbMathTaskToSave != null)
                     entries.Add(new Entry((float)dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });
-                return new LineChart() { Entries = entries, LineMode = LineMode.Spline, PointMode = PointMode.Circle,  PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff")};
+                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle,  PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff")};
             }
-            private set { }
         }
     }
 }

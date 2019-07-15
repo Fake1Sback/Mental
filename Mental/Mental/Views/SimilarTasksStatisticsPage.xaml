@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:forms="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:custom="clr-namespace:Mental.CustomControls"
              x:Class="Mental.Views.SimilarTasksStatisticsPage"
              Title="Similar Tasks Statistics"
              BackgroundColor="#6699ff">
@@ -24,88 +26,94 @@
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
             </Style>
+            <Style x:Key="TopFrameImage" TargetType="Image">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <!--<Setter Property="HeightRequest" Value="30"></Setter>
+                <Setter Property="WidthRequest" Value="30"></Setter>-->
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+            </Style>
+            <Style x:Key="ListButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="HeightRequest" Value="25"></Setter>
+                <Setter Property="WidthRequest" Value="25"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="ListLabel" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="TextColor" Value="#fafafa"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="Margin" Value="0"></Setter>
+                <Setter Property="HeightRequest" Value="15"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Frame BackgroundColor="Transparent" Padding="0" Margin="10,4,10,4" CornerRadius="25" BorderColor="#fafafa">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                        <Label Margin="2,0,0,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameOperationsString}" FontSize="14"></Label>
-                        <Button Style="{StaticResource TopFrameButton}" Image="arrow_downward_white_24.png"></Button>
+        <StackLayout>
+            <Frame BackgroundColor="Transparent" Padding="0" Margin="10,4,10,0" CornerRadius="25" BorderColor="#fafafa">
+                <StackLayout Orientation="Vertical" Padding="0" Margin="0,3,0,3">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
+                        <Label Margin="2,0,0,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameOperationsString}" FontSize="14" FontAttributes="Bold"></Label>
+                        <Image Style="{StaticResource TopFrameImage}" Source="arrow_downward_white_24.png"></Image>
                         <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameMinValue}"></Label>
-                        <Button Style="{StaticResource TopFrameButton}" Image="arrow_upward_white_24.png"></Button>
+                        <Image Style="{StaticResource TopFrameImage}" Source="arrow_upward_white_24.png"></Image>
                         <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameMaxValue}"></Label>
-                        <Button Style="{StaticResource TopFrameButton}" Image="help_outline_white_24.png"></Button>
+                        <Image Style="{StaticResource TopFrameImage}" Source="help_outline_white_24.png"></Image>
                         <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameTaskTypeString}" ></Label>
-                        <Button Style="{StaticResource TopFrameButton}" Image="{Binding TopFrameTimeParametersImgSrc}"></Button>
+                        <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameTimeParametersImgSrc}"></Image>
                         <Label Margin="0,0,2,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameTimeParameters}"></Label>
                     </StackLayout>
-                </Frame>
-                <charts:ChartView Margin="0" x:Name="LineChart1" Chart="{Binding LineChart}" WidthRequest="100" HeightRequest="200"></charts:ChartView>
-                <Frame BackgroundColor="#fafafa" Padding="0" CornerRadius="0" Margin="0">
-                    <StackLayout Orientation="Vertical">
-                        <Button x:Name="ShowHideDetailedTaskOptions" Text="Show Task Options" IsVisible="{Binding DetailedStatisticsButtonVisibility}" Command="{Binding ShowHideDetailedStatisticsCommand}"></Button>
-                        <StackLayout x:Name="DetailedTaskOptions" IsVisible="{Binding DetailedTaskOptionsVisibility}">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Operations: "></Label>
-                                <Label x:Name="PlusLabel" Text="+" IsVisible="{Binding PlusLabelVisibility}"></Label>
-                                <Label x:Name="MinusLabel" Text="-" IsVisible="{Binding MinusLabelVisibility}"></Label>
-                                <Label x:Name="MultiplyLabel" Text="*" IsVisible="{Binding MultiplyLabelVisibility}"></Label>
-                                <Label x:Name="DivideLabel" Text="/" IsVisible="{Binding DivideLabelVisibility}"></Label>
-                            </StackLayout>
-                            <Label x:Name="TaskTypeLabel" Text="{Binding TaskTypeLabel}"></Label>
-                            <Label x:Name="TimeOptionLabel" Text="{Binding TimeOptionLabel}"></Label>
-                            <Label x:Name="TimeOptionsParameters" Text="{Binding TimeParameters}"></Label>
-                            <Label x:Name="MinValueLabel" Text="{Binding MinValue}"></Label>
-                            <Label x:Name="MaxValueLabel" Text="{Binding MaxValue}"></Label>
-                            <Label x:Name="ChainLengthFixedLabel" Text="{Binding IsChainLengthFixed}"></Label>
-                            <Label x:Name="MaxChainLengthLabel" Text="{Binding MaxChainLength}"></Label>
-                            <Label x:Name="DataTypeLabel" Text="{Binding DataType}"></Label>
-                            <Label x:Name="DigitsAfterDotSignLabel" Text="{Binding DigitsAfterDotSign}" IsVisible="{Binding DigitsPrecisionLabelVisibility}"></Label>
-                            <Label x:Name="SpecialModeRestricationsLabel" Text="{Binding RestrictionsString}" IsVisible="{Binding RestrictionsLayoutVisibility}"></Label>
-                            <Label x:Name="TaskResultsLabel" Text="Task results:"></Label>
-                            <Label x:Name="LongestTimeSpentForExpressionLabel"  Text="{Binding LongestTimeSpentForExpression}"></Label>
-                            <Label x:Name="LongestTimeExpressionLabel" Text="{Binding LongestTimeExpressionString}"></Label>
-                            <Label x:Name="ShortestTimeSpentForExpressionLabel" Text="{Binding ShortestTimeSpentForExpression}"></Label>
-                            <Label x:Name="ShortestTimeExpressionLabel" Text="{Binding ShortestTimeExpressionString}"></Label>
-                        </StackLayout>
-                        <Button x:Name="SaveResultButton" Text="Save Results" Command="{Binding SaveRecordToDbCommand}" IsVisible="{Binding SaveButtonVisibility}"></Button>
-                        <ListView x:Name="SimilarTasksListView" ItemsSource="{Binding DbMathTaskListItemsProp}" SelectedItem="{Binding SelectedListViewItem, Mode=OneWayToSource}"  Margin="5,5,5,5" RowHeight="50" HeightRequest="{Binding SimilarTasksListViewHeightRequest}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <ViewCell>
-                                        <StackLayout Orientation="Vertical" Margin="15,0,15,0">
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="+" IsVisible="{Binding PlusOperation}"></Label>
-                                                <Label Text="-" IsVisible="{Binding MinusOperation}"></Label>
-                                                <Label Text="*" IsVisible="{Binding MultiplyOperation}"></Label>
-                                                <Label Text="/" IsVisible="{Binding DivideOperation}"></Label>
-                                                <Label Margin="10,0,0,0" Text="{Binding MinValue}"></Label>
-                                                <Label Margin="0,0,10,0" Text="{Binding MaxValue}"></Label>
-                                                <Label Text="{Binding TimeOption}"></Label>
-                                                <Label Text="{Binding TaskType}"></Label>
-                                            </StackLayout>
-                                            <StackLayout Orientation="Horizontal">
-                                                <Label Text="{Binding CorrentAnswers}" TextColor="Green"></Label>
-                                                <Label Text=" / "></Label>
-                                                <Label Text="{Binding WrongAnswers}" TextColor="Red"></Label>
-                                                <Label Text="{Binding DataType}"></Label>
-                                                <Label Text="{Binding MaxChainLength}"></Label>
-                                                <Label Text="{Binding RestrictionsString}" IsVisible="{Binding RestrictionsVisibility}"></Label>
-                                                <Label Text="{Binding DateTimeString}"></Label>
-                                            </StackLayout>
-                                        </StackLayout>
-                                    </ViewCell>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                        <Button x:Name="LoadMoreButton" Text="Load More" Command="{Binding LoadMoreRecordsCommand}"></Button>
-                        <Button x:Name="ClearRecords" Text="Clear Records" Command="{Binding ClearRecordsCommand}"></Button>
-                        <Button x:Name="GeneralStatistics" Text="General Statistics" Command="{Binding LoadGeneralStatistics}" IsVisible="{Binding GeneralStatisticsButtonVisibility}"></Button>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,-7,0,0">
+                        <Image Margin="2,0,0,0" Style="{StaticResource TopFrameImage}" Source="NumbersType.png"></Image>
+                        <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameNumbersType}"></Label>
+                        <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameDigitsAfterDotSign}" IsVisible="{Binding TopFrameDigitsAfterDotSignVisibility}"></Label>
+                        <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameChainLengthImgSrc}"></Image>
+                        <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameMaxChainLength}"></Label>
+                        <Image Margin="0,0,0,2" Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameRestrictionsImgSrc}"></Image>
                     </StackLayout>
-                </Frame>
+                </StackLayout>
+            </Frame>
+            <charts:ChartView Margin="0" x:Name="LineChart1" Chart="{Binding LineChart}" WidthRequest="150" HeightRequest="160"></charts:ChartView>
+            <ListView x:Name="SimilarTasksListView" ItemsSource="{Binding DbMathTaskListItemsProp}" VerticalOptions="CenterAndExpand" SeparatorColor="Transparent" SelectedItem="{Binding SelectedListViewItem, Mode=OneWayToSource}"  Margin="5,5,5,5" RowHeight="30" HeightRequest="130">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="15" BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="15,0,15,1">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                                    <Label Text="{Binding CorrentAnswers}" TextColor="Green" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text=" / " FontSize="18" VerticalOptions="Center" TextColor="White" HorizontalOptions="StartAndExpand"></Label>
+                                    <Label Text="{Binding WrongAnswers}" TextColor="Red" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
+                                    <Image Source="date_range_white_18.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Image>
+                                    <Label Text="{Binding DateTimeString}" FontSize="18" TextColor="White" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand"></Label>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" Margin="10,0,10,5">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0" IsVisible="{Binding SaveButtonVisibility}">
+                    <Button Style="{StaticResource ListButton}" x:Name="SaveResultButton" Image="save_white_24.png" Command="{Binding SaveRecordToDbCommand}"></Button>
+                    <Label Style="{StaticResource ListLabel}" Text="Save Current"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand"  VerticalOptions="Center" Padding="0">
+                    <Button Style="{StaticResource ListButton}" BackgroundColor="Transparent" x:Name="LoadMoreButton" Image="loadmore_white_24.png" Command="{Binding LoadMoreRecordsCommand}"></Button>
+                    <Label Style="{StaticResource ListLabel}" Text="Load More"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand"  VerticalOptions="Center" Padding="0">
+                    <Button Style="{StaticResource ListButton}" x:Name="ClearRecords" Image="delete_white_24.png" Command="{Binding ClearRecordsCommand}"></Button>
+                    <Label Style="{StaticResource ListLabel}" Text="Clear Records"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand"  VerticalOptions="Center" Padding="0" IsVisible="{Binding GeneralStatisticsButtonVisibility}">
+                    <Button Style="{StaticResource ListButton}" x:Name="GeneralStatistics" Image="chart_white_24.png" Command="{Binding LoadGeneralStatistics}"></Button>
+                    <Label Style="{StaticResource ListLabel}" Text="General Stats"></Label>
+                </StackLayout>
             </StackLayout>
-        </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

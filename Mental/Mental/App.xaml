@@ -54,6 +54,13 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
             </Style>
+            <Style x:Name="CarouselFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="Margin" Value="2,2,2,2"></Setter>
+                <Setter Property="CornerRadius" Value="15"></Setter>
+                <Setter Property="BorderColor" Value="White"></Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

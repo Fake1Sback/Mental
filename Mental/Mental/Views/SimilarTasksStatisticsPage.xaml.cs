@@ -20,5 +20,5 @@ namespace Mental.Views
             InitializeComponent();
             this.BindingContext = new SimilarMathTasksStatisticsVM(this.Navigation, _dbMathTask, _save);
         }
-	}
+    }
 }
