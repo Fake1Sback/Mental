@@ -17,8 +17,19 @@ namespace Mental.ViewModels
     public class GeneralStatisticsVM : BaseVM
     {
         private int GeneralAmountOfRecords;
-        private int LoadCounter = 0;
         private int AmountOfDataInListView = 5;
+
+        private int _StartPaginationIndex;
+        private int _CurrentPaginationIndex;
+        private int _LastPaginationIndex;
+
+        private string Color1 = "#0040ff"; //DarkBlue        
+        private string Color2 = "#F55B70"; //Red
+        private string Color3 = "#009933"; //Green
+        private string Color4 = "#ff9900"; //Orange
+        private string Color5 = "#8000ff"; //Violet
+        private string Color6 = "#2eb8b8"; //Aqua
+        private string Color7 = "#cc4400"; //Brown
 
         private List<DbMathTaskListItem> _mathTaskListItems;
         private DbMathTaskListItem _SelectedMathTaskListItem;
@@ -31,6 +42,7 @@ namespace Mental.ViewModels
         private List<Entry> _RestrictionsChart;
         private List<Entry> _OperationsChart;
         private List<Entry> _ChainLengthChart;
+        private List<Entry> _MaxChainLengthChart;
 
         private int _ListViewHeightRequest;
 
@@ -46,7 +58,17 @@ namespace Mental.ViewModels
                 InitializeRestrictionsOptionsChart(db);
                 InitializeOperationsModeOptionsChart(db);
                 InitializeFixedChainLengthOptionsChart(db);
+                InitializeMaxChainLengthOptionsChart(db);
             }
+
+            int AmountOfPages = GeneralAmountOfRecords / AmountOfDataInListView;
+            if (GeneralAmountOfRecords % AmountOfDataInListView == 0)
+                AmountOfPages -= 1;
+
+            StartPaginationIndex = 0;
+            CurrentPaginationIndex = 0;
+            LastPaginationIndex = AmountOfPages;
+
             LoadMoreDbMathTaskInfo();
             LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
             LoadSimilarCommand = new Command(LoadSimilar);
@@ -65,7 +87,13 @@ namespace Mental.ViewModels
             set
             {
                 if (value != null)
+                {
+                    foreach (DbMathTaskListItem item in _mathTaskListItems)
+                        item.SetDefaultColor();
+
                     _SelectedMathTaskListItem = value;
+                    _SelectedMathTaskListItem.SetActiveColor();
+                }               
             }
         }
 
@@ -73,7 +101,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20 };
             }
             set
             {
@@ -86,7 +114,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TaskTypeChart };
+                return new DonutChart() { Entries = _TaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20};
             }
             set
             {
@@ -99,7 +127,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _DataTypeChart };
+                return new DonutChart() { Entries = _DataTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20};
             }
             set
             {
@@ -112,7 +140,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _RestrictionsChart };
+                return new DonutChart() { Entries = _RestrictionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20 };
             }
             set
             {
@@ -121,11 +149,11 @@ namespace Mental.ViewModels
             }
         }
 
-        public RadialGaugeChart OperationsChart
+        public PointChart OperationsChart
         {
             get
             {
-                return new RadialGaugeChart() { Entries = _OperationsChart };
+                return new PointChart() { Entries = _OperationsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 20 };
             }
             set
             {
@@ -138,7 +166,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _ChainLengthChart };
+                return new DonutChart() { Entries = _ChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20 };
             }
             set
             {
@@ -147,23 +175,42 @@ namespace Mental.ViewModels
             }
         }
 
+        public PointChart MaxChainLengthChart
+        {
+            get
+            {
+                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200 };
+            }
+            set
+            {
+                _MaxChainLengthChart = value.Entries.ToList();
+                OnPropertyChanged("MaxChainLengthChart");
+            }
+        }
+
 
         private async void InitializeTimeOptionsChart(ApplicationContext db)
         {           
             int AmountOfCountdownOptionRecords = await db.mathTasks.Where(t => t.TimeOptions == 0).CountAsync();
-            int AmountOfLimitedTasksOptionsRecords = GeneralAmountOfRecords - AmountOfCountdownOptionRecords;
+            int AmountOfLimitedTasksOptionsRecords = await db.mathTasks.Where(t => t.TimeOptions == 1).CountAsync();
+            int AmountOfLastTaskOptionsRecords = GeneralAmountOfRecords - (AmountOfCountdownOptionRecords + AmountOfLimitedTasksOptionsRecords);
 
             List<Entry> entries = new List<Entry>()
             {
                 new Entry(AmountOfCountdownOptionRecords)
                 {
                     ValueLabel = "Countdown",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfLimitedTasksOptionsRecords)
                 {
-                    ValueLabel = "Limited tasks",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    ValueLabel = "Limited Tasks",
+                    Color = SkiaSharp.SKColor.Parse(Color2)
+                },
+                new Entry(AmountOfLastTaskOptionsRecords)
+                {
+                    ValueLabel = "Last Task",
+                    Color = SkiaSharp.SKColor.Parse(Color3)
                 }
             };
 
@@ -173,7 +220,7 @@ namespace Mental.ViewModels
 
         private async void InitializeTaskTypeOptionsChart(ApplicationContext db)
         {
-            int AmountOfFindResultOptionsRecords = await db.mathTasks.Where(t => t.TaskType == 0).CountAsync();
+            int AmountOfFindResultOptionsRecords = await db.mathTasks.Where(t => t.TaskType == 0).CountAsync();       
             int AmountOfFindXOptionsRecords = GeneralAmountOfRecords - AmountOfFindResultOptionsRecords;
 
             List<Entry> entries = new List<Entry>()
@@ -181,12 +228,12 @@ namespace Mental.ViewModels
                 new Entry(AmountOfFindResultOptionsRecords)
                 {
                     ValueLabel = "Find Result",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfFindXOptionsRecords)
                 {
                     ValueLabel = "Find X",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
 
@@ -204,12 +251,12 @@ namespace Mental.ViewModels
                 new Entry(AmountOfIntOptionsRecords)
                 {
                     ValueLabel = "Integer",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfFractionalOptionsRecords)
                 {
                     ValueLabel = "Fractional",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
 
@@ -227,12 +274,12 @@ namespace Mental.ViewModels
                 new Entry(AmountOfRestrictedRecords)
                 {
                     ValueLabel = "Restricted",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfNoSpecialModeOptionsRecords)
                 {
                     ValueLabel = "No Restrictions",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
 
@@ -251,23 +298,31 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfPlusOperations)
                 {
-                    ValueLabel = "+",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    ValueLabel = AmountOfPlusOperations.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color1),
+                    Label = "+",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOfMinusOperations)
                 {
-                    ValueLabel = "-",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    ValueLabel = AmountOfMinusOperations.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color2),
+                    Label = "-",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOfMultiplyOperations)
                 {
-                    ValueLabel = "*",
-                    Color = SkiaSharp.SKColor.Parse("D3C0D3")
+                    ValueLabel = AmountOfMultiplyOperations.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color3),
+                    Label = "*",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                  new Entry(AmountOfDivideOperations)
                 {
-                    ValueLabel = "/",
-                    Color = SkiaSharp.SKColor.Parse("007F7F")
+                    ValueLabel = AmountOfDivideOperations.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color4),
+                    Label = "/",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 }
             };
 
@@ -285,18 +340,182 @@ namespace Mental.ViewModels
                 new Entry(AmountOfFixedChainLengthOptionRecords)
                 {
                     ValueLabel = "Fixed",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfNotFixedChainLengthOptionsRecords)
                 {
                     ValueLabel = "Not Fixed",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
 
             _ChainLengthChart = entries;
             OnPropertyChanged("ChainLengthChart");
         }
+
+        private async void InitializeMaxChainLengthOptionsChart(ApplicationContext db)
+        {
+            int AmountOfMax2ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 2).CountAsync();
+            int AmountOfMax3ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 3).CountAsync();
+            int AmountOfMax4ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 4).CountAsync();
+            int AmountOfMax5ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 5).CountAsync();
+            int AmountOfMax6ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 6).CountAsync();
+            int AmountOfMax7ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 7).CountAsync();
+            int AmountOfMax8ChainLength = GeneralAmountOfRecords - (AmountOfMax2ChainLength + AmountOfMax3ChainLength + AmountOfMax4ChainLength + AmountOfMax5ChainLength + AmountOfMax6ChainLength + AmountOfMax7ChainLength);
+
+            List<Entry> entries = new List<Entry>()
+            {
+                new Entry(AmountOfMax2ChainLength)
+                {
+                    ValueLabel = AmountOfMax2ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color1),
+                    Label = "2 OP",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+                new Entry(AmountOfMax3ChainLength)
+                {
+                    ValueLabel = AmountOfMax3ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color2),
+                    Label = "3 OP",
+                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+                new Entry(AmountOfMax4ChainLength)
+                {
+                    ValueLabel = AmountOfMax4ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color3),
+                    Label = "4 OP",
+                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+                new Entry(AmountOfMax5ChainLength)
+                {
+                    ValueLabel = AmountOfMax5ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color4),
+                    Label = "5 OP",
+                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+                new Entry(AmountOfMax6ChainLength)
+                {
+                    ValueLabel = AmountOfMax6ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color5),
+                    Label = "6 OP",
+                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+                new Entry(AmountOfMax7ChainLength)
+                {
+                    ValueLabel = AmountOfMax7ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color6),
+                    Label = "7 OP",
+                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+                new Entry(AmountOfMax8ChainLength)
+                {
+                    ValueLabel = AmountOfMax8ChainLength.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color7),
+                    Label = "8 OP",
+                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
+                },
+            };
+
+            _MaxChainLengthChart = entries;
+            OnPropertyChanged("MaxChainLengthChart");
+        }
+
+        //-------------------- Pagination -------------------------------------------
+
+        public int StartPaginationIndex
+        {
+            get
+            {
+                return _StartPaginationIndex;
+            }
+            set
+            {
+                _StartPaginationIndex = value;
+                OnPropertyChanged("StartPaginationIndex");
+            }
+        }
+
+        public int CurrentPaginationIndex
+        {
+            get
+            {
+                return _CurrentPaginationIndex;
+            }
+            set
+            {
+                _CurrentPaginationIndex = value;
+                OnPropertyChanged("CurrentPaginationIndex");
+            }
+        }
+
+        public int LastPaginationIndex
+        {
+            get
+            {
+                return _LastPaginationIndex;
+            }
+            set
+            {
+                _LastPaginationIndex = value;
+                OnPropertyChanged("LastPaginationIndex");
+            }
+        }
+
+
+        public Command StartPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() => {
+                    CurrentPaginationIndex = StartPaginationIndex;
+                    LoadMoreDbMathTaskInfo();
+                });
+            }
+        }
+
+        public Command LastPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    CurrentPaginationIndex = LastPaginationIndex;
+                    LoadMoreDbMathTaskInfo();
+                });
+            }
+        }
+
+        public Command LeftPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (CurrentPaginationIndex != StartPaginationIndex)
+                    {
+                        CurrentPaginationIndex -= 1;
+                        LoadMoreDbMathTaskInfo();
+                    }
+                });
+            }
+        }
+
+        public Command RightPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (CurrentPaginationIndex != LastPaginationIndex)
+                    {
+                        CurrentPaginationIndex += 1;
+                        LoadMoreDbMathTaskInfo();
+                    }
+                });
+            }
+        }
+
+        //-----------------------------------------------------------------------
 
         public Command LoadMoreDbMathTasksCommand { get; set; }
 
@@ -305,16 +524,17 @@ namespace Mental.ViewModels
             DbMathTask[] dbMathTasks;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbMathTasks = db.mathTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * LoadCounter).Take(AmountOfDataInListView).ToArray();
+                dbMathTasks = db.mathTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArray();
             }
-            if (_mathTaskListItems == null)
-                _mathTaskListItems = new List<DbMathTaskListItem>();
-            LoadCounter += 1;
+
+             _mathTaskListItems = new List<DbMathTaskListItem>();
+
             for (int i = 0; i < dbMathTasks.Length; i++)
             {
                 _mathTaskListItems.Add(new DbMathTaskListItem(dbMathTasks[i]));
             }
-            ListViewHeightRequest = mathTaskListItems.Count * 50;
+
+            ListViewHeightRequest = mathTaskListItems.Count * 75;
             OnPropertyChanged("mathTaskListItems");
         }
 

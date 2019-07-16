@@ -57,43 +57,7 @@ namespace Mental.Models
                 dbMathTask.Operations = value;
                 OnPropertyChanged("Operations");
             }
-        }
-
-        public bool PlusOperation
-        {
-            get
-            {
-                return OperationStringChecker("+");
-            }
-            private set { }
-        }
-
-        public bool MinusOperation
-        {
-            get
-            {
-                return OperationStringChecker("-");
-            }
-            private set { }
-        }
-
-        public bool MultiplyOperation
-        {
-            get
-            {
-                return OperationStringChecker("*");
-            }
-            private set { }
-        }
-
-        public bool DivideOperation
-        {
-            get
-            {
-                return OperationStringChecker("/");
-            }
-            private set { }
-        }
+        }     
 
         private bool OperationStringChecker(string value)
         {
@@ -135,6 +99,17 @@ namespace Mental.Models
             private set { }
         }
 
+        public string TimeOptionImgSrc
+        {
+            get
+            {
+                if (dbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "list_numbered_white_18.png";
+                else
+                    return "access_time_white_18.png";
+            }
+        }
+
         public string TimeOptionsImageSrcUrl
         {
             get
@@ -151,9 +126,9 @@ namespace Mental.Models
             get
             {
                 if (dbMathTask.TaskType == 0)
-                    return "Find Result";
+                    return "Result";
                 else
-                    return "Find X";
+                    return " X ";
             }
         }
 
@@ -180,27 +155,31 @@ namespace Mental.Models
             get
             {
                 if (dbMathTask.IsInteger)
-                    return "INT";
+                    return "INTEGER";
                 else
                 {
-                    return "FRACTIONAL ." + dbMathTask.DigitsAfterDotSing;
+                    string str = ".";
+                    for(int i = 0;i < dbMathTask.DigitsAfterDotSing;i++)
+                    {
+                        str += "X";
+                    }
+                    return "FRACTIONAL " + str;
                 }
                     
             }
             private set { }
         }
 
-        //public string ChainLengthImageSrcUrl
-        //{
-        //    get
-        //    {
-        //        if (dbMathTask.IsChainLengthFixed)
-        //            return srcUrl1;
-        //        else
-        //            return srcUrl2;
-        //    }
-        //    private set { }
-        //}
+        public string ChainLengthImgSrc
+        {
+            get
+            {
+                if (dbMathTask.IsChainLengthFixed)
+                    return "Chain_18.png";
+                else
+                    return "Broken_chain_18.png";
+            }
+        }
 
         public int MaxChainLength
         {
@@ -217,15 +196,6 @@ namespace Mental.Models
             {
                 return dbMathTask.IsRestrictionActivated;
             }
-        }
-
-        public string RestrictionsString
-        {
-            get
-            {
-                return "R";
-            }
-            private set { }
         }
 
         public string DateTimeString

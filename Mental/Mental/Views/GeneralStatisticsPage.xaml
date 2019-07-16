@@ -2,48 +2,180 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             x:Class="Mental.Views.GeneralStatisticsPage">
+             x:Class="Mental.Views.GeneralStatisticsPage"
+             Title="Math Tasks General Stats">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ListViewItemLabel" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="TextColor" Value="#fafafa"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="ListViewItemImage" TargetType="Image">
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="PaginationButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#80aaff"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="#fafafa"></Setter>
+                <Setter Property="BorderRadius" Value="15"></Setter>
+                <Setter Property="BackgroundColor" Value="#6699ff"/>
+                <Setter Property="Margin" Value="2,0,2,0"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="WidthRequest" Value="30"></Setter>
+                <Setter Property="HeightRequest" Value="30"></Setter>
+            </Style>
+            <Style x:Key="StatsChart" TargetType="charts:ChartView">
+                <Setter Property="WidthRequest" Value="200"></Setter>
+                <Setter Property="HeightRequest" Value="100"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+            </Style>
+            <Style x:Key="BoxLine" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1"></Setter>
+                <Setter Property="BackgroundColor" Value="#fafafa"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="WidthRequest" Value="70"></Setter>
+            </Style>
+            <Style x:Key="ChartCaptionFrame" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="25"></Setter>
+                <Setter Property="Padding" Value="5,0,5,0"></Setter>
+                <Setter Property="Margin" Value="0"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="BorderColor" Value="#fafafa"></Setter>
+            </Style>
+            <Style x:Key="ChartCaptionLabel" TargetType="Label">
+                <Setter Property="WidthRequest" Value="110"></Setter>
+                <Setter Property="HeightRequest" Value="20"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="TextColor" Value="#fafafa"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <charts:ChartView x:Name="TimeOptionsChart" Chart="{Binding TimeOptionsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <charts:ChartView x:Name="TaskTypeChart" Chart="{Binding TaskTypeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <charts:ChartView x:Name="DataTypeChart" Chart="{Binding DataTypeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <charts:ChartView x:Name="RestrictionsChart" Chart="{Binding RestrictionsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <charts:ChartView x:Name="OperationsChart" Chart="{Binding OperationsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <charts:ChartView x:Name="ChainLengthChart" Chart="{Binding ChainLengthChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                <Label Text="Latest Math Tasks" HorizontalOptions="Center"></Label>
-                <ListView x:Name="LatestTasksListView" Margin="5,5,5,5" ItemsSource="{Binding mathTaskListItems}" RowHeight="50" SelectedItem="{Binding SelectedMathTaskListItem}" HeightRequest="{Binding ListViewHeightRequest}">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="0,0,0,10" Margin="0" BackgroundColor="#6699ff">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="20,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <Frame Style="{StaticResource ChartCaptionFrame}">
+                            <Label Style="{StaticResource ChartCaptionLabel}" Text="Time Options"></Label>
+                        </Frame>
+                        <BoxView Margin="-8,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
+                    </StackLayout>
+                    <charts:ChartView Margin="0" x:Name="TimeOptionsChart" Chart="{Binding TimeOptionsChart}" Style="{StaticResource StatsChart}"></charts:ChartView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="30,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <Frame Style="{StaticResource ChartCaptionFrame}">
+                            <Label Style="{StaticResource ChartCaptionLabel}" Text="Task Type"></Label>
+                        </Frame>
+                        <BoxView Margin="-8,0,30,0" Style="{StaticResource BoxLine}"></BoxView>
+                    </StackLayout>
+                    <charts:ChartView Margin="0,-10,0,0" x:Name="TaskTypeChart" Chart="{Binding TaskTypeChart}" Style="{StaticResource StatsChart}"></charts:ChartView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="30,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <Frame Style="{StaticResource ChartCaptionFrame}">
+                            <Label Style="{StaticResource ChartCaptionLabel}" Text="Data Type"></Label>
+                        </Frame>
+                        <BoxView Margin="-8,0,30,0" Style="{StaticResource BoxLine}"></BoxView>
+                    </StackLayout>
+                    <charts:ChartView Margin="0,-10,0,0" x:Name="DataTypeChart" Chart="{Binding DataTypeChart}" Style="{StaticResource StatsChart}"></charts:ChartView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="30,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <Frame Style="{StaticResource ChartCaptionFrame}">
+                            <Label Style="{StaticResource ChartCaptionLabel}" Text="Restrictions"></Label>
+                        </Frame>
+                        <BoxView Margin="-8,0,30,0" Style="{StaticResource BoxLine}"></BoxView>
+                    </StackLayout>
+                    <charts:ChartView Margin="0,-10,0,0" x:Name="RestrictionsChart" Chart="{Binding RestrictionsChart}" Style="{StaticResource StatsChart}"></charts:ChartView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="30,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <Frame Style="{StaticResource ChartCaptionFrame}">
+                            <Label Style="{StaticResource ChartCaptionLabel}" Text="Operations"></Label>
+                        </Frame>
+                        <BoxView Margin="-8,0,30,0" Style="{StaticResource BoxLine}"></BoxView>
+                    </StackLayout>
+                    <charts:ChartView Margin="0,-10,0,0" x:Name="OperationsChart" Chart="{Binding OperationsChart}" Style="{StaticResource StatsChart}"></charts:ChartView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="30,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <Frame Style="{StaticResource ChartCaptionFrame}">
+                            <Label Style="{StaticResource ChartCaptionLabel}" Text="Chain Length"></Label>
+                        </Frame>
+                        <BoxView Margin="-8,0,30,0" Style="{StaticResource BoxLine}"></BoxView>
+                    </StackLayout>
+                    <charts:ChartView Margin="0,-10,0,0" x:Name="ChainLengthChart" Chart="{Binding ChainLengthChart}" Style="{StaticResource StatsChart}"></charts:ChartView>
+                    <charts:ChartView Margin="0,-10,0,0" x:Name="MaxChainLengthChart" Chart="{Binding MaxChainLengthChart}" Style="{StaticResource StatsChart}" VerticalOptions="End"></charts:ChartView>
+                    <Frame Padding="5" BackgroundColor="#6699ff" CornerRadius="25" BorderColor="Transparent" Margin="20,0,20,-25">
+                        <Label Text="Latest Math Tasks" TextColor="#fafafa" FontSize="18" HorizontalOptions="Center"></Label>
+                    </Frame>
+                </StackLayout>
+                <ListView x:Name="LatestTasksListView" Margin="10,15,10,5" ItemsSource="{Binding mathTaskListItems}" RowHeight="75" SelectedItem="{Binding SelectedMathTaskListItem}" SeparatorColor="Transparent" HeightRequest="{Binding ListViewHeightRequest}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Vertical" Margin="15,0,15,0">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="+" IsVisible="{Binding PlusOperation}"></Label>
-                                        <Label Text="-" IsVisible="{Binding MinusOperation}"></Label>
-                                        <Label Text="*" IsVisible="{Binding MultiplyOperation}"></Label>
-                                        <Label Text="/" IsVisible="{Binding DivideOperation}"></Label>
-                                        <Label Margin="10,0,0,0" Text="{Binding MinValue}"></Label>
-                                        <Label Margin="0,0,10,0" Text="{Binding MaxValue}"></Label>
-                                        <Label Text="{Binding TimeOption}"></Label>
-                                        <Label Text="{Binding TaskType}"></Label>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding CorrentAnswers}" TextColor="Green"></Label>
-                                        <Label Text=" / "></Label>
-                                        <Label Text="{Binding WrongAnswers}" TextColor="Red"></Label>
-                                        <Label Text="{Binding DataType}"></Label>
-                                        <Label Text="{Binding MaxChainLength}"></Label>
-                                        <Label Text="{Binding RestrictionsString}" IsVisible="{Binding RestrictionsVisibility}"></Label>
-                                        <Label Text="{Binding DateTimeString}"></Label>
-                                    </StackLayout>
-                                </StackLayout>
+                                <Frame BackgroundColor="{Binding FrameBackgroundColor}" CornerRadius="25" Padding="0" BorderColor="#6699ff">
+                                    <!--<StackLayout Orientation="Horizontal" Margin="5,5,5,5">-->
+                                        <!--<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+                                            <Button HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" BorderRadius="15" Image="statistics_white_18.png" BackgroundColor="#6699ff"></Button>
+                                        </StackLayout>-->
+                                        <StackLayout Orientation="Vertical" Margin="15,5,15,5">
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                                <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding Operations}" FontSize="14" FontAttributes="Bold"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_18.png" Rotation="180"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding MinValue}"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_18.png"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding MaxValue}"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TimeOption}"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" Source="help_outline_white_18.png"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TaskType}"></Label>
+                                            </StackLayout>
+                                            <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                                <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding CorrentAnswers}" TextColor="Green"></Label>
+                                                <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text=" / "></Label>
+                                                <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding WrongAnswers}" TextColor="Red"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="NumbersType.png"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding DataType}"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="{Binding ChainLengthImgSrc}"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding MaxChainLength}"></Label>
+                                                <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="Restrictions_18.png" IsVisible="{Binding RestrictionsVisibility}"></Image>
+                                            </StackLayout>
+                                            <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                                                <Image Style="{StaticResource ListViewItemImage}" Source="date_range_white_18.png" HorizontalOptions="CenterAndExpand"></Image>
+                                                <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding DateTimeString}" HorizontalOptions="CenterAndExpand"></Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    <!--</StackLayout>-->
+                                </Frame>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button x:Name="LoadSimilarStatistics" Text="Load Similar" Command="{Binding LoadSimilarCommand}"></Button>
-                <Button x:Name="LoadMoreDbInfoButton" Text="Load More" Command="{Binding LoadMoreDbMathTasksCommand}"></Button>
+                <StackLayout Margin="25,0,25,0" Orientation="Horizontal">
+                    <Button Style="{StaticResource PaginationButton}" Command="{Binding StartPaginationButtonCommand}" Text="{Binding StartPaginationIndex}"></Button>
+                    <Button Style="{StaticResource PaginationButton}" Command="{Binding LeftPaginationButtonCommand}" Image="arrow_left_white_24.png" Padding="0"></Button>
+                    <Button Style="{StaticResource PaginationButton}" Text="{Binding CurrentPaginationIndex}"></Button>
+                    <Button Style="{StaticResource PaginationButton}" Command="{Binding RightPaginationButtonCommand}" Image="arrow_right_white_24.png" Padding="0"></Button>
+                    <Button Style="{StaticResource PaginationButton}" Command="{Binding  LastPaginationButtonCommand}" Text="{Binding LastPaginationIndex}"></Button>
+                </StackLayout>
+                <Frame CornerRadius="25" Margin="15,0,15,10" Padding="7,7,7,7" BorderColor="#6699ff">
+                    <StackLayout Orientation="Horizontal">
+                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="statistics_blue_36.png"></Button>
+                        <Button x:Name="LoadSimilarStatistics"  Style="{StaticResource StartButton}" Command="{Binding LoadSimilarCommand}" BackgroundColor="Transparent" Text="LOAD SIMILAR"></Button>
+                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="statistics_blue_36.png"></Button>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
