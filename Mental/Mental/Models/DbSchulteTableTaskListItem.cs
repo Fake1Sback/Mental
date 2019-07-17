@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using Mental.Models.DbModels;
 using Mental.ViewModels;
+using Xamarin.Forms;
 
 namespace Mental.Models
 {
@@ -11,16 +12,45 @@ namespace Mental.Models
     {
         public DbSchulteTableTask DbSchulteTableTask;
 
+        private Color ActiveColor = Color.FromHex("#99ffcc");
+        private Color DefaultColor = Color.FromHex("#80aaff");
+
+        private Color _FrameBackgroundColor;
+
         public DbSchulteTableTaskListItem(DbSchulteTableTask _dbSchulteTableTask)
         {
             DbSchulteTableTask = _dbSchulteTableTask;
+            SetDefaultColor();
+        }
+
+        public Color FrameBackgroundColor
+        {
+            get
+            {
+                return _FrameBackgroundColor;
+            }
+            set
+            {
+                _FrameBackgroundColor = value;
+                OnPropertyChanged("FrameBackgroundColor");
+            }
+        }
+
+        public void SetActiveColor()
+        {
+            FrameBackgroundColor = ActiveColor;
+        }
+
+        public void SetDefaultColor()
+        {
+            FrameBackgroundColor = DefaultColor;
         }
 
         public string GridSizeString
         {
             get
             {
-                return "#" + DbSchulteTableTask.GridSize;
+                return DbSchulteTableTask.GridSize + " x " + DbSchulteTableTask.GridSize;
             }
         }
 
@@ -29,10 +59,32 @@ namespace Mental.Models
             get
             {
                 if (DbSchulteTableTask.IsEasyModeActivated)
-                    return "Easy Mode: +";
+                    return "Easy Mode";
                 else
-                    return "Easy Mode: -";
+                    return "Normal Mode";
 
+            }
+        }
+
+        public string EasyModeSrc
+        {
+            get
+            {
+                if (DbSchulteTableTask.IsEasyModeActivated)
+                    return "Easy_Mode_18.png";
+                else
+                    return "circle_outline_white_18.png";
+            }
+        }
+
+        public string TimeOptionImgSrc
+        {
+            get
+            {
+                if (DbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "list_numbered_white_18.png";
+                else
+                    return "access_time_white_18.png";
             }
         }
 

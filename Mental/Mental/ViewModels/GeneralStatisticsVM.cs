@@ -101,7 +101,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20 };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -114,7 +114,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20};
+                return new DonutChart() { Entries = _TaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17};
             }
             set
             {
@@ -127,7 +127,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _DataTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20};
+                return new DonutChart() { Entries = _DataTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17};
             }
             set
             {
@@ -140,7 +140,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _RestrictionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20 };
+                return new DonutChart() { Entries = _RestrictionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -153,7 +153,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _OperationsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 20 };
+                return new PointChart() { Entries = _OperationsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 17 };
             }
             set
             {
@@ -166,7 +166,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _ChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20 };
+                return new DonutChart() { Entries = _ChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -179,7 +179,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200 };
+                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 17 };
             }
             set
             {
@@ -199,17 +199,17 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfCountdownOptionRecords)
                 {
-                    ValueLabel = "Countdown",
+                    ValueLabel = $"Countdown ({AmountOfCountdownOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfLimitedTasksOptionsRecords)
                 {
-                    ValueLabel = "Limited Tasks",
+                    ValueLabel = $"Limited Tasks ({AmountOfLimitedTasksOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 },
                 new Entry(AmountOfLastTaskOptionsRecords)
                 {
-                    ValueLabel = "Last Task",
+                    ValueLabel = $"Last Task ({AmountOfLastTaskOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color3)
                 }
             };
@@ -227,12 +227,12 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfFindResultOptionsRecords)
                 {
-                    ValueLabel = "Find Result",
+                    ValueLabel = $"Find Result ({AmountOfFindResultOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfFindXOptionsRecords)
                 {
-                    ValueLabel = "Find X",
+                    ValueLabel = $"Find X ({AmountOfFindXOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
@@ -250,12 +250,12 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfIntOptionsRecords)
                 {
-                    ValueLabel = "Integer",
+                    ValueLabel = $"Integer ({AmountOfIntOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfFractionalOptionsRecords)
                 {
-                    ValueLabel = "Fractional",
+                    ValueLabel = $"Fractional ({AmountOfFractionalOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
@@ -273,12 +273,12 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfRestrictedRecords)
                 {
-                    ValueLabel = "Restricted",
+                    ValueLabel = $"Restricted ({AmountOfRestrictedRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfNoSpecialModeOptionsRecords)
                 {
-                    ValueLabel = "No Restrictions",
+                    ValueLabel = $"Unrestricted ({AmountOfNoSpecialModeOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
@@ -339,12 +339,12 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfFixedChainLengthOptionRecords)
                 {
-                    ValueLabel = "Fixed",
+                    ValueLabel = $"Fixed ({AmountOfFixedChainLengthOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfNotFixedChainLengthOptionsRecords)
                 {
-                    ValueLabel = "Not Fixed",
+                    ValueLabel = $"Not Fixed ({AmountOfNotFixedChainLengthOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };

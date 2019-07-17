@@ -32,9 +32,6 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Button LoadSimilarStatistics;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button LoadMoreDbInfoButton;
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(SchulteTableTasksGeneralStatisticsPage));
             TimeOptionsChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "TimeOptionsChart");
@@ -42,7 +39,6 @@ namespace Mental.Views {
             GridSizeChart = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Microcharts.Forms.ChartView>(this, "GridSizeChart");
             LatestSchulteTableTasksListView = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.ListView>(this, "LatestSchulteTableTasksListView");
             LoadSimilarStatistics = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "LoadSimilarStatistics");
-            LoadMoreDbInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "LoadMoreDbInfoButton");
         }
     }
 }

@@ -16,8 +16,19 @@ namespace Mental.ViewModels
     public class SchulteTableTasksGeneralStatisticsVM : BaseVM
     {
         private int GeneralAmountOfRecords;
-        private int LoadCounter = 0;
         private int AmountOfDataInListView = 5;
+
+        private int _StartPaginationIndex;
+        private int _CurrentPaginationIndex;
+        private int _LastPaginationIndex;
+
+        private string Color1 = "#0040ff"; //DarkBlue        
+        private string Color2 = "#F55B70"; //Red
+        private string Color3 = "#ff9900"; //Orange
+        private string Color4 = "#009933"; //Green     
+        private string Color5 = "#8000ff"; //Violet
+        private string Color6 = "#2eb8b8"; //Aqua
+        private string Color7 = "#cc4400"; //Brown
 
         private List<DbSchulteTableTaskListItem> _SchulteTableTaskListItems;
         private DbSchulteTableTaskListItem _SelectedSchulteTableTaskListItem;
@@ -40,6 +51,16 @@ namespace Mental.ViewModels
                 InitializeEasyModeOptionsChart(db);
                 InitializeGridSizeOptionsChart(db);
             }
+
+            int AmountOfPages = GeneralAmountOfRecords / AmountOfDataInListView;
+            if (GeneralAmountOfRecords % AmountOfDataInListView == 0)
+                AmountOfPages -= 1;
+
+            StartPaginationIndex = 0;
+            CurrentPaginationIndex = 0;
+            LastPaginationIndex = AmountOfPages;
+
+
             LoadMoreDbMathTaskInfo();
             LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
             LoadSimilarCommand = new Command(LoadSimilar);
@@ -58,7 +79,14 @@ namespace Mental.ViewModels
             set
             {
                 if (value != null)
+                {
+                    foreach(DbSchulteTableTaskListItem item in DbSchulteTableTasksListItems)
+                        item.SetDefaultColor();
+
                     _SelectedSchulteTableTaskListItem = value;
+                    _SelectedSchulteTableTaskListItem.SetActiveColor();
+                }
+                   
             }
         }
 
@@ -66,7 +94,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -79,7 +107,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _EasyModeChart };
+                return new DonutChart() { Entries = _EasyModeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -88,11 +116,11 @@ namespace Mental.ViewModels
             }
         }
 
-        public BarChart GridSizeChart
+        public PointChart GridSizeChart
         {
             get
             {
-                return new BarChart() { Entries = _GridSizeChart };
+                return new PointChart() { Entries = _GridSizeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 17 };
             }
             set
             {
@@ -106,26 +134,23 @@ namespace Mental.ViewModels
             int AmountOfCountdownOptionRecords = await db.SchulteTableTasks.Where(t => t.TimeOption == 0).CountAsync();
             int AmountOfLimitedTasksOptionRecords = await db.SchulteTableTasks.Where(t => t.TimeOption == 1).CountAsync();
             int AmountOfLastTaskOptionRecords = GeneralAmountOfRecords - (AmountOfCountdownOptionRecords + AmountOfLimitedTasksOptionRecords);
- 
+
             List<Entry> entries = new List<Entry>()
             {
                 new Entry(AmountOfCountdownOptionRecords)
                 {
-                    ValueLabel = "Countdown",
-                    Color = SkiaSharp.SKColor.Parse("000080"),
-                    Label = AmountOfCountdownOptionRecords.ToString()
+                    ValueLabel = $"Countdown ({AmountOfCountdownOptionRecords.ToString()})",
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfLimitedTasksOptionRecords)
                 {
-                    ValueLabel = "Limited tasks",
-                    Color = SkiaSharp.SKColor.Parse("F55B70"),
-                    Label = AmountOfLimitedTasksOptionRecords.ToString()
+                    ValueLabel = $"Limited tasks ({AmountOfLimitedTasksOptionRecords.ToString()})",
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 },
                 new Entry(AmountOfLastTaskOptionRecords)
                 {
-                    ValueLabel = "Last task",
-                    Color = SkiaSharp.SKColor.Parse("D3C0D3"),
-                    Label = AmountOfLastTaskOptionRecords.ToString()
+                    ValueLabel = $"Last task ({AmountOfLastTaskOptionRecords.ToString()})",
+                    Color = SkiaSharp.SKColor.Parse(Color3)
                 }
             };
 
@@ -142,13 +167,13 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfEasyModeActivatedRecords)
                 {
-                    ValueLabel = "Easy mode",
-                    Color = SkiaSharp.SKColor.Parse("000080")
+                    ValueLabel = $"Easy mode ({AmountOfEasyModeActivatedRecords.ToString()})",
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfEasyModeDisabledRecords)
                 {
-                    ValueLabel = "Standard",
-                    Color = SkiaSharp.SKColor.Parse("F55B70")
+                    ValueLabel = $"Standard ({AmountOfEasyModeDisabledRecords.ToString()})",
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 }
             };
             _EasyModeChart = entries;
@@ -167,40 +192,142 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOf3GridSizeRecods)
                 {
-                    ValueLabel = "3",
-                    Color = SkiaSharp.SKColor.Parse("000080"),
-                    Label = AmountOf3GridSizeRecods.ToString()
+                    ValueLabel =  AmountOf3GridSizeRecods.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color1),
+                    Label = "3 x 3",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOf4GridSizeRecods)
                 {
-                    ValueLabel = "4",
-                    Color = SkiaSharp.SKColor.Parse("F55B70"),
-                    Label = AmountOf4GridSizeRecods.ToString()
+                    ValueLabel = AmountOf4GridSizeRecods.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color2),
+                    Label = "4 x 4",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry( AmountOf5GridSizeRecods)
                 {
-                    ValueLabel = "5",
-                    Color = SkiaSharp.SKColor.Parse("D3C0D3"),
-                    Label = AmountOf5GridSizeRecods.ToString()
+                    ValueLabel = AmountOf5GridSizeRecods.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color3),
+                    Label =  "5 x 5",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOf6GridSizeRecods)
                 {
-                    ValueLabel = "6",
-                    Color = SkiaSharp.SKColor.Parse("007F7F"),
-                    Label = AmountOf6GridSizeRecods.ToString()
+                    ValueLabel = AmountOf6GridSizeRecods.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color4),
+                    Label =  "6 x 6",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry( AmountOf7GridSizeRecods)
                 {
-                    ValueLabel = "7",
-                    Color = SkiaSharp.SKColor.Parse("0545F5"),
-                    Label = AmountOf7GridSizeRecods.ToString()
+                    ValueLabel = AmountOf7GridSizeRecods.ToString(),
+                    Color = SkiaSharp.SKColor.Parse(Color5),
+                    Label =  "7 x 7",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 }
             };
 
             _GridSizeChart = entries;
             OnPropertyChanged("GridSizeChart");
         }
-       
+
+        //-------------------- Pagination -------------------------------------------
+
+        public int StartPaginationIndex
+        {
+            get
+            {
+                return _StartPaginationIndex;
+            }
+            set
+            {
+                _StartPaginationIndex = value;
+                OnPropertyChanged("StartPaginationIndex");
+            }
+        }
+
+        public int CurrentPaginationIndex
+        {
+            get
+            {
+                return _CurrentPaginationIndex;
+            }
+            set
+            {
+                _CurrentPaginationIndex = value;
+                OnPropertyChanged("CurrentPaginationIndex");
+            }
+        }
+
+        public int LastPaginationIndex
+        {
+            get
+            {
+                return _LastPaginationIndex;
+            }
+            set
+            {
+                _LastPaginationIndex = value;
+                OnPropertyChanged("LastPaginationIndex");
+            }
+        }
+
+
+        public Command StartPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() => {
+                    CurrentPaginationIndex = StartPaginationIndex;
+                    LoadMoreDbMathTaskInfo();
+                });
+            }
+        }
+
+        public Command LastPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    CurrentPaginationIndex = LastPaginationIndex;
+                    LoadMoreDbMathTaskInfo();
+                });
+            }
+        }
+
+        public Command LeftPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (CurrentPaginationIndex != StartPaginationIndex)
+                    {
+                        CurrentPaginationIndex -= 1;
+                        LoadMoreDbMathTaskInfo();
+                    }
+                });
+            }
+        }
+
+        public Command RightPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (CurrentPaginationIndex != LastPaginationIndex)
+                    {
+                        CurrentPaginationIndex += 1;
+                        LoadMoreDbMathTaskInfo();
+                    }
+                });
+            }
+        }
+
+        //-----------------------------------------------------------------------
+
         public Command LoadMoreDbMathTasksCommand { get; set; }
 
         private void LoadMoreDbMathTaskInfo()
@@ -208,15 +335,16 @@ namespace Mental.ViewModels
             DbSchulteTableTask[] dbSchulteTableTasks;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbSchulteTableTasks = db.SchulteTableTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * LoadCounter).Take(AmountOfDataInListView).ToArray();
+                dbSchulteTableTasks = db.SchulteTableTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArray();
             }
-            if (_SchulteTableTaskListItems == null)
-                _SchulteTableTaskListItems = new List<DbSchulteTableTaskListItem>();
-            LoadCounter += 1;
+
+            _SchulteTableTaskListItems = new List<DbSchulteTableTaskListItem>();
+
             for (int i = 0; i < dbSchulteTableTasks.Length; i++)
             {
                 _SchulteTableTaskListItems.Add(new DbSchulteTableTaskListItem(dbSchulteTableTasks[i]));
             }
+
             ListViewHeightRequest = _SchulteTableTaskListItems.Count * 50;
             OnPropertyChanged("DbSchulteTableTasksListItems");
         }

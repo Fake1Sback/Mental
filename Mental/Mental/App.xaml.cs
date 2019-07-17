@@ -293,9 +293,13 @@ namespace Mental
             //          LoadLatestStroopTaskOptions();
 
 
-          //  MainPage = new NavigationPage(new GeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //  MainPage = new NavigationPage(new GeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
 
-            MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 10, AmountOfWrongAnswers = 3, DigitsAfterDotSing = 1, IsChainLengthFixed = false, IsInteger = true, IsRestrictionActivated = false, LongestTimeExpressionString = "4 +3 ", LongestTimeSpentForExpression = 4, MaxChainLength = 3, MaxValue = 100, MinValue = 0, Operations = "+-*/", ShortestTimeExpressionString = "3 + 1", ShortestTimeSpentForExpression = 3, TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            MainPage = new NavigationPage(new SchulteTableTasksGeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+
+            //  MainPage = new NavigationPage(new SimilarSchulteTableTasksStatisticsPage(new DbSchulteTableTask() { AmountOfCorrectAnswers = 25, AmountOfWrongAnswers = 0, GridSize = 5, IsEasyModeActivated = false, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TimeParameter = 15000, TaskDateTime = DateTime.Now, TaskComplexityParameter = 25, LongestTimeNumberString = "4", ShortestTimeNumberString = "3", LongestTimeSpentForFindingNumber = 2, ShortestTimeSpentForFindingNumber = 1 }, true));
+
+            // MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 10, AmountOfWrongAnswers = 3, DigitsAfterDotSing = 1, IsChainLengthFixed = false, IsInteger = true, IsRestrictionActivated = false, LongestTimeExpressionString = "4 +3 ", LongestTimeSpentForExpression = 4, MaxChainLength = 3, MaxValue = 100, MinValue = 0, Operations = "+-*/", ShortestTimeExpressionString = "3 + 1", ShortestTimeSpentForExpression = 3, TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
 
             //MainPage = new NavigationPage(new MathTasksOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
             //MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };

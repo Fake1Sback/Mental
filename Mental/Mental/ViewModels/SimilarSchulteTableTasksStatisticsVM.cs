@@ -14,16 +14,33 @@ namespace Mental.ViewModels
 {
     public class SimilarSchulteTableTasksStatisticsVM : BaseVM
     {
-        private int AmountOfData = 3;
+        private int AmountOfData = 4;
         private int LoadMoreCounter = 0;
 
-        private DbSchulteTableTask SelectedDbSchulteTableTask;
-        private DbSchulteTableTask DbSchulteTaskToSave;
+        private DbSchulteTableTask _SelectedDbSchulteTableTask;
+        public DbSchulteTableTaskListItem SelectedDbSchulteTableTaskListItem
+        {
+            set
+            {
+                DbSchulteTableTaskListItem schulteTableTaskListItem = value;
+                if (schulteTableTaskListItem != null)
+                {
+                    _SelectedDbSchulteTableTask = schulteTableTaskListItem.DbSchulteTableTask;
+                    foreach (DbSchulteTableTaskListItem item in DbSchulteTableTasksListItems)
+                        item.SetDefaultColor();
+                    schulteTableTaskListItem.SetActiveColor();
+                    InitializeChart();
+                }
+            }
+        }
 
-        private List<DbSchulteTableTask> DbSchulteTableTasksList = new List<DbSchulteTableTask>();
-        public List<DbSchulteTableTaskListItem> DbSchulteTableTasksListItems { get; set; }
+        private DbSchulteTableTask _DbSchulteTaskToSave;
+        private DbSchulteTableTask _PatternDbSchulteTableTask;
 
-        public List<DbSchulteTableTaskListItem> dbSchulteTableTaskListItems
+        private List<DbSchulteTableTask> _DbSchulteTableTasksList = new List<DbSchulteTableTask>();
+
+        public List<DbSchulteTableTaskListItem> DbSchulteTableTasksListItems { get; set; }   
+        public List<DbSchulteTableTaskListItem> DbSchulteTableTasksListItemsProp
         {
             get
             {
@@ -32,35 +49,12 @@ namespace Mental.ViewModels
             set
             {
                 DbSchulteTableTasksListItems = value;
-                OnPropertyChanged("dbSchulteTableTaskListItems");
+                OnPropertyChanged("DbSchulteTableTasksListItemsProp");
             }
         }
-
-        public DbSchulteTableTaskListItem SelectedDbSchulteTableListViewItem
-        {
-            set
-            {
-                if(value != null)
-                {
-                    SelectedDbSchulteTableTask = value.DbSchulteTableTask;
-                    OnPropertyChanged("TimeOptionLabel");
-                    OnPropertyChanged("EasyModeLabel");
-                    OnPropertyChanged("GridSizeLabel");
-                    OnPropertyChanged("EfficiencyLabel");
-                    OnPropertyChanged("LongestTimeSpentForFindingNumberLabel");
-                    OnPropertyChanged("LongestTimeLabel");
-                    OnPropertyChanged("ShortestTimeSpentForFindingNumberLabel");
-                    OnPropertyChanged("ShortestTimeNumberLabel");
-                    OnPropertyChanged("DateTimeLabel");
-                    InitializeChart();
-                }
-            }
-        }
-
+      
         private INavigation navigation;
 
-        private bool _DetailedTaskOptionsButtonVisibility = true;
-        private bool _DetailedTasksOptionsLayoutVisibility = false;
         private bool _SaveButtonVisibility;
         private bool _GeneralStatisticsButtonVisibility = true;
 
@@ -70,8 +64,9 @@ namespace Mental.ViewModels
             SaveButtonVisibility = Save;
             GeneralStatisticsButtonVisibility = Save;
             if (Save)
-                DbSchulteTaskToSave = _dbSchulteTableTask;
-            SelectedDbSchulteTableTask = _dbSchulteTableTask;
+                _DbSchulteTaskToSave = _dbSchulteTableTask;
+            _SelectedDbSchulteTableTask = _dbSchulteTableTask;
+            _PatternDbSchulteTableTask = _dbSchulteTableTask;
             GetMathTasksFromDb();
             FillListView();
             InitializeChart();
@@ -79,124 +74,67 @@ namespace Mental.ViewModels
             SaveRecordToDbCommand = new Command(SaveRecordToDb);
             LoadMoreRecordsCommand = new Command(LoadMoreRecords);
             ClearRecordsCommand = new Command(ClearRecords);
-            LoadGeneralStatistics = new Command(LoadMoreRecords);
             LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage()); });
         }
 
-        public LineChart LineChart
+        //---------------------TopFrameValue-------------------------------
+
+        public string TopFrameGridSize
         {
             get
             {
-                List<Entry> entries = new List<Entry>();
-                for (int i = DbSchulteTableTasksList.Count - 1; i >= 0; i--)
-                {
-                    if (SelectedDbSchulteTableTask == DbSchulteTableTasksList[i])
-                        entries.Add(new Entry((float)DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("000080"), Label = "Selected", ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
-                    else
-                    {
-                        if (DbSchulteTableTasksList[i].TaskDateTime.Date == DateTime.Now.Date)
-                        {
-                            entries.Add(new Entry((float)DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = DbSchulteTableTasksList[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
-                        }
-                        else
-                            entries.Add(new Entry((float)DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("1CC9F0"), Label = DbSchulteTableTasksList[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
-                    }
-
-                }
-                if (DbSchulteTaskToSave != null)
-                    entries.Add(new Entry((float)DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FF1493"), Label = "Current", ValueLabel = DbSchulteTaskToSave.GetEfficiencyParameterString() });
-                return new LineChart() { Entries = entries };
+                return _PatternDbSchulteTableTask.GridSize + " x " + _PatternDbSchulteTableTask.GridSize;
             }
-            private set { }
-        }  
+        }
 
-        public string TimeOptionLabel
+        public string TopFrameEasyMode
         {
             get
             {
-                if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
-                    return "Time Option: Countdown";
-                else if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "Time Option: Limited Operations";
+                if (_PatternDbSchulteTableTask.IsEasyModeActivated)
+                    return "Easy Mode";
                 else
-                    return "Time Options: Last Task";
-
+                    return "Normal Mode";
             }
         }
 
-        public string EasyModeLabel
+        public string TopFrameEasyModeSrc
         {
             get
             {
-                if (SelectedDbSchulteTableTask.IsEasyModeActivated)
-                    return "Easy Mode: +";
+                if (_PatternDbSchulteTableTask.IsEasyModeActivated)
+                    return "Easy_Mode_24.png";
                 else
-                    return "Easy Mode: -";
+                    return "circle_outline_white_24.png";
             }
         }
 
-        public string GridSizeLabel
+        public string TopFrameTimeParametersImgSrc
         {
             get
             {
-                return "Grid Size: " + SelectedDbSchulteTableTask.GridSize;
+                if (_PatternDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "list_numbered_white_24.png";
+                else
+                    return "access_time_white_24.png";
             }
         }
 
-        public string EfficiencyLabel
+        public string TopFrameTimeParameters
         {
             get
             {
-                return "Efficiency: " + SelectedDbSchulteTableTask.GetEfficiencyParameterString();
-                //if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
-                //    return "Efficiency: " + (SelectedDbSchulteTableTask.AmountOfCorrectAnswers / (SelectedDbSchulteTableTask.AmountOfCorrectAnswers + SelectedDbSchulteTableTask.AmountOfWrongAnswers) * 100).ToString() + "%";
-                //else if (SelectedDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
-                //    return "Efficiency: " + TimeSpan.FromMilliseconds(SelectedDbSchulteTableTask.TimeParameter).ToString(@"mm\:ss");
-                //else
-                //    return "Efficiency: " + SelectedDbSchulteTableTask.TimeParameter.ToString() + "%";
+                if (_PatternDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
+                    return _PatternDbSchulteTableTask.TaskComplexityParameter.ToString() + " min";
+                else if (_PatternDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
+                    return _PatternDbSchulteTableTask.TaskComplexityParameter.ToString() + " tasks";
+                else
+                    return _PatternDbSchulteTableTask.TaskComplexityParameter.ToString() + " sec";
             }
         }
 
-        public string LongestTimeSpentForFindingNumberLabel
-        {
-            get
-            {
-                return "Longest time spent for finding number: " + SelectedDbSchulteTableTask.LongestTimeSpentForFindingNumber + " sec";
-            }
-        }
-
-        public string LongestTimeLabel
-        {
-            get
-            {
-                return "Number: " + SelectedDbSchulteTableTask.LongestTimeNumberString;
-            }
-        }
-
-        public string ShortestTimeSpentForFindingNumberLabel
-        {
-            get
-            {
-                return "Shortest time spent for finding number: " + SelectedDbSchulteTableTask.ShortestTimeSpentForFindingNumber + " sec";
-            }
-        }
-
-        public string ShortestTimeNumberLabel
-        {
-            get
-            {
-                return "Number: " + SelectedDbSchulteTableTask.ShortestTimeNumberString;
-            }
-        }
-
-        public string DateTimeLabel
-        {
-            get
-            {
-                return "Date: " + SelectedDbSchulteTableTask.TaskDateTime.ToString("dd-MM-yy HH:mm");
-            }
-        }
-
+        //-----------------------------------------------------------------
+          
         public bool SaveButtonVisibility
         {
             get
@@ -207,32 +145,6 @@ namespace Mental.ViewModels
             {
                 _SaveButtonVisibility = value;
                 OnPropertyChanged("SaveButtonVisibility");
-            }
-        }
-
-        public bool DetailedTaskOptionsLayoutVisibility
-        {
-            get
-            {
-                return _DetailedTasksOptionsLayoutVisibility;
-            }
-            set
-            {
-                _DetailedTasksOptionsLayoutVisibility = value;
-                OnPropertyChanged("DetailedTaskOptionsLayoutVisibility");
-            }
-        }
-
-        public bool DetailedTaskOptionsButtonVisibility
-        {
-            get
-            {
-                return _DetailedTaskOptionsButtonVisibility;
-            }
-            set
-            {
-                _DetailedTaskOptionsButtonVisibility = value;
-                OnPropertyChanged("DetailedTaskOptionsButtonVisibility");
             }
         }
 
@@ -249,34 +161,21 @@ namespace Mental.ViewModels
             }
         }
 
-
-        public Command ShowHideDetailedStatisticsCommand
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    DetailedTaskOptionsLayoutVisibility = !DetailedTaskOptionsLayoutVisibility;
-                });
-            }
-        }
-
         public Command SaveRecordToDbCommand { get; set; }
 
         private void SaveRecordToDb()
         {
-            if (DbSchulteTaskToSave != null)
+            if (_DbSchulteTaskToSave != null)
             {
                 using (var db = new ApplicationContext("mental.db"))
                 {
-                    db.SchulteTableTasks.Add(DbSchulteTaskToSave);
+                    db.SchulteTableTasks.Add(_DbSchulteTaskToSave);
                     db.SaveChanges();
                 }
-                DbSchulteTaskToSave = null;
+                _DbSchulteTaskToSave = null;
                 LoadMoreCounter = 0;
-                DbSchulteTableTasksList.Clear();
+                _DbSchulteTableTasksList.Clear();
                 GetMathTasksFromDb();
-                SelectedDbSchulteTableTask = DbSchulteTableTasksList[0];
                 FillListView();
                 InitializeChart();
                 SaveButtonVisibility = false;
@@ -289,6 +188,7 @@ namespace Mental.ViewModels
         {
             GetMathTasksFromDb();
             FillListView();
+            _SelectedDbSchulteTableTask = null;
             InitializeChart();
         }
 
@@ -296,26 +196,27 @@ namespace Mental.ViewModels
 
         private void ClearRecords()
         {
-            if (SelectedDbSchulteTableTask != null)
+            using (var db = new ApplicationContext("mental.db"))
             {
-                using (var db = new ApplicationContext("mental.db"))
+                DbSchulteTableTask[] dbSchulteTableTasksToDelete = db.SchulteTableTasks.Where(t => t.TimeOption == _PatternDbSchulteTableTask.TimeOption &&
+                t.TaskComplexityParameter == _PatternDbSchulteTableTask.TaskComplexityParameter &&
+                t.GridSize == _PatternDbSchulteTableTask.GridSize &&
+                t.IsEasyModeActivated == _PatternDbSchulteTableTask.IsEasyModeActivated).ToArray();
+
+
+                if (dbSchulteTableTasksToDelete != null)
                 {
-                    DbSchulteTableTask[] dbSchulteTableTasksToDelete = db.SchulteTableTasks.Where(t => t.TimeOption == SelectedDbSchulteTableTask.TimeOption && t.TaskComplexityParameter == SelectedDbSchulteTableTask.TaskComplexityParameter && t.GridSize == SelectedDbSchulteTableTask.GridSize).ToArray();
-                    db.SchulteTableTasks.RemoveRange(dbSchulteTableTasksToDelete);
-                    db.SaveChanges();
+                    if(dbSchulteTableTasksToDelete.Length != 0)
+                    {
+                        db.SchulteTableTasks.RemoveRange(dbSchulteTableTasksToDelete);
+                        db.SaveChanges();
+                    }
                 }
+
             }
 
-            DbSchulteTaskToSave = null;
-            SelectedDbSchulteTableTask = null;
-
-            LoadMoreCounter = 0;
-
-            DbSchulteTableTasksList.Clear();
-
-            DetailedTaskOptionsLayoutVisibility = false;
-            DetailedTaskOptionsButtonVisibility = false;
-            SaveButtonVisibility = false;
+            _SelectedDbSchulteTableTask = null;
+            _DbSchulteTableTasksList.Clear();
 
             FillListView();
             InitializeChart();
@@ -328,15 +229,22 @@ namespace Mental.ViewModels
         private void GetMathTasksFromDb()
         {
             DbSchulteTableTask[] dbSchulteTableTasks;
-            if (SelectedDbSchulteTableTask != null)
-            {
-                using (var db = new ApplicationContext("mental.db"))
-                {
-                    dbSchulteTableTasks = db.SchulteTableTasks.Where(t => t.TimeOption == SelectedDbSchulteTableTask.TimeOption && t.TaskComplexityParameter == SelectedDbSchulteTableTask.TaskComplexityParameter && t.GridSize == SelectedDbSchulteTableTask.GridSize).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();                 
-                }
 
-                LoadMoreCounter += 1;
-                DbSchulteTableTasksList.AddRange(dbSchulteTableTasks);
+            using (var db = new ApplicationContext("mental.db"))
+            {
+                dbSchulteTableTasks = db.SchulteTableTasks.Where(t => t.TimeOption == _PatternDbSchulteTableTask.TimeOption &&
+                t.TaskComplexityParameter == _PatternDbSchulteTableTask.TaskComplexityParameter &&
+                t.GridSize == _PatternDbSchulteTableTask.GridSize &&
+                t.IsEasyModeActivated == _PatternDbSchulteTableTask.IsEasyModeActivated).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+            }
+
+            if(dbSchulteTableTasks != null)
+            {
+                if(dbSchulteTableTasks.Length != 0)
+                {
+                    LoadMoreCounter += 1;
+                    _DbSchulteTableTasksList.AddRange(dbSchulteTableTasks);
+                }
             }
         }
 
@@ -344,13 +252,12 @@ namespace Mental.ViewModels
         {
             DbSchulteTableTasksListItems = new List<DbSchulteTableTaskListItem>();
 
-            for (int i = 0; i < DbSchulteTableTasksList.Count; i++)
+            for (int i = 0; i < _DbSchulteTableTasksList.Count; i++)
             {
-                DbSchulteTableTasksListItems.Add(new DbSchulteTableTaskListItem(DbSchulteTableTasksList[i]));
+                DbSchulteTableTasksListItems.Add(new DbSchulteTableTaskListItem(_DbSchulteTableTasksList[i]));
             }
 
-            OnPropertyChanged("SimilarTasksListViewHeightRequest");
-            OnPropertyChanged("dbSchulteTableTaskListItems");
+            OnPropertyChanged("DbSchulteTableTasksListItemsProp");
         }
 
         public int SimilarTasksListViewHeightRequest
@@ -365,6 +272,32 @@ namespace Mental.ViewModels
         private void InitializeChart()
         {
             OnPropertyChanged("LineChart");
+        }
+
+        public LineChart LineChart
+        {
+            get
+            {
+                List<Entry> entries = new List<Entry>();
+                for (int i = _DbSchulteTableTasksList.Count - 1; i >= 0; i--)
+                {
+                    if (_SelectedDbSchulteTableTask == _DbSchulteTableTasksList[i])
+                        entries.Add(new Entry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#99ffcc"), TextColor = SkiaSharp.SKColor.Parse("#99ffcc"), Label = "Selected", ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                    else
+                    {
+                        if (_DbSchulteTableTasksList[i].TaskDateTime.Date == DateTime.Now.Date)
+                        {
+                            entries.Add(new Entry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = _DbSchulteTableTasksList[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                        }
+                        else
+                            entries.Add(new Entry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = _DbSchulteTableTasksList[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                    }
+
+                }
+                if (_DbSchulteTaskToSave != null)
+                    entries.Add(new Entry((float)_DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = _DbSchulteTaskToSave.GetEfficiencyParameterString() });
+                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff") };
+            }
         }
     }
 }
