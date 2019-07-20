@@ -129,8 +129,8 @@
                                         <!--<StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
                                             <Button HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" BorderRadius="15" Image="statistics_white_18.png" BackgroundColor="#6699ff"></Button>
                                         </StackLayout>-->
-                                        <StackLayout Orientation="Vertical" Margin="15,5,15,5">
-                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="15,5,15,5">
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                                                 <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding Operations}" FontSize="14" FontAttributes="Bold"></Label>
                                                 <Image Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_18.png" Rotation="180"></Image>
                                                 <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding MinValue}"></Label>
@@ -141,7 +141,7 @@
                                                 <Image Style="{StaticResource ListViewItemImage}" Source="help_outline_white_18.png"></Image>
                                                 <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TaskType}"></Label>
                                             </StackLayout>
-                                            <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                            <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                                                 <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding CorrentAnswers}" TextColor="Green"></Label>
                                                 <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text=" / "></Label>
                                                 <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding WrongAnswers}" TextColor="Red"></Label>
@@ -151,7 +151,7 @@
                                                 <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding MaxChainLength}"></Label>
                                                 <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="Restrictions_18.png" IsVisible="{Binding RestrictionsVisibility}"></Image>
                                             </StackLayout>
-                                            <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                                            <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                                                 <Image Style="{StaticResource ListViewItemImage}" Source="date_range_white_18.png" HorizontalOptions="CenterAndExpand"></Image>
                                                 <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding DateTimeString}" HorizontalOptions="CenterAndExpand"></Label>
                                             </StackLayout>

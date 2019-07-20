@@ -116,8 +116,10 @@ namespace Mental.Models
             {
                 if (dbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
                     return "list_numbered_white_18.png";
-                else
+                else if (dbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
                     return "access_time_white_18.png";
+                else
+                    return "Stopwatch_18.png";
             }
         }
 

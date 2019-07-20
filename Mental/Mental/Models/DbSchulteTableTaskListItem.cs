@@ -83,8 +83,10 @@ namespace Mental.Models
             {
                 if (DbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
                     return "list_numbered_white_18.png";
-                else
+                else if (DbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
                     return "access_time_white_18.png";
+                else
+                    return "Stopwatch_18.png";
             }
         }
 

@@ -3,6 +3,7 @@ using Mental.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace Mental.Models
 {
@@ -10,9 +11,38 @@ namespace Mental.Models
     {
         public DbStroopTask DbStroopTask;
 
+        private Color ActiveColor = Color.FromHex("#99ffcc");
+        private Color DefaultColor = Color.FromHex("#80aaff");
+
+        private Color _FrameBackgroundColor;
+
         public DbStroopTaskListItem(DbStroopTask _dbStroopTask)
         {
             DbStroopTask = _dbStroopTask;
+            SetDefaultColor();
+        }
+
+        public Color FrameBackgroundColor
+        {
+            get
+            {
+                return _FrameBackgroundColor;
+            }
+            set
+            {
+                _FrameBackgroundColor = value;
+                OnPropertyChanged("FrameBackgroundColor");
+            }
+        }
+
+        public void SetActiveColor()
+        {
+            FrameBackgroundColor = ActiveColor;
+        }
+
+        public void SetDefaultColor()
+        {
+            FrameBackgroundColor = DefaultColor;
         }
 
         public string TaskTypeString
@@ -20,19 +50,45 @@ namespace Mental.Models
             get
             {
                 if (DbStroopTask.StroopTaskOption == (byte)StroopTaskType.FindOneCorrect)
-                    return "Find 1";
+                    return "Find 1 Correct";
                 else if (DbStroopTask.StroopTaskOption == (byte)StroopTaskType.TrueOrFalse)
                     return "True/False";
                 else
-                    return "Find Color";
+                    return "Find Color by Text";
             }
         }
 
-        public string AmountOfButtonsString
+        public string TaskTypeImgSrc
         {
             get
             {
-                return "Buttons: " + DbStroopTask.AmountOfButtons;
+                if (DbStroopTask.StroopTaskOption == (byte)StroopTaskType.FindOneCorrect)
+                    return "Find_One_18.png";
+                else if (DbStroopTask.StroopTaskOption == (byte)StroopTaskType.TrueOrFalse)
+                    return "True_or_False_18.png";
+                else
+                    return "Color_by_Text_18.png";
+            }
+        }
+
+        public int AmountOfButtons
+        {
+            get
+            {
+                return DbStroopTask.AmountOfButtons;
+            }
+        }
+
+        public string TimeOptionImgSrc
+        {
+            get
+            {
+                if (DbStroopTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
+                    return "list_numbered_white_18.png";
+                else if (DbStroopTask.TimeOption == (byte)TimeOptions.CountdownTimer)
+                    return "access_time_white_18.png";
+                else
+                    return "Stopwatch_18.png";
             }
         }
 

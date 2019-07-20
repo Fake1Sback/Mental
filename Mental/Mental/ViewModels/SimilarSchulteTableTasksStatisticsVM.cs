@@ -115,8 +115,10 @@ namespace Mental.ViewModels
             {
                 if (_PatternDbSchulteTableTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
                     return "list_numbered_white_24.png";
-                else
+                else if (_PatternDbSchulteTableTask.TimeOption == (byte)TimeOptions.CountdownTimer)
                     return "access_time_white_24.png";
+                else
+                    return "Stopwatch_24.png";
             }
         }
 

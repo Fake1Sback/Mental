@@ -15,8 +15,19 @@ namespace Mental.ViewModels
     public class StroopTaskGeneralStatisticsVM : BaseVM
     {
         private int GeneralAmountOfRecords;
-        private int LoadCounter = 0;
         private int AmountOfDataInListView = 5;
+
+        private int _StartPaginationIndex;
+        private int _CurrentPaginationIndex;
+        private int _LastPaginationIndex;
+
+        private string Color1 = "#0040ff"; //DarkBlue        
+        private string Color2 = "#F55B70"; //Red
+        private string Color3 = "#ff9900"; //Orange
+        private string Color4 = "#009933"; //Green     
+        private string Color5 = "#8000ff"; //Violet
+        private string Color6 = "#2eb8b8"; //Aqua
+        private string Color7 = "#cc4400"; //Brown
 
         private List<DbStroopTaskListItem> _DbStroopTaskListItems;
         private DbStroopTaskListItem _SelectedStroopTaskListItem;
@@ -39,6 +50,15 @@ namespace Mental.ViewModels
                 InitializeStroopTaskTypeChart(db);
                 InitializeAmountOfButtonsChart(db);
             }
+
+            int AmountOfPages = GeneralAmountOfRecords / AmountOfDataInListView;
+            if (GeneralAmountOfRecords % AmountOfDataInListView == 0)
+                AmountOfPages -= 1;
+
+            StartPaginationIndex = 0;
+            CurrentPaginationIndex = 0;
+            LastPaginationIndex = AmountOfPages;
+
             LoadMoreDbMathTaskInfo();
             LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
             LoadSimilarCommand = new Command(LoadSimilar);
@@ -57,15 +77,22 @@ namespace Mental.ViewModels
             set
             {
                 if (value != null)
+                {
+                    foreach (DbStroopTaskListItem item in DbStroopTaskListItems)
+                        item.SetDefaultColor();
+
                     _SelectedStroopTaskListItem = value;
+                    _SelectedStroopTaskListItem.SetActiveColor();
+                }
             }
         }
+
 
         public DonutChart TimeOptionsChart
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -78,7 +105,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _StroopTaskTypeChart };
+                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -87,11 +114,11 @@ namespace Mental.ViewModels
             }
         }
 
-        public BarChart AmountOfButtonsChart
+        public PointChart AmountOfButtonsChart
         {
             get
             {
-                return new BarChart() { Entries = _AmountOfButtonsChart };
+                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
             }
             set
             {
@@ -111,21 +138,18 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfCountdownOptionRecords)
                 {
-                    ValueLabel = "Countdown",
-                    Color = SkiaSharp.SKColor.Parse("000080"),
-                    Label = AmountOfCountdownOptionRecords.ToString()
+                    ValueLabel = $"Countdown ({AmountOfCountdownOptionRecords})",
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfLimitedTasksOptionRecords)
                 {
-                    ValueLabel = "Limited tasks",
-                    Color = SkiaSharp.SKColor.Parse("F55B70"),
-                    Label = AmountOfLimitedTasksOptionRecords.ToString()
+                    ValueLabel = $"Limited tasks ({AmountOfLimitedTasksOptionRecords})",
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 },
                 new Entry(AmountOfLastTaskOptionRecords)
                 {
-                    ValueLabel = "Last task",
-                    Color = SkiaSharp.SKColor.Parse("D3C0D3"),
-                    Label = AmountOfLastTaskOptionRecords.ToString()
+                    ValueLabel = $"Last task ({AmountOfLastTaskOptionRecords})",
+                    Color = SkiaSharp.SKColor.Parse(Color3)
                 }
             };
 
@@ -143,21 +167,18 @@ namespace Mental.ViewModels
             {
                 new Entry(AmountOfFindOneCorrectRecords)
                 {
-                    ValueLabel = "Find One Correct",
-                    Color = SkiaSharp.SKColor.Parse("000080"),
-                    Label = AmountOfFindOneCorrectRecords.ToString()
+                    ValueLabel = $"One Correct ({AmountOfFindOneCorrectRecords})",
+                    Color = SkiaSharp.SKColor.Parse(Color1)
                 },
                 new Entry(AmountOfTrueOrFalseRecords)
                 {
-                    ValueLabel = "True or False",
-                    Color = SkiaSharp.SKColor.Parse("F55B70"),
-                    Label = AmountOfTrueOrFalseRecords.ToString()
+                    ValueLabel = $"True / False ({AmountOfTrueOrFalseRecords})",
+                    Color = SkiaSharp.SKColor.Parse(Color2)
                 },
                 new Entry(AmountOfFindColorByTextRecods)
                 {
-                    ValueLabel = "Find Color by Text",
-                    Color = SkiaSharp.SKColor.Parse("D3C0D3"),
-                    Label = AmountOfFindColorByTextRecods.ToString()
+                    ValueLabel = $"Color by Text ({AmountOfFindColorByTextRecods})",
+                    Color = SkiaSharp.SKColor.Parse(Color3)
                 }
             };
 
@@ -178,32 +199,37 @@ namespace Mental.ViewModels
                 new Entry(AmountOf2ButtonsRecods)
                 {
                     ValueLabel = AmountOf2ButtonsRecods.ToString(),
-                    Color = SkiaSharp.SKColor.Parse("000080"),
-                    Label = "2 Records"
+                    Color = SkiaSharp.SKColor.Parse(Color1),
+                    Label = "2 Records",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOf4ButtonsRecods)
                 {
                     ValueLabel = AmountOf4ButtonsRecods.ToString(),
-                    Color = SkiaSharp.SKColor.Parse("F55B70"),
-                    Label = "4 Records"
+                    Color = SkiaSharp.SKColor.Parse(Color2),
+                    Label = "4 Records",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOf6ButtonsRecods)
                 {
                     ValueLabel = AmountOf6ButtonsRecods.ToString(),
-                    Color = SkiaSharp.SKColor.Parse("D3C0D3"),
-                    Label = "6 Records"
+                    Color = SkiaSharp.SKColor.Parse(Color3),
+                    Label = "6 Records",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOf8ButtonsRecods)
                 {
                     ValueLabel = AmountOf8ButtonsRecods.ToString(),
-                    Color = SkiaSharp.SKColor.Parse("007F7F"),
-                    Label = "8 Records"
+                    Color = SkiaSharp.SKColor.Parse(Color4),
+                    Label = "8 Records",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
                 new Entry(AmountOf10ButtonsRecods)
                 {
                     ValueLabel = AmountOf10ButtonsRecods.ToString(),
-                    Color = SkiaSharp.SKColor.Parse("0545F5"),
-                    Label = "10 Records"
+                    Color = SkiaSharp.SKColor.Parse(Color5),
+                    Label = "10 Records",
+                    TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 }
             };
 
@@ -212,7 +238,104 @@ namespace Mental.ViewModels
         }
 
 
-   
+        //-------------------- Pagination -------------------------------------------
+
+        public int StartPaginationIndex
+        {
+            get
+            {
+                return _StartPaginationIndex;
+            }
+            set
+            {
+                _StartPaginationIndex = value;
+                OnPropertyChanged("StartPaginationIndex");
+            }
+        }
+
+        public int CurrentPaginationIndex
+        {
+            get
+            {
+                return _CurrentPaginationIndex;
+            }
+            set
+            {
+                _CurrentPaginationIndex = value;
+                OnPropertyChanged("CurrentPaginationIndex");
+            }
+        }
+
+        public int LastPaginationIndex
+        {
+            get
+            {
+                return _LastPaginationIndex;
+            }
+            set
+            {
+                _LastPaginationIndex = value;
+                OnPropertyChanged("LastPaginationIndex");
+            }
+        }
+
+
+        public Command StartPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() => {
+                    CurrentPaginationIndex = StartPaginationIndex;
+                    LoadMoreDbMathTaskInfo();
+                });
+            }
+        }
+
+        public Command LastPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    CurrentPaginationIndex = LastPaginationIndex;
+                    LoadMoreDbMathTaskInfo();
+                });
+            }
+        }
+
+        public Command LeftPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (CurrentPaginationIndex != StartPaginationIndex)
+                    {
+                        CurrentPaginationIndex -= 1;
+                        LoadMoreDbMathTaskInfo();
+                    }
+                });
+            }
+        }
+
+        public Command RightPaginationButtonCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    if (CurrentPaginationIndex != LastPaginationIndex)
+                    {
+                        CurrentPaginationIndex += 1;
+                        LoadMoreDbMathTaskInfo();
+                    }
+                });
+            }
+        }
+
+        //-----------------------------------------------------------------------
+
+
         public Command LoadMoreDbMathTasksCommand { get; set; }
 
         private void LoadMoreDbMathTaskInfo()
@@ -220,16 +343,16 @@ namespace Mental.ViewModels
             DbStroopTask[] dbStroopTasks;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbStroopTasks = db.StroopTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * LoadCounter).Take(AmountOfDataInListView).ToArray();           
+                dbStroopTasks = db.StroopTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArray();
             }
-            if (_DbStroopTaskListItems == null)
-                _DbStroopTaskListItems = new List<DbStroopTaskListItem>();
-            LoadCounter += 1;
+
+            _DbStroopTaskListItems = new List<DbStroopTaskListItem>();
+
             for (int i = 0; i < dbStroopTasks.Length; i++)
             {
                 _DbStroopTaskListItems.Add(new DbStroopTaskListItem(dbStroopTasks[i]));
             }
-            ListViewHeightRequest = _DbStroopTaskListItems.Count * 50;
+            ListViewHeightRequest = _DbStroopTaskListItems.Count * 50 + 1 * _DbStroopTaskListItems.Count;
             OnPropertyChanged("DbStroopTaskListItems");
         }
 

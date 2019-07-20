@@ -131,8 +131,10 @@ namespace Mental.ViewModels
             {
                 if (PatternDbMathTask.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
                     return "list_numbered_white_24.png";
-                else
+                else if (PatternDbMathTask.TimeOptions == (byte)TimeOptions.CountdownTimer)
                     return "access_time_white_24.png";
+                else
+                    return "Stopwatch_24.png";
             }
         }
 

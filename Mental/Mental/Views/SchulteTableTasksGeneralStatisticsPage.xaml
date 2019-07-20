@@ -100,8 +100,8 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Frame BackgroundColor="{Binding FrameBackgroundColor}" CornerRadius="25" Padding="0" BorderColor="#6699ff">
-                                    <StackLayout Orientation="Vertical" Padding="15,5,15,5">
-                                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="15,5,15,5">
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                             <Image Style="{StaticResource ListViewItemImage}" Source="grid_on_white_18.png"></Image>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding GridSizeString}" Margin="5,0,5,0"></Label>
                                             <Image Style="{StaticResource ListViewItemImage}" Source="{Binding EasyModeSrc}"></Image>
@@ -109,7 +109,7 @@
                                             <Image Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></Image>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TimeOptionString}" Margin="5,0,5,0"></Label>
                                         </StackLayout>
-                                        <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                        <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding EfficiencyString}" Margin="5,0,5,0"></Label>
                                             <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_18.png"></Image>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding DateTimeString}" Margin="5,0,5,0"></Label>
