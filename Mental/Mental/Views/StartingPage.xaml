@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             x:Class="Mental.Views.StartingPage"
+             Title="Starting Page">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CarouselNavigation" TargetType="Button">
+                <Setter Property="WidthRequest" Value="20"></Setter>
+                <Setter Property="HeightRequest" Value="20"></Setter>
+                <Setter Property="BorderColor" Value="#6699ff"></Setter>
+                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="BorderRadius" Value="10"></Setter>
+                <Setter Property="BorderWidth" Value="2"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="Text" Value=""></Setter>
+            </Style>
+            <Style x:Key="StartingPageButton" TargetType="Button">
+                <Setter Property="WidthRequest" Value="70"></Setter>
+                <Setter Property="HeightRequest" Value="70"></Setter>
+                <Setter Property="BorderRadius" Value="15"></Setter>
+                <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
+                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+            </Style>
+            <Style x:Key="StartingPageLabel" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="#6699ff"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
+                    <Label Text="{Binding Caption}" FontSize="23" BackgroundColor="Transparent" TextColor="#fafafa" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></Label>
+                </Frame>
+                <custom:CarouselView ItemsSource="{Binding CarouselViewList}" ItemSelected="CarouselView_ItemSelected">
+                    <custom:CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <StackLayout Margin="20,5,20,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Image Source="{Binding ImgSrc}" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                                    <StackLayout Margin="5" Orientation="Vertical">
+                                        <Button Style="{StaticResource StartingPageButton}" Command="{Binding FavoriteCommand}" Image="Favorite_48.png"></Button>
+                                        <Label Style="{StaticResource StartingPageLabel}" Text="Favorite"></Label>
+                                    </StackLayout>
+                                    <StackLayout Margin="5" Orientation="Vertical">
+                                        <Button Style="{StaticResource StartingPageButton}" Command="{Binding OptionsCommand}" Image="Adjust_48.png"></Button>
+                                        <Label Style="{StaticResource StartingPageLabel}" Text="Customize"></Label>
+                                    </StackLayout>
+                                    <StackLayout Margin="5" Orientation="Vertical">
+                                        <Button Style="{StaticResource StartingPageButton}" Command="{Binding StatisticsCommand}" Image="Statistics_48.png"></Button>
+                                        <Label Style="{StaticResource StartingPageLabel}" Text="Statistics"></Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </custom:CarouselView.ItemTemplate>
+                </custom:CarouselView>
+                <StackLayout Margin="20,10,20,20" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+                    <Button Style="{StaticResource CarouselNavigation}" BackgroundColor="{Binding FirstPoint}"></Button>
+                    <Button Style="{StaticResource CarouselNavigation}" BackgroundColor="{Binding SecondPoint}"></Button>
+                    <Button Style="{StaticResource CarouselNavigation}" BackgroundColor="{Binding ThirdPoint}"></Button>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
