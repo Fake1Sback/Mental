@@ -18,12 +18,6 @@ namespace Mental.Models.DbModels
         public int AmountOfCorrectAnswers { get; set; }
         public int AmountOfWrongAnswers { get; set; }
 
-        //public int LongestTimeSpentForFindingCorrectAnswer { get; set; }
-        //public string LongestTimeCorrectAnswerString { get; set; }
-
-        //public int ShortestTimeSpentForFindingCorrectAnswer { get; set; }
-        //public string ShortestTimeCorrectAnswerString { get; set; }
-
         public DateTime TaskDateTime { get; set; }
     }
 }

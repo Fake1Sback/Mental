@@ -13,7 +13,6 @@ namespace Mental.ViewModels
     {
         private AbstractTaskType MathTask;
         private ITimeOption timeOption;
-        private StatisticsTimer statisticsTimer;
         private MathTasksOptions mathTasksOptions;
         private INavigation navigation;
         private MathTasksPage mathTasksPage;
@@ -27,7 +26,6 @@ namespace Mental.ViewModels
             timeOption = _timeOption;
             navigation = _navigation;
             mathTasksPage = _mathTasksPage;
-            statisticsTimer = new StatisticsTimer();
 
             if (mathTasksOptions.IsIntegerNumbers)
                 MathTask = new CountResultTaskOption(_mathTasksOptions);
@@ -180,7 +178,6 @@ namespace Mental.ViewModels
             if (timeOption.CanExecuteOperation(IsAnswerCorrect))
             {
                 Answer = string.Empty;
-                statisticsTimer.RegisterTime(MathTask.GetExpressionString());
                 MathTask.GenerateExpression();
 
                 OnPropertyChanged("LabelFontSize");
@@ -189,7 +186,6 @@ namespace Mental.ViewModels
             }
             else
             {
-                statisticsTimer.TurnOffTimer();
                 mathTasksPage.HideTaskFrame();
                 VMTimerBlocker = true;
             }
@@ -222,10 +218,6 @@ namespace Mental.ViewModels
                         RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions),
                         AmountOfCorrectAnswers = MathTask.AmountOfCorrectAnswers,
                         AmountOfWrongAnswers = MathTask.AmountOfWrongAnswers,
-                        LongestTimeSpentForExpression = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
-                        LongestTimeExpressionString = statisticsTimer.LongestTimeExpressionString,
-                        ShortestTimeSpentForExpression = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
-                        ShortestTimeExpressionString = statisticsTimer.ShortestTimeExpressionString,
                         TaskDateTime = DateTime.Now
                     };
 

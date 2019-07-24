@@ -13,7 +13,6 @@ namespace Mental.ViewModels
     {
         private AbstractTaskType MathTask;
         private ITimeOption timeOption;
-        private StatisticsTimer statisticsTimer;
         private MathTasksOptions mathTasksOptions;
         private INavigation navigation;
         private MathTasksPage mathTasksPage;
@@ -27,7 +26,6 @@ namespace Mental.ViewModels
             timeOption = _timeOption;
             navigation = _navigation;
             mathTasksPage = _mathTasksPage;
-            statisticsTimer = new StatisticsTimer();
 
             if (_mathTasksOptions.IsIntegerNumbers)
                 MathTask = new CountVariableTaskOption(mathTasksOptions);
@@ -174,7 +172,6 @@ namespace Mental.ViewModels
             if (timeOption.CanExecuteOperation(IsAnswerCorrect))
             {
                 Answer = string.Empty;
-                statisticsTimer.RegisterTime(MathTask.GetExpressionString());
                 MathTask.GenerateExpression();
               
                 OnPropertyChanged("AnswerValue");
@@ -183,7 +180,6 @@ namespace Mental.ViewModels
             }
             else
             {
-                statisticsTimer.TurnOffTimer();
                 mathTasksPage.HideTaskFrame();
                 VMTimerBlocker = true;
             }
@@ -217,7 +213,6 @@ namespace Mental.ViewModels
             {
                 return new Command(async () =>
                 {
-                    statisticsTimer.TurnOffTimer();
                     string Op = string.Empty;
                     foreach (var a in mathTasksOptions.Operations)
                     {
@@ -239,10 +234,6 @@ namespace Mental.ViewModels
                         RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions),
                         AmountOfCorrectAnswers = MathTask.AmountOfCorrectAnswers,
                         AmountOfWrongAnswers = MathTask.AmountOfWrongAnswers,
-                        LongestTimeSpentForExpression = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
-                        LongestTimeExpressionString = statisticsTimer.LongestTimeExpressionString,
-                        ShortestTimeSpentForExpression = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
-                        ShortestTimeExpressionString = statisticsTimer.ShortestTimeExpressionString,
                         TaskDateTime = DateTime.Now
                     };
 

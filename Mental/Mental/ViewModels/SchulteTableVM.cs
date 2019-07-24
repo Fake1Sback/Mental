@@ -15,7 +15,6 @@ namespace Mental.ViewModels
         private int _CurrentNumberToAnswer;
         private ITimeOption timeOption;
         private INavigation navigation;
-        private StatisticsTimer statisticsTimer;
         private SchulteTableTaskPage schulteTableTaskPage;
         private bool VMTimerBlocker = false;
 
@@ -32,7 +31,6 @@ namespace Mental.ViewModels
             StartTimerCountdown();
             _CurrentNumberToAnswer = 1;
             OnPropertyChanged("CurrentNumberString");
-            statisticsTimer = new StatisticsTimer();
         }
 
         public string TimerValue
@@ -78,7 +76,6 @@ namespace Mental.ViewModels
                     if (IsCorrectAnswer)
                     {
                         _AmountOfCorrectAnswers += 1;
-                        statisticsTimer.RegisterTime(Answer.ToString());
                         if (SchulteTableTaskOptions.IsEasyModeActivated)
                             button.BackgroundColor = Color.FromHex("#ff8566");
                     }
@@ -93,7 +90,6 @@ namespace Mental.ViewModels
                     }
                     else
                     {
-                        statisticsTimer.TurnOffTimer();
                         schulteTableTaskPage.HideTaskFrame();
                         VMTimerBlocker = true;
                     }
@@ -132,11 +128,7 @@ namespace Mental.ViewModels
                         AmountOfCorrectAnswers = _AmountOfCorrectAnswers,
                         AmountOfWrongAnswers = _AmountOfWrongAnswers,
                         IsEasyModeActivated = SchulteTableTaskOptions.IsEasyModeActivated,
-                        GridSize = SchulteTableTaskOptions.GridSize,
-                        LongestTimeNumberString = statisticsTimer.LongestTimeExpressionString,
-                        LongestTimeSpentForFindingNumber = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
-                        ShortestTimeNumberString = statisticsTimer.ShortestTimeExpressionString,
-                        ShortestTimeSpentForFindingNumber = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
+                        GridSize = SchulteTableTaskOptions.GridSize,                  
                         TaskDateTime = DateTime.Now,
                     };
 

@@ -8,7 +8,6 @@ namespace Mental.Models.DbModels
     {
         public int Id { get; set; }
         public int ButtonsAmount { get; set; }
-     //   public byte ColorShowingOption { get; set; }
         public byte StroopTaskType { get; set; }
 
         public byte TimeOptions { get; set; }
