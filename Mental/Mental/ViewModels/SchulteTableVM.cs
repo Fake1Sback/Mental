@@ -16,15 +16,19 @@ namespace Mental.ViewModels
         private ITimeOption timeOption;
         private INavigation navigation;
         private StatisticsTimer statisticsTimer;
+        private SchulteTableTaskPage schulteTableTaskPage;
+        private bool VMTimerBlocker = false;
 
         private int _AmountOfCorrectAnswers;
         private int _AmountOfWrongAnswers;
 
-        public SchulteTableVM(SchulteTableTaskOptions _schulteTableTaskOptions,ITimeOption _timeOption,INavigation _navigation)
+        public SchulteTableVM(SchulteTableTaskOptions _schulteTableTaskOptions,ITimeOption _timeOption,INavigation _navigation,SchulteTableTaskPage _schulteTableTaskPage)
         {
             navigation = _navigation;
             SchulteTableTaskOptions = _schulteTableTaskOptions;
             timeOption = _timeOption;
+            schulteTableTaskPage = _schulteTableTaskPage;
+
             StartTimerCountdown();
             _CurrentNumberToAnswer = 1;
             OnPropertyChanged("CurrentNumberString");
@@ -43,7 +47,7 @@ namespace Mental.ViewModels
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (timeOption.CheckTimerEnd())
+                if (timeOption.CheckTimerEnd() && !VMTimerBlocker)
                 {
                     timeOption.TimerWork();
                     OnPropertyChanged("TimerValue");
@@ -90,41 +94,72 @@ namespace Mental.ViewModels
                     else
                     {
                         statisticsTimer.TurnOffTimer();
-                        DbSchulteTableTask dbSchulteTableTask =  new DbSchulteTableTask()
-                        {
-                            TimeOption = (byte)SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption,
-                            AmountOfCorrectAnswers = _AmountOfCorrectAnswers,
-                            AmountOfWrongAnswers = _AmountOfWrongAnswers,
-                            IsEasyModeActivated = SchulteTableTaskOptions.IsEasyModeActivated,
-                            GridSize = SchulteTableTaskOptions.GridSize,
-                            LongestTimeNumberString = statisticsTimer.LongestTimeExpressionString,
-                            LongestTimeSpentForFindingNumber = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
-                            ShortestTimeNumberString = statisticsTimer.ShortestTimeExpressionString,
-                            ShortestTimeSpentForFindingNumber = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
-                            TaskDateTime = DateTime.Now,
-                        };
-
-                        if(SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
-                        {
-                            dbSchulteTableTask.TimeParameter = timeOption.GetMillis();
-                            dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
-                        }
-                        else if(SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
-                        {
-                            dbSchulteTableTask.TimeParameter = timeOption.GetMillis();
-                            dbSchulteTableTask.TaskComplexityParameter = (int)Math.Pow(SchulteTableTaskOptions.GridSize, 2);
-                        }
-                        else
-                        {
-                            dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-                            dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-                        }
-
-                        await navigation.PushAsync(new SimilarSchulteTableTasksStatisticsPage(dbSchulteTableTask,true));
+                        schulteTableTaskPage.HideTaskFrame();
+                        VMTimerBlocker = true;
                     }
                 });
             }
         }
-              
+
+        public Command RestartCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    schulteTableTaskPage.ShowTaskFrame();
+                    schulteTableTaskPage.ButtonsColorToDefault();
+                    _AmountOfWrongAnswers = 0;
+                    _AmountOfCorrectAnswers = 0;
+                    _CurrentNumberToAnswer = 1;
+                    OnPropertyChanged("CurrentNumberString");
+                    timeOption.TimerRestart();
+                    VMTimerBlocker = false;
+                    StartTimerCountdown();
+                });
+            }
+        }
+
+        public Command NavigateToStatisticsCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    DbSchulteTableTask dbSchulteTableTask = new DbSchulteTableTask()
+                    {
+                        TimeOption = (byte)SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption,
+                        AmountOfCorrectAnswers = _AmountOfCorrectAnswers,
+                        AmountOfWrongAnswers = _AmountOfWrongAnswers,
+                        IsEasyModeActivated = SchulteTableTaskOptions.IsEasyModeActivated,
+                        GridSize = SchulteTableTaskOptions.GridSize,
+                        LongestTimeNumberString = statisticsTimer.LongestTimeExpressionString,
+                        LongestTimeSpentForFindingNumber = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
+                        ShortestTimeNumberString = statisticsTimer.ShortestTimeExpressionString,
+                        ShortestTimeSpentForFindingNumber = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
+                        TaskDateTime = DateTime.Now,
+                    };
+
+                    if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
+                    {
+                        dbSchulteTableTask.TimeParameter = timeOption.GetMillis();
+                        dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
+                    }
+                    else if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                    {
+                        dbSchulteTableTask.TimeParameter = timeOption.GetMillis();
+                        dbSchulteTableTask.TaskComplexityParameter = (int)Math.Pow(SchulteTableTaskOptions.GridSize, 2);
+                    }
+                    else
+                    {
+                        dbSchulteTableTask.TimeParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+                        dbSchulteTableTask.TaskComplexityParameter = SchulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+                    }
+
+                    await navigation.PushAsync(new SimilarSchulteTableTasksStatisticsPage(dbSchulteTableTask, true));
+                });
+            }
+        }
+
     }
 }

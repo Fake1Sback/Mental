@@ -13,7 +13,7 @@ namespace Mental.ViewModels
     {
         private Random random;
 
-        public StroopFindColorByTextTaskVM(INavigation _navigation,StroopTaskOptions _stroopTaskOptions,ITimeOption _timeOption) : base(_navigation,_stroopTaskOptions,_timeOption)
+        public StroopFindColorByTextTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption, StroopTaskPage _stroopTaskPage) : base(_navigation, _stroopTaskOptions, _timeOption, _stroopTaskPage)
         {
             QuestionLabelVisibility = true;
             YesNoLayoutVisibility = false;
@@ -22,7 +22,7 @@ namespace Mental.ViewModels
             GenerateTask();
         }
 
-        private void GenerateTask()
+        protected override void GenerateTask()
         {
             colorsStringsList = new List<string>(colorsStrings);
             colorsList = new List<Color>(colors);
@@ -31,12 +31,12 @@ namespace Mental.ViewModels
             int TrueButtonIndex = random.Next(0, stroopTaskOptions.ButtonsAmount);
 
             QuestionLabelString = colorsStringsList[TrueTextStringIndex];
-            
+
 
             int[] arr = Enumerable.Range(0, colorsList.Count).Except(new int[] { TrueTextStringIndex }).ToArray();
             int RandomIndex = random.Next(0, arr.Length);
             QuestrionLabelTextColor = colorsList[arr[RandomIndex]];
-            
+
             ColorButtonColor[TrueButtonIndex] = colorsList[TrueTextStringIndex];
             colorsStringsList.RemoveAt(TrueTextStringIndex);
             colorsList.RemoveAt(TrueTextStringIndex);
@@ -46,7 +46,7 @@ namespace Mental.ViewModels
             ColorButtonText[TrueButtonIndex] = colorsStringsList[RandomIndex2];
             colorsStringsList.RemoveAt(RandomIndex2);
 
-            for(int i = 0;i < stroopTaskOptions.ButtonsAmount;i++)
+            for (int i = 0; i < stroopTaskOptions.ButtonsAmount; i++)
             {
                 if (i == TrueButtonIndex)
                     continue;
@@ -75,12 +75,13 @@ namespace Mental.ViewModels
                 AmountOfWrongAnswers += 1;
 
             if (timeOption.CanExecuteOperation(IsCorrect))
-            {             
+            {
                 GenerateTask();
             }
             else
             {
-                NavigateToSimilarStatisticsPage();
+                stroopTaskPage.HideTaskFrame();
+                VMTimerBlocker = true;
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Mental.ViewModels
     {
         private Random random;
 
-        public StroopTrueOrFalseTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption) : base(_navigation, _stroopTaskOptions, _timeOption)
+        public StroopTrueOrFalseTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption,StroopTaskPage _stroopTaskPage) : base(_navigation, _stroopTaskOptions, _timeOption,_stroopTaskPage)
         {
             QuestionLabelVisibility = false;
             YesNoLayoutVisibility = true;
@@ -22,7 +22,7 @@ namespace Mental.ViewModels
             GenerateTask();
         }
 
-        private void GenerateTask()
+        protected override void GenerateTask()
         {
             bool IsTaskTrue = RandomBool();
 
@@ -118,7 +118,8 @@ namespace Mental.ViewModels
             }
             else
             {
-                NavigateToSimilarStatisticsPage();
+                stroopTaskPage.HideTaskFrame();
+                VMTimerBlocker = true;
             }
         }
 

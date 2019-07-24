@@ -44,6 +44,11 @@ namespace Mental.Models
             return TimeLeft.ToString(@"mm\:ss");
         }
 
+        public void TimerRestart()
+        {
+            TimeLeft = TimeSpan.FromSeconds(InitialTime + 1);
+        }
+
         public void TimerWork()
         {
             if (CheckTimerEnd())

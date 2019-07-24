@@ -16,14 +16,17 @@ namespace Mental.ViewModels
         private StatisticsTimer statisticsTimer;
         private MathTasksOptions mathTasksOptions;
         private INavigation navigation;
+        private MathTasksPage mathTasksPage;
+        private bool VMTimerBlocker = false;
 
         private string Answer = string.Empty;
 
-        public CountResultVM(INavigation _navigation, MathTasksOptions _mathTasksOptions,ITimeOption _timeOption)
+        public CountResultVM(INavigation _navigation, MathTasksOptions _mathTasksOptions,ITimeOption _timeOption,MathTasksPage _mathTasksPage)
         {
             mathTasksOptions = _mathTasksOptions;
             timeOption = _timeOption;
             navigation = _navigation;
+            mathTasksPage = _mathTasksPage;
             statisticsTimer = new StatisticsTimer();
 
             if (mathTasksOptions.IsIntegerNumbers)
@@ -160,7 +163,7 @@ namespace Mental.ViewModels
 
         public Command OkButtonPressedCommand { get; set; }
 
-        private async void OkButtonPressed()
+        private void OkButtonPressed()
         {
             bool IsAnswerCorrect = MathTask.CheckAnswer(Answer);
             if (IsAnswerCorrect)
@@ -187,59 +190,92 @@ namespace Mental.ViewModels
             else
             {
                 statisticsTimer.TurnOffTimer();
-                string Op = string.Empty;
-                foreach (var a in mathTasksOptions.Operations)
-                {
-                    Op += a;
-                }
-
-                DbMathTask dbMathTask = new DbMathTask()
-                {
-                    Operations = Op,
-                    TaskType = (byte)mathTasksOptions.TaskType,
-                    TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption,
-                    MinValue = mathTasksOptions.MinValue,
-                    MaxValue = mathTasksOptions.MaxValue,
-                    IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed,
-                    MaxChainLength = mathTasksOptions.MaxChainLength,
-                    IsInteger = mathTasksOptions.IsIntegerNumbers,
-                    DigitsAfterDotSing = mathTasksOptions.DigitsAfterDotSign,
-                    IsRestrictionActivated = mathTasksOptions.IsRestrictionsActivated,
-                    RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions),
-                    AmountOfCorrectAnswers = MathTask.AmountOfCorrectAnswers,
-                    AmountOfWrongAnswers = MathTask.AmountOfWrongAnswers,
-                    LongestTimeSpentForExpression = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
-                    LongestTimeExpressionString = statisticsTimer.LongestTimeExpressionString,
-                    ShortestTimeSpentForExpression = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
-                    ShortestTimeExpressionString = statisticsTimer.ShortestTimeExpressionString,
-                    TaskDateTime = DateTime.Now
-                };
-
-                if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
-                {
-                    dbMathTask.TimeParameter = timeOption.GetMillis();
-                    dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
-                }
-                else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
-                {
-                    dbMathTask.TimeParameter = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
-                    dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
-                }
-                else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.LastTask)
-                {
-                    dbMathTask.TimeParameter = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-                    dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-                }
-
-               await navigation.PushAsync(new SimilarTasksStatisticsPage(dbMathTask, true));
+                mathTasksPage.HideTaskFrame();
+                VMTimerBlocker = true;
             }
         }
-       
+
+        public Command NavigateToStatisticsCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    string Op = string.Empty;
+                    foreach (var a in mathTasksOptions.Operations)
+                    {
+                        Op += a;
+                    }
+
+                    DbMathTask dbMathTask = new DbMathTask()
+                    {
+                        Operations = Op,
+                        TaskType = (byte)mathTasksOptions.TaskType,
+                        TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption,
+                        MinValue = mathTasksOptions.MinValue,
+                        MaxValue = mathTasksOptions.MaxValue,
+                        IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed,
+                        MaxChainLength = mathTasksOptions.MaxChainLength,
+                        IsInteger = mathTasksOptions.IsIntegerNumbers,
+                        DigitsAfterDotSing = mathTasksOptions.DigitsAfterDotSign,
+                        IsRestrictionActivated = mathTasksOptions.IsRestrictionsActivated,
+                        RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions),
+                        AmountOfCorrectAnswers = MathTask.AmountOfCorrectAnswers,
+                        AmountOfWrongAnswers = MathTask.AmountOfWrongAnswers,
+                        LongestTimeSpentForExpression = (int)statisticsTimer.LongestTimeSpentForExpression.TotalSeconds,
+                        LongestTimeExpressionString = statisticsTimer.LongestTimeExpressionString,
+                        ShortestTimeSpentForExpression = (int)statisticsTimer.ShortestTimeSpentForExpression.TotalSeconds,
+                        ShortestTimeExpressionString = statisticsTimer.ShortestTimeExpressionString,
+                        TaskDateTime = DateTime.Now
+                    };
+
+                    if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                    {
+                        dbMathTask.TimeParameter = timeOption.GetMillis();
+                        dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
+                    }
+                    else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
+                    {
+                        dbMathTask.TimeParameter = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
+                        dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
+                    }
+                    else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.LastTask)
+                    {
+                        dbMathTask.TimeParameter = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+                        dbMathTask.TaskComplexityParameter = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
+                    }
+
+                    await navigation.PushAsync(new SimilarTasksStatisticsPage(dbMathTask, true));
+                });
+            }
+        }
+        public Command RestartCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    mathTasksPage.ShowTaskFrame();
+                    MathTask.AmountOfCorrectAnswers = 0;
+                    MathTask.AmountOfWrongAnswers = 0;
+                    Answer = string.Empty;
+                    MathTask.GenerateExpression();
+                    timeOption.TimerRestart();
+                    OnPropertyChanged("AnswerValue");
+                    OnPropertyChanged("OperationValue");
+                    OnPropertyChanged("AmountOfCorrectAnswers");
+                    OnPropertyChanged("AmountOfWrongAnswers");
+                    VMTimerBlocker = false;
+                    StartTimerCountdown();
+                });
+            }
+        }
+
         private void StartTimerCountdown()
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (timeOption.CheckTimerEnd())
+                if (timeOption.CheckTimerEnd() && !VMTimerBlocker)
                 {
                     timeOption.TimerWork();
                     OnPropertyChanged("TimerValue");

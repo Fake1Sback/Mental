@@ -10,12 +10,14 @@ namespace Mental.Models
         private TimeSpan Time;
         private int GeneralAmountOfTasks;
         private int CurrentAmountOfTasks;
+        private int InitialGeneralAmountOfTasks;
 
         private bool InternalCheck = true;
      
         public LimitedTasksTimeOption(TaskTimeOptionsContainer taskTimeOptions)
         {
             GeneralAmountOfTasks = taskTimeOptions.AmountOfTasks;
+            InitialGeneralAmountOfTasks = GeneralAmountOfTasks;
             CurrentAmountOfTasks = 1;
         }
 
@@ -40,10 +42,6 @@ namespace Mental.Models
         public bool CheckTimerEnd()
         {
             return InternalCheck;
-            //if (CurrentAmountOfTasks < GeneralAmountOfTasks)
-            //    return true;
-            //else
-            //    return false;
         }
 
         public bool CanExecuteOperation(bool IsAnswerCorrect)
@@ -58,6 +56,14 @@ namespace Mental.Models
                 InternalCheck = false;
                 return false;
             }
+        }
+
+        public void TimerRestart()
+        {
+            GeneralAmountOfTasks = InitialGeneralAmountOfTasks;
+            CurrentAmountOfTasks = 1;
+            InternalCheck = true;
+            Time = TimeSpan.FromSeconds(0);
         }
     }
 }

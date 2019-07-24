@@ -8,10 +8,12 @@ namespace Mental.Models
     public class CountdownTimeOption : ITimeOption
     {
         private TimeSpan TimeLeft;
+        private TimeSpan InitialTimeLeft;
    
         public CountdownTimeOption(TaskTimeOptionsContainer taskTimeOptions)
         {    
             TimeLeft = TimeSpan.FromMinutes(taskTimeOptions.AmountOfMinutes);
+            InitialTimeLeft = TimeLeft;
         }
 
         public void TimerWork()
@@ -41,6 +43,11 @@ namespace Mental.Models
         public bool CanExecuteOperation(bool IsAnswerCorrect)
         {
             return CheckTimerEnd();
+        }
+
+        public void TimerRestart()
+        {
+            TimeLeft = InitialTimeLeft;
         }
     }
 }

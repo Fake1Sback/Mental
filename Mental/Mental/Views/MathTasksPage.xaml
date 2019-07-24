@@ -29,39 +29,47 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <StackLayout Orientation="Vertical" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                    <Label x:Name="OperationLabel" Margin="10,0,10,0" FontSize="{Binding LabelFontSize}" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
-                    <Label x:Name="EqualsLabel" FontSize="{Binding LabelFontSize}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center">=</Label>
-                    <Label x:Name="AnswerLabel" FontSize="{Binding LabelFontSize}" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                <Frame x:Name="AfterTaskFrame" Opacity="0" IsVisible="False" Padding="0" CornerRadius="25">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="0">
+                        <Button Text="Restart" Command="{Binding RestartCommand}"></Button>
+                        <Button Text="Statistics" Command="{Binding NavigateToStatisticsCommand}"></Button>
+                    </StackLayout>
+                </Frame>
+                <StackLayout x:Name="TaskFrame" Opacity="1" IsVisible="True" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                    <StackLayout x:Name="OperationsStack" Orientation="Vertical" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                        <Label x:Name="OperationLabel" Margin="10,0,10,0" FontSize="{Binding LabelFontSize}" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                        <Label x:Name="EqualsLabel" FontSize="{Binding LabelFontSize}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center">=</Label>
+                        <Label x:Name="AnswerLabel" FontSize="{Binding LabelFontSize}" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                    </StackLayout>
+                    <Grid x:Name="DigitButtonsGrid" VerticalOptions="EndAndExpand" BackgroundColor="#6699ff" RowSpacing="0" ColumnSpacing="0" Margin="20,0,20,0" Padding="-2,-2,-2,-2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button x:Name="ButtonOne" Style="{StaticResource KeyBoardButton}" Text="1" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonOne}" Grid.Row="0" Grid.Column="0"></Button>
+                        <Button x:Name="ButtonTwo" Style="{StaticResource KeyBoardButton}" Text="2" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonTwo}" Grid.Row="0" Grid.Column="1"></Button>
+                        <Button x:Name="ButtonThree" Style="{StaticResource KeyBoardButton}" Text="3" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonThree}" Grid.Row="0" Grid.Column="2"></Button>
+                        <Button x:Name="ButtonFour" Style="{StaticResource KeyBoardButton}" Text="4" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFour}" Grid.Row="1" Grid.Column="0"></Button>
+                        <Button x:Name="ButtonFive" Style="{StaticResource KeyBoardButton}" Text="5" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFive}" Grid.Row="1" Grid.Column="1"></Button>
+                        <Button x:Name="ButtonSix" Style="{StaticResource KeyBoardButton}" Text="6" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSix}" Grid.Row="1" Grid.Column="2"></Button>
+                        <Button x:Name="ButtonSeven" Style="{StaticResource KeyBoardButton}" Text="7" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSeven}" Grid.Row="2" Grid.Column="0"></Button>
+                        <Button x:Name="ButtonEight" Style="{StaticResource KeyBoardButton}" Text="8" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonEight}" Grid.Row="2" Grid.Column="1"></Button>
+                        <Button x:Name="ButtonNine" Style="{StaticResource KeyBoardButton}" Text="9" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonNine}" Grid.Row="2" Grid.Column="2"></Button>
+                        <Button x:Name="ButtonZero" Style="{StaticResource KeyBoardButton}" Text="0" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonZero}" Grid.Row="2" Grid.Column="3"></Button>
+                        <Button Text="." Style="{StaticResource KeyBoardButton}" Command="{Binding DotButtonPressedCommand}" Grid.Row="0" Grid.Column="3"></Button>
+                        <Button Text="-" Style="{StaticResource KeyBoardButton}" Command="{Binding MinusButtonPressedCommand}" Grid.Row="1" Grid.Column="3"></Button>
+                        <Button Style="{StaticResource KeyBoardButton}" Text="Del" Command="{Binding DelButtonPressedCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"></Button>
+                        <Button Style="{StaticResource KeyBoardButton}" Text="OK" Command="{Binding OkButtonPressedCommand}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"></Button>
+                    </Grid>
                 </StackLayout>
-                <Grid x:Name="DigitButtonsGrid" VerticalOptions="EndAndExpand" BackgroundColor="#6699ff" RowSpacing="0" ColumnSpacing="0" Margin="20,0,20,0" Padding="-2,-2,-2,-2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Button x:Name="ButtonOne" Style="{StaticResource KeyBoardButton}" Text="1" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonOne}" Grid.Row="0" Grid.Column="0"></Button>
-                    <Button x:Name="ButtonTwo" Style="{StaticResource KeyBoardButton}" Text="2" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonTwo}" Grid.Row="0" Grid.Column="1"></Button>
-                    <Button x:Name="ButtonThree" Style="{StaticResource KeyBoardButton}" Text="3" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonThree}" Grid.Row="0" Grid.Column="2"></Button>
-                    <Button x:Name="ButtonFour" Style="{StaticResource KeyBoardButton}" Text="4" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFour}" Grid.Row="1" Grid.Column="0"></Button>
-                    <Button x:Name="ButtonFive" Style="{StaticResource KeyBoardButton}" Text="5" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonFive}" Grid.Row="1" Grid.Column="1"></Button>
-                    <Button x:Name="ButtonSix" Style="{StaticResource KeyBoardButton}" Text="6" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSix}" Grid.Row="1" Grid.Column="2"></Button>
-                    <Button x:Name="ButtonSeven" Style="{StaticResource KeyBoardButton}" Text="7" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonSeven}" Grid.Row="2" Grid.Column="0"></Button>
-                    <Button x:Name="ButtonEight" Style="{StaticResource KeyBoardButton}" Text="8" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonEight}" Grid.Row="2" Grid.Column="1"></Button>
-                    <Button x:Name="ButtonNine" Style="{StaticResource KeyBoardButton}" Text="9" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonNine}" Grid.Row="2" Grid.Column="2"></Button>
-                    <Button x:Name="ButtonZero" Style="{StaticResource KeyBoardButton}" Text="0" Command="{Binding DigitButtonPressedCommand}" CommandParameter="{x:Reference ButtonZero}" Grid.Row="2" Grid.Column="3"></Button>
-                    <Button Text="." Style="{StaticResource KeyBoardButton}" Command="{Binding DotButtonPressedCommand}" Grid.Row="0" Grid.Column="3"></Button>
-                    <Button Text="-" Style="{StaticResource KeyBoardButton}" Command="{Binding MinusButtonPressedCommand}" Grid.Row="1" Grid.Column="3"></Button>
-                    <Button Style="{StaticResource KeyBoardButton}" Text="Del" Command="{Binding DelButtonPressedCommand}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"></Button>
-                    <Button Style="{StaticResource KeyBoardButton}" Text="OK" Command="{Binding OkButtonPressedCommand}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"></Button>
-                </Grid>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

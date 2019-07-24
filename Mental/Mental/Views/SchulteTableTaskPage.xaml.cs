@@ -28,22 +28,22 @@ namespace Mental.Views
             InitializeComponent();
             ListOfSchulteTableNumbers = new List<int>(Enumerable.Range(1, (int)Math.Pow(_schulteTableTaskOptions.GridSize, 2)));
             random = new Random();
-            SchulteTableVM = new SchulteTableVM(_schulteTableTaskOptions,_timeOption,this.Navigation);
+            SchulteTableVM = new SchulteTableVM(_schulteTableTaskOptions, _timeOption, this.Navigation,this);
 
             this.BindingContext = SchulteTableVM;
             SchulteTableGrid.ColumnSpacing = 0;
             SchulteTableGrid.RowSpacing = 0;
-         
 
-            for(int i = 0;i < _schulteTableTaskOptions.GridSize;i++)
+
+            for (int i = 0; i < _schulteTableTaskOptions.GridSize; i++)
             {
                 SchulteTableGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Star) });
                 SchulteTableGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
             }
 
-            for(int i = 0;i < _schulteTableTaskOptions.GridSize;i++)
+            for (int i = 0; i < _schulteTableTaskOptions.GridSize; i++)
             {
-                for(int j = 0;j < _schulteTableTaskOptions.GridSize;j++)
+                for (int j = 0; j < _schulteTableTaskOptions.GridSize; j++)
                 {
                     Button button = new Button();
                     int randomNumberFromList = random.Next(0, ListOfSchulteTableNumbers.Count);
@@ -58,6 +58,31 @@ namespace Mental.Views
             }
 
             this.Title = "Schulte Table " + _schulteTableTaskOptions.GridSize.ToString() + " x " + _schulteTableTaskOptions.GridSize.ToString();
+        }
+
+        public async void HideTaskFrame()
+        {
+            await TaskFrame.FadeTo(0, 750);
+            TaskFrame.IsVisible = false;
+            AfterTaskFrame.IsVisible = true;
+            await AfterTaskFrame.FadeTo(1, 750);
+        }
+
+        public async void ShowTaskFrame()
+        {
+            await AfterTaskFrame.FadeTo(0, 750);
+            AfterTaskFrame.IsVisible = false;
+            TaskFrame.IsVisible = true;
+            await TaskFrame.FadeTo(1, 750);
+        }
+
+        public void ButtonsColorToDefault()
+        {
+            for(int i = 0;i < SchulteTableGrid.Children.Count;i++)
+            {
+                Button button = SchulteTableGrid.Children[i] as Button;
+                button.BackgroundColor = Color.Transparent;
+            }
         }
     }
 }

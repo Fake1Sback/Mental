@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Mental.ViewModels
 {
-    public class BaseStroopTaskVM : BaseVM
+    public abstract class BaseStroopTaskVM : BaseVM
     {
         protected ITimeOption timeOption;
         protected INavigation navigation;
@@ -29,6 +29,9 @@ namespace Mental.ViewModels
         private int _ColorButtonFontSize;
         private int _ColorButtonHeight;
         private StackOrientation _FirstColorButtonsStackLayoutOrientation;
+
+        protected bool VMTimerBlocker = false;
+        protected StroopTaskPage stroopTaskPage;
 
         protected Color[] colors = new Color[]
        {
@@ -62,11 +65,12 @@ namespace Mental.ViewModels
         protected List<Color> colorsList;
         protected List<string> colorsStringsList;
 
-        public BaseStroopTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption)
+        public BaseStroopTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption,StroopTaskPage _stroopTaskPage)
         {
             timeOption = _timeOption;
             navigation = _navigation;
             stroopTaskOptions = _stroopTaskOptions;
+            stroopTaskPage = _stroopTaskPage;
 
             Dictionary<int, bool> dic3 = new Dictionary<int, bool>();
             for (int i = 0; i < 5; i++)
@@ -98,6 +102,12 @@ namespace Mental.ViewModels
 
             StartTimerCountdown();
         }
+
+        //----------------------------------------------------
+
+        protected abstract void GenerateTask();
+
+        //-----------------------------------------------------
 
         public bool QuestionLabelVisibility
         {
@@ -278,11 +288,11 @@ namespace Mental.ViewModels
             }
         }
 
-        private void StartTimerCountdown()
+        protected void StartTimerCountdown()
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (timeOption.CheckTimerEnd())
+                if (timeOption.CheckTimerEnd() && !VMTimerBlocker)
                 {
                     timeOption.TimerWork();
                     OnPropertyChanged("TimerValue");
@@ -293,39 +303,58 @@ namespace Mental.ViewModels
             });
         }
 
-        protected async void NavigateToSimilarStatisticsPage()
+        public Command RestartCommand
         {
-            DbStroopTask dbStroopTask = new DbStroopTask
+            get
             {
-                AmountOfButtons = stroopTaskOptions.ButtonsAmount,
-                AmountOfCorrectAnswers = AmountOfCorrectAnswers,
-                AmountOfWrongAnswers = AmountOfWrongAnswers,
-                StroopTaskOption = (byte)stroopTaskOptions.StroopTaskType,
-                TimeOption = (byte)stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption,
-                //LongestTimeCorrectAnswerString = "1",
-                //LongestTimeSpentForFindingCorrectAnswer = 20,
-                //ShortestTimeSpentForFindingCorrectAnswer = 10,
-                //ShortestTimeCorrectAnswerString = "2",
-                TaskDateTime = DateTime.Now
-            };
+                return new Command(() =>
+                {
+                    stroopTaskPage.ShowTaskFrame();
+                    AmountOfCorrectAnswers = 0;
+                    AmountOfWrongAnswers = 0;
+                    GenerateTask();
+                    timeOption.TimerRestart();
+                    VMTimerBlocker = false;
+                    StartTimerCountdown();
+                });
+            }
+        }
 
-            if (stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.CountdownTimer)
+        public Command NavigateToStatisticsCommand
+        {
+            get
             {
-                dbStroopTask.TimeParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
-                dbStroopTask.TaskComplexityParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
-            }
-            else if (stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
-            {
-                dbStroopTask.TimeParameter = timeOption.GetMillis();
-                dbStroopTask.TaskComplexityParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfTasks;
-            }
-            else
-            {
-                dbStroopTask.TimeParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
-                dbStroopTask.TaskComplexityParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
-            }
+                return new Command(async () =>
+                {
+                    DbStroopTask dbStroopTask = new DbStroopTask
+                    {
+                        AmountOfButtons = stroopTaskOptions.ButtonsAmount,
+                        AmountOfCorrectAnswers = AmountOfCorrectAnswers,
+                        AmountOfWrongAnswers = AmountOfWrongAnswers,
+                        StroopTaskOption = (byte)stroopTaskOptions.StroopTaskType,
+                        TimeOption = (byte)stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption,
+                        TaskDateTime = DateTime.Now
+                    };
 
-            await navigation.PushAsync(new StroopTaskSimilarStatisticsPage(dbStroopTask, true));
+                    if (stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.CountdownTimer)
+                    {
+                        dbStroopTask.TimeParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
+                        dbStroopTask.TaskComplexityParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
+                    }
+                    else if (stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                    {
+                        dbStroopTask.TimeParameter = timeOption.GetMillis();
+                        dbStroopTask.TaskComplexityParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfTasks;
+                    }
+                    else
+                    {
+                        dbStroopTask.TimeParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
+                        dbStroopTask.TaskComplexityParameter = stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
+                    }
+
+                    await navigation.PushAsync(new StroopTaskSimilarStatisticsPage(dbStroopTask, true));
+                });
+            }
         }
     }
 }

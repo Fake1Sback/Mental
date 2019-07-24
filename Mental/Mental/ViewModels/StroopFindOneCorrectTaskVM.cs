@@ -13,7 +13,7 @@ namespace Mental.ViewModels
     {
         private Random random;
 
-        public StroopFindOneCorrectTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption) : base(_navigation, _stroopTaskOptions, _timeOption)
+        public StroopFindOneCorrectTaskVM(INavigation _navigation, StroopTaskOptions _stroopTaskOptions, ITimeOption _timeOption,StroopTaskPage _stroopTaskPage) : base(_navigation, _stroopTaskOptions, _timeOption,_stroopTaskPage)
         {
             QuestionLabelVisibility = false;
             YesNoLayoutVisibility = false;
@@ -44,11 +44,12 @@ namespace Mental.ViewModels
             }
             else
             {
-                NavigateToSimilarStatisticsPage();
+                stroopTaskPage.HideTaskFrame();
+                VMTimerBlocker = true;
             }
         }
 
-        private void GenerateTask()
+        protected override void GenerateTask()
         {
             int EqualityValue = random.Next(0, colors.Length);
             int EqualityButtonValue = random.Next(0, stroopTaskOptions.ButtonsAmount);

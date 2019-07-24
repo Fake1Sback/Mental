@@ -7,6 +7,8 @@ namespace Mental.Models
     public interface ITimeOption
     {
         void TimerWork();
+
+        void TimerRestart();
         bool CheckTimerEnd();
         string GetTimeString();
         int GetMillis();

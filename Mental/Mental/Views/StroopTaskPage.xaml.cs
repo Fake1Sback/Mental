@@ -21,20 +21,36 @@ namespace Mental.Views
             InitializeComponent();
             if (_stroopTaskOptions.StroopTaskType == StroopTaskType.FindOneCorrect)
             {
-                BaseStroopTaskVM = new StroopFindOneCorrectTaskVM(this.Navigation, _stroopTaskOptions, _timeOption);
+                BaseStroopTaskVM = new StroopFindOneCorrectTaskVM(this.Navigation, _stroopTaskOptions, _timeOption,this);
                 this.Title = "Find 1 Correct";
             }
             else if (_stroopTaskOptions.StroopTaskType == StroopTaskType.TrueOrFalse)
             {
-                BaseStroopTaskVM = new StroopTrueOrFalseTaskVM(this.Navigation, _stroopTaskOptions, _timeOption);
+                BaseStroopTaskVM = new StroopTrueOrFalseTaskVM(this.Navigation, _stroopTaskOptions, _timeOption,this);
                 this.Title = "True / False";
             }
             else if (_stroopTaskOptions.StroopTaskType == StroopTaskType.FindColorByText)
             {
-                BaseStroopTaskVM = new StroopFindColorByTextTaskVM(this.Navigation, _stroopTaskOptions, _timeOption);
+                BaseStroopTaskVM = new StroopFindColorByTextTaskVM(this.Navigation, _stroopTaskOptions, _timeOption,this);
                 this.Title = "Find Color by Text";
             }
             BindingContext = BaseStroopTaskVM;
+        }
+
+        public async void HideTaskFrame()
+        {
+            await TaskFrame.FadeTo(0, 750);
+            TaskFrame.IsVisible = false;
+            AfterTaskFrame.IsVisible = true;
+            await AfterTaskFrame.FadeTo(1, 750);
+        }
+
+        public async void ShowTaskFrame()
+        {
+            await AfterTaskFrame.FadeTo(0, 750);
+            AfterTaskFrame.IsVisible = false;
+            TaskFrame.IsVisible = true;
+            await TaskFrame.FadeTo(1, 750);
         }
     }
 }
