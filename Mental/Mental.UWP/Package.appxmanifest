@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="30df8963-a20a-4722-9c2f-c3b36ac08121"
-    Publisher="CN=03dc5e9a-c641-46a5-8542-68391a7d25b6"
+    Name="89877ef2-26fb-41c1-be42-2942282a5e46"
+    Publisher="CN=44ad98c4-a81d-46b0-ae99-99012fd145c3"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Mental.UWP</DisplayName>
-    <PublisherDisplayName>03dc5e9a-c641-46a5-8542-68391a7d25b6</PublisherDisplayName>
+    <PublisherDisplayName>44ad98c4-a81d-46b0-ae99-99012fd145c3</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

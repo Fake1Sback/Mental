@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
-using Entry = Microcharts.Entry;
+using ChartEntry = Microcharts.ChartEntry;
 using Mental.Views;
 
 namespace Mental.ViewModels
@@ -35,9 +35,9 @@ namespace Mental.ViewModels
 
         private INavigation navigation;
 
-        private List<Entry> _TimeOptionsChart;
-        private List<Entry> _EasyModeChart;
-        private List<Entry> _GridSizeChart;
+        private List<ChartEntry> _TimeOptionsChart;
+        private List<ChartEntry> _EasyModeChart;
+        private List<ChartEntry> _GridSizeChart;
 
         private int _ListViewHeightRequest;
 
@@ -64,6 +64,12 @@ namespace Mental.ViewModels
             LoadMoreDbMathTaskInfo();
             LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
             LoadSimilarCommand = new Command(LoadSimilar);
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (p) =>
+            {
+                _CurrentPaginationIndex = StartPaginationIndex;
+                LoadMoreDbMathTaskInfo();
+            });
         }
 
         public List<DbSchulteTableTaskListItem> DbSchulteTableTasksListItems
@@ -135,19 +141,19 @@ namespace Mental.ViewModels
             int AmountOfLimitedTasksOptionRecords = await db.SchulteTableTasks.Where(t => t.TimeOption == 1).CountAsync();
             int AmountOfLastTaskOptionRecords = GeneralAmountOfRecords - (AmountOfCountdownOptionRecords + AmountOfLimitedTasksOptionRecords);
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfCountdownOptionRecords)
+                new ChartEntry(AmountOfCountdownOptionRecords)
                 {
                     ValueLabel = $"Countdown ({AmountOfCountdownOptionRecords.ToString()})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfLimitedTasksOptionRecords)
+                new ChartEntry(AmountOfLimitedTasksOptionRecords)
                 {
                     ValueLabel = $"Limited tasks ({AmountOfLimitedTasksOptionRecords.ToString()})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 },
-                new Entry(AmountOfLastTaskOptionRecords)
+                new ChartEntry(AmountOfLastTaskOptionRecords)
                 {
                     ValueLabel = $"Last task ({AmountOfLastTaskOptionRecords.ToString()})",
                     Color = SkiaSharp.SKColor.Parse(Color3)
@@ -163,14 +169,14 @@ namespace Mental.ViewModels
             int AmountOfEasyModeActivatedRecords = await db.SchulteTableTasks.Where(t => t.IsEasyModeActivated == true).CountAsync();
             int AmountOfEasyModeDisabledRecords = GeneralAmountOfRecords - AmountOfEasyModeActivatedRecords;
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfEasyModeActivatedRecords)
+                new ChartEntry(AmountOfEasyModeActivatedRecords)
                 {
                     ValueLabel = $"Easy mode ({AmountOfEasyModeActivatedRecords.ToString()})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfEasyModeDisabledRecords)
+                new ChartEntry(AmountOfEasyModeDisabledRecords)
                 {
                     ValueLabel = $"Standard ({AmountOfEasyModeDisabledRecords.ToString()})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
@@ -188,37 +194,37 @@ namespace Mental.ViewModels
             int AmountOf6GridSizeRecods = await db.SchulteTableTasks.Where(t => t.GridSize == 6).CountAsync();
             int AmountOf7GridSizeRecods = await db.SchulteTableTasks.Where(t => t.GridSize == 7).CountAsync();
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOf3GridSizeRecods)
+                new ChartEntry(AmountOf3GridSizeRecods)
                 {
                     ValueLabel =  AmountOf3GridSizeRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color1),
                     Label = "3 x 3",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOf4GridSizeRecods)
+                new ChartEntry(AmountOf4GridSizeRecods)
                 {
                     ValueLabel = AmountOf4GridSizeRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color2),
                     Label = "4 x 4",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry( AmountOf5GridSizeRecods)
+                new ChartEntry( AmountOf5GridSizeRecods)
                 {
                     ValueLabel = AmountOf5GridSizeRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color3),
                     Label =  "5 x 5",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOf6GridSizeRecods)
+                new ChartEntry(AmountOf6GridSizeRecods)
                 {
                     ValueLabel = AmountOf6GridSizeRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color4),
                     Label =  "6 x 6",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry( AmountOf7GridSizeRecods)
+                new ChartEntry( AmountOf7GridSizeRecods)
                 {
                     ValueLabel = AmountOf7GridSizeRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color5),

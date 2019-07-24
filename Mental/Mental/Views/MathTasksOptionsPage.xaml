@@ -50,7 +50,7 @@
                     <Label HorizontalOptions="FillAndExpand" TextColor="White" FontSize="15" Text="Operations option defines what arithmetic operations will be used in generated expressions"></Label>
                 </Frame>
                 <Frame x:Name="OperationsFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
                         <Button x:Name="PlusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding PlusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference PlusButton}" Text="+"></Button>
                         <Button x:Name="MinusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MinusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference MinusButton}" Text="-"></Button>
                         <Button x:Name="MultiplyButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MultiplyButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference MultiplyButton}" Text="*"></Button>
@@ -61,16 +61,16 @@
                     <StackLayout Orientation="Horizontal">
                         <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
                         <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Chain Length</Label>
-                        <Button x:Name="ChainLengthExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="ChainLengthExpandMoreButton_Clicked"></Button>
+                        <Button x:Name="ChainLengthExpandMoreButton" Style="{StaticResource ExpandButton}"  Image="expand_more_white_48.png" Clicked="ChainLengthExpandMoreButton_Clicked"></Button>
                     </StackLayout>
                 </Frame>
                 <Frame Margin="30,-7,30,0" IsVisible="False" Padding="5,5,5,5" BackgroundColor="#6699ff">
                     <Label HorizontalOptions="FillAndExpand" TextColor="White" FontSize="15" Text="Chain length defines how much operations between two values will be in each task. Fixed parameter defines if chosen value will be only option or chain length will float between minimum and chosen value."></Label>
                 </Frame>
                 <Frame x:Name="ChainLengthFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                            <Label Margin="15,0,5,0" Text="Length Fixed" TextColor="White" FontSize="18" HeightRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="Center"></Label>
+                    <StackLayout Orientation="Vertical" Padding="0,10,0,10">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="25,0,25,0">
+                            <Label Text="Length Fixed" TextColor="White" FontSize="18" HeightRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="Center"></Label>
                             <Button x:Name="FixedChainLengthButton" Margin="0,0,10,0" BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" BorderRadius="20" BorderColor="Black" BorderWidth="1" Image="{Binding ChainLengthImageSrc}" Command="{Binding ChainLengthFixedChangedCommand}" CommandParameter="{x:Reference FixedChainLengthButton}"></Button>
                         </StackLayout>
                         <Label Text="Maximum Chain Length" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18"></Label>

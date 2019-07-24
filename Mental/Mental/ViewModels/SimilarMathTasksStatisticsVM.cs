@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
-using Entry = Microcharts.Entry;
+using ChartEntry = Microcharts.ChartEntry;
 using Microcharts.Forms;
 using Microcharts;
 using System.Collections.ObjectModel;
@@ -318,6 +318,8 @@ namespace Mental.ViewModels
 
             FillListView();
             InitializeChart();
+
+            MessagingCenter.Send<BaseVM>(this, "ReloadRecords");
         }
 
         public Command LoadGeneralStatistics { get; set; }
@@ -379,24 +381,24 @@ namespace Mental.ViewModels
         {
             get
             {
-                List<Entry> entries = new List<Entry>();
+                List<ChartEntry> entries = new List<ChartEntry>();
                 for (int i = ListOfMathTasks.Count - 1; i >= 0; i--)
                 {
                     if (SelectedListItemDbMathTask == ListOfMathTasks[i])
-                        entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#99ffcc"), TextColor = SkiaSharp.SKColor.Parse("#99ffcc"), Label = "Selected", ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                        entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#99ffcc"), TextColor = SkiaSharp.SKColor.Parse("#99ffcc"), Label = "Selected", ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     else
                     {
                         if(ListOfMathTasks[i].TaskDateTime.Date == DateTime.Now.Date)
                         {
-                            entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                         }
                         else
-                            entries.Add(new Entry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"),  Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"),  Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     }
                        
                 }
                 if (dbMathTaskToSave != null)
-                    entries.Add(new Entry((float)dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });
+                    entries.Add(new ChartEntry((float)dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });
                 return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle,  PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff")};
             }
         }

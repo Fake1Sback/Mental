@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 using Microcharts;
-using Entry = Microcharts.Entry;
+using ChartEntry = Microcharts.ChartEntry;
 using Mental.Models;
 using Mental.Models.DbModels;
 using System.Linq;
@@ -36,13 +36,13 @@ namespace Mental.ViewModels
 
         private INavigation navigation;
 
-        private List<Entry> _TimeOptionsChart;
-        private List<Entry> _TaskTypeChart;
-        private List<Entry> _DataTypeChart;
-        private List<Entry> _RestrictionsChart;
-        private List<Entry> _OperationsChart;
-        private List<Entry> _ChainLengthChart;
-        private List<Entry> _MaxChainLengthChart;
+        private List<ChartEntry> _TimeOptionsChart;
+        private List<ChartEntry> _TaskTypeChart;
+        private List<ChartEntry> _DataTypeChart;
+        private List<ChartEntry> _RestrictionsChart;
+        private List<ChartEntry> _OperationsChart;
+        private List<ChartEntry> _ChainLengthChart;
+        private List<ChartEntry> _MaxChainLengthChart;
 
         private int _ListViewHeightRequest;
 
@@ -72,6 +72,12 @@ namespace Mental.ViewModels
             LoadMoreDbMathTaskInfo();
             LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
             LoadSimilarCommand = new Command(LoadSimilar);
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (p) =>
+            {
+                _CurrentPaginationIndex = StartPaginationIndex;
+                LoadMoreDbMathTaskInfo();
+            });
         }
 
         public List<DbMathTaskListItem> mathTaskListItems
@@ -195,19 +201,19 @@ namespace Mental.ViewModels
             int AmountOfLimitedTasksOptionsRecords = await db.mathTasks.Where(t => t.TimeOptions == 1).CountAsync();
             int AmountOfLastTaskOptionsRecords = GeneralAmountOfRecords - (AmountOfCountdownOptionRecords + AmountOfLimitedTasksOptionsRecords);
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfCountdownOptionRecords)
+                new ChartEntry(AmountOfCountdownOptionRecords)
                 {
                     ValueLabel = $"Countdown ({AmountOfCountdownOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfLimitedTasksOptionsRecords)
+                new ChartEntry(AmountOfLimitedTasksOptionsRecords)
                 {
                     ValueLabel = $"Limited Tasks ({AmountOfLimitedTasksOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 },
-                new Entry(AmountOfLastTaskOptionsRecords)
+                new ChartEntry(AmountOfLastTaskOptionsRecords)
                 {
                     ValueLabel = $"Last Task ({AmountOfLastTaskOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color3)
@@ -223,14 +229,14 @@ namespace Mental.ViewModels
             int AmountOfFindResultOptionsRecords = await db.mathTasks.Where(t => t.TaskType == 0).CountAsync();       
             int AmountOfFindXOptionsRecords = GeneralAmountOfRecords - AmountOfFindResultOptionsRecords;
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfFindResultOptionsRecords)
+                new ChartEntry(AmountOfFindResultOptionsRecords)
                 {
                     ValueLabel = $"Find Result ({AmountOfFindResultOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfFindXOptionsRecords)
+                new ChartEntry(AmountOfFindXOptionsRecords)
                 {
                     ValueLabel = $"Find X ({AmountOfFindXOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
@@ -246,14 +252,14 @@ namespace Mental.ViewModels
             int AmountOfIntOptionsRecords = await db.mathTasks.Where(t => t.IsInteger == true).CountAsync();
             int AmountOfFractionalOptionsRecords = GeneralAmountOfRecords - AmountOfIntOptionsRecords;
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfIntOptionsRecords)
+                new ChartEntry(AmountOfIntOptionsRecords)
                 {
                     ValueLabel = $"Integer ({AmountOfIntOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfFractionalOptionsRecords)
+                new ChartEntry(AmountOfFractionalOptionsRecords)
                 {
                     ValueLabel = $"Fractional ({AmountOfFractionalOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
@@ -269,14 +275,14 @@ namespace Mental.ViewModels
             int AmountOfRestrictedRecords = await db.mathTasks.Where(t => t.IsRestrictionActivated == true).CountAsync();
             int AmountOfNoSpecialModeOptionsRecords = GeneralAmountOfRecords - AmountOfRestrictedRecords;
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfRestrictedRecords)
+                new ChartEntry(AmountOfRestrictedRecords)
                 {
                     ValueLabel = $"Restricted ({AmountOfRestrictedRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfNoSpecialModeOptionsRecords)
+                new ChartEntry(AmountOfNoSpecialModeOptionsRecords)
                 {
                     ValueLabel = $"Unrestricted ({AmountOfNoSpecialModeOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
@@ -294,30 +300,30 @@ namespace Mental.ViewModels
             int AmountOfMultiplyOperations = await db.mathTasks.Where(t => t.Operations.Contains("*")).CountAsync();
             int AmountOfDivideOperations = await db.mathTasks.Where(t => t.Operations.Contains("/")).CountAsync();
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfPlusOperations)
+                new ChartEntry(AmountOfPlusOperations)
                 {
                     ValueLabel = AmountOfPlusOperations.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color1),
                     Label = "+",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMinusOperations)
+                new ChartEntry(AmountOfMinusOperations)
                 {
                     ValueLabel = AmountOfMinusOperations.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color2),
                     Label = "-",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMultiplyOperations)
+                new ChartEntry(AmountOfMultiplyOperations)
                 {
                     ValueLabel = AmountOfMultiplyOperations.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color3),
                     Label = "*",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                 new Entry(AmountOfDivideOperations)
+                 new ChartEntry(AmountOfDivideOperations)
                 {
                     ValueLabel = AmountOfDivideOperations.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color4),
@@ -335,14 +341,14 @@ namespace Mental.ViewModels
             int AmountOfFixedChainLengthOptionRecords = await db.mathTasks.Where(t => t.IsChainLengthFixed == true).CountAsync();
             int AmountOfNotFixedChainLengthOptionsRecords = GeneralAmountOfRecords - AmountOfFixedChainLengthOptionRecords;
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfFixedChainLengthOptionRecords)
+                new ChartEntry(AmountOfFixedChainLengthOptionRecords)
                 {
                     ValueLabel = $"Fixed ({AmountOfFixedChainLengthOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfNotFixedChainLengthOptionsRecords)
+                new ChartEntry(AmountOfNotFixedChainLengthOptionsRecords)
                 {
                     ValueLabel = $"Not Fixed ({AmountOfNotFixedChainLengthOptionsRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
@@ -363,51 +369,51 @@ namespace Mental.ViewModels
             int AmountOfMax7ChainLength = await db.mathTasks.Where(t => t.MaxChainLength == 7).CountAsync();
             int AmountOfMax8ChainLength = GeneralAmountOfRecords - (AmountOfMax2ChainLength + AmountOfMax3ChainLength + AmountOfMax4ChainLength + AmountOfMax5ChainLength + AmountOfMax6ChainLength + AmountOfMax7ChainLength);
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfMax2ChainLength)
+                new ChartEntry(AmountOfMax2ChainLength)
                 {
                     ValueLabel = AmountOfMax2ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color1),
                     Label = "2 OP",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMax3ChainLength)
+                new ChartEntry(AmountOfMax3ChainLength)
                 {
                     ValueLabel = AmountOfMax3ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color2),
                     Label = "3 OP",
                      TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMax4ChainLength)
+                new ChartEntry(AmountOfMax4ChainLength)
                 {
                     ValueLabel = AmountOfMax4ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color3),
                     Label = "4 OP",
                      TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMax5ChainLength)
+                new ChartEntry(AmountOfMax5ChainLength)
                 {
                     ValueLabel = AmountOfMax5ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color4),
                     Label = "5 OP",
                      TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMax6ChainLength)
+                new ChartEntry(AmountOfMax6ChainLength)
                 {
                     ValueLabel = AmountOfMax6ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color5),
                     Label = "6 OP",
                      TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMax7ChainLength)
+                new ChartEntry(AmountOfMax7ChainLength)
                 {
                     ValueLabel = AmountOfMax7ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color6),
                     Label = "7 OP",
                      TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOfMax8ChainLength)
+                new ChartEntry(AmountOfMax8ChainLength)
                 {
                     ValueLabel = AmountOfMax8ChainLength.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color7),

@@ -10,8 +10,8 @@
                 <Button x:Name="TimeOptionsExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="TimeOptionsExpandMoreButton_Clicked"></Button>
             </StackLayout>
         </Frame>
-        <Frame x:Name="TimeOptionsFrame" Margin="30,-7,30,0" Padding="5,5,5,5" BackgroundColor="#6699ff">
-            <StackLayout Orientation="Vertical">
+        <Frame x:Name="TimeOptionsFrame" BorderColor="#6699ff" Margin="30,-7,30,0" Padding="5,5,5,5" BackgroundColor="#6699ff">
+            <StackLayout Orientation="Vertical" Padding="0,10,0,10">
                 <StackLayout Orientation="Vertical">
                     <Button x:Name="CountDownTimeOptionButton" Style="{StaticResource OptionButton}" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference CountDownTimeOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.CountdownTimeOptionButtonColor}" Text="Countdown"></Button>
                     <Button x:Name="LimitedTasksOptionButton" Style="{StaticResource OptionButton}" Command="{Binding TimeOptionsPVM.TimeOptionsChangedCommand}" CommandParameter="{x:Reference LimitedTasksOptionButton}" BackgroundColor="{Binding TimeOptionsPVM.FixedAmountOfOperationsTimeOptionButtonColor}" Text="Limited Tasks"></Button>

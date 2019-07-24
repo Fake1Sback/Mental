@@ -1,5 +1,4 @@
 .vs/*
-packages/*
 *.sln
-Mental/Mental/bin/Debug/netstandard2.0/*
-Mental/Mental/obj/*
+Mental/Mental/bin/
+Mental/Mental/obj/

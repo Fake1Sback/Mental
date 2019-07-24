@@ -148,7 +148,7 @@ namespace Mental.ViewModels
                   {
                     Caption = "Stroop Tasks",
                     Description = "Stroop",
-                    ImgSrc = "MathOperations_200.png",
+                    ImgSrc = "Stroop_2_200.png",
                     FavoriteCommand = new Command (()=>{}),
                     OptionsCommand = new Command(() =>
                     {

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using Mental.Views;
 using System.Linq;
 
-[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Mental
 {
     public partial class App : Application
@@ -40,7 +39,7 @@ namespace Mental
                         AmountOfMinutes = 1,
                         AmountOfTasks = 1,
                         AmountOfSecondsForAnswer = 3
-                    }                    
+                    }
                 };
                 return StoredMathTaskOptions;
             }
@@ -51,7 +50,7 @@ namespace Mental
                 return StoredSchulteTableTaskOptions;
             else
             {
-                StoredSchulteTableTaskOptions = new  SchulteTableTaskOptions
+                StoredSchulteTableTaskOptions = new SchulteTableTaskOptions
                 {
                     GridSize = 3,
                     IsEasyModeActivated = false,
@@ -61,7 +60,7 @@ namespace Mental
                         AmountOfMinutes = 1,
                         AmountOfSecondsForAnswer = 10,
                         AmountOfTasks = 9
-                    }                     
+                    }
                 };
                 return StoredSchulteTableTaskOptions;
             }
@@ -87,7 +86,7 @@ namespace Mental
                 return StoredStroopTaskOptions;
             }
         }
-      
+
         private void LoadLatestMathTaskOptions()
         {
             DbMathTaskOptions dbMathTaskOptions;
@@ -101,7 +100,7 @@ namespace Mental
                 StoredMathTaskOptions = dbMathTaskOptions.ToMathTaskOptions();
 
                 //StoredMathTaskOptions = new MathTasksOptions() { Operations = new List<string>() };
-                
+
                 //if (dbMathTaskOptions.Operations.Contains("+"))
                 //    StoredMathTaskOptions.Operations.Add("+");
                 //if (dbMathTaskOptions.Operations.Contains("-"))
@@ -139,7 +138,7 @@ namespace Mental
         {
             StoredMathTaskOptions = mathTasksOptions;
             DbMathTaskOptions dbMathTaskOptions = mathTasksOptions.ToDbMathTaskOptions();
-            
+
             //string operations = string.Empty;
             //for (int i = 0; i < mathTasksOptions.Operations.Count; i++)
             //{
@@ -185,7 +184,7 @@ namespace Mental
                 dbSchulteTableTaskOptions = db.LastSchulteTableTaskOptions.FirstOrDefault();
             }
 
-            if(dbSchulteTableTaskOptions != null)
+            if (dbSchulteTableTaskOptions != null)
             {
                 StoredSchulteTableTaskOptions = dbSchulteTableTaskOptions.ToSchulteTableTaskOptions();
 
@@ -208,7 +207,7 @@ namespace Mental
         {
             StoredSchulteTableTaskOptions = _schulteTableTaskOptions;
             DbSchulteTableTaskOptions dbSchulteTableTaskOptions = _schulteTableTaskOptions.ToDbSchulteTableTaskOptions();
-           
+
             //dbSchulteTableTaskOptions.GridSize = _schulteTableTaskOptions.GridSize;
             //dbSchulteTableTaskOptions.IsEasyModeActivated = _schulteTableTaskOptions.IsEasyModeActivated;
             //dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption;
@@ -223,7 +222,7 @@ namespace Mental
                     db.LastSchulteTableTaskOptions.Remove(dbSchulteTableTaskOptionsToDelete);
                 db.LastSchulteTableTaskOptions.Add(dbSchulteTableTaskOptions);
                 db.SaveChanges();
-            }          
+            }
         }
 
         public void LoadLatestStroopTaskOptions()
@@ -255,7 +254,7 @@ namespace Mental
         {
             StoredStroopTaskOptions = _stroopTaskOptions;
             DbStroopTaskOptions dbStroopTaskOptions = _stroopTaskOptions.ToDbStroopTaskOptions();
-            
+
 
             //dbStroopTaskOptions.TimeOptions = (byte)_stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption;
             //dbStroopTaskOptions.AmountOfMinutes = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;

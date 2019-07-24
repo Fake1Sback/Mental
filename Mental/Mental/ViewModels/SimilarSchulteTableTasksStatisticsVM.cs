@@ -7,7 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
-using Entry = Microcharts.Entry;
+using ChartEntry = Microcharts.ChartEntry;
 using Mental.Views;
 
 namespace Mental.ViewModels
@@ -74,7 +74,7 @@ namespace Mental.ViewModels
             SaveRecordToDbCommand = new Command(SaveRecordToDb);
             LoadMoreRecordsCommand = new Command(LoadMoreRecords);
             ClearRecordsCommand = new Command(ClearRecords);
-            LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage()); });
+            LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage()); });         
         }
 
         //---------------------TopFrameValue-------------------------------
@@ -222,6 +222,8 @@ namespace Mental.ViewModels
 
             FillListView();
             InitializeChart();
+
+            MessagingCenter.Send<BaseVM>(this, "ReloadRecords");
         }
 
         public Command LoadGeneralStatistics { get; set; }
@@ -280,24 +282,24 @@ namespace Mental.ViewModels
         {
             get
             {
-                List<Entry> entries = new List<Entry>();
+                List<ChartEntry> entries = new List<ChartEntry>();
                 for (int i = _DbSchulteTableTasksList.Count - 1; i >= 0; i--)
                 {
                     if (_SelectedDbSchulteTableTask == _DbSchulteTableTasksList[i])
-                        entries.Add(new Entry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#99ffcc"), TextColor = SkiaSharp.SKColor.Parse("#99ffcc"), Label = "Selected", ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                        entries.Add(new ChartEntry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#99ffcc"), TextColor = SkiaSharp.SKColor.Parse("#99ffcc"), Label = "Selected", ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
                     else
                     {
                         if (_DbSchulteTableTasksList[i].TaskDateTime.Date == DateTime.Now.Date)
                         {
-                            entries.Add(new Entry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = _DbSchulteTableTasksList[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                            entries.Add(new ChartEntry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = _DbSchulteTableTasksList[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
                         }
                         else
-                            entries.Add(new Entry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = _DbSchulteTableTasksList[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
+                            entries.Add(new ChartEntry((float)_DbSchulteTableTasksList[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = _DbSchulteTableTasksList[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = _DbSchulteTableTasksList[i].GetEfficiencyParameterString() });
                     }
 
                 }
                 if (_DbSchulteTaskToSave != null)
-                    entries.Add(new Entry((float)_DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = _DbSchulteTaskToSave.GetEfficiencyParameterString() });
+                    entries.Add(new ChartEntry((float)_DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = _DbSchulteTaskToSave.GetEfficiencyParameterString() });
                 return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff") };
             }
         }

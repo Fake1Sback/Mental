@@ -17,11 +17,11 @@
                 <Setter Property="Text" Value=""></Setter>
             </Style>
             <Style x:Key="StartingPageButton" TargetType="Button">
-                <Setter Property="WidthRequest" Value="70"></Setter>
-                <Setter Property="HeightRequest" Value="70"></Setter>
+                <Setter Property="WidthRequest" Value="90"></Setter>
+                <Setter Property="HeightRequest" Value="90"></Setter>
                 <Setter Property="BorderRadius" Value="15"></Setter>
                 <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
-                <Setter Property="Padding" Value="0"></Setter>
+                <Setter Property="Padding" Value="1"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
             </Style>
@@ -38,14 +38,14 @@
         <ScrollView>
             <StackLayout>
                 <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
-                    <Label Text="{Binding Caption}" FontSize="23" BackgroundColor="Transparent" TextColor="#fafafa" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></Label>
+                    <Label Text="{Binding Caption}" FontSize="23" BackgroundColor="Transparent" TextColor="#fafafa" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Label>
                 </Frame>
                 <custom:CarouselView ItemsSource="{Binding CarouselViewList}" ItemSelected="CarouselView_ItemSelected">
                     <custom:CarouselView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                 <StackLayout Margin="20,5,20,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Image Source="{Binding ImgSrc}" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+                                    <Image Source="{Binding ImgSrc}" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="Center"></Image>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                                     <StackLayout Margin="5" Orientation="Vertical">
@@ -57,7 +57,7 @@
                                         <Label Style="{StaticResource StartingPageLabel}" Text="Customize"></Label>
                                     </StackLayout>
                                     <StackLayout Margin="5" Orientation="Vertical">
-                                        <Button Style="{StaticResource StartingPageButton}" Command="{Binding StatisticsCommand}" Image="Statistics_48.png"></Button>
+                                        <Button Style="{StaticResource StartingPageButton}" Command="{Binding StatisticsCommand}"  Image="Statistics_48.png"></Button>
                                         <Label Style="{StaticResource StartingPageLabel}" Text="Statistics"></Label>
                                     </StackLayout>
                                 </StackLayout>

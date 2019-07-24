@@ -21,22 +21,6 @@ namespace Mental.ViewModels.PartialViewModels
             MinimumDigitValue = mathTaskOptions.MinValue;
             MaximumDigitValue = mathTaskOptions.MaxValue;
 
-            //_MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
-            //_MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue);
-
-            //   IsRestrictionsOriginallyActivated = _mathTasksOptions.IsRestrictionsActivated;
-
-            //if(FindAmountOfDigits(mathTaskOptions.MinValue) != FindAmountOfDigits(mathTaskOptions.MaxValue))
-            //{
-
-            //}
-            //else
-            //{
-            //    _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
-            //    _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue) + 1;
-            //    _mathTasksOptions.IsRestrictionsActivated = false;
-            //}
-
             PlusDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit1Restriction) / 100;
             PlusDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit2Restriction) / 100;
             MinusDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[1].Digit1Restriction) / 100;
@@ -322,6 +306,208 @@ namespace Mental.ViewModels.PartialViewModels
 
         //---------------------------------------------------------------
 
+        public bool IsPlusDidit1HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[0].IsDigit1HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[0].IsDigit1HardRestriction = value;
+                OnPropertyChanged("IsPlusDidit1HardRestriction");
+                OnPropertyChanged("HardRestrictionPlusDigit1String");
+            }
+        }
+
+        public string HardRestrictionPlusDigit1String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[0].IsDigit1HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsPlusDigit2HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[0].IsDigit2HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[0].IsDigit2HardRestriction = value;
+                OnPropertyChanged("IsPlusDidit2HardRestriction");
+                OnPropertyChanged("HardRestrictionPlusDigit2String");
+            }
+        }
+
+        public string HardRestrictionPlusDigit2String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[0].IsDigit2HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsMinusDigit1HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[1].IsDigit1HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[1].IsDigit1HardRestriction = value;
+                OnPropertyChanged("IsMinusDigit1HardRestriction");
+                OnPropertyChanged("HardRestrictionMinusDigit1String");
+            }
+        }
+
+        public string HardRestrictionMinusDigit1String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[1].IsDigit1HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsMinusDigit2HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[1].IsDigit2HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[1].IsDigit2HardRestriction = value;
+                OnPropertyChanged("IsMinusDigit2HardRestriction");
+                OnPropertyChanged("HardRestrictionMinusDigit2String");
+            }
+        }
+
+        public string HardRestrictionMinusDigit2String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[1].IsDigit2HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsMultiplyDigit1HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[2].IsDigit1HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[2].IsDigit1HardRestriction = value;
+                OnPropertyChanged("IsMultiplyDigit1HardRestriction");
+                OnPropertyChanged("HardRestrictionMultiplyDigit1String");
+            }
+        }
+
+        public string HardRestrictionMultiplyDigit1String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[2].IsDigit1HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsMultiplyDigit2HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[2].IsDigit2HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[2].IsDigit2HardRestriction = value;
+                OnPropertyChanged("IsMultiplyDigit2HardRestriction");
+                OnPropertyChanged("HardRestrictionMultiplyDigit2String");
+            }
+        }
+
+        public string HardRestrictionMultiplyDigit2String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[2].IsDigit2HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsDivideDigit1HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[3].IsDigit1HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[3].IsDigit1HardRestriction = value;
+                OnPropertyChanged("IsDivideDigit1HardRestriction");
+                OnPropertyChanged("HardRestrictionDivideDigit1String");
+            }
+        }
+
+        public string HardRestrictionDivideDigit1String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[3].IsDigit1HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        public bool IsDivideDigit2HardRestriction
+        {
+            get
+            {
+                return taskRestrictions.restrictions[3].IsDigit2HardRestriction;
+            }
+            set
+            {
+                taskRestrictions.restrictions[3].IsDigit2HardRestriction = value;
+                OnPropertyChanged("IsDivideDigit2HardRestriction");
+                OnPropertyChanged("HardRestrictionDivideDigit2String");
+            }
+        }
+
+        public string HardRestrictionDivideDigit2String
+        {
+            get
+            {
+                if (taskRestrictions.restrictions[3].IsDigit2HardRestriction)
+                    return "Only";
+                else
+                    return "Max";
+            }
+        }
+
+        //---------------------------------------------------------------
+
         public int MinimumDigitValue
         {
             get
@@ -351,71 +537,7 @@ namespace Mental.ViewModels.PartialViewModels
                 RenewSliderValues();
             }
         }
-
-        //public int MinimumDigitValue
-        //{
-        //    get
-        //    {
-        //        return _MinimumSliderValue;
-        //    }
-        //    set
-        //    {
-        //        if (FindAmountOfDigits(value) == FindAmountOfDigits(MaximumDigitValue))
-        //        {
-        //            mathTaskOptions.IsRestrictionsActivated = false;
-        //            OnPropertyChanged("RestrictionLayoutVisibility");
-        //            OnPropertyChanged("RestrictionsVisibilityText");
-        //        }
-        //        else
-        //        {
-        //            if(IsRestrictionsOriginallyActivated)
-        //            {
-        //                if(!mathTaskOptions.IsRestrictionsActivated)
-        //                {
-        //                    mathTaskOptions.IsRestrictionsActivated = true;
-        //                    OnPropertyChanged("RestrictionLayoutVisibility");
-        //                    OnPropertyChanged("RestrictionsVisibilityText");
-        //                }
-        //            }
-        //            _MinimumSliderValue = FindAmountOfDigits(value);
-        //            OnPropertyChanged("MinimumSliderValue");
-        //            RenewSliderValues();
-        //        }
-        //    }
-        //}
-
-        //public int MaximumDigitValue
-        //{
-        //    get
-        //    {
-        //        return _MaximumSliderValue;
-        //    }
-        //    set
-        //    {
-        //        if (FindAmountOfDigits(value) == FindAmountOfDigits(MinimumDigitValue))
-        //        {
-        //            mathTaskOptions.IsRestrictionsActivated = false;
-        //            OnPropertyChanged("RestrictionLayoutVisibility");
-        //            OnPropertyChanged("RestrictionsVisibilityText");
-        //        }
-        //        else
-        //        {
-        //            if (IsRestrictionsOriginallyActivated)
-        //            {
-        //                if (!mathTaskOptions.IsRestrictionsActivated)
-        //                {
-        //                    mathTaskOptions.IsRestrictionsActivated = true;
-        //                    OnPropertyChanged("RestrictionLayoutVisibility");
-        //                    OnPropertyChanged("RestrictionsVisibilityText");
-        //                }
-        //                _MaximumSliderValue = FindAmountOfDigits(value);
-        //                OnPropertyChanged("_MaximumSliderValue");
-        //                RenewSliderValues();
-        //            }
-        //        }
-        //    }
-        //}
-
+     
         private int FindAmountOfDigits(int Value)
         {
             int AmountOfDigits = 0;
@@ -561,16 +683,7 @@ namespace Mental.ViewModels.PartialViewModels
                     return "-";
             }
         }
-
-        public Command PlusDigit1HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[0].IsDigit1HardRestriction = !taskRestrictions.restrictions[0].IsDigit1HardRestriction; OnPropertyChanged("PlusDigit1RestrictionString"); }); } set { } }
-        public Command PlusDigit2HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[0].IsDigit2HardRestriction = !taskRestrictions.restrictions[0].IsDigit2HardRestriction; OnPropertyChanged("PlusDigit2RestrictionString"); }); } set { } }
-        public Command MinusDigit1HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[1].IsDigit1HardRestriction = !taskRestrictions.restrictions[1].IsDigit1HardRestriction; OnPropertyChanged("MinusDigit1RestrictionString"); }); } set { } }
-        public Command MinusDigit2HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[1].IsDigit2HardRestriction = !taskRestrictions.restrictions[1].IsDigit2HardRestriction; OnPropertyChanged("MinusDigit2RestrictionString"); }); } set { } }
-        public Command MultiplyDigit1HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[2].IsDigit1HardRestriction = !taskRestrictions.restrictions[2].IsDigit1HardRestriction; OnPropertyChanged("MultiplyDigit1RestrictionString"); }); } set { } }
-        public Command MultiplyDigit2HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[2].IsDigit2HardRestriction = !taskRestrictions.restrictions[2].IsDigit2HardRestriction; OnPropertyChanged("MultiplyDigit2RestrictionString"); }); } set { } }
-        public Command DivideDigit1HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[3].IsDigit1HardRestriction = !taskRestrictions.restrictions[3].IsDigit1HardRestriction; OnPropertyChanged("DivideDigit1RestrictionString"); }); } set { } }
-        public Command DivideDigit2HardRestrictionCommand { get { return new Command(() => { taskRestrictions.restrictions[3].IsDigit2HardRestriction = !taskRestrictions.restrictions[3].IsDigit2HardRestriction; OnPropertyChanged("DivideDigit2RestrictionString"); }); } set { } }
-
+      
         //----------------------------------------------------------------
 
         private string CheckBlockRestrictionImgSrc(int OperationIndex)
@@ -626,6 +739,8 @@ namespace Mental.ViewModels.PartialViewModels
             }
             return false;
         }
+
+        //---------------------------------------------------------------
 
         public Command PlusBlockActivatedCommand
         {

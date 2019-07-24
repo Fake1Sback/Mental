@@ -26,12 +26,14 @@
                 <Setter Property="Margin" Value="10,3,10,0"></Setter>
                 <Setter Property="Padding" Value="0,3,0,3"></Setter>
                 <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
+                <Setter Property="BorderColor" Value="#6699ff"></Setter>
                 <Setter Property="CornerRadius" Value="25"></Setter>
             </Style>
             <Style x:Key="OptionsContainerFrame" TargetType="Frame">
                 <Setter Property="Margin" Value="30,-7,30,0"></Setter>
                 <Setter Property="Padding" Value="5,5,5,15"></Setter>
                 <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
+                <Setter Property="BorderColor" Value="#6699ff"></Setter>
             </Style>
             <Style x:Key="Navigation" TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="#6699ff"></Setter>

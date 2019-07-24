@@ -1,1 +1,0 @@
-E:\Visual Studio Projects\Mental\Mental\Mental.UWP\Mental.UWP.csproj;x86

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
-using Entry = Microcharts.Entry;
+using ChartEntry = Microcharts.ChartEntry;
 using Mental.Views;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +34,9 @@ namespace Mental.ViewModels
 
         private INavigation navigation;
 
-        private List<Entry> _TimeOptionsChart;
-        private List<Entry> _StroopTaskTypeChart;
-        private List<Entry> _AmountOfButtonsChart;
+        private List<ChartEntry> _TimeOptionsChart;
+        private List<ChartEntry> _StroopTaskTypeChart;
+        private List<ChartEntry> _AmountOfButtonsChart;
 
         private int _ListViewHeightRequest;
 
@@ -62,6 +62,12 @@ namespace Mental.ViewModels
             LoadMoreDbMathTaskInfo();
             LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
             LoadSimilarCommand = new Command(LoadSimilar);
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords",(p) =>
+            {
+                _CurrentPaginationIndex = StartPaginationIndex;
+                LoadMoreDbMathTaskInfo();
+            });
         }  
 
         public List<DbStroopTaskListItem> DbStroopTaskListItems
@@ -92,7 +98,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20, HoleRadius = 0 };
             }
             set
             {
@@ -105,7 +111,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20, HoleRadius = 0};
             }
             set
             {
@@ -118,7 +124,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20};
             }
             set
             {
@@ -134,19 +140,19 @@ namespace Mental.ViewModels
             int AmountOfLimitedTasksOptionRecords = await db.StroopTasks.Where(t => t.TimeOption == 1).CountAsync();
             int AmountOfLastTaskOptionRecords = GeneralAmountOfRecords - (AmountOfCountdownOptionRecords + AmountOfLimitedTasksOptionRecords);
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfCountdownOptionRecords)
+                new ChartEntry(AmountOfCountdownOptionRecords)
                 {
                     ValueLabel = $"Countdown ({AmountOfCountdownOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfLimitedTasksOptionRecords)
+                new ChartEntry(AmountOfLimitedTasksOptionRecords)
                 {
                     ValueLabel = $"Limited tasks ({AmountOfLimitedTasksOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 },
-                new Entry(AmountOfLastTaskOptionRecords)
+                new ChartEntry(AmountOfLastTaskOptionRecords)
                 {
                     ValueLabel = $"Last task ({AmountOfLastTaskOptionRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color3)
@@ -163,19 +169,19 @@ namespace Mental.ViewModels
             int AmountOfTrueOrFalseRecords = await db.StroopTasks.Where(t => t.StroopTaskOption == (byte)StroopTaskType.TrueOrFalse).CountAsync();
             int AmountOfFindColorByTextRecods = GeneralAmountOfRecords - (AmountOfFindOneCorrectRecords + AmountOfTrueOrFalseRecords);
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOfFindOneCorrectRecords)
+                new ChartEntry(AmountOfFindOneCorrectRecords)
                 {
                     ValueLabel = $"One Correct ({AmountOfFindOneCorrectRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color1)
                 },
-                new Entry(AmountOfTrueOrFalseRecords)
+                new ChartEntry(AmountOfTrueOrFalseRecords)
                 {
                     ValueLabel = $"True / False ({AmountOfTrueOrFalseRecords})",
                     Color = SkiaSharp.SKColor.Parse(Color2)
                 },
-                new Entry(AmountOfFindColorByTextRecods)
+                new ChartEntry(AmountOfFindColorByTextRecods)
                 {
                     ValueLabel = $"Color by Text ({AmountOfFindColorByTextRecods})",
                     Color = SkiaSharp.SKColor.Parse(Color3)
@@ -194,37 +200,37 @@ namespace Mental.ViewModels
             int AmountOf8ButtonsRecods = await db.StroopTasks.Where(t => t.AmountOfButtons == 8).CountAsync();
             int AmountOf10ButtonsRecods = await db.StroopTasks.Where(t => t.AmountOfButtons == 10).CountAsync();
 
-            List<Entry> entries = new List<Entry>()
+            List<ChartEntry> entries = new List<ChartEntry>()
             {
-                new Entry(AmountOf2ButtonsRecods)
+                new ChartEntry(AmountOf2ButtonsRecods)
                 {
                     ValueLabel = AmountOf2ButtonsRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color1),
                     Label = "2 Records",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOf4ButtonsRecods)
+                new ChartEntry(AmountOf4ButtonsRecods)
                 {
                     ValueLabel = AmountOf4ButtonsRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color2),
                     Label = "4 Records",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOf6ButtonsRecods)
+                new ChartEntry(AmountOf6ButtonsRecods)
                 {
                     ValueLabel = AmountOf6ButtonsRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color3),
                     Label = "6 Records",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOf8ButtonsRecods)
+                new ChartEntry(AmountOf8ButtonsRecods)
                 {
                     ValueLabel = AmountOf8ButtonsRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color4),
                     Label = "8 Records",
                     TextColor = SkiaSharp.SKColor.Parse("#fafafa")
                 },
-                new Entry(AmountOf10ButtonsRecods)
+                new ChartEntry(AmountOf10ButtonsRecods)
                 {
                     ValueLabel = AmountOf10ButtonsRecods.ToString(),
                     Color = SkiaSharp.SKColor.Parse(Color5),

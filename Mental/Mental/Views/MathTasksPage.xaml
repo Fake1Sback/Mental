@@ -29,10 +29,12 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Label x:Name="OperationLabel" Margin="10,0,10,0" FontSize="{Binding LabelFontSize}" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
-                <Label x:Name="EqualsLabel" FontSize="{Binding LabelFontSize}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center">=</Label>
-                <Label x:Name="AnswerLabel" FontSize="{Binding LabelFontSize}" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
-                <Grid x:Name="DigitButtonsGrid" BackgroundColor="#6699ff" RowSpacing="0" ColumnSpacing="0" Margin="20,0,20,0" Padding="-2,-2,-2,-2">
+                <StackLayout Orientation="Vertical" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                    <Label x:Name="OperationLabel" Margin="10,0,10,0" FontSize="{Binding LabelFontSize}" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                    <Label x:Name="EqualsLabel" FontSize="{Binding LabelFontSize}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center">=</Label>
+                    <Label x:Name="AnswerLabel" FontSize="{Binding LabelFontSize}" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                </StackLayout>
+                <Grid x:Name="DigitButtonsGrid" VerticalOptions="EndAndExpand" BackgroundColor="#6699ff" RowSpacing="0" ColumnSpacing="0" Margin="20,0,20,0" Padding="-2,-2,-2,-2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*"/>
