@@ -6549,17 +6549,20 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F010054
 			public const int Stroop_2_200 = 2130772052;
 			
+			// aapt resource value: 0x7F010055
+			public const int Stroop_Ver2_200 = 2130772053;
+			
 			// aapt resource value: 0x7F09006F
 			public const int tooltip_frame_dark = 2131296367;
 			
 			// aapt resource value: 0x7F090070
 			public const int tooltip_frame_light = 2131296368;
 			
-			// aapt resource value: 0x7F010055
-			public const int True_False_24 = 2130772053;
-			
 			// aapt resource value: 0x7F010056
-			public const int True_or_False_18 = 2130772054;
+			public const int True_False_24 = 2130772054;
+			
+			// aapt resource value: 0x7F010057
+			public const int True_or_False_18 = 2130772055;
 			
 			static Drawable()
 			{

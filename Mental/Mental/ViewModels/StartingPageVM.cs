@@ -120,13 +120,13 @@ namespace Mental.ViewModels
                     Description = "Math",
                     ImgSrc = "MathOperations_200.png",
                     FavoriteCommand = new Command (()=>{}),
-                    OptionsCommand = new Command (() =>
+                    OptionsCommand = new Command (async () =>
                     {
-                        navigation.PushAsync(new MathTasksOptionsPage());
+                        await navigation.PushAsync(new MathTasksOptionsPage());
                     }),
-                    StatisticsCommand = new Command (() =>
+                    StatisticsCommand = new Command (async () =>
                     {
-                        navigation.PushAsync(new GeneralStatisticsPage());
+                        await navigation.PushAsync(new GeneralStatisticsPage());
                     })
                 },
                 new CarouselViewListItem()
@@ -135,28 +135,28 @@ namespace Mental.ViewModels
                     Description = "Schulte",
                     ImgSrc = "Schulte_Tables_200.png",
                     FavoriteCommand = new Command(()=>{}),
-                    OptionsCommand = new Command(() =>
+                    OptionsCommand = new Command(async () =>
                     {
-                        navigation.PushAsync(new SchulteTableTaskOptionsPage());
+                        await navigation.PushAsync(new SchulteTableTaskOptionsPage());
                     }),
-                    StatisticsCommand = new Command(() =>
+                    StatisticsCommand = new Command(async () =>
                     {
-                        navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage());
+                        await navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage());
                     })
                   },
                 new CarouselViewListItem()
                   {
                     Caption = "Stroop Tasks",
                     Description = "Stroop",
-                    ImgSrc = "Stroop_2_200.png",
+                    ImgSrc = "Stroop_Ver2_200.png",
                     FavoriteCommand = new Command (()=>{}),
-                    OptionsCommand = new Command(() =>
+                    OptionsCommand = new Command(async () =>
                     {
-                        navigation.PushAsync(new StroopTaskOptionsPage());
+                        await navigation.PushAsync(new StroopTaskOptionsPage());
                     }),
-                    StatisticsCommand = new Command(() =>
+                    StatisticsCommand = new Command(async () =>
                     {
-                        navigation.PushAsync(new StroopTaskGeneralStatisticsPage());
+                       await navigation.PushAsync(new StroopTaskGeneralStatisticsPage());
                     })
                   }
             };

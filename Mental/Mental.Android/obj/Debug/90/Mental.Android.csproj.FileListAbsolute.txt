@@ -934,3 +934,8 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\stroop_2_200.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\stroop_2_200.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\stroop_2_200.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\stroop_2_200.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable\stroop_ver2_200.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\stroop_ver2_200.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\stroop_ver2_200.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\stroop_ver2_200.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\stroop_ver2_200.png
