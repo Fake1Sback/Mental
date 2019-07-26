@@ -4,6 +4,9 @@
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Mental.Views.StroopTaskSimilarStatisticsPage"
              Title="Similar Tasks Statistics">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home_white_36.png" Command="{Binding ToHomeCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TopFrameLabel" TargetType="Label">

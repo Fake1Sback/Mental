@@ -375,5 +375,16 @@ namespace Mental.ViewModels
             if (_SelectedSchulteTableTaskListItem != null)
                 await navigation.PushAsync(new SimilarSchulteTableTasksStatisticsPage(_SelectedSchulteTableTaskListItem.DbSchulteTableTask, false));
         }
+
+        public Command ToHomeCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await navigation.PopToRootAsync();
+                });
+            }
+        }
     }
 }

@@ -4,6 +4,9 @@
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="Mental.Views.GeneralStatisticsPage"
              Title="Math Tasks General Stats">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home_white_36.png" Command="{Binding ToHomeCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="ListViewItemLabel" TargetType="Label">

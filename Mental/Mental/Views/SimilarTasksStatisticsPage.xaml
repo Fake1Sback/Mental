@@ -6,7 +6,9 @@
              xmlns:custom="clr-namespace:Mental.CustomControls"
              x:Class="Mental.Views.SimilarTasksStatisticsPage"
              Title="Similar Tasks Statistics">
-    <!--BackgroundColor="#6699ff"-->
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="home_white_36.png" Command="{Binding ToHomeCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="TopFrameLabel" TargetType="Label">

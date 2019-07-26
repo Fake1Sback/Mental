@@ -309,5 +309,16 @@ namespace Mental.ViewModels
                 return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff") };
             }
         }
+
+        public Command ToHomeCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await navigation.PopToRootAsync();
+                });
+            }
+        }
     }
 }

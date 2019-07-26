@@ -382,5 +382,16 @@ namespace Mental.ViewModels
             if (_SelectedStroopTaskListItem != null)
                 await navigation.PushAsync(new StroopTaskSimilarStatisticsPage(_SelectedStroopTaskListItem.DbStroopTask,false));
         }
+
+        public Command ToHomeCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await navigation.PopToRootAsync();
+                });
+            }
+        }
     }
 }

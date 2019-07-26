@@ -564,5 +564,16 @@ namespace Mental.ViewModels
             if (_SelectedMathTaskListItem != null)
                 await navigation.PushAsync(new SimilarTasksStatisticsPage(_SelectedMathTaskListItem.dbMathTask, false));
         }
+
+        public Command ToHomeCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    await navigation.PopToRootAsync();
+                });
+            }
+        }
     }
 }

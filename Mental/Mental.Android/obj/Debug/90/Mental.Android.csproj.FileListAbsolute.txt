@@ -944,3 +944,13 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\info_white_nt_48.
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\info_white_nt_48.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\info_white_nt_48.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\info_white_nt_48.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable\favourite_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\favourite_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\favourite_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\favourite_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\favourite_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\home_white_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\home_white_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\home_white_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\home_white_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable\home_white_36.png
