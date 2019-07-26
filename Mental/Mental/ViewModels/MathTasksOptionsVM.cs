@@ -6,6 +6,7 @@ using Mental.Models;
 using Mental.Views;
 using Xamarin.Forms;
 using Mental.ViewModels.PartialViewModels;
+using Mental.Services;
 
 namespace Mental.ViewModels
 {
@@ -19,6 +20,11 @@ namespace Mental.ViewModels
 
         private double _SliderMaxChainLengthValue;
         private double _DigitsAfterDotSignSliderValue;
+
+
+        private bool _InfoVisibility = false;
+        private string _InfoCaption = string.Empty;
+        private string _InfoText = string.Empty;
 
         private Color ActiveColor = Color.FromHex("#6699ff");
 
@@ -36,12 +42,78 @@ namespace Mental.ViewModels
             _SliderMaxChainLengthValue = mathTasksOptions.MaxChainLength;
             _DigitsAfterDotSignSliderValue = mathTasksOptions.DigitsAfterDotSign;
 
-            ListOfOperationsChangedCommand = new Command(OperationButtonClick);
             ChainLengthFixedChangedCommand = new Command(ChainLengthFixedChanged);
             NumbersTypeChangedCommand = new Command(NumberTypeChanged);
             TypeOfTaskChangedCommand = new Command(TypeOfTaskChanged);
             StartCommand = new Command(Start);
         }
+
+
+        //--------------------------------------------------------
+        public bool InfoVisibility
+        {
+            get
+            {
+                return _InfoVisibility;
+            }
+            set
+            {
+                _InfoVisibility = value;
+                OnPropertyChanged("InfoVisibility");
+            }
+        }
+
+        public string InfoCaption
+        {
+            get
+            {
+                return _InfoCaption;
+            }
+            set
+            {
+                _InfoCaption = value;
+                OnPropertyChanged("InfoCaption");
+            }
+        }
+
+        public string InfoText
+        {
+            get
+            {
+                return _InfoText;
+            }
+            set
+            {
+                _InfoText = value;
+                OnPropertyChanged("InfoText");
+            }
+        }
+
+        public Command<string> ShowInfoCommand
+        {
+            get
+            {
+                return new Command<string>((str) =>
+                {
+                    InfoVisibility = true;
+                    InfoCaption = OptionsInfoDictionary.GetCaption(str);
+                    InfoText = OptionsInfoDictionary.GetInfoText(str);
+                });
+            }
+        }
+
+        public Command HideInfoCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    InfoVisibility = false;
+                });
+            }
+        }
+
+        //---------------------------------------------------
 
         public RestrictionsPVM RestPVM
         {
@@ -292,45 +364,41 @@ namespace Mental.ViewModels
             private set { }
         }
    
-        public Command ListOfOperationsChangedCommand { get; set; }
-
-        private void OperationButtonClick(object obj)
+        public Command ListOfOperationsChangedCommand
         {
-            Button button = obj as Button;
-            if (button.Text == "+")
+            get
             {
-                if (mathTasksOptions.Operations.Contains("+"))
-                    mathTasksOptions.Operations.Remove("+");
-                else
-                    mathTasksOptions.Operations.Add("+");
-                OnPropertyChanged("PlusButtonColor");
-            }
-            else if (button.Text == "-")
-            {
-                if (mathTasksOptions.Operations.Contains("-"))
-                    mathTasksOptions.Operations.Remove("-");
-                else
-                    mathTasksOptions.Operations.Add("-");
-                OnPropertyChanged("MinusButtonColor");
-            }
-            else if (button.Text == "*")
-            {
-                if (mathTasksOptions.Operations.Contains("*"))
-                    mathTasksOptions.Operations.Remove("*");
-                else
-                    mathTasksOptions.Operations.Add("*");
-                OnPropertyChanged("MultiplyButtonColor");
-            }
-            else if (button.Text == "/")
-            {
-                if (mathTasksOptions.Operations.Contains("/"))
-                    mathTasksOptions.Operations.Remove("/");
-                else
-                    mathTasksOptions.Operations.Add("/");
-                OnPropertyChanged("DivideButtonColor");
+                return new Command<string>((str) =>
+                {
+                    if (mathTasksOptions.Operations.Contains(str))
+                    {
+                        if (mathTasksOptions.Operations.Count > 1)
+                            mathTasksOptions.Operations.Remove(str);
+                    }
+                    else
+                        mathTasksOptions.Operations.Add(str);
+
+                    switch (str)
+                    {
+                        case "+":
+                            OnPropertyChanged("PlusButtonColor");
+                            break;
+                        case "-":
+                            OnPropertyChanged("MinusButtonColor");
+                            break;
+                        case "*":
+                            OnPropertyChanged("MultiplyButtonColor");
+                            break;
+                        case "/":
+                            OnPropertyChanged("DivideButtonColor");
+                            break;
+                    }
+
+                    RestPVM.RenewRestrictionsBlockVisibility();
+                });
             }
         }
-
+              
         public Command ChainLengthFixedChangedCommand { get; set; }
 
         private void ChainLengthFixedChanged()

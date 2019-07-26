@@ -49,7 +49,7 @@
                 <Setter Property="Margin" Value="2,2,2,2"></Setter>
             </Style>
             <Style x:Key="StartButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="White"></Setter>
+                <Setter Property="BackgroundColor" Value="#fafafa"></Setter>
                 <Setter Property="FontSize" Value="20"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="TextColor" Value="#6699ff"></Setter>

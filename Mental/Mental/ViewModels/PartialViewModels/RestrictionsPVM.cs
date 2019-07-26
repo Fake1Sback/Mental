@@ -742,13 +742,59 @@ namespace Mental.ViewModels.PartialViewModels
 
         //---------------------------------------------------------------
 
+        public void RenewRestrictionsBlockVisibility()
+        {
+            OnPropertyChanged("PlusBlockVivibility");
+            OnPropertyChanged("MinusBlockVisibility");
+            OnPropertyChanged("MultiplyBlockVisibility");
+            OnPropertyChanged("DivideBlockVisibility");
+        }
+
+        public bool PlusBlockVivibility
+        {
+            get
+            {
+                return mathTaskOptions.Operations.Contains("+");
+            }
+        }
+
+        public bool MinusBlockVisibility
+        {
+            get
+            {
+                return mathTaskOptions.Operations.Contains("-");
+            }
+        }
+
+        public bool MultiplyBlockVisibility
+        {
+            get
+            {
+                return mathTaskOptions.Operations.Contains("*");
+            }
+        }
+
+        public bool DivideBlockVisibility
+        {
+            get
+            {
+                return mathTaskOptions.Operations.Contains("/");
+            }
+        }
+
         public Command PlusBlockActivatedCommand
         {
             get
             {
                 return new Command(() =>
                 {
-                    taskRestrictions.restrictions[0].IsBlockActivated = !taskRestrictions.restrictions[0].IsBlockActivated;
+                    if (taskRestrictions.restrictions[0].IsBlockActivated)
+                        taskRestrictions.restrictions[0].IsBlockActivated = false;
+                    else
+                    {
+                        if (mathTaskOptions.Operations.Contains("+"))
+                            taskRestrictions.restrictions[0].IsBlockActivated = true;
+                    }
                     mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
                     OnPropertyChanged("PlusBlockActivatedImgSrc");
                 });
@@ -761,8 +807,14 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 return new Command(() =>
-                {
-                    taskRestrictions.restrictions[1].IsBlockActivated = !taskRestrictions.restrictions[1].IsBlockActivated;
+                {                 
+                    if (taskRestrictions.restrictions[1].IsBlockActivated)
+                        taskRestrictions.restrictions[1].IsBlockActivated = false;
+                    else
+                    {
+                        if (mathTaskOptions.Operations.Contains("-"))
+                            taskRestrictions.restrictions[1].IsBlockActivated = true;
+                    }
                     mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
                     OnPropertyChanged("MinusBlockActivatedImgSrc");
                 });
@@ -775,8 +827,14 @@ namespace Mental.ViewModels.PartialViewModels
             get
             {
                 return new Command(() =>
-                {
-                    taskRestrictions.restrictions[2].IsBlockActivated = !taskRestrictions.restrictions[2].IsBlockActivated;
+                {                  
+                    if (taskRestrictions.restrictions[2].IsBlockActivated)
+                        taskRestrictions.restrictions[2].IsBlockActivated = false;
+                    else
+                    {
+                        if (mathTaskOptions.Operations.Contains("*"))
+                            taskRestrictions.restrictions[2].IsBlockActivated = true;
+                    }
                     mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
                     OnPropertyChanged("MultiplyBlockActivatedImgSrc");
                 });
@@ -789,7 +847,13 @@ namespace Mental.ViewModels.PartialViewModels
             {
                 return new Command(() =>
                 {
-                    taskRestrictions.restrictions[3].IsBlockActivated = !taskRestrictions.restrictions[3].IsBlockActivated;
+                    if (taskRestrictions.restrictions[3].IsBlockActivated)
+                        taskRestrictions.restrictions[3].IsBlockActivated = false;
+                    else
+                    {
+                        if (mathTaskOptions.Operations.Contains("/"))
+                            taskRestrictions.restrictions[3].IsBlockActivated = true;
+                    }
                     mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
                     OnPropertyChanged("DivideBlockActivatedImgSrc");
                 });

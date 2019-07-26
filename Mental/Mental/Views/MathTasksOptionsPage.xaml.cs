@@ -14,32 +14,11 @@ namespace Mental.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MathTasksOptionsPage : ContentPage
-    {
-        private bool IsVisible = true;
-             
+    {            
         public MathTasksOptionsPage()
         {
             InitializeComponent();
             BindingContext = new MathTasksOptionsVM(this.Navigation);
-        }
-
-        private async void ShowHideDescription_Clicked(object sender, EventArgs e)
-        {
-            if (IsVisible)
-            {
-               // await OperationDescriptionFrame.TranslateTo(OperationDescriptionFrame.X, OperationDescriptionFrame.Y - 100, 500);
-                await OperationDescriptionFrame.ScaleTo(0,500,Easing.SinOut);
-                OperationDescriptionFrame.IsEnabled = false;
-                OperationDescriptionFrame.IsVisible = false;
-                IsVisible = false;
-            }
-            else
-            {
-                OperationDescriptionFrame.IsEnabled = true;
-                OperationDescriptionFrame.IsVisible = true;
-                await OperationDescriptionFrame.ScaleTo(1, 500);
-                IsVisible = true;
-            }
         }
 
         private void OperationsExpandMoreButton_Clicked(object sender, EventArgs e)
@@ -65,6 +44,6 @@ namespace Mental.Views
         private void TaskTypeExpandMoreButton_Clicked(object sender, EventArgs e)
         {
             TaskTypeFrame.IsVisible = !TaskTypeFrame.IsVisible;
-        }
+        }    
     }
 }

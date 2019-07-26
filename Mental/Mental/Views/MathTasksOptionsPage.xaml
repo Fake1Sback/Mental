@@ -37,107 +37,125 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button x:Name="ShowHideDescription" Style="{StaticResource InfoButton}" Image="info_white_48.png" Clicked="ShowHideDescription_Clicked"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Operations</Label>
-                        <Button x:Name="OperationsExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="OperationsExpandMoreButton_Clicked"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame x:Name="OperationDescriptionFrame" IsVisible="False" Margin="30,-7,30,0" Padding="5,5,5,5" BackgroundColor="#6699ff">
-                    <Label HorizontalOptions="FillAndExpand" TextColor="White" FontSize="15" Text="Operations option defines what arithmetic operations will be used in generated expressions"></Label>
-                </Frame>
-                <Frame x:Name="OperationsFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
-                        <Button x:Name="PlusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding PlusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference PlusButton}" Text="+"></Button>
-                        <Button x:Name="MinusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MinusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="{x:Reference MinusButton}" Text="-"></Button>
-                        <Button x:Name="MultiplyButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MultiplyButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference MultiplyButton}" Text="*"></Button>
-                        <Button x:Name="DivideButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding DivideButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="{x:Reference DivideButton}" Text="/"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Chain Length</Label>
-                        <Button x:Name="ChainLengthExpandMoreButton" Style="{StaticResource ExpandButton}"  Image="expand_more_white_48.png" Clicked="ChainLengthExpandMoreButton_Clicked"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame Margin="30,-7,30,0" IsVisible="False" Padding="5,5,5,5" BackgroundColor="#6699ff">
-                    <Label HorizontalOptions="FillAndExpand" TextColor="White" FontSize="15" Text="Chain length defines how much operations between two values will be in each task. Fixed parameter defines if chosen value will be only option or chain length will float between minimum and chosen value."></Label>
-                </Frame>
-                <Frame x:Name="ChainLengthFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical" Padding="0,10,0,10">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="25,0,25,0">
-                            <Label Text="Length Fixed" TextColor="White" FontSize="18" HeightRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="Center"></Label>
-                            <Button x:Name="FixedChainLengthButton" Margin="0,0,10,0" BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" BorderRadius="20" BorderColor="Black" BorderWidth="1" Image="{Binding ChainLengthImageSrc}" Command="{Binding ChainLengthFixedChangedCommand}" CommandParameter="{x:Reference FixedChainLengthButton}"></Button>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="OperationsInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="OperationsInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Operations</Label>
+                            <Button x:Name="OperationsExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="OperationsExpandMoreButton_Clicked"></Button>
                         </StackLayout>
-                        <Label Text="Maximum Chain Length" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18"></Label>
-                        <Label x:Name="MaximumChainLengthValueLabel" Text="{Binding IntMaxChainLength}" VerticalOptions="Center" FontSize="18" HorizontalOptions="Center" TextColor="White"></Label>
-                        <Slider x:Name="MaximumChainLengthValueSlider" Value="{Binding MaxChainLength}" Maximum="8" Minimum="2"></Slider>
-                    </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Generated Values</Label>
-                        <Button x:Name="GeneratedValueExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="GeneratedValueExpandMoreButton_Clicked"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame x:Name="GeneratedValuesFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout Margin="7,0,0,0" Orientation="Horizontal">
-                            <Label Text="Minimum value:" FontSize="18" TextColor="White" VerticalOptions="Center"></Label>
-                            <Editor x:Name="MinValueEditor" WidthRequest="70" TextColor="White" FontSize="18" Text="{Binding MinValue}" Keyboard="Numeric" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Editor>
+                    </Frame>
+                    <Frame x:Name="OperationsFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0,10,0,0">
+                            <Button x:Name="PlusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding PlusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="+" Text="+"></Button>
+                            <Button x:Name="MinusButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MinusButtonColor}" Command="{Binding ListOfOperationsChangedCommand}" CommandParameter="-" Text="-"></Button>
+                            <Button x:Name="MultiplyButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding MultiplyButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="*" Text="*"></Button>
+                            <Button x:Name="DivideButton" Style="{StaticResource OperationButton}" BackgroundColor="{Binding DivideButtonColor}" Command="{Binding ListOfOperationsChangedCommand}"  CommandParameter="/" Text="/"></Button>
                         </StackLayout>
-                        <StackLayout Margin="7,0,0,0" Orientation="Horizontal">
-                            <Label Text="Maximum value:"  FontSize="18" TextColor="White" VerticalOptions="Center"></Label>
-                            <Editor x:Name="MaxValueEditor" WidthRequest="70" TextColor="White" Text="{Binding MaxValue}" Keyboard="Numeric" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Editor>
+                    </Frame>
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="ChainLengthInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="ChainLengthInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Chain Length</Label>
+                            <Button x:Name="ChainLengthExpandMoreButton" Style="{StaticResource ExpandButton}"  Image="expand_more_white_48.png" Clicked="ChainLengthExpandMoreButton_Clicked"></Button>
                         </StackLayout>
-                    </StackLayout>
-                </Frame>
-                <PartialViews:RestrictionsView ></PartialViews:RestrictionsView>
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Numbers type</Label>
-                        <Button x:Name="NumbersTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="NumbersTypeExpandMoreButton_Clicked"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame x:Name="NumbersTypeFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical">
-                        <Button x:Name="IntegerNumberTypeButton" Style="{StaticResource OptionButton}" Command="{Binding NumbersTypeChangedCommand}" BackgroundColor="{Binding IntegerDataTypeButtonColor}" CommandParameter="{x:Reference IntegerNumberTypeButton}" Text="Integer"></Button>
-                        <Button x:Name="FractionalNumberTypeButton" Style="{StaticResource OptionButton}" Command="{Binding NumbersTypeChangedCommand}" BackgroundColor="{Binding FractionalDataTypeButtonColor}" CommandParameter="{x:Reference FractionalNumberTypeButton}" Text="Fractional"></Button>
-                        <StackLayout x:Name="FractionalNumbersOptions" IsVisible="{Binding FractionalNumbersOptionsLabeleVisibility}">
-                            <Label Text="Digits after dot sign" FontSize="18" TextColor="White" HorizontalOptions="Center"></Label>
-                            <Label x:Name="DigitsAfterDotSignLabel" TextColor="White" FontSize="18" Text="{Binding IntDigitsAfterDotSign}" HorizontalOptions="Center"></Label>
-                            <Slider x:Name="DigitsAfterDotSignSlider" Maximum="8" Minimum="1" Value="{Binding DigitsAfterDotSign}"></Slider>
+                    </Frame>
+                    <Frame x:Name="ChainLengthFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Vertical" Padding="0,10,0,10">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="15,0,15,0">
+                                <Label Text="Length Fixed" TextColor="White" FontSize="18" HorizontalOptions="Start" VerticalOptions="Center"></Label>
+                                <BoxView Margin="10,0,10,0" BackgroundColor="#fafafa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                                <Button x:Name="FixedChainLengthButton" Margin="0,0,10,0" BackgroundColor="White" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="40" HeightRequest="40" BorderRadius="20" BorderColor="Black" BorderWidth="1" Image="{Binding ChainLengthImageSrc}" Command="{Binding ChainLengthFixedChangedCommand}" CommandParameter="{x:Reference FixedChainLengthButton}"></Button>
+                            </StackLayout>
+                            <Label Text="Maximum Chain Length" HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" FontSize="18"></Label>
+                            <Label x:Name="MaximumChainLengthValueLabel" Text="{Binding IntMaxChainLength}" VerticalOptions="Center" FontSize="18" HorizontalOptions="Center" TextColor="White"></Label>
+                            <Slider x:Name="MaximumChainLengthValueSlider" Value="{Binding MaxChainLength}" Maximum="8" Minimum="2"></Slider>
                         </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="GeneratedValuesInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="GeneratedValuesInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Generated Values</Label>
+                            <Button x:Name="GeneratedValueExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="GeneratedValueExpandMoreButton_Clicked"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="GeneratedValuesFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Vertical">
+                            <StackLayout Margin="7,0,0,0" Orientation="Horizontal">
+                                <Label Text="Minimum value:" FontSize="18" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <BoxView Margin="10,0,10,0" BackgroundColor="#fafafa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                                <Editor x:Name="MinValueEditor" WidthRequest="70" TextColor="White" FontSize="18" Text="{Binding MinValue}" Keyboard="Numeric" VerticalOptions="Center" HorizontalOptions="End"></Editor>
+                            </StackLayout>
+                            <StackLayout Margin="7,0,0,0" Orientation="Horizontal">
+                                <Label Text="Maximum value:"  FontSize="18" TextColor="White" VerticalOptions="Center" HorizontalOptions="Start"></Label>
+                                <BoxView Margin="10,0,10,0" BackgroundColor="#fafafa" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                                <Editor x:Name="MaxValueEditor" WidthRequest="70" TextColor="White" Text="{Binding MaxValue}" Keyboard="Numeric" VerticalOptions="Center" HorizontalOptions="End"></Editor>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <PartialViews:RestrictionsView ></PartialViews:RestrictionsView>
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="NumbersTypeInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="NumbersTypeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Numbers type</Label>
+                            <Button x:Name="NumbersTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="NumbersTypeExpandMoreButton_Clicked"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="NumbersTypeFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Vertical">
+                            <Button x:Name="IntegerNumberTypeButton" Style="{StaticResource OptionButton}" Command="{Binding NumbersTypeChangedCommand}" BackgroundColor="{Binding IntegerDataTypeButtonColor}" CommandParameter="{x:Reference IntegerNumberTypeButton}" Text="Integer"></Button>
+                            <Button x:Name="FractionalNumberTypeButton" Style="{StaticResource OptionButton}" Command="{Binding NumbersTypeChangedCommand}" BackgroundColor="{Binding FractionalDataTypeButtonColor}" CommandParameter="{x:Reference FractionalNumberTypeButton}" Text="Fractional"></Button>
+                            <StackLayout x:Name="FractionalNumbersOptions" IsVisible="{Binding FractionalNumbersOptionsLabeleVisibility}">
+                                <Label Text="Digits after dot sign" FontSize="18" TextColor="White" HorizontalOptions="Center"></Label>
+                                <Label x:Name="DigitsAfterDotSignLabel" TextColor="White" FontSize="18" Text="{Binding IntDigitsAfterDotSign}" HorizontalOptions="Center"></Label>
+                                <Slider x:Name="DigitsAfterDotSignSlider" Maximum="8" Minimum="1" Value="{Binding DigitsAfterDotSign}"></Slider>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="TaskTypeInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="MathTaskTypeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Task type</Label>
+                            <Button x:Name="TaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="TaskTypeExpandMoreButton_Clicked"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="TaskTypeFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Vertical">
+                            <Button x:Name="CountResultButton" Style="{StaticResource OptionButton}" Command="{Binding TypeOfTaskChangedCommand}" CommandParameter="{x:Reference CountResultButton}" BackgroundColor="{Binding CountResultTaskOptionButtonColor}" Text="Count the result"></Button>
+                            <Button x:Name="CountVariableButton" Style="{StaticResource OptionButton}" Command="{Binding TypeOfTaskChangedCommand}" CommandParameter="{x:Reference CountVariableButton}" BackgroundColor="{Binding CountVariableOptionButtonColor}" Text="Count the variable"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
+                    <Frame CornerRadius="25" Margin="10,0,10,10" Padding="7,7,7,7" BorderColor="#6699ff">
+                        <StackLayout Orientation="Horizontal">
+                            <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="flag_blue_36.png"></Button>
+                            <Button x:Name="StartButton"  Style="{StaticResource StartButton}" Command="{Binding StartCommand}" Text="START"></Button>
+                            <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="flag_blue_36.png"></Button>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+            <Frame x:Name="InfoBackgroundFrame" IsVisible="{Binding InfoVisibility}" Opacity="0.5" Padding="0" Margin="0" CornerRadius="0" BackgroundColor="#fafafa" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+            <Frame x:Name="InfoFrame" IsVisible="{Binding InfoVisibility}"  Opacity="1" Padding="20,5,20,20" CornerRadius="25" BorderColor="#6699ff" BackgroundColor="#6699ff" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.8,0.8">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <BoxView Margin="5,0,10,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                        <Image WidthRequest="50" BackgroundColor="#6699ff" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Source="info_white_nt_48.png"/>
+                        <BoxView Margin="10,0,5,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
                     </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Task type</Label>
-                        <Button x:Name="TaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="TaskTypeExpandMoreButton_Clicked"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame x:Name="TaskTypeFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical">
-                        <Button x:Name="CountResultButton" Style="{StaticResource OptionButton}" Command="{Binding TypeOfTaskChangedCommand}" CommandParameter="{x:Reference CountResultButton}" BackgroundColor="{Binding CountResultTaskOptionButtonColor}" Text="Count the result"></Button>
-                        <Button x:Name="CountVariableButton" Style="{StaticResource OptionButton}" Command="{Binding TypeOfTaskChangedCommand}" CommandParameter="{x:Reference CountVariableButton}" BackgroundColor="{Binding CountVariableOptionButtonColor}" Text="Count the variable"></Button>
-                    </StackLayout>
-                </Frame>
-                <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
-                <Frame CornerRadius="25" Margin="10,0,10,10" Padding="7,7,7,7" BorderColor="#6699ff">
-                    <StackLayout Orientation="Horizontal">
-                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="flag_blue_36.png"></Button>
-                        <Button x:Name="StartButton"  Style="{StaticResource StartButton}" Command="{Binding StartCommand}" Text="START"></Button>
-                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="flag_blue_36.png"></Button>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </ScrollView>
+                    <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" CornerRadius="25" BackgroundColor="Transparent" BorderColor="#fafafa" >
+                        <StackLayout Orientation="Vertical" Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding InfoCaption}" FontSize="23" FontAttributes="Bold" TextColor="#fafafa" VerticalOptions="Start" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10"></Label>
+                            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label Text="{Binding InfoText}" Margin="10,0,10,10" FontSize="17" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"  TextColor="#fafafa"></Label>
+                            </ScrollView>
+                            <Button x:Name="OkInfoFrameButton" Command="{Binding HideInfoCommand}" BackgroundColor="#80aaff" TextColor="#fafafa" FontSize="23" CornerRadius="15" BorderColor="Transparent" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="10" Text="OK"></Button>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

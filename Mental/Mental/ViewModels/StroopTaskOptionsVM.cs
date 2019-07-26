@@ -5,6 +5,7 @@ using Mental.Models;
 using Xamarin.Forms;
 using Mental.ViewModels.PartialViewModels;
 using Mental.Views;
+using Mental.Services;
 
 namespace Mental.ViewModels
 {
@@ -20,6 +21,10 @@ namespace Mental.ViewModels
         private Color DefaultOptionButtonBackgroundColor = Color.FromHex("#80aaff");
         private Color ActiveOptionButtonBackgroundColor = Color.FromHex("#99ffcc");
 
+        private bool _InfoVisibility = false;
+        private string _InfoCaption = string.Empty;
+        private string _InfoText = string.Empty;
+
         public StroopTaskOptionsVM(INavigation _navigation)
         {
             navigation = _navigation;
@@ -30,6 +35,71 @@ namespace Mental.ViewModels
             OnPropertyChanged("ButonsAmountSliderValue");
         }
 
+        //--------------------------------------------------------
+        public bool InfoVisibility
+        {
+            get
+            {
+                return _InfoVisibility;
+            }
+            set
+            {
+                _InfoVisibility = value;
+                OnPropertyChanged("InfoVisibility");
+            }
+        }
+
+        public string InfoCaption
+        {
+            get
+            {
+                return _InfoCaption;
+            }
+            set
+            {
+                _InfoCaption = value;
+                OnPropertyChanged("InfoCaption");
+            }
+        }
+
+        public string InfoText
+        {
+            get
+            {
+                return _InfoText;
+            }
+            set
+            {
+                _InfoText = value;
+                OnPropertyChanged("InfoText");
+            }
+        }
+
+        public Command<string> ShowInfoCommand
+        {
+            get
+            {
+                return new Command<string>((str) =>
+                {
+                    InfoVisibility = true;
+                    InfoCaption = OptionsInfoDictionary.GetCaption(str);
+                    InfoText = OptionsInfoDictionary.GetInfoText(str);
+                });
+            }
+        }
+
+        public Command HideInfoCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    InfoVisibility = false;
+                });
+            }
+        }
+
+        //---------------------------------------------------
         public TimeOptionsPVM TimeOptionsPVM
         {
             get

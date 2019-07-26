@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Mental.Models;
 using Mental.Views;
 using Mental.ViewModels.PartialViewModels;
+using Mental.Services;
 
 namespace Mental.ViewModels
 {
@@ -16,6 +17,10 @@ namespace Mental.ViewModels
         private App app;
         private TimeOptionsPVM _TimeOptionsPVM;
 
+        private bool _InfoVisibility = false;
+        private string _InfoCaption = string.Empty;
+        private string _InfoText = string.Empty;
+
         public SchulteTableTaskOptionsVM(INavigation _navigation)
         {
             app = (App)App.Current;
@@ -24,6 +29,72 @@ namespace Mental.ViewModels
             _TimeOptionsPVM = new TimeOptionsPVM(SchulteTableTaskOptions.TaskTimeOptions);
             GridSizeSliderValue = SchulteTableTaskOptions.GridSize;
         }
+
+        //--------------------------------------------------------
+        public bool InfoVisibility
+        {
+            get
+            {
+                return _InfoVisibility;
+            }
+            set
+            {
+                _InfoVisibility = value;
+                OnPropertyChanged("InfoVisibility");
+            }
+        }
+
+        public string InfoCaption
+        {
+            get
+            {
+                return _InfoCaption;
+            }
+            set
+            {
+                _InfoCaption = value;
+                OnPropertyChanged("InfoCaption");
+            }
+        }
+
+        public string InfoText
+        {
+            get
+            {
+                return _InfoText;
+            }
+            set
+            {
+                _InfoText = value;
+                OnPropertyChanged("InfoText");
+            }
+        }
+
+        public Command<string> ShowInfoCommand
+        {
+            get
+            {
+                return new Command<string>((str) =>
+                {
+                    InfoVisibility = true;
+                    InfoCaption = OptionsInfoDictionary.GetCaption(str);
+                    InfoText = OptionsInfoDictionary.GetInfoText(str);
+                });
+            }
+        }
+
+        public Command HideInfoCommand
+        {
+            get
+            {
+                return new Command(() =>
+                {
+                    InfoVisibility = false;
+                });
+            }
+        }
+
+        //---------------------------------------------------
 
         private double _GridSizeSliderValue;
 

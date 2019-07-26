@@ -6400,16 +6400,19 @@ namespace Mental.Droid
 			public const int info_white_48 = 2130772025;
 			
 			// aapt resource value: 0x7F010040
-			public const int list_numbered_white_18 = 2130772032;
+			public const int info_white_nt_48 = 2130772032;
 			
 			// aapt resource value: 0x7F010041
-			public const int list_numbered_white_24 = 2130772033;
+			public const int list_numbered_white_18 = 2130772033;
 			
 			// aapt resource value: 0x7F010042
-			public const int loadmore_white_24 = 2130772034;
+			public const int list_numbered_white_24 = 2130772034;
 			
 			// aapt resource value: 0x7F010043
-			public const int MathOperations_200 = 2130772035;
+			public const int loadmore_white_24 = 2130772035;
+			
+			// aapt resource value: 0x7F010044
+			public const int MathOperations_200 = 2130772036;
 			
 			// aapt resource value: 0x7F090106
 			public const int mr_button_connected_dark = 2131296518;
@@ -6516,41 +6519,41 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F09000C
 			public const int notify_panel_notification_icon_bg = 2131296268;
 			
-			// aapt resource value: 0x7F010044
-			public const int NumbersType = 2130772036;
-			
 			// aapt resource value: 0x7F010045
-			public const int Restrictions_18 = 2130772037;
+			public const int NumbersType = 2130772037;
 			
 			// aapt resource value: 0x7F010046
-			public const int Restrictions_24 = 2130772038;
+			public const int Restrictions_18 = 2130772038;
 			
 			// aapt resource value: 0x7F010047
-			public const int save_white_24 = 2130772039;
+			public const int Restrictions_24 = 2130772039;
 			
 			// aapt resource value: 0x7F010048
-			public const int Schulte_Tables_200 = 2130772040;
+			public const int save_white_24 = 2130772040;
 			
 			// aapt resource value: 0x7F010049
-			public const int Statistics_48 = 2130772041;
+			public const int Schulte_Tables_200 = 2130772041;
 			
 			// aapt resource value: 0x7F010050
-			public const int statistics_blue_36 = 2130772048;
+			public const int Statistics_48 = 2130772048;
 			
 			// aapt resource value: 0x7F010051
-			public const int statistics_white_18 = 2130772049;
+			public const int statistics_blue_36 = 2130772049;
 			
 			// aapt resource value: 0x7F010052
-			public const int Stopwatch_18 = 2130772050;
+			public const int statistics_white_18 = 2130772050;
 			
 			// aapt resource value: 0x7F010053
-			public const int Stopwatch_24 = 2130772051;
+			public const int Stopwatch_18 = 2130772051;
 			
 			// aapt resource value: 0x7F010054
-			public const int Stroop_2_200 = 2130772052;
+			public const int Stopwatch_24 = 2130772052;
 			
 			// aapt resource value: 0x7F010055
-			public const int Stroop_Ver2_200 = 2130772053;
+			public const int Stroop_2_200 = 2130772053;
+			
+			// aapt resource value: 0x7F010056
+			public const int Stroop_Ver2_200 = 2130772054;
 			
 			// aapt resource value: 0x7F09006F
 			public const int tooltip_frame_dark = 2131296367;
@@ -6558,11 +6561,11 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F090070
 			public const int tooltip_frame_light = 2131296368;
 			
-			// aapt resource value: 0x7F010056
-			public const int True_False_24 = 2130772054;
-			
 			// aapt resource value: 0x7F010057
-			public const int True_or_False_18 = 2130772055;
+			public const int True_False_24 = 2130772055;
+			
+			// aapt resource value: 0x7F010058
+			public const int True_or_False_18 = 2130772056;
 			
 			static Drawable()
 			{

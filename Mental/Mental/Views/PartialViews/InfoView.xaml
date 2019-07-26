@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Mental.Views.PartialViews.InfoView">
+  
+        <!--<Frame Opacity="0.5" Padding="0" Margin="0" CornerRadius="0" BackgroundColor="#fafafa" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>-->
+        <Frame Opacity="1" Padding="20,5,20,20" CornerRadius="25" BorderColor="#6699ff" BackgroundColor="#6699ff" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.8,0.8">
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <BoxView Margin="5,0,10,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                    <Image WidthRequest="50" BackgroundColor="#6699ff" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Source="info_white_nt_48.png"/>
+                    <BoxView Margin="10,0,5,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                </StackLayout>
+                <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" CornerRadius="25" BackgroundColor="Transparent" BorderColor="#fafafa" >
+                    <StackLayout Orientation="Vertical" Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Label Text="CAPTION" FontSize="23" FontAttributes="Bold" TextColor="#fafafa" VerticalOptions="Start" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10"></Label>
+                        <Label Margin="10,0,10,10" FontSize="18" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Start" Text="Text" TextColor="#fafafa"></Label>
+                        <Button BackgroundColor="#80aaff" TextColor="#fafafa" FontSize="23" CornerRadius="15" BorderColor="Transparent" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="10" Text="OK"></Button>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Frame>
+</ContentView>

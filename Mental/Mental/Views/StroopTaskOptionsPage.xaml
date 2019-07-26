@@ -5,45 +5,66 @@
              x:Class="Mental.Views.StroopTaskOptionsPage"
              Title="Stroop Tasks Options">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Orientation="Vertical">
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Buttons Options</Label>
-                        <Button x:Name="ButtonsAmountExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="ButtonsAmountExpandMoreButton_Clicked"></Button>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Orientation="Vertical">
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="ButtonsAmountInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="ButtonsAmountInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Buttons Options</Label>
+                            <Button x:Name="ButtonsAmountExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="ButtonsAmountExpandMoreButton_Clicked"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="ButtonsAmountFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="Buttons Amount" HorizontalOptions="Center" TextColor="White" FontSize="18"></Label>
+                            <Label HorizontalOptions="Center" TextColor="White" FontSize="18" Text="{Binding IntButtonsAmount}"></Label>
+                            <Slider Maximum="5" Minimum="1" Value="{Binding ButtonsAmountSliderValue}"></Slider>
+                        </StackLayout>
+                    </Frame>
+                    <Frame Style="{StaticResource LabelFrame}">
+                        <StackLayout Orientation="Horizontal">
+                            <Button x:Name="TaskTypeInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="StroopTaskTypeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Task type</Label>
+                            <Button x:Name="StroopTaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="StroopTaskTypeExpandMoreButton_Clicked"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <Frame x:Name="StroopTaskTypeFrame" Style="{StaticResource OptionsContainerFrame}">
+                        <StackLayout Orientation="Vertical">
+                            <Button x:Name="FindCorrectTaskTypeButton" Style="{StaticResource OptionButton}" Text="Find Correct" BackgroundColor="{Binding FindOneCorrectColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindCorrectTaskTypeButton}"></Button>
+                            <Button x:Name="TrueOrFalseTaskTypeButton" Style="{StaticResource OptionButton}" Text="True or False" BackgroundColor="{Binding TrueOrFalseColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference TrueOrFalseTaskTypeButton}"></Button>
+                            <Button x:Name="FindTextByColorTypeButton" Style="{StaticResource OptionButton}" Text="Find Text By Color" BackgroundColor="{Binding FindTextColorColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindTextByColorTypeButton}"></Button>
+                        </StackLayout>
+                    </Frame>
+                    <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
+                    <Frame CornerRadius="25" Margin="10,0,10,10" Padding="7,7,7,7" BorderColor="#6699ff">
+                        <StackLayout Orientation="Horizontal">
+                            <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="flag_blue_36.png"></Button>
+                            <Button x:Name="StartButton"  Style="{StaticResource StartButton}" Command="{Binding StartCommand}" Text="START"></Button>
+                            <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="flag_blue_36.png"></Button>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+            <Frame x:Name="InfoBackgroundFrame" IsVisible="{Binding InfoVisibility}" Opacity="0.5" Padding="0" Margin="0" CornerRadius="0" BackgroundColor="#fafafa" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"/>
+            <Frame x:Name="InfoFrame" IsVisible="{Binding InfoVisibility}"  Opacity="1" Padding="15,5,15,20" CornerRadius="25" BorderColor="#6699ff" BackgroundColor="#6699ff" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5,0.5,0.8,0.8">
+                <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                        <BoxView Margin="5,0,10,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
+                        <Image WidthRequest="50" BackgroundColor="#6699ff" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Source="info_white_nt_48.png"/>
+                        <BoxView Margin="10,0,5,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
                     </StackLayout>
-                </Frame>
-                <Frame x:Name="ButtonsAmountFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical">
-                        <Label Text="Buttons Amount" HorizontalOptions="Center" TextColor="White" FontSize="18"></Label>
-                        <Label HorizontalOptions="Center" TextColor="White" FontSize="18" Text="{Binding IntButtonsAmount}"></Label>
-                        <Slider Maximum="5" Minimum="1" Value="{Binding ButtonsAmountSliderValue}"></Slider>
-                    </StackLayout>
-                </Frame>
-                <Frame Style="{StaticResource LabelFrame}">
-                    <StackLayout Orientation="Horizontal">
-                        <Button Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
-                        <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Task type</Label>
-                        <Button x:Name="StroopTaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="StroopTaskTypeExpandMoreButton_Clicked"></Button>
-                    </StackLayout>
-                </Frame>
-                <Frame x:Name="StroopTaskTypeFrame" Style="{StaticResource OptionsContainerFrame}">
-                    <StackLayout Orientation="Vertical">
-                        <Button x:Name="FindCorrectTaskTypeButton" Style="{StaticResource OptionButton}" Text="Find Correct" BackgroundColor="{Binding FindOneCorrectColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindCorrectTaskTypeButton}"></Button>
-                        <Button x:Name="TrueOrFalseTaskTypeButton" Style="{StaticResource OptionButton}" Text="True or False" BackgroundColor="{Binding TrueOrFalseColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference TrueOrFalseTaskTypeButton}"></Button>
-                        <Button x:Name="FindTextByColorTypeButton" Style="{StaticResource OptionButton}" Text="Find Text By Color" BackgroundColor="{Binding FindTextColorColor}" Command="{Binding StroopTaskTypeChangedCommand}" CommandParameter="{x:Reference FindTextByColorTypeButton}"></Button>
-                    </StackLayout>
-                </Frame>
-                <PartialViews:TimeOptionsView></PartialViews:TimeOptionsView>
-                <Frame CornerRadius="25" Margin="10,0,10,10" Padding="7,7,7,7" BorderColor="#6699ff">
-                    <StackLayout Orientation="Horizontal">
-                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Start" Image="flag_blue_36.png"></Button>
-                        <Button x:Name="StartButton"  Style="{StaticResource StartButton}" Command="{Binding StartCommand}" Text="START"></Button>
-                        <Button HeightRequest="40" WidthRequest="40" BorderRadius="20" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="End" Image="flag_blue_36.png"></Button>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </ScrollView>
+                    <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" CornerRadius="25" BackgroundColor="Transparent" BorderColor="#fafafa" >
+                        <StackLayout Orientation="Vertical" Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding InfoCaption}" FontSize="23" FontAttributes="Bold" TextColor="#fafafa" VerticalOptions="Start" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Margin="10"></Label>
+                            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label Text="{Binding InfoText}" Margin="10,0,10,10" FontSize="17" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Start"  TextColor="#fafafa"></Label>
+                            </ScrollView>
+                            <Button x:Name="OkInfoFrameButton" Command="{Binding HideInfoCommand}" BackgroundColor="#80aaff" TextColor="#fafafa" FontSize="23" CornerRadius="15" BorderColor="Transparent" VerticalOptions="End" HorizontalOptions="FillAndExpand" Margin="10" Text="OK"></Button>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

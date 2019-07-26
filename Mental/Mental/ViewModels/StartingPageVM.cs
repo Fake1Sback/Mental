@@ -4,11 +4,15 @@ using System.Text;
 using Mental.Models;
 using Xamarin.Forms;
 using Mental.Views;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Mental.ViewModels
 {
     public class StartingPageVM : BaseVM
     {
+        private bool _ActivityIndicator = false;
+
         private Color DefaultColor = Color.Transparent;
         private Color ActiveColor = Color.FromHex("#6699ff");
 
@@ -54,6 +58,19 @@ namespace Mental.ViewModels
         {
             navigation = _navigation;
             InitializeList();
+        }
+
+        public bool ActivityIndicator
+        {
+            get
+            {
+                return _ActivityIndicator;
+            }
+            set
+            {
+                _ActivityIndicator = value;
+                OnPropertyChanged("ActivityIndicator");
+            }
         }
 
         public string Caption
@@ -119,14 +136,24 @@ namespace Mental.ViewModels
                     Caption = "Mental Math",
                     Description = "Math",
                     ImgSrc = "MathOperations_200.png",
-                    FavoriteCommand = new Command (()=>{}),
+                    FavoriteCommand = new Command (()=>
+                    {
+                        ActivityIndicator = true;
+                    }),
                     OptionsCommand = new Command (async () =>
                     {
-                        await navigation.PushAsync(new MathTasksOptionsPage());
+                         ActivityIndicator = true;
+                        await Task.Delay(200);
+                        await navigation.PushAsync(new MathTasksOptionsPage()).ContinueWith((t) =>
+                        {
+                            ActivityIndicator = false;
+                        });
                     }),
                     StatisticsCommand = new Command (async () =>
                     {
-                        await navigation.PushAsync(new GeneralStatisticsPage());
+                        ActivityIndicator = true;
+                        Device.BeginInvokeOnMainThread(async () => {await navigation.PushAsync(new GeneralStatisticsPage()); }) ;                       
+                        ActivityIndicator = false;
                     })
                 },
                 new CarouselViewListItem()
