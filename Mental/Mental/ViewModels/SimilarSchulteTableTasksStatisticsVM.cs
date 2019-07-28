@@ -92,7 +92,7 @@ namespace Mental.ViewModels
             get
             {
                 if (_PatternDbSchulteTableTask.IsEasyModeActivated)
-                    return "Easy Mode";
+                    return " Easy Mode ";
                 else
                     return "Normal Mode";
             }

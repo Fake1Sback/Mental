@@ -27,3 +27,4 @@ D:\Mental\Mental\Mental\bin\Debug\netstandard2.0\ref\Mental.dll
 D:\Mental\Mental\Mental\bin\Debug\netstandard2.0\Mental.pdb
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\PartialViews\InfoView.xaml.g.cs
+D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\FavouriteSetupsPage.xaml.g.cs

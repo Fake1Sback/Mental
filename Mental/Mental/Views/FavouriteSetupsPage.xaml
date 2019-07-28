@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Mental.Views.FavouriteSetupsPage"
+             Title="Favourite Setups">
+    <ContentPage.Resources>
+        <Style x:Key="FavouritesListLabel" TargetType="Label">
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <Setter Property="TextColor" Value="#fafafa"></Setter>
+            <Setter Property="VerticalOptions" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="FavouritesListImage" TargetType="Image">
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <!--<Setter Property="HeightRequest" Value="30"></Setter>
+                <Setter Property="WidthRequest" Value="30"></Setter>-->
+            <Setter Property="VerticalOptions" Value="Center"></Setter>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+        </Style>
+        <Style x:Key="FavouritesPanelButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <Setter Property="HeightRequest" Value="50"></Setter>
+            <Setter Property="WidthRequest" Value="50"></Setter>
+            <Setter Property="BorderRadius" Value="25"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+            <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="VerticalOptions" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="FavouritesPanelLabel" TargetType="Label">
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="TextColor" Value="#6699ff"></Setter>
+            <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalOptions" Value="Center"></Setter>
+            <Setter Property="VerticalOptions" Value="Center"></Setter>
+            <Setter Property="Margin" Value="0,0,0,0"></Setter>
+            <!--<Setter Property="HeightRequest" Value="15"></Setter>-->
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Margin="10,5,10,5" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                <BoxView BackgroundColor="#6699ff" HeightRequest="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10,0,-10,0"></BoxView>
+                <Frame BorderColor="#6699ff" BackgroundColor="#6699ff" Padding="0" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Margin="10,5,10,5" FontAttributes="Bold" Text="{Binding PageCaption}" TextColor="#fafafa" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                </Frame>
+                <BoxView BackgroundColor="#6699ff" HeightRequest="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="-10,0,10,0"></BoxView>
+            </StackLayout>
+            <ListView IsVisible="{Binding MathOptionsVisibility}" Margin="0,10,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="FavouriteMathTaskOptionsListView" ItemsSource="{Binding FavouriteMathOptionsList}" SeparatorVisibility="None" SeparatorColor="Transparent" SelectedItem="{Binding SelectedMathOptions}" RowHeight="60">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Margin="10,0,10,2" CornerRadius="25" Padding="0" BorderColor="#6699ff">
+                                <StackLayout Margin="10,0,10,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Padding="0">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding Operations}" FontSize="20" FontAttributes="Bold"></Label>
+                                        <Image Style="{StaticResource FavouritesListImage}" Source="arrow_downward_white_24.png"></Image>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MinValue}"></Label>
+                                        <Image Style="{StaticResource FavouritesListImage}" Source="arrow_upward_white_24.png"></Image>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MaxValue}"></Label>
+                                        <Image Style="{StaticResource FavouritesListImage}" Source="help_outline_white_24.png"></Image>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TaskType}" ></Label>
+                                        <Image Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></Image>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TimeOption}"></Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Image Style="{StaticResource FavouritesListImage}" Source="NumbersType.png"></Image>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding DataType}"></Label>
+                                        <Image Style="{StaticResource FavouritesListImage}" Source="{Binding ChainLengthImgSrc}"></Image>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MaxChainLength}"></Label>
+                                        <Image Style="{StaticResource FavouritesListImage}" IsVisible="{Binding RestrictionsVisibility}" Source="Restrictions_24.png"></Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView IsVisible="{Binding SchulteTableOptionsVisibility}" Margin="0,10,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="SchulteTablesTaskOptionsListView" ItemsSource="{Binding FavouriteSchulteTableOptionsList}" SeparatorVisibility="None" SeparatorColor="Transparent" SelectedItem="{Binding SelectedSchulteTableOptions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#fafafa">
+                                <StackLayout Margin="10,0,10,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Image Style="{StaticResource FavouritesListImage}" Source="grid_on_white_24.png"></Image>
+                                    <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding GridSize}"></Label>
+                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding EasyModeImgSrc}"></Image>
+                                    <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding EasyMode}"></Label>
+                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></Image>
+                                    <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TimeOption}"></Label>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView IsVisible="{Binding StroopOptionsVisibility}" Margin="0,10,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" x:Name="StroopTaskOptionsListView" ItemsSource="{Binding FavouriteStroopTaskOptionsList}" SeparatorVisibility="None" SeparatorColor="Transparent" SelectedItem="{Binding SelectedStroopOptions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#fafafa">
+                                <StackLayout Margin="10,0,10,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <Image Style="{StaticResource FavouritesListImage}" Source="Buttons_Amount_24.png"></Image>
+                                    <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding AmountOfButtons}"></Label>
+                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding StroopTaskTypeImgSrc}"></Image>
+                                    <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding StroopTaskTypeString}"></Label>
+                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></Image>
+                                    <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TimeOption}"></Label>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Margin="0,10,0,10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="LoadFavouriteSetupButton" Image="loadmore_white_24.png" Command="{Binding LoadSelected}"></Button>
+                    <Label Style="{StaticResource FavouritesPanelLabel}" Text="Load Setup"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="DeleteSetupButton" Image="delete_white_24.png" Command="{Binding DeleteSelected}"></Button>
+                    <Label Style="{StaticResource FavouritesPanelLabel}" Text="Delete Setup"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="ClearRecordsButton" Image="clear_forever_white_24.png" Command="{Binding ClearFavouritesList}"></Button>
+                    <Label Style="{StaticResource FavouritesPanelLabel}" Text="Clear Records"></Label>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

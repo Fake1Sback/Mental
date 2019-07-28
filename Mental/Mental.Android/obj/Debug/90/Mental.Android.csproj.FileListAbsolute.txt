@@ -954,3 +954,8 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\home_white_36.p
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\home_white_36.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\home_white_36.png
 D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable\home_white_36.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\clear_forever_white_24.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\clear_forever_white_24.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\clear_forever_white_24.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\clear_forever_white_24.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable\clear_forever_white_24.png

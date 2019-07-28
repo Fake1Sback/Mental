@@ -4,6 +4,9 @@
              xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
              x:Class="Mental.Views.SchulteTableTaskOptionsPage"
              Title="Schulte Tables Tasks Options">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Favourite_36.png" Command="{Binding AddToFavouriteCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">

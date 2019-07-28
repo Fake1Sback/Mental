@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Mental.Views;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Mental.ViewModels
 {
@@ -136,9 +137,9 @@ namespace Mental.ViewModels
                     Caption = "Mental Math",
                     Description = "Math",
                     ImgSrc = "MathOperations_200.png",
-                    FavoriteCommand = new Command (()=>
+                    FavoriteCommand = new Command ( async ()=>
                     {
-                        ActivityIndicator = true;
+                        await navigation.PushAsync(new FavouriteSetupsPage(Favourites.MathOptionsFavourite));
                     }),
                     OptionsCommand = new Command (async () =>
                     {
@@ -161,7 +162,10 @@ namespace Mental.ViewModels
                     Caption = "Schulte Tables",
                     Description = "Schulte",
                     ImgSrc = "Schulte_Tables_200.png",
-                    FavoriteCommand = new Command(()=>{}),
+                    FavoriteCommand = new Command( async ()=>
+                    {
+                        await navigation.PushAsync(new FavouriteSetupsPage(Favourites.SchulteTableOptionsFavourite));
+                    }),
                     OptionsCommand = new Command(async () =>
                     {
                         await navigation.PushAsync(new SchulteTableTaskOptionsPage());
@@ -176,7 +180,10 @@ namespace Mental.ViewModels
                     Caption = "Stroop Tasks",
                     Description = "Stroop",
                     ImgSrc = "Stroop_Ver2_200.png",
-                    FavoriteCommand = new Command (()=>{}),
+                    FavoriteCommand = new Command ( async ()=>
+                    {
+                        await navigation.PushAsync(new FavouriteSetupsPage(Favourites.StroopOptionsFavourite));
+                    }),
                     OptionsCommand = new Command(async () =>
                     {
                         await navigation.PushAsync(new StroopTaskOptionsPage());

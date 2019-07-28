@@ -21,6 +21,12 @@ namespace Mental.Views
             BindingContext = new MathTasksOptionsVM(this.Navigation);
         }
 
+        public MathTasksOptionsPage(MathTasksOptions FavouriteMathTaskOptions)
+        {
+            InitializeComponent();
+            BindingContext = new MathTasksOptionsVM(this.Navigation, FavouriteMathTaskOptions);
+        }
+
         private void OperationsExpandMoreButton_Clicked(object sender, EventArgs e)
         {
             OperationsFrame.IsVisible = !OperationsFrame.IsVisible;

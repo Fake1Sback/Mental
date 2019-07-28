@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mental.ViewModels;
+using Mental.Models;
 
 namespace Mental.Views
 {
@@ -18,6 +19,12 @@ namespace Mental.Views
 			InitializeComponent ();
             BindingContext = new SchulteTableTaskOptionsVM(this.Navigation);
 		}
+
+        public SchulteTableTaskOptionsPage(SchulteTableTaskOptions FavouriteSchulteTableTaskOptions)
+        {
+            InitializeComponent();
+            BindingContext = new SchulteTableTaskOptionsVM(this.Navigation, FavouriteSchulteTableTaskOptions);
+        }
 
         private void GridSizeExpandMoreButton_Clicked(object sender, EventArgs e)
         {

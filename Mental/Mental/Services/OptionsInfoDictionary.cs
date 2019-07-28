@@ -20,7 +20,8 @@ namespace Mental.Services
              new InfoListItem{Index = "GridSizeInfo", Caption = "Grid Size", Info = "Defines amount of grid items you need to find in order to complete task."},
              new InfoListItem{Index = "EasyModeInfo", Caption = "Easy Mode", Info = "If Easy Mode is active allready found grid items will be highlighted."},
              new InfoListItem{Index = "ButtonsAmountInfo", Caption = "Buttons amount", Info = "Defines how much options to choose from, or how much options you need to check in order to complete task."},
-             new InfoListItem{Index = "StroopTaskTypeInfo", Caption = "Task Type", Info = "Defines which type of Stroop task will be generated. Available Stroop tasks:\n  Find 1 Correct --- Find button in which text color equals to color that this text means.\n  True or False --- Check if on all generated buttons text color equals to color that this text means.\n  Find Color by Text --- Find one button in which text color equals to color that requested button text means."}
+             new InfoListItem{Index = "StroopTaskTypeInfo", Caption = "Task Type", Info = "Defines which type of Stroop task will be generated. Available Stroop tasks:\n  Find 1 Correct --- Find button in which text color equals to color that this text means.\n  True or False --- Check if on all generated buttons text color equals to color that this text means.\n  Find Color by Text --- Find one button in which text color equals to color that requested button text means."},
+             new InfoListItem{Index = "FavouriteRecordsLimitation", Caption = "Favourites Limitation", Info = "You can`t have more than 10 favourite task options records in database. To save new records you have to delete previous."}
         };
 
         public static string GetCaption(string Index)

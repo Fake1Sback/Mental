@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mental.ViewModels;
+using Mental.Models;
 
 namespace Mental.Views
 {
@@ -16,9 +17,14 @@ namespace Mental.Views
 		public StroopTaskOptionsPage ()
 		{
 			InitializeComponent ();
-            this.BindingContext = new StroopTaskOptionsVM(this.Navigation);
-           
+            this.BindingContext = new StroopTaskOptionsVM(this.Navigation);         
 		}
+
+        public StroopTaskOptionsPage(StroopTaskOptions FavouriteStroopTaskOptions)
+        {
+            InitializeComponent();
+            this.BindingContext = new StroopTaskOptionsVM(this.Navigation, FavouriteStroopTaskOptions);
+        }
 
         private void ButtonsAmountExpandMoreButton_Clicked(object sender, EventArgs e)
         {

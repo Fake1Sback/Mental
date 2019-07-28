@@ -6,6 +6,8 @@ using Xamarin.Forms;
 using Mental.ViewModels.PartialViewModels;
 using Mental.Views;
 using Mental.Services;
+using Mental.Models.DbModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
@@ -30,6 +32,16 @@ namespace Mental.ViewModels
             navigation = _navigation;
             app = (App)App.Current;
             StroopTaskOptions = app.GetStoredStroopTaskOptions();
+            _TimeOptionsPVM = new TimeOptionsPVM(StroopTaskOptions.TaskTimeOptionsContainer);
+            _ButtonsAmountSliderValue = StroopTaskOptions.ButtonsAmount / 2;
+            OnPropertyChanged("ButonsAmountSliderValue");
+        }
+
+        public StroopTaskOptionsVM(INavigation _navigation, StroopTaskOptions FavouriteStroopTaskOptions)
+        {
+            navigation = _navigation;
+            app = (App)App.Current;
+            StroopTaskOptions = FavouriteStroopTaskOptions;
             _TimeOptionsPVM = new TimeOptionsPVM(StroopTaskOptions.TaskTimeOptionsContainer);
             _ButtonsAmountSliderValue = StroopTaskOptions.ButtonsAmount / 2;
             OnPropertyChanged("ButonsAmountSliderValue");
@@ -253,6 +265,32 @@ namespace Mental.ViewModels
                         timeOption = new LastTaskTimeOption(StroopTaskOptions.TaskTimeOptionsContainer);
                                                 
                     await navigation.PushAsync(new StroopTaskPage(StroopTaskOptions, timeOption));
+                });
+            }
+        }
+
+        public Command AddToFavouriteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    using (var db = new ApplicationContext("mental.db"))
+                    {
+                        int FavouritesCount = await db.FavouriteStroopTaskOptions.CountAsync();
+                        if (FavouritesCount >= 10)
+                        {
+                            InfoVisibility = true;
+                            InfoCaption = OptionsInfoDictionary.GetCaption("FavouriteRecordsLimitation");
+                            InfoText = OptionsInfoDictionary.GetInfoText("FavouriteRecordsLimitation");
+                        }
+                        else
+                        {
+                            await db.FavouriteStroopTaskOptions.AddAsync(StroopTaskOptions.ToDbStroopTaskOptions());
+                            await db.SaveChangesAsync();
+                        }
+                    }
+                    MessagingCenter.Send<BaseVM>(this, "UpdateStroopTaskOptions");
                 });
             }
         }

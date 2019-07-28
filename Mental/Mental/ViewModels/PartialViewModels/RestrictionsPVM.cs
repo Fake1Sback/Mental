@@ -16,10 +16,14 @@ namespace Mental.ViewModels.PartialViewModels
         {
             mathTaskOptions = _mathTasksOptions;
             taskRestrictions = mathTaskOptions.restrictions;
-            CheckIfRestrictionsActivated();
 
-            MinimumDigitValue = mathTaskOptions.MinValue;
-            MaximumDigitValue = mathTaskOptions.MaxValue;
+            _MinimumSliderValue = FindAmountOfDigits(mathTaskOptions.MinValue);
+            _MaximumSliderValue = FindAmountOfDigits(mathTaskOptions.MaxValue);
+
+            OnPropertyChanged("MinimumDigitValue");
+            OnPropertyChanged("MaximumDigitValue");
+
+            mathTaskOptions.IsRestrictionsActivated = CheckIfRestrictionsActivated();
 
             PlusDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit1Restriction) / 100;
             PlusDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[0].Digit2Restriction) / 100;
@@ -29,6 +33,8 @@ namespace Mental.ViewModels.PartialViewModels
             MultiplyDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[2].Digit2Restriction) / 100;
             DivideDigit1Restriction = GetSliderPercentage(taskRestrictions.restrictions[3].Digit1Restriction) / 100;
             DivideDigit2Restriction = GetSliderPercentage(taskRestrictions.restrictions[3].Digit2Restriction) / 100;
+
+           // RenewSliderValues();
         }
 
         private bool IsRestrictionsOriginallyActivated = false;

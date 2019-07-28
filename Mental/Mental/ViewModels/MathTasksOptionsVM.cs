@@ -7,6 +7,9 @@ using Mental.Views;
 using Xamarin.Forms;
 using Mental.ViewModels.PartialViewModels;
 using Mental.Services;
+using Mental.Models.DbModels;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
@@ -36,6 +39,19 @@ namespace Mental.ViewModels
             navigation = _navigation;
             app = (App)App.Current;
             mathTasksOptions = app.GetStoredMathTaskOptions();
+            Initialize();
+        }
+
+        public MathTasksOptionsVM(INavigation _navigation, MathTasksOptions FavouriteMathTaskOptions)
+        {
+            navigation = _navigation;
+            app = (App)App.Current;
+            mathTasksOptions = FavouriteMathTaskOptions;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
             _restPVM = new RestrictionsPVM(mathTasksOptions);
             _TimeOptionsPVM = new TimeOptionsPVM(mathTasksOptions.TaskTimeOptions);
 
@@ -466,5 +482,31 @@ namespace Mental.ViewModels
 
             await navigation.PushAsync(new MathTasksPage(mathTasksOptions, timeOption));
         }           
+
+        public Command AddToFavouriteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    using(var db = new ApplicationContext("mental.db"))
+                    {
+                        int FavouritesCount = await db.FavouriteMathTaskOptions.CountAsync();
+                        if (FavouritesCount >= 10)
+                        {
+                            InfoVisibility = true;
+                            InfoCaption = OptionsInfoDictionary.GetCaption("FavouriteRecordsLimitation");
+                            InfoText = OptionsInfoDictionary.GetInfoText("FavouriteRecordsLimitation");
+                        }
+                        else
+                        {
+                            await db.FavouriteMathTaskOptions.AddAsync(mathTasksOptions.ToDbMathTaskOptions());
+                            await db.SaveChangesAsync();
+                        }
+                    }
+                    MessagingCenter.Send<BaseVM>(this, "UpdateMathTaskOptions");
+                });
+            }
+        }
     }
 }

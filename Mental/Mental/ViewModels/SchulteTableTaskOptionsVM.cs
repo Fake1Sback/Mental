@@ -7,6 +7,8 @@ using Mental.Models;
 using Mental.Views;
 using Mental.ViewModels.PartialViewModels;
 using Mental.Services;
+using Mental.Models.DbModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
@@ -26,6 +28,15 @@ namespace Mental.ViewModels
             app = (App)App.Current;
             navigation = _navigation;
             SchulteTableTaskOptions = app.GetStoredSchulteTableTaskOptions();
+            _TimeOptionsPVM = new TimeOptionsPVM(SchulteTableTaskOptions.TaskTimeOptions);
+            GridSizeSliderValue = SchulteTableTaskOptions.GridSize;
+        }
+
+        public SchulteTableTaskOptionsVM(INavigation _navigation, SchulteTableTaskOptions FavouriteSchulteTableTaskOptions)
+        {
+            app = (App)App.Current;
+            navigation = _navigation;
+            SchulteTableTaskOptions = FavouriteSchulteTableTaskOptions;
             _TimeOptionsPVM = new TimeOptionsPVM(SchulteTableTaskOptions.TaskTimeOptions);
             GridSizeSliderValue = SchulteTableTaskOptions.GridSize;
         }
@@ -189,6 +200,32 @@ namespace Mental.ViewModels
                     }
 
                     await navigation.PushAsync(new SchulteTableTaskPage(SchulteTableTaskOptions,timeOption));
+                });
+            }
+        }
+
+        public Command AddToFavouriteCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    using (var db = new ApplicationContext("mental.db"))
+                    {
+                        int FavouritesCount = await db.FavouriteSchulteTableTaskOptions.CountAsync();
+                        if (FavouritesCount >= 10)
+                        {
+                            InfoVisibility = true;
+                            InfoCaption = OptionsInfoDictionary.GetCaption("FavouriteRecordsLimitation");
+                            InfoText = OptionsInfoDictionary.GetInfoText("FavouriteRecordsLimitation");
+                        }
+                        else
+                        {
+                            await db.FavouriteSchulteTableTaskOptions.AddAsync(SchulteTableTaskOptions.ToDbSchulteTableTaskOptions());
+                            await db.SaveChangesAsync();
+                        }
+                    }
+                    MessagingCenter.Send<BaseVM>(this, "UpdateSchulteTableTaskOptions");
                 });
             }
         }

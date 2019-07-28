@@ -4,6 +4,9 @@
              xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
              x:Class="Mental.Views.MathTasksOptionsPage"            
              Title="Math Tasks Options">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Favourite_36.png" Command="{Binding AddToFavouriteCommand}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="OperationButton" TargetType="Button">
