@@ -241,7 +241,62 @@ namespace Mental.ViewModels
             }
         }
 
-        public Command LoadSelected
+        public Command LoadSelectedTask
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    if(FavouriteType == Favourites.MathOptionsFavourite)
+                    {
+                        if (SelectedMathOptions != null)
+                        {
+                            MathTasksOptions mathTasksOptions = SelectedMathOptions.dbMathTaskOptions.ToMathTaskOptions();
+                            ITimeOption timeOption;
+                            if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
+                                timeOption = new CountdownTimeOption(mathTasksOptions.TaskTimeOptions);
+                            else if (mathTasksOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                                timeOption = new LimitedTasksTimeOption(mathTasksOptions.TaskTimeOptions);
+                            else
+                                timeOption = new LastTaskTimeOption(mathTasksOptions.TaskTimeOptions);
+                            await navigation.PushAsync(new MathTasksPage(SelectedMathOptions.dbMathTaskOptions.ToMathTaskOptions(), timeOption));
+                        }
+                            
+                    }
+                    else if(FavouriteType == Favourites.SchulteTableOptionsFavourite)
+                    {
+                        if (SelectedSchulteTableOptions != null)
+                        {
+                            SchulteTableTaskOptions schulteTableTaskOptions = SelectedSchulteTableOptions.dbSchulteTableTaskOptions.ToSchulteTableTaskOptions();
+                            ITimeOption timeOption;
+                            if (schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
+                                timeOption = new CountdownTimeOption(schulteTableTaskOptions.TaskTimeOptions);
+                            else if (schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                                timeOption = new LimitedTasksTimeOption(schulteTableTaskOptions.TaskTimeOptions);
+                            else
+                                timeOption = new LastTaskTimeOption(schulteTableTaskOptions.TaskTimeOptions);
+                            await navigation.PushAsync(new SchulteTableTaskPage(SelectedSchulteTableOptions.dbSchulteTableTaskOptions.ToSchulteTableTaskOptions(), timeOption));
+                        }                           
+                    }
+                    else if(FavouriteType == Favourites.StroopOptionsFavourite)
+                    {
+                        if(SelectedStroopOptions != null)
+                        {
+                            StroopTaskOptions stroopTaskOptions = SelectedStroopOptions.dbStroopTaskOptions.ToStroopTaskOptions();
+                            ITimeOption timeOption;
+                            if (stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.CountdownTimer)
+                                timeOption = new CountdownTimeOption(stroopTaskOptions.TaskTimeOptionsContainer);
+                            else if (stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
+                                timeOption = new LimitedTasksTimeOption(stroopTaskOptions.TaskTimeOptionsContainer);
+                            else
+                                timeOption = new LastTaskTimeOption(stroopTaskOptions.TaskTimeOptionsContainer);
+                            await navigation.PushAsync(new StroopTaskPage(SelectedStroopOptions.dbStroopTaskOptions.ToStroopTaskOptions(), timeOption));
+                        }                         
+                    }
+                });
+            }
+        }
+        public Command LoadSelectedTaskSettings
         {
             get
             {

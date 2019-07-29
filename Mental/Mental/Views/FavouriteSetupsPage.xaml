@@ -88,7 +88,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#fafafa">
+                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#6699ff">
                                 <StackLayout Margin="10,0,10,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                     <Image Style="{StaticResource FavouritesListImage}" Source="grid_on_white_24.png"></Image>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding GridSize}"></Label>
@@ -106,7 +106,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#fafafa">
+                            <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#6699ff">
                                 <StackLayout Margin="10,0,10,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                     <Image Style="{StaticResource FavouritesListImage}" Source="Buttons_Amount_24.png"></Image>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding AmountOfButtons}"></Label>
@@ -120,17 +120,21 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Margin="0,10,0,10" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
+            <StackLayout Margin="0,10,0,20" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="LoadFavouriteSetupButton" Image="loadmore_white_24.png" Command="{Binding LoadSelected}"></Button>
-                    <Label Style="{StaticResource FavouritesPanelLabel}" Text="Load Setup"></Label>
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="LoadFavouriteTaskButton" ImageSource="outlined_flag_white_36.png" Command="{Binding LoadSelectedTask}"></Button>
+                    <Label Style="{StaticResource FavouritesPanelLabel}" Text="Load Task"></Label>
                 </StackLayout>
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="DeleteSetupButton" Image="delete_white_24.png" Command="{Binding DeleteSelected}"></Button>
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="LoadFavouriteSetupButton" Image="settings_white_36.png" Command="{Binding LoadSelectedTaskSettings}"></Button>
+                    <Label Style="{StaticResource FavouritesPanelLabel}" Text="Load Settings"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="DeleteSetupButton" Image="delete_white_36.png" Command="{Binding DeleteSelected}"></Button>
                     <Label Style="{StaticResource FavouritesPanelLabel}" Text="Delete Setup"></Label>
                 </StackLayout>
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="ClearRecordsButton" Image="clear_forever_white_24.png" Command="{Binding ClearFavouritesList}"></Button>
+                    <Button Style="{StaticResource FavouritesPanelButton}" x:Name="ClearRecordsButton" Image="clear_forever_white_36.png" Command="{Binding ClearFavouritesList}"></Button>
                     <Label Style="{StaticResource FavouritesPanelLabel}" Text="Clear Records"></Label>
                 </StackLayout>
             </StackLayout>

@@ -38,10 +38,20 @@
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame x:Name="AfterTaskFrame" Opacity="0" IsVisible="False" Padding="0" CornerRadius="25">
-                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="0">
-                        <Button Text="Restart" Command="{Binding RestartCommand}"></Button>
-                        <Button Text="Statistics" Command="{Binding NavigateToStatisticsCommand}"></Button>
+                <Frame x:Name="AfterTaskFrame" Margin="15,10,15,20" BorderColor="#fafafa" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Opacity="0" IsVisible="False" Padding="0">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Padding="0">
+                        <Frame Style="{StaticResource AfterFrameInternalFrame}">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Button Style="{StaticResource AfterFrameButton}" Text="Restart" Command="{Binding RestartCommand}"></Button>
+                                <Image Style="{StaticResource AfterFrameImage}" Source="refresh_white_48.png"></Image>
+                            </StackLayout>
+                        </Frame>
+                        <Frame Style="{StaticResource AfterFrameInternalFrame}">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Button Style="{StaticResource AfterFrameButton}" Text="Statistics" Command="{Binding NavigateToStatisticsCommand}"></Button>
+                                <Image Style="{StaticResource AfterFrameImage}" Source="Statistics_48.png"></Image>
+                            </StackLayout>
+                        </Frame>
                     </StackLayout>
                 </Frame>
                 <StackLayout x:Name="TaskFrame" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
