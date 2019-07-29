@@ -31,6 +31,8 @@ namespace Mental.ViewModels
         private string Color6 = "#2eb8b8"; //Aqua
         private string Color7 = "#cc4400"; //Brown
 
+        public int StatisticsLabelTextSize = 40;
+
         private List<DbMathTaskListItem> _mathTaskListItems;
         private DbMathTaskListItem _SelectedMathTaskListItem;
 
@@ -107,7 +109,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _TimeOptionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
             }
             set
             {
@@ -120,7 +122,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17};
+                return new DonutChart() { Entries = _TaskTypeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize};
             }
             set
             {
@@ -133,7 +135,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _DataTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17};
+                return new DonutChart() { Entries = _DataTypeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize};
             }
             set
             {
@@ -146,7 +148,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _RestrictionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _RestrictionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
             }
             set
             {
@@ -159,7 +161,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _OperationsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 17 };
+                return new PointChart() { Entries = _OperationsChart,  BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), LabelTextSize = StatisticsLabelTextSize, ValueLabelOrientation = Orientation.Horizontal, LabelOrientation = Orientation.Horizontal, PointSize = 40 };
             }
             set
             {
@@ -172,7 +174,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _ChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _ChainLengthChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
             }
             set
             {
@@ -185,7 +187,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 17 };
+                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), LabelTextSize = StatisticsLabelTextSize, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, PointSize = 40};
             }
             set
             {
@@ -540,7 +542,7 @@ namespace Mental.ViewModels
                 _mathTaskListItems.Add(new DbMathTaskListItem(dbMathTasks[i]));
             }
 
-            ListViewHeightRequest = mathTaskListItems.Count * 75;
+            ListViewHeightRequest = mathTaskListItems.Count * 85;
             OnPropertyChanged("mathTaskListItems");
         }
 

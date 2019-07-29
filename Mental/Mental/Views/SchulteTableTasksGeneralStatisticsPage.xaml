@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <Style x:Key="ListViewItemLabel" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="FontSize" Value="16"></Setter>
                 <Setter Property="TextColor" Value="#fafafa"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
@@ -44,25 +44,26 @@
                 <Setter Property="HeightRequest" Value="1"></Setter>
                 <Setter Property="BackgroundColor" Value="#fafafa"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
-                <Setter Property="WidthRequest" Value="70"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
             </Style>
             <Style x:Key="ChartCaptionFrame" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="25"></Setter>
-                <Setter Property="Padding" Value="5,0,5,0"></Setter>
+                <Setter Property="Padding" Value="15,5,15,5"></Setter>
                 <Setter Property="Margin" Value="0"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
                 <Setter Property="BorderColor" Value="#fafafa"></Setter>
             </Style>
             <Style x:Key="ChartCaptionLabel" TargetType="Label">
-                <Setter Property="WidthRequest" Value="110"></Setter>
-                <Setter Property="HeightRequest" Value="20"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
-                <Setter Property="FontSize" Value="14"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="TextColor" Value="#fafafa"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -70,42 +71,42 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Padding="0,0,0,10" Margin="0" BackgroundColor="#6699ff">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
-                        <BoxView Margin="20,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="20,0,-7,0" Style="{StaticResource BoxLine}"></BoxView>
                         <Frame Style="{StaticResource ChartCaptionFrame}">
                             <Label Style="{StaticResource ChartCaptionLabel}" Text="Time Options"></Label>
                         </Frame>
-                        <BoxView Margin="-8,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <BoxView Margin="-7,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
                     </StackLayout>
                     <charts:ChartView x:Name="TimeOptionsChart" Chart="{Binding TimeOptionsChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
-                        <BoxView Margin="20,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="20,0,-7,0" Style="{StaticResource BoxLine}"></BoxView>
                         <Frame Style="{StaticResource ChartCaptionFrame}">
                             <Label Style="{StaticResource ChartCaptionLabel}" Text="Easy Mode"></Label>
                         </Frame>
-                        <BoxView Margin="-8,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <BoxView Margin="-7,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
                     </StackLayout>
-                    <charts:ChartView x:Name="EasyModeChart" Chart="{Binding EasyModeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
-                        <BoxView Margin="20,0,-8,0" Style="{StaticResource BoxLine}"></BoxView>
+                    <charts:ChartView Margin="0,5,0,0" x:Name="EasyModeChart" Chart="{Binding EasyModeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0" Margin="0,5,0,5">
+                        <BoxView Margin="20,0,-7,0" Style="{StaticResource BoxLine}"></BoxView>
                         <Frame Style="{StaticResource ChartCaptionFrame}">
                             <Label Style="{StaticResource ChartCaptionLabel}" Text="Grid Size"></Label>
                         </Frame>
-                        <BoxView Margin="-8,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
+                        <BoxView Margin="-7,0,20,0" Style="{StaticResource BoxLine}"></BoxView>
                     </StackLayout>
-                    <charts:ChartView x:Name="GridSizeChart" Chart="{Binding GridSizeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
+                    <charts:ChartView Margin="0,5,0,0" x:Name="GridSizeChart" Chart="{Binding GridSizeChart}" WidthRequest="100" HeightRequest="100"></charts:ChartView>
                     <Frame Padding="5" BackgroundColor="#6699ff" CornerRadius="25" BorderColor="Transparent" Margin="20,0,20,-25">
                         <Label Text="Latest Schulte Table Tasks" TextColor="#fafafa" FontSize="18" HorizontalOptions="Center"></Label>
                     </Frame>
                 </StackLayout>
-                <ListView x:Name="LatestSchulteTableTasksListView" Margin="10,15,10,5" SeparatorColor="Transparent" ItemsSource="{Binding DbSchulteTableTasksListItems}" RowHeight="50" SelectedItem="{Binding SelectedSchulteTableTaskListItem}" HeightRequest="{Binding ListViewHeightRequest}">
+                <ListView x:Name="LatestSchulteTableTasksListView" Margin="10,15,10,5" SeparatorColor="Transparent" ItemsSource="{Binding DbSchulteTableTasksListItems}" RowHeight="65" SelectedItem="{Binding SelectedSchulteTableTaskListItem}" HeightRequest="{Binding ListViewHeightRequest}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Frame BackgroundColor="{Binding FrameBackgroundColor}" CornerRadius="25" Padding="0" BorderColor="#6699ff">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="15,5,15,5">
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="grid_on_white_18.png"></Image>
+                                            <Image Style="{StaticResource ListViewItemImage}" Source="grid_on_white_24.png"></Image>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding GridSizeString}" Margin="5,0,5,0"></Label>
                                             <Image Style="{StaticResource ListViewItemImage}" Source="{Binding EasyModeSrc}"></Image>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding EasyModeString}" Margin="5,0,5,0"></Label>
@@ -114,7 +115,7 @@
                                         </StackLayout>
                                         <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding EfficiencyString}" Margin="5,0,5,0"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_18.png"></Image>
+                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_24.png"></Image>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding DateTimeString}" Margin="5,0,5,0"></Label>
                                         </StackLayout>
                                     </StackLayout>

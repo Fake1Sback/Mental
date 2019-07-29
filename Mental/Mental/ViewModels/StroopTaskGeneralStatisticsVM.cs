@@ -29,6 +29,8 @@ namespace Mental.ViewModels
         private string Color6 = "#2eb8b8"; //Aqua
         private string Color7 = "#cc4400"; //Brown
 
+        public int StatisticsLabelTextSize = 40;
+
         private List<DbStroopTaskListItem> _DbStroopTaskListItems;
         private DbStroopTaskListItem _SelectedStroopTaskListItem;
 
@@ -98,7 +100,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20, HoleRadius = 0 };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, HoleRadius = 0 };
             }
             set
             {
@@ -111,7 +113,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20, HoleRadius = 0};
+                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, HoleRadius = 0};
             }
             set
             {
@@ -124,7 +126,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 20};
+                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, ValueLabelOrientation = Orientation.Horizontal, LabelOrientation = Orientation.Horizontal, PointSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa")};
             }
             set
             {
@@ -358,7 +360,7 @@ namespace Mental.ViewModels
             {
                 _DbStroopTaskListItems.Add(new DbStroopTaskListItem(dbStroopTasks[i]));
             }
-            ListViewHeightRequest = _DbStroopTaskListItems.Count * 50 + 1 * _DbStroopTaskListItems.Count;
+            ListViewHeightRequest = _DbStroopTaskListItems.Count * 65;
             OnPropertyChanged("DbStroopTaskListItems");
         }
 

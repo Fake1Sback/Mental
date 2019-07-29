@@ -63,11 +63,11 @@ namespace Mental.Models
             get
             {
                 if (DbStroopTask.StroopTaskOption == (byte)StroopTaskType.FindOneCorrect)
-                    return "Find_One_18.png";
+                    return "Find_One_24.png";
                 else if (DbStroopTask.StroopTaskOption == (byte)StroopTaskType.TrueOrFalse)
-                    return "True_or_False_18.png";
+                    return "True_False_24.png";
                 else
-                    return "Color_by_Text_18.png";
+                    return "Color_by_Text_24.png";
             }
         }
 
@@ -84,11 +84,11 @@ namespace Mental.Models
             get
             {
                 if (DbStroopTask.TimeOption == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "list_numbered_white_18.png";
+                    return "list_numbered_white_24.png";
                 else if (DbStroopTask.TimeOption == (byte)TimeOptions.CountdownTimer)
-                    return "access_time_white_18.png";
+                    return "access_time_white_24.png";
                 else
-                    return "Stopwatch_18.png";
+                    return "Stopwatch_24.png";
             }
         }
 

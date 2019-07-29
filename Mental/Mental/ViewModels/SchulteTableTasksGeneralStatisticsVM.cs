@@ -30,6 +30,8 @@ namespace Mental.ViewModels
         private string Color6 = "#2eb8b8"; //Aqua
         private string Color7 = "#cc4400"; //Brown
 
+        public int StatisticsLabelTextSize = 40;
+
         private List<DbSchulteTableTaskListItem> _SchulteTableTaskListItems;
         private DbSchulteTableTaskListItem _SelectedSchulteTableTaskListItem;
 
@@ -100,7 +102,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _TimeOptionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
             }
             set
             {
@@ -113,7 +115,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _EasyModeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = 17 };
+                return new DonutChart() { Entries = _EasyModeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
             }
             set
             {
@@ -126,7 +128,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _GridSizeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = 17 };
+                return new PointChart() { Entries = _GridSizeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelTextSize = StatisticsLabelTextSize, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, PointSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa") };
             }
             set
             {
@@ -351,7 +353,7 @@ namespace Mental.ViewModels
                 _SchulteTableTaskListItems.Add(new DbSchulteTableTaskListItem(dbSchulteTableTasks[i]));
             }
 
-            ListViewHeightRequest = _SchulteTableTaskListItems.Count * 50;
+            ListViewHeightRequest = _SchulteTableTaskListItems.Count * 65;
             OnPropertyChanged("DbSchulteTableTasksListItems");
         }
 

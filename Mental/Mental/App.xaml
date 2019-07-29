@@ -84,6 +84,7 @@
                 <Setter Property="BorderColor" Value="#6699ff"></Setter>
                 <Setter Property="Margin" Value="0,5,0,5"></Setter>
             </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
