@@ -8,12 +8,13 @@ using Microcharts;
 using Xamarin.Forms;
 using ChartEntry = Microcharts.ChartEntry;
 using Mental.Views;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
     public class StroopTaskSimilarStatisticsVM : BaseVM
     {
-        private int AmountOfData = 4;
+        private int AmountOfData = 3;
         private int LoadMoreCounter = 0;
 
         private DbStroopTask _SelectedDbStroopTask;
@@ -77,6 +78,20 @@ namespace Mental.ViewModels
             {
                 await navigation.PushAsync(new StroopTaskGeneralStatisticsPage());
             });
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (vm) =>
+            {
+                if (vm != this)
+                {
+                    LoadMoreCounter = 0;
+                    _SelectedDbStroopTask = null;
+                    _DbStroopTasksList.Clear();
+
+                    GetMathTasksFromDb();
+                    FillListView();
+                    InitializeChart();
+                }
+            });
         }
 
         //---------------------TopFrameValue-------------------------------
@@ -98,7 +113,7 @@ namespace Mental.ViewModels
                 else if (_PatternDbStroopTask.StroopTaskOption == (byte)StroopTaskType.TrueOrFalse)
                     return "True_False_24.png";
                 else
-                    return "Color_By_Text_24.png";
+                    return "Color_by_Text_24.png";
             }
         }
 
@@ -171,22 +186,23 @@ namespace Mental.ViewModels
 
         public Command SaveRecordToDbCommand { get; set; }
 
-        private void SaveRecordToDb()
+        private async void SaveRecordToDb()
         {
             if (_DbStroopTaskToSave != null)
             {
                 using (var db = new ApplicationContext("mental.db"))
                 {
-                    db.StroopTasks.Add(_DbStroopTaskToSave);
-                    db.SaveChanges();
+                    await db.StroopTasks.AddAsync(_DbStroopTaskToSave);
+                    await db.SaveChangesAsync();
                 }
                 _DbStroopTaskToSave = null;
+                _SelectedDbStroopTask = null;
                 LoadMoreCounter = 0;
                 _DbStroopTasksList.Clear();
                 GetMathTasksFromDb();
                 FillListView();
                 InitializeChart();
-                SaveButtonVisibility = false;
+              //  SaveButtonVisibility = false;
             }
         }
 
@@ -202,14 +218,14 @@ namespace Mental.ViewModels
 
         public Command ClearRecordsCommand { get; set; }
 
-        private void ClearRecords()
+        private async void ClearRecords()
         {
             using (var db = new ApplicationContext("mental.db"))
             {
-                DbStroopTask[] dbStroopTasksToDelete = db.StroopTasks.Where(t => t.TimeOption == _PatternDbStroopTask.TimeOption &&
+                DbStroopTask[] dbStroopTasksToDelete = await db.StroopTasks.Where(t => t.TimeOption == _PatternDbStroopTask.TimeOption &&
                 t.StroopTaskOption == _PatternDbStroopTask.StroopTaskOption &&
                 t.TaskComplexityParameter == _PatternDbStroopTask.TaskComplexityParameter &&
-                t.AmountOfButtons == _PatternDbStroopTask.AmountOfButtons).ToArray();
+                t.AmountOfButtons == _PatternDbStroopTask.AmountOfButtons).ToArrayAsync();
 
 
                 if (dbStroopTasksToDelete != null)
@@ -217,7 +233,7 @@ namespace Mental.ViewModels
                     if (dbStroopTasksToDelete.Length != 0)
                     {
                         db.StroopTasks.RemoveRange(dbStroopTasksToDelete);
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
                     }
                 }
             }
@@ -236,16 +252,16 @@ namespace Mental.ViewModels
 
         //-------------------------------------------------
 
-        private void GetMathTasksFromDb()
+        private async void GetMathTasksFromDb()
         {
             DbStroopTask[] dbStroopTasks;
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbStroopTasks = db.StroopTasks.Where(t => t.TimeOption == _PatternDbStroopTask.TimeOption &&
+                dbStroopTasks = await db.StroopTasks.Where(t => t.TimeOption == _PatternDbStroopTask.TimeOption &&
                 t.StroopTaskOption == _PatternDbStroopTask.StroopTaskOption &&
                 t.TaskComplexityParameter == _PatternDbStroopTask.TaskComplexityParameter &&
-                t.AmountOfButtons == _PatternDbStroopTask.AmountOfButtons).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+                t.AmountOfButtons == _PatternDbStroopTask.AmountOfButtons).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArrayAsync();
             }
 
             if(dbStroopTasks != null)
@@ -268,15 +284,6 @@ namespace Mental.ViewModels
             }
 
             OnPropertyChanged("DbStroopTasksListItems");
-        }
-
-        public int SimilarTasksListViewHeightRequest
-        {
-            get
-            {
-                return _DbStroopTasksList.Count * 50;
-            }
-            private set { }
         }
 
         private void InitializeChart()
@@ -306,7 +313,7 @@ namespace Mental.ViewModels
                 }
                 if (_DbStroopTaskToSave != null)
                     entries.Add(new ChartEntry((float)_DbStroopTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = _DbStroopTaskToSave.GetEfficiencyParameterString() });
-                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff") };
+                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 7, PointSize = 30, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, LabelTextSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), IsAnimated = false };
             }
         }
 

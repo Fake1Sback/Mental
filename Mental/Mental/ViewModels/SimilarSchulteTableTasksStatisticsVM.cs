@@ -9,12 +9,13 @@ using System.Text;
 using Xamarin.Forms;
 using ChartEntry = Microcharts.ChartEntry;
 using Mental.Views;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
     public class SimilarSchulteTableTasksStatisticsVM : BaseVM
     {
-        private int AmountOfData = 4;
+        private int AmountOfData = 3;
         private int LoadMoreCounter = 0;
 
         private DbSchulteTableTask _SelectedDbSchulteTableTask;
@@ -74,7 +75,21 @@ namespace Mental.ViewModels
             SaveRecordToDbCommand = new Command(SaveRecordToDb);
             LoadMoreRecordsCommand = new Command(LoadMoreRecords);
             ClearRecordsCommand = new Command(ClearRecords);
-            LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage()); });         
+            LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new SchulteTableTasksGeneralStatisticsPage()); });
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (vm) =>
+            {
+                if (vm != this)
+                {
+                    LoadMoreCounter = 0;
+                    _SelectedDbSchulteTableTask = null;
+                    _DbSchulteTableTasksList.Clear();
+
+                    GetMathTasksFromDb();
+                    FillListView();
+                    InitializeChart();
+                }
+            });
         }
 
         //---------------------TopFrameValue-------------------------------
@@ -165,22 +180,23 @@ namespace Mental.ViewModels
 
         public Command SaveRecordToDbCommand { get; set; }
 
-        private void SaveRecordToDb()
+        private async void SaveRecordToDb()
         {
             if (_DbSchulteTaskToSave != null)
             {
                 using (var db = new ApplicationContext("mental.db"))
                 {
-                    db.SchulteTableTasks.Add(_DbSchulteTaskToSave);
-                    db.SaveChanges();
+                    await db.SchulteTableTasks.AddAsync(_DbSchulteTaskToSave);
+                    await db.SaveChangesAsync();
                 }
                 _DbSchulteTaskToSave = null;
+                _SelectedDbSchulteTableTask = null;
                 LoadMoreCounter = 0;
                 _DbSchulteTableTasksList.Clear();
                 GetMathTasksFromDb();
                 FillListView();
                 InitializeChart();
-                SaveButtonVisibility = false;
+              //  SaveButtonVisibility = false;
             }
         }
 
@@ -196,14 +212,14 @@ namespace Mental.ViewModels
 
         public Command ClearRecordsCommand { get; set; }
 
-        private void ClearRecords()
+        private async void ClearRecords()
         {
             using (var db = new ApplicationContext("mental.db"))
             {
-                DbSchulteTableTask[] dbSchulteTableTasksToDelete = db.SchulteTableTasks.Where(t => t.TimeOption == _PatternDbSchulteTableTask.TimeOption &&
+                DbSchulteTableTask[] dbSchulteTableTasksToDelete = await db.SchulteTableTasks.Where(t => t.TimeOption == _PatternDbSchulteTableTask.TimeOption &&
                 t.TaskComplexityParameter == _PatternDbSchulteTableTask.TaskComplexityParameter &&
                 t.GridSize == _PatternDbSchulteTableTask.GridSize &&
-                t.IsEasyModeActivated == _PatternDbSchulteTableTask.IsEasyModeActivated).ToArray();
+                t.IsEasyModeActivated == _PatternDbSchulteTableTask.IsEasyModeActivated).ToArrayAsync();
 
 
                 if (dbSchulteTableTasksToDelete != null)
@@ -211,7 +227,7 @@ namespace Mental.ViewModels
                     if(dbSchulteTableTasksToDelete.Length != 0)
                     {
                         db.SchulteTableTasks.RemoveRange(dbSchulteTableTasksToDelete);
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
                     }
                 }
 
@@ -230,16 +246,16 @@ namespace Mental.ViewModels
 
         //-------------------------------------------------
 
-        private void GetMathTasksFromDb()
+        private async void GetMathTasksFromDb()
         {
             DbSchulteTableTask[] dbSchulteTableTasks;
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbSchulteTableTasks = db.SchulteTableTasks.Where(t => t.TimeOption == _PatternDbSchulteTableTask.TimeOption &&
+                dbSchulteTableTasks = await db.SchulteTableTasks.Where(t => t.TimeOption == _PatternDbSchulteTableTask.TimeOption &&
                 t.TaskComplexityParameter == _PatternDbSchulteTableTask.TaskComplexityParameter &&
                 t.GridSize == _PatternDbSchulteTableTask.GridSize &&
-                t.IsEasyModeActivated == _PatternDbSchulteTableTask.IsEasyModeActivated).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+                t.IsEasyModeActivated == _PatternDbSchulteTableTask.IsEasyModeActivated).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArrayAsync();
             }
 
             if(dbSchulteTableTasks != null)
@@ -262,15 +278,6 @@ namespace Mental.ViewModels
             }
 
             OnPropertyChanged("DbSchulteTableTasksListItemsProp");
-        }
-
-        public int SimilarTasksListViewHeightRequest
-        {
-            get
-            {
-                return DbSchulteTableTasksListItems.Count * 50;
-            }
-            private set { }
         }
 
         private void InitializeChart()
@@ -300,7 +307,7 @@ namespace Mental.ViewModels
                 }
                 if (_DbSchulteTaskToSave != null)
                     entries.Add(new ChartEntry((float)_DbSchulteTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = _DbSchulteTaskToSave.GetEfficiencyParameterString() });
-                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff") };
+                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle, PointAreaAlpha = 0, LineSize = 7, PointSize = 30, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, LabelTextSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), IsAnimated = false };
             }
         }
 

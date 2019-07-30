@@ -46,6 +46,19 @@ namespace Mental.ViewModels
         public SchulteTableTasksGeneralStatisticsVM(INavigation _navigation)
         {
             navigation = _navigation;
+            Initialize();
+
+            LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
+            LoadSimilarCommand = new Command(LoadSimilar);
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (p) =>
+            {
+                Initialize();
+            });
+        }
+
+        private void Initialize()
+        {
             using (var db = new ApplicationContext("mental.db"))
             {
                 GeneralAmountOfRecords = db.SchulteTableTasks.Count();
@@ -62,16 +75,7 @@ namespace Mental.ViewModels
             CurrentPaginationIndex = 0;
             LastPaginationIndex = AmountOfPages;
 
-
             LoadMoreDbMathTaskInfo();
-            LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
-            LoadSimilarCommand = new Command(LoadSimilar);
-
-            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (p) =>
-            {
-                _CurrentPaginationIndex = StartPaginationIndex;
-                LoadMoreDbMathTaskInfo();
-            });
         }
 
         public List<DbSchulteTableTaskListItem> DbSchulteTableTasksListItems
@@ -185,7 +189,7 @@ namespace Mental.ViewModels
                 }
             };
             _EasyModeChart = entries;
-            OnPropertyChanged(" EasyModeChart");
+            OnPropertyChanged("EasyModeChart");
         }
 
         private async void InitializeGridSizeOptionsChart(ApplicationContext db)

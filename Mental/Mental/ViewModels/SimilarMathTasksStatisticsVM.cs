@@ -12,12 +12,13 @@ using Microcharts;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Mental.Views;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
     public class SimilarMathTasksStatisticsVM : BaseVM
     {
-        private int AmountOfData = 4;
+        private int AmountOfData = 3;
         private int LoadMoreCounter = 0;
 
         private DbMathTask PatternDbMathTask;
@@ -79,6 +80,20 @@ namespace Mental.ViewModels
             ClearRecordsCommand = new Command(ClearRecords);
             LoadGeneralStatistics = new Command(LoadMoreRecords);
             LoadGeneralStatistics = new Command(async () => { await navigation.PushAsync(new GeneralStatisticsPage()); });
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (vm) =>
+            {
+                if (vm != this)
+                {
+                    LoadMoreCounter = 0;
+                    SelectedListItemDbMathTask = null;
+                    ListOfMathTasks.Clear();
+
+                    GetMathTasksFromDb();
+                    FillListView();
+                    InitializeChart();
+                }
+            });
         }
 
 
@@ -249,23 +264,24 @@ namespace Mental.ViewModels
         //--------------------------------------------
 
         public Command SaveRecordToDbCommand { get; set; }
-
-        private void SaveRecordToDb()
+      
+        private async void SaveRecordToDb()
         {
             if (dbMathTaskToSave != null)
             {
                 using (var db = new ApplicationContext("mental.db"))
                 {
-                    db.mathTasks.Add(dbMathTaskToSave);
-                    db.SaveChanges();
+                    await db.mathTasks.AddAsync(dbMathTaskToSave);
+                    await db.SaveChangesAsync();
                 }
                 dbMathTaskToSave = null;
+                SelectedListItemDbMathTask = null;
                 LoadMoreCounter = 0;
                 ListOfMathTasks.Clear();
                 GetMathTasksFromDb();
                 FillListView();
                 InitializeChart();
-                SaveButtonVisibility = false;
+  //              SaveButtonVisibility = false;
             }
         }
 
@@ -281,11 +297,11 @@ namespace Mental.ViewModels
 
         public Command ClearRecordsCommand { get; set; }
 
-        private void ClearRecords()
+        private async void ClearRecords()
         {
             using (var db = new ApplicationContext("mental.db"))
             {
-                DbMathTask[] mathTasksToDelete = db.mathTasks.Where(t => t.TimeOptions == PatternDbMathTask.TimeOptions &&
+                DbMathTask[] mathTasksToDelete = await db.mathTasks.Where(t => t.TimeOptions == PatternDbMathTask.TimeOptions &&
                 t.Operations == PatternDbMathTask.Operations &&
                 t.TaskType == PatternDbMathTask.TaskType &&
                 t.TaskComplexityParameter == PatternDbMathTask.TaskComplexityParameter &&
@@ -294,7 +310,7 @@ namespace Mental.ViewModels
                 t.IsChainLengthFixed == PatternDbMathTask.IsChainLengthFixed &&
                 t.MaxChainLength == PatternDbMathTask.MaxChainLength &&
                 t.IsInteger == PatternDbMathTask.IsInteger &&
-                t.IsRestrictionActivated == PatternDbMathTask.IsRestrictionActivated).ToArray();
+                t.IsRestrictionActivated == PatternDbMathTask.IsRestrictionActivated).ToArrayAsync();
 
                 if (mathTasksToDelete != null)
                 {
@@ -307,7 +323,7 @@ namespace Mental.ViewModels
                             mathTasksToDelete = mathTasksToDelete.Where(t => t.RestrictionsString == PatternDbMathTask.RestrictionsString).ToArray();
 
                         db.mathTasks.RemoveRange(mathTasksToDelete);
-                        db.SaveChanges();
+                        await db.SaveChangesAsync();
                     }
                 }
             }
@@ -326,13 +342,13 @@ namespace Mental.ViewModels
 
         //--------------------------------------------
 
-        private void GetMathTasksFromDb()
+        private async void GetMathTasksFromDb()
         {
             DbMathTask[] dbMathTasksArray;
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbMathTasksArray = db.mathTasks.Where(t => t.TimeOptions == PatternDbMathTask.TimeOptions &&
+                dbMathTasksArray = await db.mathTasks.Where(t => t.TimeOptions == PatternDbMathTask.TimeOptions &&
                 t.Operations == PatternDbMathTask.Operations &&
                 t.TaskType == PatternDbMathTask.TaskType &&
                 t.TaskComplexityParameter == PatternDbMathTask.TaskComplexityParameter &&
@@ -341,7 +357,7 @@ namespace Mental.ViewModels
                 t.IsChainLengthFixed == PatternDbMathTask.IsChainLengthFixed &&
                 t.MaxChainLength == PatternDbMathTask.MaxChainLength &&
                 t.IsInteger == PatternDbMathTask.IsInteger &&
-                t.IsRestrictionActivated == PatternDbMathTask.IsRestrictionActivated).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArray();
+                t.IsRestrictionActivated == PatternDbMathTask.IsRestrictionActivated).OrderByDescending(t => t.Id).Skip(AmountOfData * LoadMoreCounter).Take(AmountOfData).ToArrayAsync();
             }
 
             if (dbMathTasksArray != null)
@@ -390,16 +406,16 @@ namespace Mental.ViewModels
                     {
                         if(ListOfMathTasks[i].TaskDateTime.Date == DateTime.Now.Date)
                         {
-                            entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue())  {Color = SkiaSharp.SKColor.Parse("#fafafa"), TextColor = SkiaSharp.SKColor.Parse("#fafafa"), Label = ListOfMathTasks[i].TaskDateTime.ToString(@"HH:mm"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString()} );
                         }
                         else
-                            entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("FAFAFA"), TextColor = SkiaSharp.SKColor.Parse("FAFAFA"),  Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
+                            entries.Add(new ChartEntry((float)ListOfMathTasks[i].GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#fafafa"), TextColor = SkiaSharp.SKColor.Parse("#fafafa"),  Label = ListOfMathTasks[i].TaskDateTime.ToString(@"dd:MM:yy"), ValueLabel = ListOfMathTasks[i].GetEfficiencyParameterString() });
                     }
                        
                 }
                 if (dbMathTaskToSave != null)
                     entries.Add(new ChartEntry((float)dbMathTaskToSave.GetEfficiencyParameterValue()) { Color = SkiaSharp.SKColor.Parse("#ff3333"), TextColor = SkiaSharp.SKColor.Parse("#ff3333"), Label = "Current", ValueLabel = dbMathTaskToSave.GetEfficiencyParameterString() });
-                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle,  PointAreaAlpha = 0, LineSize = 3, PointSize = 10, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff")};
+                return new LineChart() { Entries = entries, LineMode = LineMode.Straight, PointMode = PointMode.Circle,  PointAreaAlpha = 0, LineSize = 7, PointSize = 30, LineAreaAlpha = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, LabelTextSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), IsAnimated = false};
             }
         }
 

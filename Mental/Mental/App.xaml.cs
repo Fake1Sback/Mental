@@ -97,40 +97,7 @@ namespace Mental
 
             if (dbMathTaskOptions != null)
             {
-                StoredMathTaskOptions = dbMathTaskOptions.ToMathTaskOptions();
-
-                //StoredMathTaskOptions = new MathTasksOptions() { Operations = new List<string>() };
-
-                //if (dbMathTaskOptions.Operations.Contains("+"))
-                //    StoredMathTaskOptions.Operations.Add("+");
-                //if (dbMathTaskOptions.Operations.Contains("-"))
-                //    StoredMathTaskOptions.Operations.Add("-");
-                //if (dbMathTaskOptions.Operations.Contains("*"))
-                //    StoredMathTaskOptions.Operations.Add("*");
-                //if (dbMathTaskOptions.Operations.Contains("/"))
-                //    StoredMathTaskOptions.Operations.Add("/");
-
-                //StoredMathTaskOptions.TaskType = (TaskType)dbMathTaskOptions.TaskType;
-
-                //StoredMathTaskOptions.TaskTimeOptions = new TaskTimeOptionsContainer
-                //{
-                //    CurrentTimeOption = (TimeOptions)dbMathTaskOptions.TimeOptions,
-                //    AmountOfMinutes = dbMathTaskOptions.AmountOfMinutes,
-                //    AmountOfTasks = dbMathTaskOptions.AmountOfTasks,
-                //    AmountOfSecondsForAnswer = dbMathTaskOptions.AmountOfSecondsForAnswer
-                //};
-
-                //StoredMathTaskOptions.IsRestrictionsActivated = dbMathTaskOptions.IsRestrictionActivated;
-                //StoredMathTaskOptions.restrictions.restrictions = TaskRestrictions.GetTaskRestrictionFromString(dbMathTaskOptions.RestrictionsString);
-
-                //StoredMathTaskOptions.IsIntegerNumbers = dbMathTaskOptions.IsIntegerNumbers;
-                //StoredMathTaskOptions.DigitsAfterDotSign = dbMathTaskOptions.DigitsAfterDotSign;
-
-                //StoredMathTaskOptions.MaxValue = dbMathTaskOptions.MaxValue;
-                //StoredMathTaskOptions.MinValue = dbMathTaskOptions.MinValue;
-
-                //StoredMathTaskOptions.IsChainLengthFixed = dbMathTaskOptions.IsChainLengthFixed;
-                //StoredMathTaskOptions.MaxChainLength = dbMathTaskOptions.MaxChainLength;               
+                StoredMathTaskOptions = dbMathTaskOptions.ToMathTaskOptions();                     
             }
         }
 
@@ -138,33 +105,6 @@ namespace Mental
         {
             StoredMathTaskOptions = mathTasksOptions;
             DbMathTaskOptions dbMathTaskOptions = mathTasksOptions.ToDbMathTaskOptions();
-
-            //string operations = string.Empty;
-            //for (int i = 0; i < mathTasksOptions.Operations.Count; i++)
-            //{
-            //    operations += mathTasksOptions.Operations[i];
-            //}
-
-            //dbMathTaskOptions.Operations = operations;
-
-            //dbMathTaskOptions.IsRestrictionActivated = mathTasksOptions.IsRestrictionsActivated;
-            //dbMathTaskOptions.RestrictionsString = TaskRestrictions.GetTaskRestrictionsString(mathTasksOptions.restrictions.restrictions);
-
-            //dbMathTaskOptions.IsIntegerNumbers = mathTasksOptions.IsIntegerNumbers;
-            //dbMathTaskOptions.DigitsAfterDotSign = mathTasksOptions.DigitsAfterDotSign;
-
-            //dbMathTaskOptions.MinValue = mathTasksOptions.MinValue;
-            //dbMathTaskOptions.MaxValue = mathTasksOptions.MaxValue;
-
-            //dbMathTaskOptions.IsChainLengthFixed = mathTasksOptions.IsChainLengthFixed;
-            //dbMathTaskOptions.MaxChainLength = mathTasksOptions.MaxChainLength;
-
-            //dbMathTaskOptions.AmountOfTasks = mathTasksOptions.TaskTimeOptions.AmountOfTasks;
-            //dbMathTaskOptions.AmountOfMinutes = mathTasksOptions.TaskTimeOptions.AmountOfMinutes;
-            //dbMathTaskOptions.AmountOfSecondsForAnswer = mathTasksOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-
-            //dbMathTaskOptions.TaskType = (byte)mathTasksOptions.TaskType;
-            //dbMathTaskOptions.TimeOptions = (byte)mathTasksOptions.TaskTimeOptions.CurrentTimeOption;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -186,20 +126,7 @@ namespace Mental
 
             if (dbSchulteTableTaskOptions != null)
             {
-                StoredSchulteTableTaskOptions = dbSchulteTableTaskOptions.ToSchulteTableTaskOptions();
-
-                //StoredSchulteTableTaskOptions = new SchulteTableTaskOptions()
-                //{
-                //    GridSize = dbSchulteTableTaskOptions.GridSize,
-                //    IsEasyModeActivated = dbSchulteTableTaskOptions.IsEasyModeActivated,
-                //    TaskTimeOptions = new TaskTimeOptionsContainer
-                //    {
-                //        CurrentTimeOption = (TimeOptions)dbSchulteTableTaskOptions.TimeOptions,
-                //        AmountOfMinutes = dbSchulteTableTaskOptions.AmountOfMinutes,
-                //        AmountOfTasks = dbSchulteTableTaskOptions.AmountOfTasks,
-                //        AmountOfSecondsForAnswer = dbSchulteTableTaskOptions.AmountOfSecondsForAnswer
-                //    }
-                //};               
+                StoredSchulteTableTaskOptions = dbSchulteTableTaskOptions.ToSchulteTableTaskOptions();             
             }
         }
 
@@ -207,14 +134,7 @@ namespace Mental
         {
             StoredSchulteTableTaskOptions = _schulteTableTaskOptions;
             DbSchulteTableTaskOptions dbSchulteTableTaskOptions = _schulteTableTaskOptions.ToDbSchulteTableTaskOptions();
-
-            //dbSchulteTableTaskOptions.GridSize = _schulteTableTaskOptions.GridSize;
-            //dbSchulteTableTaskOptions.IsEasyModeActivated = _schulteTableTaskOptions.IsEasyModeActivated;
-            //dbSchulteTableTaskOptions.TimeOptions = (byte)_schulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption;
-            //dbSchulteTableTaskOptions.AmountOfMinutes = _schulteTableTaskOptions.TaskTimeOptions.AmountOfMinutes;
-            //dbSchulteTableTaskOptions.AmountOfTasks = _schulteTableTaskOptions.TaskTimeOptions.AmountOfTasks;
-            //dbSchulteTableTaskOptions.AmountOfSecondsForAnswer = _schulteTableTaskOptions.TaskTimeOptions.AmountOfSecondsForAnswer;
-
+         
             using (var db = new ApplicationContext("mental.db"))
             {
                 DbSchulteTableTaskOptions dbSchulteTableTaskOptionsToDelete = db.LastSchulteTableTaskOptions.FirstOrDefault();
@@ -236,17 +156,6 @@ namespace Mental
             if (dbStroopTaskOptions != null)
             {
                 StoredStroopTaskOptions = dbStroopTaskOptions.ToStroopTaskOptions();
-
-                //StoredStroopTaskOptions = new StroopTaskOptions();
-                //StoredStroopTaskOptions.StroopTaskType = (StroopTaskType)dbStroopTaskOptions.StroopTaskType;
-                //StoredStroopTaskOptions.ButtonsAmount = dbStroopTaskOptions.ButtonsAmount;
-                //StoredStroopTaskOptions.TaskTimeOptionsContainer = new TaskTimeOptionsContainer
-                //{
-                //    AmountOfMinutes = dbStroopTaskOptions.AmountOfMinutes,
-                //    AmountOfSecondsForAnswer = dbStroopTaskOptions.AmountOfSecondsForAnswer,
-                //    AmountOfTasks = dbStroopTaskOptions.AmountOfTasks,
-                //    CurrentTimeOption = (TimeOptions)dbStroopTaskOptions.TimeOptions
-                //};
             }
         }
 
@@ -254,14 +163,6 @@ namespace Mental
         {
             StoredStroopTaskOptions = _stroopTaskOptions;
             DbStroopTaskOptions dbStroopTaskOptions = _stroopTaskOptions.ToDbStroopTaskOptions();
-
-
-            //dbStroopTaskOptions.TimeOptions = (byte)_stroopTaskOptions.TaskTimeOptionsContainer.CurrentTimeOption;
-            //dbStroopTaskOptions.AmountOfMinutes = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfMinutes;
-            //dbStroopTaskOptions.AmountOfTasks = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfTasks;
-            //dbStroopTaskOptions.AmountOfSecondsForAnswer = _stroopTaskOptions.TaskTimeOptionsContainer.AmountOfSecondsForAnswer;
-            //dbStroopTaskOptions.ButtonsAmount = _stroopTaskOptions.ButtonsAmount;
-            //dbStroopTaskOptions.StroopTaskType = (byte)_stroopTaskOptions.StroopTaskType;
 
             using (var db = new ApplicationContext("mental.db"))
             {
@@ -293,15 +194,16 @@ namespace Mental
 
 
             //  MainPage = new NavigationPage(new GeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //  MainPage = new NavigationPage(new StroopTaskSimilarStatisticsPage(new DbStroopTask() { AmountOfButtons = 4, AmountOfCorrectAnswers = 9, AmountOfWrongAnswers = 2, StroopTaskOption = (byte)StroopTaskType.FindColorByText, TaskComplexityParameter = 25, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TaskDateTime = DateTime.Now, TimeParameter = 20000 }, true));
+               MainPage = new NavigationPage(new StroopTaskSimilarStatisticsPage(new DbStroopTask() { AmountOfButtons = 8, AmountOfCorrectAnswers = 20, AmountOfWrongAnswers = 5, StroopTaskOption = (byte)StroopTaskType.TrueOrFalse, TaskComplexityParameter = 25, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TaskDateTime = DateTime.Now, TimeParameter = 15000 }, true));
             // MainPage = new NavigationPage(new SchulteTableTasksGeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
 
-            MainPage = new NavigationPage(new StartingPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            // MainPage = new NavigationPage(new StartingPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
 
             // MainPage = new NavigationPage(new StroopTaskGeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //  MainPage = new NavigationPage(new SimilarSchulteTableTasksStatisticsPage(new DbSchulteTableTask() { AmountOfCorrectAnswers = 25, AmountOfWrongAnswers = 0, GridSize = 5, IsEasyModeActivated = false, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TimeParameter = 15000, TaskDateTime = DateTime.Now, TaskComplexityParameter = 25, LongestTimeNumberString = "4", ShortestTimeNumberString = "3", LongestTimeSpentForFindingNumber = 2, ShortestTimeSpentForFindingNumber = 1 }, true));
+           // MainPage = new NavigationPage(new SimilarSchulteTableTasksStatisticsPage(new DbSchulteTableTask() { AmountOfCorrectAnswers = 49, AmountOfWrongAnswers = 0, GridSize = 7, IsEasyModeActivated = true, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TimeParameter = 20000, TaskDateTime = DateTime.Now, TaskComplexityParameter = 49 }, true));
 
-            // MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 10, AmountOfWrongAnswers = 3, DigitsAfterDotSing = 1, IsChainLengthFixed = false, IsInteger = true, IsRestrictionActivated = false, LongestTimeExpressionString = "4 +3 ", LongestTimeSpentForExpression = 4, MaxChainLength = 3, MaxValue = 100, MinValue = 0, Operations = "+-*/", ShortestTimeExpressionString = "3 + 1", ShortestTimeSpentForExpression = 3, TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 10, AmountOfWrongAnswers = 2, DigitsAfterDotSing = 1, IsChainLengthFixed = true, IsInteger = true, IsRestrictionActivated = false, MaxChainLength = 2, MaxValue = 100, MinValue = 0, Operations = "+-*/", TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            //MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 15, AmountOfWrongAnswers = 0, DigitsAfterDotSing = 1, IsChainLengthFixed = false, IsInteger = true, IsRestrictionActivated = false,  MaxChainLength = 3, MaxValue = 100, MinValue = 0, Operations = "+-*/", TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
 
             //MainPage = new NavigationPage(new MathTasksOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
             //MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };

@@ -11,9 +11,9 @@
         <ResourceDictionary>
             <Style x:Key="TopFrameLabel" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="#fafafa"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
@@ -35,9 +35,9 @@
             </Style>
             <Style x:Key="ListButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
-                <Setter Property="HeightRequest" Value="36"></Setter>
-                <Setter Property="WidthRequest" Value="36"></Setter>
-                <Setter Property="BorderRadius" Value="18"></Setter>
+                <Setter Property="HeightRequest" Value="50"></Setter>
+                <Setter Property="WidthRequest" Value="50"></Setter>
+                <Setter Property="BorderRadius" Value="25"></Setter>
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
@@ -45,22 +45,21 @@
             </Style>
             <Style x:Key="ListLabel" TargetType="Label">
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
-                <Setter Property="FontSize" Value="12"></Setter>
+                <Setter Property="FontSize" Value="18"></Setter>
                 <Setter Property="TextColor" Value="#6699ff"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="Margin" Value="0,-7,0,0"></Setter>
-                <Setter Property="HeightRequest" Value="15"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="0">
             <StackLayout Orientation="Vertical" Padding="0" Margin="0" BackgroundColor="#6699ff">
-                <Frame BackgroundColor="Transparent" Padding="0" Margin="10,4,10,0" CornerRadius="25" BorderColor="#fafafa">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,3,0,3">
+                <Frame BackgroundColor="Transparent" Padding="0" Margin="10,5,10,10" CornerRadius="25" BorderColor="#fafafa">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,5,0,5">
                         <Image Margin="2,0,0,0" Style="{StaticResource TopFrameImage}" Source="Buttons_Amount_24.png"></Image>
                         <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameAmountOfButtons}"></Label>
                         <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameStroopTaskTypeImgSrc}"></Image>
@@ -69,21 +68,21 @@
                         <Label Margin="0,0,2,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameTimeParameters}"></Label>
                     </StackLayout>
                 </Frame>
-                <charts:ChartView x:Name="LineChart1" Chart="{Binding LineChart}" WidthRequest="150" HeightRequest="190"></charts:ChartView>
+                <charts:ChartView x:Name="LineChart1" Chart="{Binding LineChart}" WidthRequest="200" HeightRequest="200"></charts:ChartView>
                 <Frame CornerRadius="25" BorderColor="Transparent" BackgroundColor="#6699ff" Padding="5" Margin="15,0,15,-15">
                     <Label BackgroundColor="#6699ff" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="#fafafa" FontSize="16" FontAttributes="Bold" Text="Similar Tasks"></Label>
                 </Frame>
             </StackLayout>
-            <ListView x:Name="SimilarTasksListView" ItemsSource="{Binding DbStroopTasksListItems}" SeparatorColor="Transparent" SeparatorVisibility="None" SelectedItem="{Binding SelectedDbStroopTask, Mode=OneWayToSource}" Margin="5,10,5,5" RowHeight="30" HeightRequest="132">
+            <ListView x:Name="SimilarTasksListView" ItemsSource="{Binding DbStroopTasksListItems}" SeparatorColor="Transparent" SeparatorVisibility="None" SelectedItem="{Binding SelectedDbStroopTask, Mode=OneWayToSource}" Margin="5,10,5,5" RowHeight="50" HeightRequest="153">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame CornerRadius="15" BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="15,0,15,1">
+                            <Frame CornerRadius="25" BackgroundColor="{Binding FrameBackgroundColor}" BorderColor="#fafafa" Padding="0" Margin="15,0,15,0">
                                 <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
                                     <Label Text="{Binding CorrectAnswers}" TextColor="Green" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
                                     <Label Text=" / " FontSize="18" VerticalOptions="Center" TextColor="White" HorizontalOptions="StartAndExpand"></Label>
                                     <Label Text="{Binding WrongAnswers}" TextColor="Red" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
-                                    <Image Source="date_range_white_18.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Image>
+                                    <Image Source="date_range_white_24.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Image>
                                     <Label Text="{Binding DateTimeString}" FontSize="18" TextColor="White" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand"></Label>
                                 </StackLayout>
                             </Frame>
@@ -91,21 +90,21 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <StackLayout Orientation="Horizontal" VerticalOptions="End" Margin="10,0,10,5">
+            <StackLayout Padding="0,0,0,3" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="10,0,10,0">
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="0" IsVisible="{Binding SaveButtonVisibility}">
-                    <Button Style="{StaticResource ListButton}" x:Name="SaveResultButton" Image="save_white_24.png" Command="{Binding SaveRecordToDbCommand}"></Button>
+                    <Button Style="{StaticResource ListButton}" x:Name="SaveResultButton" Image="save_white_36.png" Command="{Binding SaveRecordToDbCommand}"></Button>
                     <Label Style="{StaticResource ListLabel}" Text="Save Current"></Label>
                 </StackLayout>
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand"  VerticalOptions="Center" Padding="0">
-                    <Button Style="{StaticResource ListButton}" x:Name="LoadMoreButton" Image="loadmore_white_24.png" Command="{Binding LoadMoreRecordsCommand}"></Button>
+                    <Button Style="{StaticResource ListButton}" x:Name="LoadMoreButton" Image="loadmore_white_36.png" Command="{Binding LoadMoreRecordsCommand}"></Button>
                     <Label Style="{StaticResource ListLabel}" Text="Load More"></Label>
                 </StackLayout>
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand"  VerticalOptions="Center" Padding="0">
-                    <Button Style="{StaticResource ListButton}" x:Name="ClearRecords" Image="delete_white_24.png" Command="{Binding ClearRecordsCommand}"></Button>
+                    <Button Style="{StaticResource ListButton}" x:Name="ClearRecords" Image="delete_white_36.png" Command="{Binding ClearRecordsCommand}"></Button>
                     <Label Style="{StaticResource ListLabel}" Text="Clear Records"></Label>
                 </StackLayout>
                 <StackLayout Orientation="Vertical"  HorizontalOptions="FillAndExpand"  VerticalOptions="Center" Padding="0" IsVisible="{Binding GeneralStatisticsButtonVisibility}">
-                    <Button Style="{StaticResource ListButton}" x:Name="GeneralStatistics" Image="chart_white_24.png" Command="{Binding LoadGeneralStatistics}"></Button>
+                    <Button Style="{StaticResource ListButton}" x:Name="GeneralStatistics" Image="Statistics_36.png" Command="{Binding LoadGeneralStatistics}"></Button>
                     <Label Style="{StaticResource ListLabel}" Text="General Stats"></Label>
                 </StackLayout>
             </StackLayout>

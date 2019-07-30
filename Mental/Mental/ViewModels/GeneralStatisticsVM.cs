@@ -51,9 +51,22 @@ namespace Mental.ViewModels
         public GeneralStatisticsVM(INavigation _navigation)
         {
             navigation = _navigation;
+            Initialize();
+                 
+            LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
+            LoadSimilarCommand = new Command(LoadSimilar);
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (p) =>
+            {
+                Initialize();
+            });
+        }
+
+        private async void Initialize()
+        {
             using (var db = new ApplicationContext("mental.db"))
             {
-                GeneralAmountOfRecords = db.mathTasks.Count();
+                GeneralAmountOfRecords = await db.mathTasks.CountAsync();
                 InitializeTimeOptionsChart(db);
                 InitializeTaskTypeOptionsChart(db);
                 InitializeDataTypeOptionsChart(db);
@@ -72,14 +85,6 @@ namespace Mental.ViewModels
             LastPaginationIndex = AmountOfPages;
 
             LoadMoreDbMathTaskInfo();
-            LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
-            LoadSimilarCommand = new Command(LoadSimilar);
-
-            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords", (p) =>
-            {
-                _CurrentPaginationIndex = StartPaginationIndex;
-                LoadMoreDbMathTaskInfo();
-            });
         }
 
         public List<DbMathTaskListItem> mathTaskListItems

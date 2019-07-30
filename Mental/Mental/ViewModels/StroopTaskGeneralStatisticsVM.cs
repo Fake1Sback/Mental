@@ -45,6 +45,19 @@ namespace Mental.ViewModels
         public StroopTaskGeneralStatisticsVM(INavigation _navigation)
         {
             navigation = _navigation;
+            Initialize();
+
+            LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
+            LoadSimilarCommand = new Command(LoadSimilar);
+
+            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords",(p) =>
+            {
+                Initialize();
+            });
+        }  
+
+        private void Initialize()
+        {
             using (var db = new ApplicationContext("mental.db"))
             {
                 GeneralAmountOfRecords = db.StroopTasks.Count();
@@ -62,15 +75,7 @@ namespace Mental.ViewModels
             LastPaginationIndex = AmountOfPages;
 
             LoadMoreDbMathTaskInfo();
-            LoadMoreDbMathTasksCommand = new Command(LoadMoreDbMathTaskInfo);
-            LoadSimilarCommand = new Command(LoadSimilar);
-
-            MessagingCenter.Subscribe<BaseVM>(this, "ReloadRecords",(p) =>
-            {
-                _CurrentPaginationIndex = StartPaginationIndex;
-                LoadMoreDbMathTaskInfo();
-            });
-        }  
+        }
 
         public List<DbStroopTaskListItem> DbStroopTaskListItems
         {
