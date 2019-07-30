@@ -342,12 +342,12 @@ namespace Mental.ViewModels
 
         public Command LoadMoreDbMathTasksCommand { get; set; }
 
-        private void LoadMoreDbMathTaskInfo()
+        private async void LoadMoreDbMathTaskInfo()
         {
             DbSchulteTableTask[] dbSchulteTableTasks;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbSchulteTableTasks = db.SchulteTableTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArray();
+                dbSchulteTableTasks = await db.SchulteTableTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArrayAsync();
             }
 
             _SchulteTableTaskListItems = new List<DbSchulteTableTaskListItem>();

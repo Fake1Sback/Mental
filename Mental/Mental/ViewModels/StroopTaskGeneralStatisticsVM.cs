@@ -351,12 +351,12 @@ namespace Mental.ViewModels
 
         public Command LoadMoreDbMathTasksCommand { get; set; }
 
-        private void LoadMoreDbMathTaskInfo()
+        private async void LoadMoreDbMathTaskInfo()
         {
             DbStroopTask[] dbStroopTasks;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbStroopTasks = db.StroopTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArray();
+                dbStroopTasks = await db.StroopTasks.OrderByDescending(t => t.Id).Skip(AmountOfDataInListView * CurrentPaginationIndex).Take(AmountOfDataInListView).ToArrayAsync();
             }
 
             _DbStroopTaskListItems = new List<DbStroopTaskListItem>();
