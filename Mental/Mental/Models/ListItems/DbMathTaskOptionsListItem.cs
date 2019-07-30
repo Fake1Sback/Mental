@@ -69,9 +69,9 @@ namespace Mental.Models
             get
             {
                 if(dbMathTaskOptions.IsChainLengthFixed)
-                    return "Chain_18.png";
+                    return "Chain_24.png";
                 else
-                    return "Broken_chain_18.png";
+                    return "Broken_Chain_2_24.png";
             }
         }
 
@@ -147,11 +147,11 @@ namespace Mental.Models
             get
             {
                 if (dbMathTaskOptions.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return "access_time_white_18.png";
+                    return "access_time_white_24.png";
                 else if (dbMathTaskOptions.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "list_numbered_white_18.png";
+                    return "list_numbered_white_24.png";
                 else
-                    return   "Stopwatch_18.png";
+                    return "Stopwatch_24.png";
             }
         }
     }

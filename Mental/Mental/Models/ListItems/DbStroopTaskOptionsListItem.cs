@@ -64,7 +64,7 @@ namespace Mental.Models.ListItems
                 else if (dbStroopTaskOptions.StroopTaskType == (byte)StroopTaskType.TrueOrFalse)
                     return "True_False_24.png";
                 else
-                    return "Color_By_Text_24.png";
+                    return "Color_by_Text_24.png";
             }
         }
 
@@ -99,11 +99,11 @@ namespace Mental.Models.ListItems
             get
             {
                 if (dbStroopTaskOptions.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return "access_time_white_18.png";
+                    return "access_time_white_24.png";
                 else if (dbStroopTaskOptions.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "list_numbered_white_18.png";
+                    return "list_numbered_white_24.png";
                 else
-                    return "Stopwatch_18.png";
+                    return "Stopwatch_24.png";
             }
         }
     }

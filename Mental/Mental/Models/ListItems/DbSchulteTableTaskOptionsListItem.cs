@@ -95,11 +95,11 @@ namespace Mental.Models.ListItems
             get
             {
                 if (dbSchulteTableTaskOptions.TimeOptions == (byte)TimeOptions.CountdownTimer)
-                    return "access_time_white_18.png";
+                    return "access_time_white_24.png";
                 else if (dbSchulteTableTaskOptions.TimeOptions == (byte)TimeOptions.FixedAmountOfOperations)
-                    return "list_numbered_white_18.png";
+                    return "list_numbered_white_24.png";
                 else
-                    return "Stopwatch_18.png";
+                    return "Stopwatch_24.png";
             }
         }
     }
