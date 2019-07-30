@@ -183,7 +183,7 @@ namespace Mental.ViewModels
             get
             {
                 return new Command(async ()=> {
-                   // app.SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions);
+                    app.SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions);
                     ITimeOption timeOption;
                     if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.CountdownTimer)
                     {

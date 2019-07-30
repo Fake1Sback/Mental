@@ -7,6 +7,7 @@ using Mental.Models.DbModels;
 using Mental.Models.ListItems;
 using Xamarin.Forms;
 using Mental.Views;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental.ViewModels
 {
@@ -185,12 +186,12 @@ namespace Mental.ViewModels
             }
         }
 
-        private void LoadFavouriteMathOptions()
+        private async void LoadFavouriteMathOptions()
         {
             DbMathTaskOptions[] dbMathTaskOptions;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbMathTaskOptions = db.FavouriteMathTaskOptions.ToArray();
+                dbMathTaskOptions = await db.FavouriteMathTaskOptions.ToArrayAsync();
             }
 
             if (dbMathTaskOptions != null)
@@ -203,12 +204,12 @@ namespace Mental.ViewModels
                 FavouriteMathOptionsList = dbMathTaskOptionsListItems;
             }
         }
-        private void LoadFavouriteSchulteTableOptions()
+        private async void LoadFavouriteSchulteTableOptions()
         {
             DbSchulteTableTaskOptions[] dbSchulteTableTaskOptions;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbSchulteTableTaskOptions = db.FavouriteSchulteTableTaskOptions.ToArray();
+                dbSchulteTableTaskOptions = await db.FavouriteSchulteTableTaskOptions.ToArrayAsync();
             }
 
             if (dbSchulteTableTaskOptions != null)
@@ -221,13 +222,13 @@ namespace Mental.ViewModels
                 FavouriteSchulteTableOptionsList = dbSchulteTableTaskOptionsListItems;
             }
         }
-        private void LoadFavouriteStroopOptions()
+        private async void LoadFavouriteStroopOptions()
         {
             DbStroopTaskOptions[] dbStroopTaskOptions;
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbStroopTaskOptions = db.FavouriteStroopTaskOptions.ToArray();
+                dbStroopTaskOptions = await db.FavouriteStroopTaskOptions.ToArrayAsync();
             }
 
             if (dbStroopTaskOptions != null)
@@ -324,7 +325,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     if (FavouriteType == Favourites.MathOptionsFavourite)
                     {
@@ -333,7 +334,7 @@ namespace Mental.ViewModels
                             using (var db = new ApplicationContext("mental.db"))
                             {
                                 db.FavouriteMathTaskOptions.Remove(SelectedMathOptions.dbMathTaskOptions);
-                                db.SaveChanges();
+                                await db.SaveChangesAsync();
                             }
                             _SelectedMathOptions = null;
                             OnPropertyChanged("SelectedMathOptions");
@@ -347,7 +348,7 @@ namespace Mental.ViewModels
                             using (var db = new ApplicationContext("mental.db"))
                             {
                                 db.FavouriteSchulteTableTaskOptions.Remove(SelectedSchulteTableOptions.dbSchulteTableTaskOptions);
-                                db.SaveChanges();
+                                await db.SaveChangesAsync();
                             }
                             _SelectedSchulteTableOptions = null;
                             OnPropertyChanged("SelectedSchulteTableOptions");
@@ -361,7 +362,7 @@ namespace Mental.ViewModels
                             using (var db = new ApplicationContext("mental.db"))
                             {
                                 db.FavouriteStroopTaskOptions.Remove(SelectedStroopOptions.dbStroopTaskOptions);
-                                db.SaveChanges();
+                                await db.SaveChangesAsync();
                             }
                             _SelectedStroopOptions = null;
                             OnPropertyChanged("SelectedStroopOptions");
@@ -375,7 +376,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new Command(() =>
+                return new Command(async () =>
                 {
                     if (FavouriteType == Favourites.MathOptionsFavourite)
                     {
@@ -388,7 +389,7 @@ namespace Mental.ViewModels
                         using (var db = new ApplicationContext("mental.db"))
                         {
                             db.FavouriteMathTaskOptions.RemoveRange(dbMathTaskOptions);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
                         }
                         LoadFavouriteMathOptions();
                     }
@@ -403,7 +404,7 @@ namespace Mental.ViewModels
                         using (var db = new ApplicationContext("mental.db"))
                         {
                             db.FavouriteSchulteTableTaskOptions.RemoveRange(dbSchulteTableTaskOptions);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
                         }
                         LoadFavouriteSchulteTableOptions();
                     }
@@ -418,7 +419,7 @@ namespace Mental.ViewModels
                         using (var db = new ApplicationContext("mental.db"))
                         {
                             db.FavouriteStroopTaskOptions.RemoveRange(dbStroopTaskOptions);
-                            db.SaveChanges();
+                            await db.SaveChangesAsync();
                         }
                         LoadFavouriteStroopOptions();
                     }

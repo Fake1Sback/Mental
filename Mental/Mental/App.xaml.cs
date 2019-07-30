@@ -6,6 +6,7 @@ using Mental.Models;
 using System.Collections.Generic;
 using Mental.Views;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mental
 {
@@ -87,90 +88,90 @@ namespace Mental
             }
         }
 
-        private void LoadLatestMathTaskOptions()
+        private async void LoadLatestMathTaskOptions()
         {
-            DbMathTaskOptions dbMathTaskOptions;
+            LatestDbMathTaskOptions LatestdbMathTaskOptions;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbMathTaskOptions = db.LastMathTaskOptions.FirstOrDefault();
+                LatestdbMathTaskOptions = await db.LastMathTaskOptions.FirstOrDefaultAsync();
             }
 
-            if (dbMathTaskOptions != null)
+            if (LatestdbMathTaskOptions != null)
             {
-                StoredMathTaskOptions = dbMathTaskOptions.ToMathTaskOptions();                     
+                StoredMathTaskOptions = LatestdbMathTaskOptions.ToMathTaskOptions();                     
             }
         }
 
-        public void SaveLatestMathTaskOptions(MathTasksOptions mathTasksOptions)
+        public async void SaveLatestMathTaskOptions(MathTasksOptions mathTasksOptions)
         {
             StoredMathTaskOptions = mathTasksOptions;
-            DbMathTaskOptions dbMathTaskOptions = mathTasksOptions.ToDbMathTaskOptions();
+            LatestDbMathTaskOptions LatestdbMathTaskOptions = mathTasksOptions.ToLatestDbMathTaskOptions();
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                DbMathTaskOptions optionsToDelete = db.LastMathTaskOptions.FirstOrDefault();
+                LatestDbMathTaskOptions[] optionsToDelete = await db.LastMathTaskOptions.ToArrayAsync();
                 if (optionsToDelete != null)
-                    db.LastMathTaskOptions.Remove(optionsToDelete);
-                db.LastMathTaskOptions.Add(dbMathTaskOptions);
-                db.SaveChanges();
+                    db.LastMathTaskOptions.RemoveRange(optionsToDelete);
+                await db.LastMathTaskOptions.AddAsync(LatestdbMathTaskOptions);
+                await db.SaveChangesAsync();
             }
         }
 
-        private void LoadLatestSchulteTableTaskOptions()
+        private async void LoadLatestSchulteTableTaskOptions()
         {
-            DbSchulteTableTaskOptions dbSchulteTableTaskOptions;
+            LatestDbSchulteTableTaskOptions latestDbSchulteTableTaskOptions = new LatestDbSchulteTableTaskOptions();
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbSchulteTableTaskOptions = db.LastSchulteTableTaskOptions.FirstOrDefault();
+                latestDbSchulteTableTaskOptions = await db.LastSchulteTableTaskOptions.FirstOrDefaultAsync();
             }
 
-            if (dbSchulteTableTaskOptions != null)
+            if (latestDbSchulteTableTaskOptions != null)
             {
-                StoredSchulteTableTaskOptions = dbSchulteTableTaskOptions.ToSchulteTableTaskOptions();             
+                StoredSchulteTableTaskOptions = latestDbSchulteTableTaskOptions.ToSchulteTableTaskOptions();             
             }
         }
 
-        public void SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions _schulteTableTaskOptions)
+        public async void SaveLatestSchulteTableTaskOptions(SchulteTableTaskOptions _schulteTableTaskOptions)
         {
             StoredSchulteTableTaskOptions = _schulteTableTaskOptions;
-            DbSchulteTableTaskOptions dbSchulteTableTaskOptions = _schulteTableTaskOptions.ToDbSchulteTableTaskOptions();
+            LatestDbSchulteTableTaskOptions latestDbSchulteTableTaskOptions = _schulteTableTaskOptions.ToLatestDbSchulteTaskOptions();    
          
             using (var db = new ApplicationContext("mental.db"))
             {
-                DbSchulteTableTaskOptions dbSchulteTableTaskOptionsToDelete = db.LastSchulteTableTaskOptions.FirstOrDefault();
-                if (dbSchulteTableTaskOptionsToDelete != null)
-                    db.LastSchulteTableTaskOptions.Remove(dbSchulteTableTaskOptionsToDelete);
-                db.LastSchulteTableTaskOptions.Add(dbSchulteTableTaskOptions);
-                db.SaveChanges();
+                LatestDbSchulteTableTaskOptions[] optionsToDelete = await db.LastSchulteTableTaskOptions.ToArrayAsync();
+                if(optionsToDelete != null)
+                    db.LastSchulteTableTaskOptions.RemoveRange(optionsToDelete);
+                await db.LastSchulteTableTaskOptions.AddAsync(latestDbSchulteTableTaskOptions);
+                await db.SaveChangesAsync();
             }
         }
 
-        public void LoadLatestStroopTaskOptions()
+        public async void LoadLatestStroopTaskOptions()
         {
-            DbStroopTaskOptions dbStroopTaskOptions;
+            LatestDbStroopTaskOptions latestDbStroopTaskOptions;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbStroopTaskOptions = db.LastStroopTaskOptions.FirstOrDefault();
+                latestDbStroopTaskOptions = await db.LastStroopTaskOptions.FirstOrDefaultAsync();
             }
 
-            if (dbStroopTaskOptions != null)
+            if (latestDbStroopTaskOptions != null)
             {
-                StoredStroopTaskOptions = dbStroopTaskOptions.ToStroopTaskOptions();
+                StoredStroopTaskOptions = latestDbStroopTaskOptions.ToStroopTaskOptions();
             }
         }
 
-        public void SaveLatestStroopTaskOptions(StroopTaskOptions _stroopTaskOptions)
+        public async void SaveLatestStroopTaskOptions(StroopTaskOptions _stroopTaskOptions)
         {
             StoredStroopTaskOptions = _stroopTaskOptions;
-            DbStroopTaskOptions dbStroopTaskOptions = _stroopTaskOptions.ToDbStroopTaskOptions();
+            LatestDbStroopTaskOptions latestDbStroopTaskOptions = _stroopTaskOptions.ToLatestDbStroopTaskOptions();
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                DbStroopTaskOptions dbStroopTaskOptionsToDelete = db.LastStroopTaskOptions.FirstOrDefault();
-                if (dbStroopTaskOptionsToDelete != null)
-                    db.LastStroopTaskOptions.Remove(dbStroopTaskOptionsToDelete);
-                db.LastStroopTaskOptions.Add(dbStroopTaskOptions);
-                db.SaveChanges();
+                LatestDbStroopTaskOptions[] optionsToDelete = await db.LastStroopTaskOptions.ToArrayAsync();
+                if (optionsToDelete != null)
+                    db.LastStroopTaskOptions.RemoveRange(optionsToDelete);
+                await db.LastStroopTaskOptions.AddAsync(latestDbStroopTaskOptions);
+                await db.SaveChangesAsync();
             }
         }
 
@@ -179,36 +180,29 @@ namespace Mental
             InitializeComponent();
             using (var a = new ApplicationContext("mental.db"))
             {
-                //a.Database.EnsureDeleted();
+               // a.Database.EnsureDeleted();
                 a.Database.EnsureCreated();
             }
 
-            //  if (StoredMathTaskOptions == null)
-            //    LoadLatestMathTaskOptions();
+            if (StoredMathTaskOptions == null)
+                LoadLatestMathTaskOptions();
 
-            //            if (StoredSchulteTableTaskOptions == null)
-            //              LoadLatestSchulteTableTaskOptions();
+            if (StoredSchulteTableTaskOptions == null)
+                LoadLatestSchulteTableTaskOptions();
 
-            //        if (StoredStroopTaskOptions == null)
-            //          LoadLatestStroopTaskOptions();
+            if (StoredStroopTaskOptions == null)
+                LoadLatestStroopTaskOptions();
 
+            LatestDbMathTaskOptions[] LastOptions;
+            DbMathTaskOptions[] FavouriteOptions;
 
-            //  MainPage = new NavigationPage(new GeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //   MainPage = new NavigationPage(new StroopTaskSimilarStatisticsPage(new DbStroopTask() { AmountOfButtons = 8, AmountOfCorrectAnswers = 20, AmountOfWrongAnswers = 5, StroopTaskOption = (byte)StroopTaskType.TrueOrFalse, TaskComplexityParameter = 25, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TaskDateTime = DateTime.Now, TimeParameter = 15000 }, true));
-            // MainPage = new NavigationPage(new SchulteTableTasksGeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            using (var a = new ApplicationContext("mental.db"))
+            {
+                LastOptions = a.LastMathTaskOptions.ToArray();
+                FavouriteOptions = a.FavouriteMathTaskOptions.ToArray();
+            }
 
             MainPage = new NavigationPage(new StartingPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-
-            // MainPage = new NavigationPage(new StroopTaskGeneralStatisticsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            // MainPage = new NavigationPage(new SimilarSchulteTableTasksStatisticsPage(new DbSchulteTableTask() { AmountOfCorrectAnswers = 49, AmountOfWrongAnswers = 0, GridSize = 7, IsEasyModeActivated = true, TimeOption = (byte)TimeOptions.FixedAmountOfOperations, TimeParameter = 20000, TaskDateTime = DateTime.Now, TaskComplexityParameter = 49 }, true));
-
-            //MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 10, AmountOfWrongAnswers = 2, DigitsAfterDotSing = 1, IsChainLengthFixed = true, IsInteger = true, IsRestrictionActivated = false, MaxChainLength = 2, MaxValue = 100, MinValue = 0, Operations = "+-*/", TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //MainPage = new NavigationPage(new SimilarTasksStatisticsPage(new DbMathTask { AmountOfCorrectAnswers = 15, AmountOfWrongAnswers = 0, DigitsAfterDotSing = 1, IsChainLengthFixed = false, IsInteger = true, IsRestrictionActivated = false,  MaxChainLength = 3, MaxValue = 100, MinValue = 0, Operations = "+-*/", TaskType = (byte)TaskType.CountResult, TimeOptions = (byte)TimeOptions.CountdownTimer, TimeParameter = 3, RestrictionsString = "1111111111111111111111111", TaskDateTime = DateTime.Now, TaskComplexityParameter = 5 }, true)) { BarBackgroundColor = Color.FromHex("#6699ff") };
-
-            //MainPage = new NavigationPage(new MathTasksOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //MainPage = new NavigationPage(new SchulteTableTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //MainPage = new NavigationPage(new StroopTaskOptionsPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
-            //MainPage = new NavigationPage(new StroopTaskPage(GetStoredStroopTaskOptions(),new CountdownTimeOption(new TaskTimeOptionsContainer() { AmountOfMinutes = 2})));
         }
 
         protected override void OnStart()
@@ -224,6 +218,8 @@ namespace Mental
         protected override void OnResume()
         {
             LoadLatestMathTaskOptions();
+            LoadLatestSchulteTableTaskOptions();
+            LoadLatestStroopTaskOptions();
         }
     }
 }
