@@ -11,20 +11,21 @@
                         <Setter Property="BorderRadius" Value="25"></Setter>
                         <Setter Property="BorderWidth" Value="1"></Setter>
                         <Setter Property="BorderColor" Value="#6699ff"></Setter>
-                        <Setter Property="Padding" Value="15,15,15,15"></Setter>
-                        <Setter Property="WidthRequest" Value="140"></Setter>
-                        <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                        <Setter Property="Padding" Value="10,10,10,10"></Setter>
+                        <!--<Setter Property="WidthRequest" Value="140"></Setter>-->
+                        <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                        <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
                         <Setter Property="FontAttributes" Value="Bold"></Setter>
                     </Style>
                     <Style x:Key="YesNoButtonStyle" TargetType="Button">
                         <Setter Property="WidthRequest" Value="140"></Setter>
-                        <Setter Property="HeightRequest" Value="90"></Setter>
+                        <Setter Property="HeightRequest" Value="100"></Setter>
                         <Setter Property="BorderRadius" Value="15"></Setter>
                         <Setter Property="BorderWidth" Value="2"></Setter>
                         <Setter Property="FontSize" Value="25"></Setter>
                         <Setter Property="FontAttributes" Value="Bold"></Setter>
-                        <Setter Property="HorizontalOptions" Value="Center"></Setter>
-                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                        <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                        <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
                     </Style>
                 </StackLayout.Resources>
                 <Frame Style="{StaticResource LabelFrame}" Margin="10,4,10,0">
@@ -54,31 +55,31 @@
                         </Frame>
                     </StackLayout>
                 </Frame>
-                <StackLayout x:Name="TaskFrame" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                    <Label x:Name="QuestionLabel" IsVisible="{Binding QuestionLabelVisibility}" Text="{Binding QuestionLabelString}" TextColor="{Binding QuestrionLabelTextColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" FontAttributes="Bold" BackgroundColor="Transparent" Margin="15,0,15,0" HorizontalOptions="Center" HeightRequest="100" WidthRequest="150"></Label>
-                    <StackLayout x:Name="ColorButtonsLayout" Orientation="Vertical" Margin="10,0,10,0">
-                        <StackLayout Orientation="{Binding FirstColorButtonsStackLayoutOrientation}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[0]}">
-                            <Button x:Name="FirstColorButton" Style="{StaticResource ColorButtonStyle}" WidthRequest="{Binding ColorButtonWidth}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}" Text="{Binding ColorButtonText[0]}" TextColor="{Binding ColorButtonColor[0]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference FirstColorButton}"></Button>
-                            <Button x:Name="SecondColorButton" Style="{StaticResource ColorButtonStyle}" WidthRequest="{Binding ColorButtonWidth}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[1]}" TextColor="{Binding ColorButtonColor[1]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference SecondColorButton}"></Button>
+                <StackLayout Margin="15" x:Name="TaskFrame" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="QuestionLabel" IsVisible="{Binding QuestionLabelVisibility}" Text="{Binding QuestionLabelString}" TextColor="{Binding QuestrionLabelTextColor}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="30" FontAttributes="Bold" BackgroundColor="Transparent" Margin="15,0,15,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="100" WidthRequest="150"></Label>
+                    <StackLayout x:Name="ColorButtonsLayout" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" Margin="10,0,10,0">
+                        <StackLayout Orientation="{Binding FirstColorButtonsStackLayoutOrientation}" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[0]}">
+                            <Button x:Name="FirstColorButton" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}" Text="{Binding ColorButtonText[0]}" TextColor="{Binding ColorButtonColor[0]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference FirstColorButton}"></Button>
+                            <Button x:Name="SecondColorButton" Style="{StaticResource ColorButtonStyle}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[1]}" TextColor="{Binding ColorButtonColor[1]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference SecondColorButton}"></Button>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[1]}">
-                            <Button x:Name="ThirdButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[2]}" TextColor="{Binding ColorButtonColor[2]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference ThirdButtonColor}"></Button>
-                            <Button x:Name="ForthButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[3]}" TextColor="{Binding ColorButtonColor[3]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference ForthButtonColor}"></Button>
+                        <StackLayout Orientation="{Binding FirstColorButtonsStackLayoutOrientation}" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[1]}">
+                            <Button x:Name="ThirdButtonColor" Style="{StaticResource ColorButtonStyle}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[2]}" TextColor="{Binding ColorButtonColor[2]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference ThirdButtonColor}"></Button>
+                            <Button x:Name="ForthButtonColor" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[3]}" TextColor="{Binding ColorButtonColor[3]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference ForthButtonColor}"></Button>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[2]}">
-                            <Button x:Name="FifthButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[4]}" TextColor="{Binding ColorButtonColor[4]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference FifthButtonColor}"></Button>
-                            <Button x:Name="SixthButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[5]}" TextColor="{Binding ColorButtonColor[5]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference SixthButtonColor}"></Button>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[2]}">
+                            <Button x:Name="FifthButtonColor" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[4]}" TextColor="{Binding ColorButtonColor[4]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference FifthButtonColor}"></Button>
+                            <Button x:Name="SixthButtonColor" Style="{StaticResource ColorButtonStyle}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[5]}" TextColor="{Binding ColorButtonColor[5]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference SixthButtonColor}"></Button>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[3]}">
-                            <Button x:Name="SeventhButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[6]}" TextColor="{Binding ColorButtonColor[6]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference SeventhButtonColor}"></Button>
-                            <Button x:Name="EighthButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[7]}" TextColor="{Binding ColorButtonColor[7]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference EighthButtonColor}"></Button>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[3]}">
+                            <Button x:Name="SeventhButtonColor" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[6]}" TextColor="{Binding ColorButtonColor[6]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference SeventhButtonColor}"></Button>
+                            <Button x:Name="EighthButtonColor" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[7]}" TextColor="{Binding ColorButtonColor[7]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference EighthButtonColor}"></Button>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[4]}">
-                            <Button x:Name="NinthButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[8]}" TextColor="{Binding ColorButtonColor[8]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference NinthButtonColor}"></Button>
-                            <Button x:Name="TenthButtonColor" Style="{StaticResource ColorButtonStyle}" HeightRequest="{Binding ColorButtonHeight}" FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[9]}" TextColor="{Binding ColorButtonColor[9]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference TenthButtonColor}"></Button>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" IsVisible="{Binding ColorButtonLayoutsVisibility[4]}">
+                            <Button x:Name="NinthButtonColor" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[8]}" TextColor="{Binding ColorButtonColor[8]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference NinthButtonColor}"></Button>
+                            <Button x:Name="TenthButtonColor" Style="{StaticResource ColorButtonStyle}"  FontSize="{Binding ColorButtonFontSize}"  Text="{Binding ColorButtonText[9]}" TextColor="{Binding ColorButtonColor[9]}" Command="{Binding ColorButtonClickedCommand}" CommandParameter="{x:Reference TenthButtonColor}"></Button>
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout x:Name="YesNoLayout" IsVisible="{Binding YesNoLayoutVisibility}" Orientation="Horizontal" HorizontalOptions="Center">
+                    <StackLayout x:Name="YesNoLayout" IsVisible="{Binding YesNoLayoutVisibility}" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="End">
                         <Button Margin="10,5,0,5" Style="{StaticResource YesNoButtonStyle}" BorderColor="Green" BackgroundColor="#99ffcc" TextColor="White" Text="Yes" Command="{Binding YesButtonClickedCommand}"></Button>
                         <Button Margin="0,5,10,5" Style="{StaticResource YesNoButtonStyle}" BorderColor="Red" BackgroundColor="#ff8566" TextColor="White" Text="No" Command="{Binding NoButtonClickedCommand }"></Button>
                     </StackLayout>

@@ -179,7 +179,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                if (stroopTaskOptions.ButtonsAmount <= 2)
+                if (stroopTaskOptions.ButtonsAmount <= 4)
                     return StackOrientation.Vertical;
                 else
                     return StackOrientation.Horizontal;
