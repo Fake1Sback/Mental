@@ -81,7 +81,7 @@ namespace Mental.Views
             for(int i = 0;i < SchulteTableGrid.Children.Count;i++)
             {
                 Button button = SchulteTableGrid.Children[i] as Button;
-                button.BackgroundColor = Color.Transparent;
+                button.BackgroundColor = Color.FromHex("#6699ff");
             }
         }
     }

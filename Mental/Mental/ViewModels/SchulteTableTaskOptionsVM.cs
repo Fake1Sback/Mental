@@ -131,9 +131,8 @@ namespace Mental.ViewModels
             set
             {
                 _GridSizeSliderValue = value;
-                SchulteTableTaskOptions.GridSize = (int)Math.Round(_GridSizeSliderValue,0);
-                if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
-                    TimeOptionsPVM.AmountOfTasks = (int)Math.Pow(IntGridSizeSliderValue, 2);
+                SchulteTableTaskOptions.GridSize = (int)Math.Round(_GridSizeSliderValue, 0);
+                TimeOptionsPVM.AmountOfTasks = (int)Math.Pow(IntGridSizeSliderValue, 2);
                 OnPropertyChanged("GridSizeSliderValue");
                 OnPropertyChanged("IntGridSizeSliderValue");
             }

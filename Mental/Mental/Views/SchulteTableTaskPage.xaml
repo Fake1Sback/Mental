@@ -5,10 +5,10 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="GridButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+                <Setter Property="BackgroundColor" Value="#6699ff"></Setter>
                 <Setter Property="TextColor" Value="White"></Setter>
                 <Setter Property="BorderWidth" Value="0.8"></Setter>
-                <Setter Property="BorderColor" Value="White"></Setter>
+                <Setter Property="BorderColor" Value="#6699ff"></Setter>
                 <Setter Property="Margin" Value="2,2,2,2"></Setter>
                 <Setter Property="Padding" Value="0,0,0,0"></Setter>
             </Style>
@@ -47,7 +47,7 @@
                 <Frame Margin="0,5,0,5" CornerRadius="25" BackgroundColor="#6699ff" HeightRequest="50" WidthRequest="50" HorizontalOptions="CenterAndExpand" Padding="0,0,0,0">
                     <Label x:Name="CurrentNumberLabel" Text="{Binding CurrentNumberString}" FontAttributes="Bold" TextColor="White" FontSize="25" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"></Label>
                 </Frame>
-                <Frame Margin="5,5,5,5" BackgroundColor="#6699ff" Padding="-1,-1,-1,-1">
+                <Frame Margin="5,5,5,5" BackgroundColor="Transparent" BorderColor="Transparent" Padding="-1,-1,-1,-1">
                     <Grid x:Name="SchulteTableGrid" Margin="5,5,5,5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     </Grid>
                 </Frame>

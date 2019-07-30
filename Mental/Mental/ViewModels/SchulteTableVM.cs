@@ -68,7 +68,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new Command(async (obj) =>
+                return new Command((obj) =>
                 {
                     Button button = obj as Button;
                     int Answer = Convert.ToInt32(button.Text);
@@ -77,21 +77,44 @@ namespace Mental.ViewModels
                     {
                         _AmountOfCorrectAnswers += 1;
                         if (SchulteTableTaskOptions.IsEasyModeActivated)
+                        {
                             button.BackgroundColor = Color.FromHex("#ff8566");
+                            button.BorderColor = Color.FromHex("#ff8566");
+                        }
                     }
-                    else
-                        _AmountOfWrongAnswers += 1;
+                    //else
+                    //    _AmountOfWrongAnswers += 1;
 
-                    if (timeOption.CanExecuteOperation(IsCorrectAnswer) && _CurrentNumberToAnswer < SchulteTableTaskOptions.GridSize * SchulteTableTaskOptions.GridSize)
+                    if (SchulteTableTaskOptions.TaskTimeOptions.CurrentTimeOption == TimeOptions.FixedAmountOfOperations)
                     {
-                        if (_CurrentNumberToAnswer == Answer)
-                            _CurrentNumberToAnswer += 1;
-                        OnPropertyChanged("CurrentNumberString");
+                        if (IsCorrectAnswer)
+                        {
+                            if (timeOption.CanExecuteOperation(IsCorrectAnswer) && _CurrentNumberToAnswer < SchulteTableTaskOptions.GridSize * SchulteTableTaskOptions.GridSize)
+                            {
+                                if (_CurrentNumberToAnswer == Answer)
+                                    _CurrentNumberToAnswer += 1;
+                                OnPropertyChanged("CurrentNumberString");
+                            }
+                            else
+                            {
+                                schulteTableTaskPage.HideTaskFrame();
+                                VMTimerBlocker = true;
+                            }
+                        }
                     }
                     else
                     {
-                        schulteTableTaskPage.HideTaskFrame();
-                        VMTimerBlocker = true;
+                        if (timeOption.CanExecuteOperation(IsCorrectAnswer) && _CurrentNumberToAnswer < SchulteTableTaskOptions.GridSize * SchulteTableTaskOptions.GridSize)
+                        {
+                            if (_CurrentNumberToAnswer == Answer)
+                                _CurrentNumberToAnswer += 1;
+                            OnPropertyChanged("CurrentNumberString");
+                        }
+                        else
+                        {
+                            schulteTableTaskPage.HideTaskFrame();
+                            VMTimerBlocker = true;
+                        }
                     }
                 });
             }
