@@ -9,7 +9,8 @@
                 <Setter Property="BorderColor" Value="Transparent"></Setter>
                 <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="FontSize" Value="18"></Setter>
-                <Setter Property="VerticalOptions" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="Margin" Value="1"></Setter>
             </Style>
@@ -45,13 +46,13 @@
                         </Frame>
                     </StackLayout>
                 </Frame>
-                <StackLayout x:Name="TaskFrame" Opacity="1" IsVisible="True" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
-                    <StackLayout x:Name="OperationsStack" Orientation="Vertical" Padding="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                        <Label x:Name="OperationLabel" Margin="10,0,10,0" FontSize="{Binding LabelFontSize}" Text="{Binding OperationValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
-                        <Label x:Name="EqualsLabel" FontSize="{Binding LabelFontSize}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center">=</Label>
-                        <Label x:Name="AnswerLabel" FontSize="{Binding LabelFontSize}" Text="{Binding AnswerValue}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Center"></Label>
+                <StackLayout Margin="0,15,0,0" x:Name="TaskFrame" Opacity="1" IsVisible="True" Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0">
+                    <StackLayout x:Name="OperationsStack" Orientation="Vertical" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Label x:Name="OperationLabel" Margin="10,0,10,0" FontSize="{Binding LabelFontSize}" Text="{Binding OperationValue}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                        <Label x:Name="EqualsLabel" FontSize="{Binding LabelFontSize}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">=</Label>
+                        <Label x:Name="AnswerLabel" FontSize="{Binding LabelFontSize}" Text="{Binding AnswerValue}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center"></Label>
                     </StackLayout>
-                    <Grid x:Name="DigitButtonsGrid" VerticalOptions="EndAndExpand" BackgroundColor="#6699ff" RowSpacing="0" ColumnSpacing="0" Margin="20,0,20,0" Padding="-2,-2,-2,-2">
+                    <Grid x:Name="DigitButtonsGrid" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#6699ff" RowSpacing="0" ColumnSpacing="0" Margin="20,0,20,0" Padding="-2,-2,-2,-2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*"/>
