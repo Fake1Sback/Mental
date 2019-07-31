@@ -9,6 +9,7 @@ using Mental.ViewModels.PartialViewModels;
 using Mental.Services;
 using Mental.Models.DbModels;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Mental.ViewModels
 {
@@ -211,7 +212,7 @@ namespace Mental.ViewModels
                 {
                     using (var db = new ApplicationContext("mental.db"))
                     {
-                        int FavouritesCount = await db.FavouriteSchulteTableTaskOptions.CountAsync();
+                        int FavouritesCount = await db.FavouriteSchulteTableTaskOptions.Where(o => o.IsLatestTaskOption == false).CountAsync();
                         if (FavouritesCount >= 10)
                         {
                             InfoVisibility = true;
@@ -220,7 +221,9 @@ namespace Mental.ViewModels
                         }
                         else
                         {
-                            await db.FavouriteSchulteTableTaskOptions.AddAsync(SchulteTableTaskOptions.ToDbSchulteTableTaskOptions());
+                            DbSchulteTableTaskOptions options = SchulteTableTaskOptions.ToDbSchulteTableTaskOptions();
+                            options.IsLatestTaskOption = false;
+                            await db.FavouriteSchulteTableTaskOptions.AddAsync(options);
                             await db.SaveChangesAsync();
                         }
                     }

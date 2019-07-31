@@ -5722,31 +5722,25 @@ namespace Mental.Droid
 			public const int abc_vector_test = 2131296340;
 			
 			// aapt resource value: 0x7F010002
-			public const int access_time_white_18 = 2130771970;
+			public const int access_time_white_24 = 2130771970;
 			
 			// aapt resource value: 0x7F010003
-			public const int access_time_white_24 = 2130771971;
+			public const int access_time_white_36 = 2130771971;
 			
 			// aapt resource value: 0x7F010004
-			public const int access_time_white_36 = 2130771972;
+			public const int Adjust_48 = 2130771972;
 			
 			// aapt resource value: 0x7F010005
-			public const int Adjust_48 = 2130771973;
+			public const int arrow_downward_white_24 = 2130771973;
 			
 			// aapt resource value: 0x7F010006
-			public const int arrow_downward_white_24 = 2130771974;
+			public const int arrow_left_white_24 = 2130771974;
 			
 			// aapt resource value: 0x7F010007
-			public const int arrow_left_white_24 = 2130771975;
+			public const int arrow_right_white_24 = 2130771975;
 			
 			// aapt resource value: 0x7F010008
-			public const int arrow_right_white_24 = 2130771976;
-			
-			// aapt resource value: 0x7F010009
-			public const int arrow_upward_white_18 = 2130771977;
-			
-			// aapt resource value: 0x7F010010
-			public const int arrow_upward_white_24 = 2130771984;
+			public const int arrow_upward_white_24 = 2130771976;
 			
 			// aapt resource value: 0x7F090055
 			public const int avd_hide_password = 2131296341;
@@ -5754,53 +5748,35 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F090056
 			public const int avd_show_password = 2131296342;
 			
+			// aapt resource value: 0x7F010009
+			public const int Broken_Chain_2_24 = 2130771977;
+			
+			// aapt resource value: 0x7F010010
+			public const int Buttons_Amount_24 = 2130771984;
+			
 			// aapt resource value: 0x7F010011
-			public const int Broken_chain_18 = 2130771985;
+			public const int Chain_24 = 2130771985;
 			
 			// aapt resource value: 0x7F010012
-			public const int Broken_Chain_2_24 = 2130771986;
+			public const int circle_outline_white_24 = 2130771986;
 			
 			// aapt resource value: 0x7F010013
-			public const int Buttons_Amount_18 = 2130771987;
+			public const int clear_forever_white_24 = 2130771987;
 			
 			// aapt resource value: 0x7F010014
-			public const int Buttons_Amount_24 = 2130771988;
+			public const int clear_forever_white_36 = 2130771988;
 			
 			// aapt resource value: 0x7F010015
-			public const int Chain_18 = 2130771989;
+			public const int Color_by_Text_24 = 2130771989;
 			
 			// aapt resource value: 0x7F010016
-			public const int Chain_24 = 2130771990;
+			public const int date_range_white_24 = 2130771990;
 			
 			// aapt resource value: 0x7F010017
-			public const int circle_outline_white_18 = 2130771991;
+			public const int delete_white_24 = 2130771991;
 			
 			// aapt resource value: 0x7F010018
-			public const int circle_outline_white_24 = 2130771992;
-			
-			// aapt resource value: 0x7F010019
-			public const int clear_forever_white_24 = 2130771993;
-			
-			// aapt resource value: 0x7F010020
-			public const int clear_forever_white_36 = 2130772000;
-			
-			// aapt resource value: 0x7F010021
-			public const int Color_by_Text_18 = 2130772001;
-			
-			// aapt resource value: 0x7F010022
-			public const int Color_by_Text_24 = 2130772002;
-			
-			// aapt resource value: 0x7F010023
-			public const int date_range_white_18 = 2130772003;
-			
-			// aapt resource value: 0x7F010024
-			public const int date_range_white_24 = 2130772004;
-			
-			// aapt resource value: 0x7F010025
-			public const int delete_white_24 = 2130772005;
-			
-			// aapt resource value: 0x7F010026
-			public const int delete_white_36 = 2130772006;
+			public const int delete_white_36 = 2130771992;
 			
 			// aapt resource value: 0x7F090057
 			public const int design_bottom_navigation_item_background = 2131296343;
@@ -5820,50 +5796,38 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F09005C
 			public const int design_snackbar_background = 2131296348;
 			
+			// aapt resource value: 0x7F010019
+			public const int done_black_18 = 2130771993;
+			
+			// aapt resource value: 0x7F010020
+			public const int Easy_Mode_24 = 2130772000;
+			
+			// aapt resource value: 0x7F010021
+			public const int expand_less_white_48 = 2130772001;
+			
+			// aapt resource value: 0x7F010022
+			public const int expand_more_white_48 = 2130772002;
+			
+			// aapt resource value: 0x7F010023
+			public const int Favorite_48 = 2130772003;
+			
+			// aapt resource value: 0x7F010024
+			public const int Favourite_36 = 2130772004;
+			
+			// aapt resource value: 0x7F010025
+			public const int Find_One_24 = 2130772005;
+			
+			// aapt resource value: 0x7F010026
+			public const int flag_blue_36 = 2130772006;
+			
 			// aapt resource value: 0x7F010027
-			public const int done_black_18 = 2130772007;
+			public const int grid_on_white_24 = 2130772007;
 			
 			// aapt resource value: 0x7F010028
-			public const int Easy_Mode_18 = 2130772008;
+			public const int help_outline_white_24 = 2130772008;
 			
 			// aapt resource value: 0x7F010029
-			public const int Easy_Mode_24 = 2130772009;
-			
-			// aapt resource value: 0x7F010030
-			public const int expand_less_white_48 = 2130772016;
-			
-			// aapt resource value: 0x7F010031
-			public const int expand_more_white_48 = 2130772017;
-			
-			// aapt resource value: 0x7F010032
-			public const int Favorite_48 = 2130772018;
-			
-			// aapt resource value: 0x7F010033
-			public const int Favourite_36 = 2130772019;
-			
-			// aapt resource value: 0x7F010034
-			public const int Find_One_18 = 2130772020;
-			
-			// aapt resource value: 0x7F010035
-			public const int Find_One_24 = 2130772021;
-			
-			// aapt resource value: 0x7F010036
-			public const int flag_blue_36 = 2130772022;
-			
-			// aapt resource value: 0x7F010037
-			public const int grid_on_white_18 = 2130772023;
-			
-			// aapt resource value: 0x7F010038
-			public const int grid_on_white_24 = 2130772024;
-			
-			// aapt resource value: 0x7F010039
-			public const int help_outline_white_18 = 2130772025;
-			
-			// aapt resource value: 0x7F010040
-			public const int help_outline_white_24 = 2130772032;
-			
-			// aapt resource value: 0x7F010041
-			public const int home_white_36 = 2130772033;
+			public const int home_white_36 = 2130772009;
 			
 			// aapt resource value: 0x7F090055
 			public const int ic_audiotrack_dark = 2131296341;
@@ -6405,26 +6369,23 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F090105
 			public const int ic_vol_type_tv_light = 2131296517;
 			
-			// aapt resource value: 0x7F010042
-			public const int info_white_48 = 2130772034;
+			// aapt resource value: 0x7F010030
+			public const int info_white_48 = 2130772016;
 			
-			// aapt resource value: 0x7F010043
-			public const int info_white_nt_48 = 2130772035;
+			// aapt resource value: 0x7F010031
+			public const int info_white_nt_48 = 2130772017;
 			
-			// aapt resource value: 0x7F010044
-			public const int list_numbered_white_18 = 2130772036;
+			// aapt resource value: 0x7F010032
+			public const int list_numbered_white_24 = 2130772018;
 			
-			// aapt resource value: 0x7F010045
-			public const int list_numbered_white_24 = 2130772037;
+			// aapt resource value: 0x7F010033
+			public const int loadmore_white_24 = 2130772019;
 			
-			// aapt resource value: 0x7F010046
-			public const int loadmore_white_24 = 2130772038;
+			// aapt resource value: 0x7F010034
+			public const int loadmore_white_36 = 2130772020;
 			
-			// aapt resource value: 0x7F010047
-			public const int loadmore_white_36 = 2130772039;
-			
-			// aapt resource value: 0x7F010048
-			public const int MathOperations_200 = 2130772040;
+			// aapt resource value: 0x7F010035
+			public const int MathOperations_200 = 2130772021;
 			
 			// aapt resource value: 0x7F090106
 			public const int mr_button_connected_dark = 2131296518;
@@ -6531,56 +6492,47 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F09000C
 			public const int notify_panel_notification_icon_bg = 2131296268;
 			
+			// aapt resource value: 0x7F010036
+			public const int NumbersType = 2130772022;
+			
+			// aapt resource value: 0x7F010037
+			public const int outlined_flag_white_36 = 2130772023;
+			
+			// aapt resource value: 0x7F010038
+			public const int refresh_white_48 = 2130772024;
+			
+			// aapt resource value: 0x7F010039
+			public const int Restrictions_24 = 2130772025;
+			
+			// aapt resource value: 0x7F010040
+			public const int save_white_24 = 2130772032;
+			
+			// aapt resource value: 0x7F010041
+			public const int save_white_36 = 2130772033;
+			
+			// aapt resource value: 0x7F010042
+			public const int Schulte_Tables_200 = 2130772034;
+			
+			// aapt resource value: 0x7F010043
+			public const int settings_white_24 = 2130772035;
+			
+			// aapt resource value: 0x7F010044
+			public const int settings_white_36 = 2130772036;
+			
+			// aapt resource value: 0x7F010045
+			public const int Statistics_36 = 2130772037;
+			
+			// aapt resource value: 0x7F010046
+			public const int Statistics_48 = 2130772038;
+			
+			// aapt resource value: 0x7F010047
+			public const int statistics_blue_36 = 2130772039;
+			
+			// aapt resource value: 0x7F010048
+			public const int Stopwatch_24 = 2130772040;
+			
 			// aapt resource value: 0x7F010049
-			public const int NumbersType = 2130772041;
-			
-			// aapt resource value: 0x7F010050
-			public const int outlined_flag_white_36 = 2130772048;
-			
-			// aapt resource value: 0x7F010051
-			public const int refresh_white_48 = 2130772049;
-			
-			// aapt resource value: 0x7F010052
-			public const int Restrictions_18 = 2130772050;
-			
-			// aapt resource value: 0x7F010053
-			public const int Restrictions_24 = 2130772051;
-			
-			// aapt resource value: 0x7F010054
-			public const int save_white_24 = 2130772052;
-			
-			// aapt resource value: 0x7F010055
-			public const int save_white_36 = 2130772053;
-			
-			// aapt resource value: 0x7F010056
-			public const int Schulte_Tables_200 = 2130772054;
-			
-			// aapt resource value: 0x7F010057
-			public const int settings_white_24 = 2130772055;
-			
-			// aapt resource value: 0x7F010058
-			public const int settings_white_36 = 2130772056;
-			
-			// aapt resource value: 0x7F010059
-			public const int Statistics_36 = 2130772057;
-			
-			// aapt resource value: 0x7F010060
-			public const int Statistics_48 = 2130772064;
-			
-			// aapt resource value: 0x7F010061
-			public const int statistics_blue_36 = 2130772065;
-			
-			// aapt resource value: 0x7F010062
-			public const int statistics_white_18 = 2130772066;
-			
-			// aapt resource value: 0x7F010063
-			public const int Stopwatch_18 = 2130772067;
-			
-			// aapt resource value: 0x7F010064
-			public const int Stopwatch_24 = 2130772068;
-			
-			// aapt resource value: 0x7F010065
-			public const int Stroop_Ver2_200 = 2130772069;
+			public const int Stroop_Ver2_200 = 2130772041;
 			
 			// aapt resource value: 0x7F09006F
 			public const int tooltip_frame_dark = 2131296367;
@@ -6588,11 +6540,8 @@ namespace Mental.Droid
 			// aapt resource value: 0x7F090070
 			public const int tooltip_frame_light = 2131296368;
 			
-			// aapt resource value: 0x7F010066
-			public const int True_False_24 = 2130772070;
-			
-			// aapt resource value: 0x7F010067
-			public const int True_or_False_18 = 2130772071;
+			// aapt resource value: 0x7F010050
+			public const int True_False_24 = 2130772048;
 			
 			static Drawable()
 			{

@@ -11,15 +11,12 @@ namespace Mental.Models.DbModels
         private string databasePath;
 
         public DbSet<DbMathTask> mathTasks { get; set; }
-        public DbSet<LatestDbMathTaskOptions> LastMathTaskOptions { get; set; }
         public DbSet<DbMathTaskOptions> FavouriteMathTaskOptions { get; set; }
         
         public DbSet<DbSchulteTableTask> SchulteTableTasks { get; set; }
-        public DbSet<LatestDbSchulteTableTaskOptions> LastSchulteTableTaskOptions { get; set; }
         public DbSet<DbSchulteTableTaskOptions> FavouriteSchulteTableTaskOptions { get; set; }
 
         public DbSet<DbStroopTask> StroopTasks { get; set; }
-        public DbSet<LatestDbStroopTaskOptions> LastStroopTaskOptions { get; set; }
         public DbSet<DbStroopTaskOptions> FavouriteStroopTaskOptions { get; set; }
 
         public ApplicationContext(string _databasePath)

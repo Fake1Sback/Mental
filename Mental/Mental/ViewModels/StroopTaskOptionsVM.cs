@@ -8,6 +8,7 @@ using Mental.Views;
 using Mental.Services;
 using Mental.Models.DbModels;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Mental.ViewModels
 {
@@ -277,7 +278,7 @@ namespace Mental.ViewModels
                 {
                     using (var db = new ApplicationContext("mental.db"))
                     {
-                        int FavouritesCount = await db.FavouriteStroopTaskOptions.CountAsync();
+                        int FavouritesCount = await db.FavouriteStroopTaskOptions.Where(o => o.IsLatestTaskOption == false).CountAsync();
                         if (FavouritesCount >= 10)
                         {
                             InfoVisibility = true;
@@ -286,7 +287,9 @@ namespace Mental.ViewModels
                         }
                         else
                         {
-                            await db.FavouriteStroopTaskOptions.AddAsync(StroopTaskOptions.ToDbStroopTaskOptions());
+                            DbStroopTaskOptions options = StroopTaskOptions.ToDbStroopTaskOptions();
+                            options.IsLatestTaskOption = false;
+                            await db.FavouriteStroopTaskOptions.AddAsync(options);
                             await db.SaveChangesAsync();
                         }
                     }

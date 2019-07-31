@@ -191,7 +191,7 @@ namespace Mental.ViewModels
             DbMathTaskOptions[] dbMathTaskOptions;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbMathTaskOptions = await db.FavouriteMathTaskOptions.ToArrayAsync();
+                dbMathTaskOptions = await db.FavouriteMathTaskOptions.Where(o => o.IsLatestTaskOption == false).ToArrayAsync();
             }
 
             if (dbMathTaskOptions != null)
@@ -209,7 +209,7 @@ namespace Mental.ViewModels
             DbSchulteTableTaskOptions[] dbSchulteTableTaskOptions;
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbSchulteTableTaskOptions = await db.FavouriteSchulteTableTaskOptions.ToArrayAsync();
+                dbSchulteTableTaskOptions = await db.FavouriteSchulteTableTaskOptions.Where(o => o.IsLatestTaskOption == false).ToArrayAsync();
             }
 
             if (dbSchulteTableTaskOptions != null)
@@ -228,7 +228,7 @@ namespace Mental.ViewModels
 
             using (var db = new ApplicationContext("mental.db"))
             {
-                dbStroopTaskOptions = await db.FavouriteStroopTaskOptions.ToArrayAsync();
+                dbStroopTaskOptions = await db.FavouriteStroopTaskOptions.Where(o => o.IsLatestTaskOption == false).ToArrayAsync();
             }
 
             if (dbStroopTaskOptions != null)

@@ -491,7 +491,7 @@ namespace Mental.ViewModels
                 {
                     using(var db = new ApplicationContext("mental.db"))
                     {
-                        int FavouritesCount = await db.FavouriteMathTaskOptions.CountAsync();
+                        int FavouritesCount = await db.FavouriteMathTaskOptions.Where(o => o.IsLatestTaskOption == false).CountAsync();
                         if (FavouritesCount >= 10)
                         {
                             InfoVisibility = true;
@@ -500,7 +500,9 @@ namespace Mental.ViewModels
                         }
                         else
                         {
-                            await db.FavouriteMathTaskOptions.AddAsync(mathTasksOptions.ToDbMathTaskOptions());
+                            DbMathTaskOptions options = mathTasksOptions.ToDbMathTaskOptions();
+                            options.IsLatestTaskOption = false;
+                            await db.FavouriteMathTaskOptions.AddAsync(options);
                             await db.SaveChangesAsync();
                         }
                     }

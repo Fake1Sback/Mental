@@ -14,5 +14,7 @@ namespace Mental.Models.DbModels
         public int AmountOfMinutes { get; set; }
         public int AmountOfTasks { get; set; }
         public int AmountOfSecondsForAnswer { get; set; }
+
+        public bool IsLatestTaskOption { get; set; }
     }
 }

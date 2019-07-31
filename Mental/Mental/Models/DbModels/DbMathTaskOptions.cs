@@ -27,5 +27,7 @@ namespace Mental.Models.DbModels
 
         public byte TaskType { get; set; }
         public byte TimeOptions { get; set; }
+
+        public bool IsLatestTaskOption { get; set; }
     }
 }

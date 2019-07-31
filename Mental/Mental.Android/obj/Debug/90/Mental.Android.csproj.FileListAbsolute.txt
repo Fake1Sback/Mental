@@ -900,3 +900,8 @@ D:\Mental\Mental\Mental.Android\bin\Debug\Mental.Mental.apk
 D:\Mental\Mental\Mental.Android\bin\Debug\Mental.Mental-Signed.apk
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\bin\Mental.Mental.apk
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\mental\mental\R.java
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable\done_black_18.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-hdpi\done_black_18.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xhdpi\done_black_18.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxhdpi\done_black_18.png
+D:\Mental\Mental\Mental.Android\obj\Debug\90\res\drawable-xxxhdpi\done_black_18.png
