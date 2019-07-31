@@ -2,19 +2,6 @@
   "version": 3,
   "targets": {
     "UAP,Version=v10.0.16299": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -921,8 +908,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -933,19 +919,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-arm": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -1941,8 +1914,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -1953,19 +1925,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-arm-aot": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -2962,8 +2921,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -2974,19 +2932,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-arm64-aot": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -3793,8 +3738,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -3805,19 +3749,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-x64": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -4813,8 +4744,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -4825,19 +4755,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-x64-aot": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -5834,8 +5751,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -5846,19 +5762,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-x86": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -6854,8 +6757,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -6866,19 +6768,6 @@
       }
     },
     "UAP,Version=v10.0.16299/win10-x86-aot": {
-      "CarouselView/7.0.3.1": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "2.0.0",
-          "Xamarin.Forms": "2.5.0.122203"
-        },
-        "compile": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/CarouselView.dll": {}
-        }
-      },
       "Microcharts/0.8.5-pre": {
         "type": "package",
         "dependencies": {
@@ -7875,8 +7764,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.0.0-preview6.19304.10",
           "System.Buffers": "4.5.0",
           "Xamarin.Essentials": "1.1.0",
-          "Xamarin.Forms": "4.0.0.425677",
-          "Xamarin.Forms.CarouselView": "2.3.0-pre2"
+          "Xamarin.Forms": "4.0.0.425677"
         },
         "compile": {
           "bin/placeholder/Mental.dll": {}
@@ -7888,20 +7776,6 @@
     }
   },
   "libraries": {
-    "CarouselView/7.0.3.1": {
-      "sha512": "ajh14LBzz4A+UVNbORQaY07F3vRvIyIowYsGAv7R1XKj+OXxYPZnbbBm8xlGgZ0o7r3DnbrA4twiUFiU2KIe7A==",
-      "type": "package",
-      "path": "carouselview/7.0.3.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "carouselview.7.0.3.1.nupkg.sha512",
-        "carouselview.nuspec",
-        "lib/monoandroid80/CarouselView.dll",
-        "lib/netstandard2.0/CarouselView.dll",
-        "lib/xamarinios10/CarouselView.dll"
-      ]
-    },
     "Microcharts/0.8.5-pre": {
       "sha512": "zPRK+ZtublASZneu97T8ZeyVEWZQnOo0RZMvWyu7w/ZmN6fDl2NDdQP0IdW4Y4PVfOrLIBQp+2/EkQs8YkFDtQ==",
       "type": "package",
@@ -12796,7 +12670,6 @@
   },
   "projectFileDependencyGroups": {
     "UAP,Version=v10.0.16299": [
-      "CarouselView >= 7.0.3.1",
       "Mental >= 1.0.0",
       "Microcharts >= 0.8.5-pre",
       "Microcharts.Forms >= 0.8.5-pre",
@@ -12852,10 +12725,6 @@
     "frameworks": {
       "uap10.0.16299": {
         "dependencies": {
-          "CarouselView": {
-            "target": "Package",
-            "version": "[7.0.3.1, )"
-          },
           "Microcharts": {
             "target": "Package",
             "version": "[0.8.5-pre, )"

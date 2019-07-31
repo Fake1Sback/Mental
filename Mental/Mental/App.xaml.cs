@@ -196,7 +196,7 @@ namespace Mental
             if (StoredStroopTaskOptions == null)
                 LoadLatestStroopTaskOptions();
 
-            MainPage = new NavigationPage(new StartingPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
+            MainPage = new NavigationPage(new AltStartingPage()) { BarBackgroundColor = Color.FromHex("#6699ff") };
         }
 
         protected override void OnStart()

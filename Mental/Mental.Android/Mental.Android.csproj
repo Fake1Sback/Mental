@@ -60,9 +60,6 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CarouselView">
-      <Version>7.0.3.1</Version>
-    </PackageReference>
     <PackageReference Include="Microcharts">
       <Version>0.8.5-pre</Version>
     </PackageReference>
@@ -90,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidDbPath.cs" />
-    <Compile Include="CustomRenderers\CustomViewCellRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

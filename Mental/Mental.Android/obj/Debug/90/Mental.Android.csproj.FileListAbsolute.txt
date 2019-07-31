@@ -300,7 +300,6 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\R.txt
 D:\Mental\Mental\Mental.Android\obj\Debug\90\uploadflags.txt
 D:\Mental\Mental\Mental.Android\obj\Debug\90\resolvedassemblies.hash
 D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\Mental.Android.dll
-D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\CarouselView.dll
 D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\FormsViewGroup.dll
 D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\Java.Interop.dll
 D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\Mental.dll
@@ -450,7 +449,6 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\Mono.Security.pdb
 D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\Mental.dll.mdb
 D:\Mental\Mental\Mental.Android\obj\Debug\90\linksrc\Xamarin.Essentials.dll.mdb
 D:\Mental\Mental\Mental.Android\obj\Debug\90\link.flag
-D:\Mental\Mental\Mental.Android\obj\Debug\90\android\assets\CarouselView.dll
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\assets\FormsViewGroup.dll
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\assets\FormsViewGroup.pdb
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\assets\Java.Interop.dll
@@ -680,8 +678,6 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md58432a647068b097f9637
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md58432a647068b097f9637064b8985a5e0\TabbedPageRenderer.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md58432a647068b097f9637064b8985a5e0\ViewRenderer_2.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\mono\android\support\v4\os\CancellationSignal_OnCancelListenerImplementor.java
-D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md558dcbc47a9a5c04dd49a555e57057227\CarouselLayoutRenderer.java
-D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md558dcbc47a9a5c04dd49a555e57057227\TabIndicatorRenderer.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\mono\android\support\v4\media\session\MediaSessionCompat_OnActiveChangeListenerImplementor.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\mono\android\support\v4\content\Loader_OnLoadCanceledListenerImplementor.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\mono\android\support\v4\content\Loader_OnLoadCompleteListenerImplementor.java
@@ -885,7 +881,6 @@ D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md5e4c2749da5edf4a9690b
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md5e4c2749da5edf4a9690b7fedcbdb53f0\SKGLViewRenderer.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\md5e4c2749da5edf4a9690b7fedcbdb53f0\SKGLViewRendererBase_2.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\bin\packaged_resources
-D:\Mental\Mental\Mental.Android\obj\Debug\90\android\src\com\companyname\mental\R.java
 D:\Mental\Mental\Mental.Android\obj\Debug\90\android\bin\classes.dex
 D:\Mental\Mental\Mental.Android\obj\Debug\90\stamp\_BuildAdditionalResourcesCache.stamp
 D:\Mental\Mental\Mental.Android\obj\Debug\90\stamp\_CleanIntermediateIfNuGetsChange.stamp

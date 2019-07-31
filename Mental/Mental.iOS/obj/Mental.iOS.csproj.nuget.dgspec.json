@@ -42,10 +42,6 @@
       "frameworks": {
         "xamarinios10": {
           "dependencies": {
-            "CarouselView": {
-              "target": "Package",
-              "version": "[7.0.3.1, )"
-            },
             "Microcharts": {
               "target": "Package",
               "version": "[0.8.5-pre, )"
@@ -157,10 +153,6 @@
             "Xamarin.Forms": {
               "target": "Package",
               "version": "[4.0.0.425677, )"
-            },
-            "Xamarin.Forms.CarouselView": {
-              "target": "Package",
-              "version": "[2.3.0-pre2, )"
             }
           },
           "imports": [

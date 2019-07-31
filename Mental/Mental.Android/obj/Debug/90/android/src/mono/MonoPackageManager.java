@@ -111,7 +111,6 @@ class MonoPackageManager_Resources {
 	public static final String[] Assemblies = new String[]{
 		/* We need to ensure that "Mental.Android.dll" comes first in this list. */
 		"Mental.Android.dll",
-		"CarouselView.dll",
 		"FormsViewGroup.dll",
 		"Mental.dll",
 		"Microcharts.dll",
