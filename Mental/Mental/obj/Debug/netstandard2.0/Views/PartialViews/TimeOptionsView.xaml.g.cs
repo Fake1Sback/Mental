@@ -17,10 +17,10 @@ namespace Mental.Views.PartialViews {
     public partial class TimeOptionsView : global::Xamarin.Forms.ContentView {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button TimeOptionsInfoButton;
+        private global::FFImageLoading.Forms.CachedImage TimeOptionsInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button TimeOptionsExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage TimeOptionsExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame TimeOptionsFrame;
@@ -61,8 +61,8 @@ namespace Mental.Views.PartialViews {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(TimeOptionsView));
-            TimeOptionsInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "TimeOptionsInfoButton");
-            TimeOptionsExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "TimeOptionsExpandMoreButton");
+            TimeOptionsInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "TimeOptionsInfoButton");
+            TimeOptionsExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "TimeOptionsExpandMoreButton");
             TimeOptionsFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "TimeOptionsFrame");
             CountDownTimeOptionButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "CountDownTimeOptionButton");
             LimitedTasksOptionButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "LimitedTasksOptionButton");

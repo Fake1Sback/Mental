@@ -46,9 +46,17 @@
                 <StackLayout>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="OperationsInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="OperationsInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimageforms:CachedImage x:Name="OperationsInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="OperationsInfo"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Operations</Label>
-                            <Button x:Name="OperationsExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="OperationsExpandMoreButton_Clicked"></Button>
+                            <ffimageforms:CachedImage x:Name="OperationsExpandMoreButton" Style="{StaticResource ExpandButton}" Source="expand_more_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OperationsExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="OperationsFrame" Style="{StaticResource OptionsContainerFrame}">
@@ -61,9 +69,17 @@
                     </Frame>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="ChainLengthInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="ChainLengthInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimageforms:CachedImage  x:Name="ChainLengthInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="ChainLengthInfo"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Chain Length</Label>
-                            <Button x:Name="ChainLengthExpandMoreButton" Style="{StaticResource ExpandButton}"  Image="expand_more_white_48.png" Clicked="ChainLengthExpandMoreButton_Clicked"></Button>
+                            <ffimageforms:CachedImage x:Name="ChainLengthExpandMoreButton" Style="{StaticResource ExpandButton}"  Source="expand_more_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ChainLengthExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="ChainLengthFrame" Style="{StaticResource OptionsContainerFrame}">
@@ -80,9 +96,17 @@
                     </Frame>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="GeneratedValuesInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="GeneratedValuesInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimageforms:CachedImage x:Name="GeneratedValuesInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="GeneratedValuesInfo"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Generated Values</Label>
-                            <Button x:Name="GeneratedValueExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="GeneratedValueExpandMoreButton_Clicked"></Button>
+                            <ffimageforms:CachedImage x:Name="GeneratedValueExpandMoreButton" Style="{StaticResource ExpandButton}" Source="expand_more_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="GeneratedValueExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="GeneratedValuesFrame" Style="{StaticResource OptionsContainerFrame}">
@@ -102,9 +126,17 @@
                     <PartialViews:RestrictionsView ></PartialViews:RestrictionsView>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="NumbersTypeInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="NumbersTypeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimageforms:CachedImage x:Name="NumbersTypeInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="NumbersTypeInfo"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Numbers type</Label>
-                            <Button x:Name="NumbersTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="NumbersTypeExpandMoreButton_Clicked"></Button>
+                            <ffimageforms:CachedImage x:Name="NumbersTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Source="expand_more_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="NumbersTypeExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="NumbersTypeFrame" Style="{StaticResource OptionsContainerFrame}">
@@ -120,9 +152,17 @@
                     </Frame>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="TaskTypeInfoButton" Command="{Binding ShowInfoCommand}" CommandParameter="MathTaskTypeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimageforms:CachedImage x:Name="TaskTypeInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="MathTaskTypeInfo"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Task type</Label>
-                            <Button x:Name="TaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="TaskTypeExpandMoreButton_Clicked"></Button>
+                            <ffimageforms:CachedImage x:Name="TaskTypeExpandMoreButton" Style="{StaticResource ExpandButton}" Source="expand_more_white_48.png">
+                                <ffimageforms:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TaskTypeExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimageforms:CachedImage.GestureRecognizers>
+                            </ffimageforms:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="TaskTypeFrame" Style="{StaticResource OptionsContainerFrame}">

@@ -17,10 +17,10 @@ namespace Mental.Views {
     public partial class SchulteTableTaskOptionsPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button GridSizeInfoButton;
+        private global::FFImageLoading.Forms.CachedImage GridSizeInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button GridSizeExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage GridSizeExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame GridSizeFrame;
@@ -29,10 +29,10 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Slider SchulteTableSliderValue;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button EasyModeInfoButton;
+        private global::FFImageLoading.Forms.CachedImage EasyModeInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button ModeExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage ModeExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame ModeFrame;
@@ -52,12 +52,12 @@ namespace Mental.Views {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(SchulteTableTaskOptionsPage));
-            GridSizeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "GridSizeInfoButton");
-            GridSizeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "GridSizeExpandMoreButton");
+            GridSizeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "GridSizeInfoButton");
+            GridSizeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "GridSizeExpandMoreButton");
             GridSizeFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "GridSizeFrame");
             SchulteTableSliderValue = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Slider>(this, "SchulteTableSliderValue");
-            EasyModeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "EasyModeInfoButton");
-            ModeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "ModeExpandMoreButton");
+            EasyModeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "EasyModeInfoButton");
+            ModeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "ModeExpandMoreButton");
             ModeFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "ModeFrame");
             StartButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "StartButton");
             InfoBackgroundFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "InfoBackgroundFrame");

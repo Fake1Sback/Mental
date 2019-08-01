@@ -20,10 +20,10 @@ namespace Mental.Views.PartialViews {
         private global::Xamarin.Forms.StackLayout RestrictionsLayout;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button RestrictionsInfoButton;
+        private global::FFImageLoading.Forms.CachedImage RestrictionsInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button RestrictionsExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage RestrictionsExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame RestrictionsFrame;
@@ -32,8 +32,8 @@ namespace Mental.Views.PartialViews {
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(RestrictionsView));
             RestrictionsLayout = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.StackLayout>(this, "RestrictionsLayout");
-            RestrictionsInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "RestrictionsInfoButton");
-            RestrictionsExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "RestrictionsExpandMoreButton");
+            RestrictionsInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "RestrictionsInfoButton");
+            RestrictionsExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "RestrictionsExpandMoreButton");
             RestrictionsFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "RestrictionsFrame");
         }
     }

@@ -5,7 +5,7 @@
              x:Class="Mental.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Style x:Key="InfoButton" TargetType="Button">
+            <Style x:Key="InfoButton" TargetType="ffimage:CachedImage">
                 <Setter Property="Margin" Value="7,0,7,0"></Setter>
                 <Setter Property="HeightRequest" Value="50"></Setter>
                 <Setter Property="WidthRequest" Value="50"></Setter>
@@ -13,14 +13,12 @@
                 <Setter Property="HorizontalOptions" Value="Start"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
             </Style>
-            <Style x:Key="ExpandButton" TargetType="Button">
+            <Style x:Key="ExpandButton" TargetType="ffimage:CachedImage">
                 <Setter Property="Margin" Value="7,-2,7,0"></Setter>
                 <Setter Property="HeightRequest" Value="40"></Setter>
                 <Setter Property="WidthRequest" Value="40"></Setter>
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="HorizontalOptions" Value="End"></Setter>
-                <Setter Property="TextColor" Value="White"></Setter>
-                <Setter Property="FontSize" Value="20"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
             </Style>
             <Style x:Key="LabelFrame" TargetType="Frame">

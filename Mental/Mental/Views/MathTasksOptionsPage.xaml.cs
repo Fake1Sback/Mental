@@ -9,6 +9,7 @@ using Xamarin.Forms.Xaml;
 using Mental.ViewModels;
 using Mental.Models;
 using System.Diagnostics;
+using FFImageLoading.Forms;
 
 namespace Mental.Views
 {
@@ -50,6 +51,7 @@ namespace Mental.Views
         private void TaskTypeExpandMoreButton_Clicked(object sender, EventArgs e)
         {
             TaskTypeFrame.IsVisible = !TaskTypeFrame.IsVisible;
-        }    
+        }
+
     }
 }

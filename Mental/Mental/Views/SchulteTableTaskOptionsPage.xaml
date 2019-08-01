@@ -14,9 +14,17 @@
                 <StackLayout>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="GridSizeInfoButton"  Command="{Binding ShowInfoCommand}" CommandParameter="GridSizeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimage:CachedImage x:Name="GridSizeInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimage:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="GridSizeInfo"></TapGestureRecognizer>
+                                </ffimage:CachedImage.GestureRecognizers>
+                            </ffimage:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Grid Options</Label>
-                            <Button x:Name="GridSizeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="GridSizeExpandMoreButton_Clicked"></Button>
+                            <ffimage:CachedImage x:Name="GridSizeExpandMoreButton" Style="{StaticResource ExpandButton}" Source="expand_more_white_48.png">
+                                <ffimage:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="GridSizeExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimage:CachedImage.GestureRecognizers>
+                            </ffimage:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="GridSizeFrame" Style="{StaticResource OptionsContainerFrame}">
@@ -28,9 +36,17 @@
                     </Frame>
                     <Frame Style="{StaticResource LabelFrame}">
                         <StackLayout Orientation="Horizontal">
-                            <Button x:Name="EasyModeInfoButton"  Command="{Binding ShowInfoCommand}" CommandParameter="EasyModeInfo" Style="{StaticResource InfoButton}" Image="info_white_48.png"></Button>
+                            <ffimage:CachedImage x:Name="EasyModeInfoButton" Style="{StaticResource InfoButton}" Source="info_white_48.png">
+                                <ffimage:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ShowInfoCommand}" CommandParameter="EasyModeInfo"></TapGestureRecognizer>
+                                </ffimage:CachedImage.GestureRecognizers>
+                            </ffimage:CachedImage>
                             <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="Center" HeightRequest="40"  HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20">Mode</Label>
-                            <Button x:Name="ModeExpandMoreButton" Style="{StaticResource ExpandButton}" Image="expand_more_white_48.png" Clicked="ModeExpandMoreButton_Clicked"></Button>
+                            <ffimage:CachedImage x:Name="ModeExpandMoreButton" Style="{StaticResource ExpandButton}" Source="expand_more_white_48.png">
+                                <ffimage:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ModeExpandMoreButton_Clicked"></TapGestureRecognizer>
+                                </ffimage:CachedImage.GestureRecognizers>
+                            </ffimage:CachedImage>
                         </StackLayout>
                     </Frame>
                     <Frame x:Name="ModeFrame" Style="{StaticResource OptionsContainerFrame}">

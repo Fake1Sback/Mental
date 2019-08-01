@@ -35,5 +35,6 @@ namespace Mental.Views
         {
             StroopTaskTypeFrame.IsVisible = !StroopTaskTypeFrame.IsVisible;
         }
+
     }
 }

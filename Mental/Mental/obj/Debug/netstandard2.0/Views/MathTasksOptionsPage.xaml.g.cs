@@ -17,10 +17,10 @@ namespace Mental.Views {
     public partial class MathTasksOptionsPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button OperationsInfoButton;
+        private global::FFImageLoading.Forms.CachedImage OperationsInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button OperationsExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage OperationsExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame OperationsFrame;
@@ -38,10 +38,10 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Button DivideButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button ChainLengthInfoButton;
+        private global::FFImageLoading.Forms.CachedImage ChainLengthInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button ChainLengthExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage ChainLengthExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame ChainLengthFrame;
@@ -56,10 +56,10 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Slider MaximumChainLengthValueSlider;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button GeneratedValuesInfoButton;
+        private global::FFImageLoading.Forms.CachedImage GeneratedValuesInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button GeneratedValueExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage GeneratedValueExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame GeneratedValuesFrame;
@@ -71,10 +71,10 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Editor MaxValueEditor;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button NumbersTypeInfoButton;
+        private global::FFImageLoading.Forms.CachedImage NumbersTypeInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button NumbersTypeExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage NumbersTypeExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame NumbersTypeFrame;
@@ -95,10 +95,10 @@ namespace Mental.Views {
         private global::Xamarin.Forms.Slider DigitsAfterDotSignSlider;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button TaskTypeInfoButton;
+        private global::FFImageLoading.Forms.CachedImage TaskTypeInfoButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
-        private global::Xamarin.Forms.Button TaskTypeExpandMoreButton;
+        private global::FFImageLoading.Forms.CachedImage TaskTypeExpandMoreButton;
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private global::Xamarin.Forms.Frame TaskTypeFrame;
@@ -124,34 +124,34 @@ namespace Mental.Views {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]
         private void InitializeComponent() {
             global::Xamarin.Forms.Xaml.Extensions.LoadFromXaml(this, typeof(MathTasksOptionsPage));
-            OperationsInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "OperationsInfoButton");
-            OperationsExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "OperationsExpandMoreButton");
+            OperationsInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "OperationsInfoButton");
+            OperationsExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "OperationsExpandMoreButton");
             OperationsFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "OperationsFrame");
             PlusButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "PlusButton");
             MinusButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "MinusButton");
             MultiplyButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "MultiplyButton");
             DivideButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "DivideButton");
-            ChainLengthInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "ChainLengthInfoButton");
-            ChainLengthExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "ChainLengthExpandMoreButton");
+            ChainLengthInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "ChainLengthInfoButton");
+            ChainLengthExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "ChainLengthExpandMoreButton");
             ChainLengthFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "ChainLengthFrame");
             FixedChainLengthButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "FixedChainLengthButton");
             MaximumChainLengthValueLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "MaximumChainLengthValueLabel");
             MaximumChainLengthValueSlider = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Slider>(this, "MaximumChainLengthValueSlider");
-            GeneratedValuesInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "GeneratedValuesInfoButton");
-            GeneratedValueExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "GeneratedValueExpandMoreButton");
+            GeneratedValuesInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "GeneratedValuesInfoButton");
+            GeneratedValueExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "GeneratedValueExpandMoreButton");
             GeneratedValuesFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "GeneratedValuesFrame");
             MinValueEditor = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Editor>(this, "MinValueEditor");
             MaxValueEditor = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Editor>(this, "MaxValueEditor");
-            NumbersTypeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "NumbersTypeInfoButton");
-            NumbersTypeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "NumbersTypeExpandMoreButton");
+            NumbersTypeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "NumbersTypeInfoButton");
+            NumbersTypeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "NumbersTypeExpandMoreButton");
             NumbersTypeFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "NumbersTypeFrame");
             IntegerNumberTypeButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "IntegerNumberTypeButton");
             FractionalNumberTypeButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "FractionalNumberTypeButton");
             FractionalNumbersOptions = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.StackLayout>(this, "FractionalNumbersOptions");
             DigitsAfterDotSignLabel = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Label>(this, "DigitsAfterDotSignLabel");
             DigitsAfterDotSignSlider = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Slider>(this, "DigitsAfterDotSignSlider");
-            TaskTypeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "TaskTypeInfoButton");
-            TaskTypeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "TaskTypeExpandMoreButton");
+            TaskTypeInfoButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "TaskTypeInfoButton");
+            TaskTypeExpandMoreButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::FFImageLoading.Forms.CachedImage>(this, "TaskTypeExpandMoreButton");
             TaskTypeFrame = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Frame>(this, "TaskTypeFrame");
             CountResultButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "CountResultButton");
             CountVariableButton = global::Xamarin.Forms.NameScopeExtensions.FindByName<global::Xamarin.Forms.Button>(this, "CountVariableButton");
