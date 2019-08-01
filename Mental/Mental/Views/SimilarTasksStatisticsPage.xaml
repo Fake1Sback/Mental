@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
-             xmlns:custom="clr-namespace:Mental.CustomControls"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.SimilarTasksStatisticsPage"
              Title="Similar Tasks Statistics">
     <ContentPage.ToolbarItems>
@@ -27,7 +27,7 @@
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
             </Style>
-            <Style x:Key="TopFrameImage" TargetType="Image">
+            <Style x:Key="TopFrameImage" TargetType="ffimage:CachedImage">
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
                 <!--<Setter Property="HeightRequest" Value="30"></Setter>
                 <Setter Property="WidthRequest" Value="30"></Setter>-->
@@ -63,22 +63,22 @@
                     <StackLayout Orientation="Vertical" Padding="0" Margin="0,3,0,3">
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0">
                             <Label Margin="2,0,0,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameOperationsString}" FontSize="14" FontAttributes="Bold"></Label>
-                            <Image Style="{StaticResource TopFrameImage}" Source="arrow_downward_white_24.png"></Image>
+                            <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="arrow_downward_white_24.png"></ffimage:CachedImage>
                             <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameMinValue}"></Label>
-                            <Image Style="{StaticResource TopFrameImage}" Source="arrow_upward_white_24.png"></Image>
+                            <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="arrow_upward_white_24.png"></ffimage:CachedImage>
                             <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameMaxValue}"></Label>
-                            <Image Style="{StaticResource TopFrameImage}" Source="help_outline_white_24.png"></Image>
+                            <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="help_outline_white_24.png"></ffimage:CachedImage>
                             <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameTaskTypeString}" ></Label>
-                            <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameTimeParametersImgSrc}"></Image>
+                            <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameTimeParametersImgSrc}"></ffimage:CachedImage>
                             <Label Margin="0,0,2,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameTimeParameters}"></Label>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,-7,0,0">
-                            <Image Margin="2,0,0,0" Style="{StaticResource TopFrameImage}" Source="NumbersType.png"></Image>
+                            <ffimage:CachedImage Margin="2,0,0,0" Style="{StaticResource TopFrameImage}" Source="NumbersType.png"></ffimage:CachedImage>
                             <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameNumbersType}"></Label>
                             <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameDigitsAfterDotSign}" IsVisible="{Binding TopFrameDigitsAfterDotSignVisibility}"></Label>
-                            <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameChainLengthImgSrc}"></Image>
+                            <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameChainLengthImgSrc}"></ffimage:CachedImage>
                             <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameMaxChainLength}"></Label>
-                            <Image Margin="0,0,0,2" Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameRestrictionsImgSrc}"></Image>
+                            <ffimage:CachedImage Margin="0,0,0,2" Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameRestrictionsImgSrc}"></ffimage:CachedImage>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
@@ -96,7 +96,7 @@
                                     <Label Text="{Binding CorrentAnswers}" TextColor="Green" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
                                     <Label Text=" / " FontSize="18" VerticalOptions="Center" TextColor="White" HorizontalOptions="StartAndExpand"></Label>
                                     <Label Text="{Binding WrongAnswers}" TextColor="Red" FontSize="18" VerticalOptions="Center" HorizontalOptions="StartAndExpand"></Label>
-                                    <Image Source="date_range_white_24.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Image>
+                                    <ffimage:CachedImage Source="date_range_white_24.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></ffimage:CachedImage>
                                     <Label Text="{Binding DateTimeString}" FontSize="18" TextColor="White" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand"></Label>
                                 </StackLayout>
                             </Frame>

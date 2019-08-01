@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.StroopTaskGeneralStatisticsPage"
              Title="Stroop Tasks General Stats">
     <ContentPage.ToolbarItems>
@@ -18,7 +19,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             </Style>
-            <Style x:Key="ListViewItemImage" TargetType="Image">
+            <Style x:Key="ListViewItemImage" TargetType="ffimage:CachedImage">
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
             </Style>
@@ -106,18 +107,18 @@
                                 <Frame BackgroundColor="{Binding FrameBackgroundColor}" CornerRadius="25" Padding="0" BorderColor="#6699ff">
                                     <StackLayout Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center" Margin="15,5,15,5">
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-                                            <Image Margin="5,0,0,0" Style="{StaticResource ListViewItemImage}" Source="Buttons_Amount_24.png"></Image>
+                                            <ffimage:CachedImage Margin="5,0,0,0" Style="{StaticResource ListViewItemImage}" Source="Buttons_Amount_24.png"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding AmountOfButtons}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="{Binding TaskTypeImgSrc}"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" Source="{Binding TaskTypeImgSrc}"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TaskTypeString}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></ffimage:CachedImage>
                                             <Label Margin="0,0,5,0" Style="{StaticResource ListViewItemLabel}" Text="{Binding TimeOptionString}"></Label>
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,-5,0,10">
                                             <Label Margin="5,0,5,0" Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding CorrectAnswers}" TextColor="Green"></Label>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="/"></Label>
                                             <Label Margin="5,0,5,0" Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding WrongAnswers}" TextColor="Red"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_24.png"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_24.png"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding DateTimeString}"></Label>
                                         </StackLayout>
                                     </StackLayout>

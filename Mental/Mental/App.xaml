@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -70,7 +71,7 @@
                 <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
                 <Setter Property="FontSize" Value="23"></Setter>
             </Style>
-            <Style x:Key="AfterFrameImage" TargetType="Image">
+            <Style x:Key="AfterFrameImage" TargetType="ffimage:CachedImage">
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="HorizontalOptions" Value="End"></Setter>
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>

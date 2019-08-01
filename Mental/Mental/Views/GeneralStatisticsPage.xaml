@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:ffimageforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.GeneralStatisticsPage"
              Title="Math Tasks General Stats">
     <ContentPage.ToolbarItems>
@@ -18,7 +19,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             </Style>
-            <Style x:Key="ListViewItemImage" TargetType="Image">
+            <Style x:Key="ListViewItemImage" TargetType="ffimageforms:CachedImage">
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
             </Style>
@@ -133,27 +134,27 @@
                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Margin="15,5,15,5">
                                         <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding Operations}" FontSize="18" FontAttributes="Bold"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_24.png" Rotation="180"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_24.png" Rotation="180"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding MinValue}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_24.png"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" Source="arrow_upward_white_24.png"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding MaxValue}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TimeOption}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="help_outline_white_24.png"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" Source="help_outline_white_24.png"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TaskType}"></Label>
                                         </StackLayout>
                                         <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding CorrentAnswers}" TextColor="Green"></Label>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text=" / "></Label>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding WrongAnswers}" TextColor="Red"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="NumbersType.png"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="NumbersType.png"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding DataType}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="{Binding ChainLengthImgSrc}"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="{Binding ChainLengthImgSrc}"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding MaxChainLength}"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="Restrictions_24.png" IsVisible="{Binding RestrictionsVisibility}"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="Restrictions_24.png" IsVisible="{Binding RestrictionsVisibility}"></ffimageforms:CachedImage>
                                         </StackLayout>
                                         <StackLayout Margin="0,-7,0,0" Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center">
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="date_range_white_24.png" HorizontalOptions="CenterAndExpand"></Image>
+                                            <ffimageforms:CachedImage Style="{StaticResource ListViewItemImage}" Source="date_range_white_24.png" HorizontalOptions="CenterAndExpand"></ffimageforms:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding DateTimeString}" HorizontalOptions="CenterAndExpand"></Label>
                                         </StackLayout>
                                     </StackLayout>

@@ -28,6 +28,7 @@ namespace Mental.UWP
         /// </summary>
         public App()
         {
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }

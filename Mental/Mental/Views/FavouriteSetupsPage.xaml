@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="Mental.Views.FavouriteSetupsPage"
              Title="Favourite Setups">
@@ -16,7 +17,7 @@
             <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
         </Style>
-        <Style x:Key="FavouritesListImage" TargetType="Image">
+        <Style x:Key="FavouritesListImage" TargetType="ffimageforms:CachedImage">
             <Setter Property="BackgroundColor" Value="Transparent"></Setter>
             <!--<Setter Property="HeightRequest" Value="30"></Setter>
                 <Setter Property="WidthRequest" Value="30"></Setter>-->
@@ -62,21 +63,21 @@
                                 <StackLayout Margin="10,0,10,0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical" Padding="0">
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding Operations}" FontSize="20" FontAttributes="Bold"></Label>
-                                        <Image Style="{StaticResource FavouritesListImage}" Source="arrow_downward_white_24.png"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="arrow_downward_white_24.png"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MinValue}"></Label>
-                                        <Image Style="{StaticResource FavouritesListImage}" Source="arrow_upward_white_24.png"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="arrow_upward_white_24.png"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MaxValue}"></Label>
-                                        <Image Style="{StaticResource FavouritesListImage}" Source="help_outline_white_24.png"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="help_outline_white_24.png"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TaskType}" ></Label>
-                                        <Image Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TimeOption}"></Label>
                                     </StackLayout>
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                        <Image Style="{StaticResource FavouritesListImage}" Source="NumbersType.png"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="NumbersType.png"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding DataType}"></Label>
-                                        <Image Style="{StaticResource FavouritesListImage}" Source="{Binding ChainLengthImgSrc}"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="{Binding ChainLengthImgSrc}"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MaxChainLength}"></Label>
-                                        <Image Style="{StaticResource FavouritesListImage}" IsVisible="{Binding RestrictionsVisibility}" Source="Restrictions_24.png"></Image>
+                                        <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" IsVisible="{Binding RestrictionsVisibility}" Source="Restrictions_24.png"></ffimageforms:CachedImage>
                                     </StackLayout>
                                 </StackLayout>
                             </Frame>
@@ -90,11 +91,11 @@
                         <ViewCell>
                             <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#6699ff">
                                 <StackLayout Margin="10,0,10,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Image Style="{StaticResource FavouritesListImage}" Source="grid_on_white_24.png"></Image>
+                                    <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="grid_on_white_24.png"></ffimageforms:CachedImage>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding GridSize}"></Label>
-                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding EasyModeImgSrc}"></Image>
+                                    <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="{Binding EasyModeImgSrc}"></ffimageforms:CachedImage>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding EasyMode}"></Label>
-                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></Image>
+                                    <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></ffimageforms:CachedImage>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TimeOption}"></Label>
                                 </StackLayout>
                             </Frame>
@@ -108,11 +109,11 @@
                         <ViewCell>
                             <Frame BackgroundColor="{Binding FrameBackgroundColor}" Padding="0" Margin="10,0,10,2" CornerRadius="25" BorderColor="#6699ff">
                                 <StackLayout Margin="10,0,10,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                    <Image Style="{StaticResource FavouritesListImage}" Source="Buttons_Amount_24.png"></Image>
+                                    <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="Buttons_Amount_24.png"></ffimageforms:CachedImage>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding AmountOfButtons}"></Label>
-                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding StroopTaskTypeImgSrc}"></Image>
+                                    <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="{Binding StroopTaskTypeImgSrc}"></ffimageforms:CachedImage>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding StroopTaskTypeString}"></Label>
-                                    <Image Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></Image>
+                                    <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="{Binding TimeOptionsImgSrc}"></ffimageforms:CachedImage>
                                     <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding TimeOption}"></Label>
                                 </StackLayout>
                             </Frame>

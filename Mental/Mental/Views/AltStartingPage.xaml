@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ffimageforms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
-             x:Class="Mental.Views.AltStartingPage">
+             x:Class="Mental.Views.AltStartingPage"
+             Title="Starting Page">
     <CarouselPage.Resources>
         <ResourceDictionary>
             <Style x:Key="CarouselNavigation" TargetType="Button">
@@ -37,20 +39,20 @@
     </CarouselPage.Resources>
     <ContentPage x:Name="MathTaskOptionsPage">
         <StackLayout Orientation="Vertical">
-            <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
+            <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" BorderColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
                 <Label Text="Mental Math" FontSize="23" BackgroundColor="Transparent" TextColor="#fafafa" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Label>
             </Frame>
-            <Image Source="MathOperations_200.png" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <StackLayout Margin="5" Orientation="Vertical">
+            <ffimageforms:CachedImage Margin="15" BitmapOptimizations="True" CacheType="None" Source="MathOperations_200.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></ffimageforms:CachedImage>
+            <StackLayout Margin="15,0,15,0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <StackLayout Margin="5" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Button Style="{StaticResource StartingPageButton}" Clicked="MathTaskFavourite" Image="Favorite_48.png"></Button>
                     <Label Style="{StaticResource StartingPageLabel}" Text="Favorite"></Label>
                 </StackLayout>
-                <StackLayout Margin="5" Orientation="Vertical">
+                <StackLayout Margin="5" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Button Style="{StaticResource StartingPageButton}" Clicked="MathTaskCustomize" Image="Adjust_48.png"></Button>
                     <Label Style="{StaticResource StartingPageLabel}" Text="Customize"></Label>
                 </StackLayout>
-                <StackLayout Margin="5" Orientation="Vertical">
+                <StackLayout Margin="5" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Button Style="{StaticResource StartingPageButton}" Clicked="MathTaskGeneralStatistics" Image="Statistics_48.png"></Button>
                     <Label Style="{StaticResource StartingPageLabel}" Text="Statistics"></Label>
                 </StackLayout>
@@ -64,11 +66,11 @@
     </ContentPage>
     <ContentPage x:Name="SchulteTableTaskOptionsPage">
         <StackLayout Orientation="Vertical">
-            <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
+            <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" BorderColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
                 <Label Text="Schulte Tables" FontSize="23" BackgroundColor="Transparent" TextColor="#fafafa" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Label>
             </Frame>
-            <Image Source="Schulte_Tables_200.png" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <ffimageforms:CachedImage Margin="15" BitmapOptimizations="True" CacheType="None" Source="Schulte_Tables_200.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></ffimageforms:CachedImage>
+            <StackLayout Margin="15,0,15,0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <StackLayout Margin="5" Orientation="Vertical">
                     <Button Style="{StaticResource StartingPageButton}" Clicked="SchulteTableFavourite" Image="Favorite_48.png"></Button>
                     <Label Style="{StaticResource StartingPageLabel}" Text="Favorite"></Label>
@@ -91,11 +93,11 @@
     </ContentPage>
     <ContentPage x:Name="StroopTaskOptionsPage">
         <StackLayout Orientation="Vertical">
-            <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
+            <Frame Padding="3" Margin="20,5,20,0" BackgroundColor="#6699ff" BorderColor="#6699ff" HorizontalOptions="FillAndExpand" VerticalOptions="Start" CornerRadius="25">
                 <Label Text="Stroop Tasks" FontSize="23" BackgroundColor="Transparent" TextColor="#fafafa" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"></Label>
             </Frame>
-            <Image Source="Stroop_Ver2_200.png" WidthRequest="300" HeightRequest="300" HorizontalOptions="Center" VerticalOptions="Center"></Image>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+            <ffimageforms:CachedImage Margin="15" BitmapOptimizations="True" CacheType="None" Source="Stroop_Ver2_200.png" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></ffimageforms:CachedImage>        
+            <StackLayout Margin="15,0,15,0" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <StackLayout Margin="5" Orientation="Vertical">
                     <Button Style="{StaticResource StartingPageButton}" Clicked="StroopTaskFavourite" Image="Favorite_48.png"></Button>
                     <Label Style="{StaticResource StartingPageLabel}" Text="Favorite"></Label>

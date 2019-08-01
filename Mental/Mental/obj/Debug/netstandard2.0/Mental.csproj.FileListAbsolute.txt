@@ -22,8 +22,8 @@ D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\StroopTaskSimilarStatisti
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.csproj.CoreCompileInputs.cache
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.AssemblyInfoInputs.cache
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.AssemblyInfo.cs
-D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.dll
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\ref\Mental.dll
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Mental.pdb
 D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\Views\AltStartingPage.xaml.g.cs
+D:\Mental\Mental\Mental\obj\Debug\netstandard2.0\XamlC.stamp

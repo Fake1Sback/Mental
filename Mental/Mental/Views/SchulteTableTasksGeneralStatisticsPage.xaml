@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.SchulteTableTasksGeneralStatisticsPage"
              Title="Schulte Tables General Stats">
     <ContentPage.ToolbarItems>
@@ -18,7 +19,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
                 <Setter Property="HorizontalTextAlignment" Value="Center"></Setter>
             </Style>
-            <Style x:Key="ListViewItemImage" TargetType="Image">
+            <Style x:Key="ListViewItemImage" TargetType="ffimage:CachedImage">
                 <Setter Property="VerticalOptions" Value="Center"></Setter>
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
             </Style>
@@ -106,16 +107,16 @@
                                 <Frame BackgroundColor="{Binding FrameBackgroundColor}" CornerRadius="25" Padding="0" BorderColor="#6699ff">
                                     <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="15,5,15,5">
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="grid_on_white_24.png"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" Source="grid_on_white_24.png"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding GridSizeString}" Margin="5,0,5,0"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="{Binding EasyModeSrc}"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" Source="{Binding EasyModeSrc}"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding EasyModeString}" Margin="5,0,5,0"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" Source="{Binding TimeOptionImgSrc}"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" Text="{Binding TimeOptionString}" Margin="5,0,5,0"></Label>
                                         </StackLayout>
                                         <StackLayout Margin="0,-4,0,0" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Start" Text="{Binding EfficiencyString}" Margin="5,0,5,0"></Label>
-                                            <Image Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_24.png"></Image>
+                                            <ffimage:CachedImage Style="{StaticResource ListViewItemImage}" HorizontalOptions="Center" Source="date_range_white_24.png"></ffimage:CachedImage>
                                             <Label Style="{StaticResource ListViewItemLabel}" HorizontalOptions="Center" Text="{Binding DateTimeString}" Margin="5,0,5,0"></Label>
                                         </StackLayout>
                                     </StackLayout>

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:PartialViews="clr-namespace:Mental.Views.PartialViews"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.StroopTaskOptionsPage"
              Title="Stroop Tasks Options">
     <ContentPage.ToolbarItems>
@@ -54,7 +55,7 @@
                 <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                         <BoxView Margin="5,0,10,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
-                        <Image WidthRequest="50" BackgroundColor="#6699ff" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Source="info_white_nt_48.png"/>
+                        <ffimage:CachedImage WidthRequest="50" BackgroundColor="#6699ff" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Source="info_white_nt_48.png"/>
                         <BoxView Margin="10,0,5,0" HeightRequest="1" BackgroundColor="#fafafa" HorizontalOptions="FillAndExpand" VerticalOptions="Center"></BoxView>
                     </StackLayout>
                     <Frame HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0" CornerRadius="25" BackgroundColor="Transparent" BorderColor="#fafafa" >

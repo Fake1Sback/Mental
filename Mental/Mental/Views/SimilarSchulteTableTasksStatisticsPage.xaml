@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.SimilarSchulteTableTasksStatisticsPage"
              Title="Similar Tasks Statistics">
     <ContentPage.ToolbarItems>
@@ -26,7 +27,7 @@
                 <Setter Property="Padding" Value="0"></Setter>
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
             </Style>
-            <Style x:Key="TopFrameImage" TargetType="Image">
+            <Style x:Key="TopFrameImage" TargetType="ffimage:CachedImage">
                 <Setter Property="BackgroundColor" Value="Transparent"></Setter>
                 <!--<Setter Property="HeightRequest" Value="30"></Setter>
                 <Setter Property="WidthRequest" Value="30"></Setter>-->
@@ -60,11 +61,11 @@
             <StackLayout Orientation="Vertical" Padding="0" Margin="0" BackgroundColor="#6699ff">
                 <Frame BackgroundColor="Transparent" Padding="0" Margin="10,5,10,10" CornerRadius="25" BorderColor="#fafafa">
                     <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Margin="0,3,0,3">
-                        <Image Margin="2,0,0,0" Style="{StaticResource TopFrameImage}" Source="grid_on_white_24.png"></Image>
+                        <ffimage:CachedImage Margin="2,0,0,0" Style="{StaticResource TopFrameImage}" Source="grid_on_white_24.png"></ffimage:CachedImage>
                         <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameGridSize}"></Label>
-                        <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameEasyModeSrc}"></Image>
+                        <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameEasyModeSrc}"></ffimage:CachedImage>
                         <Label Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameEasyMode}"></Label>
-                        <Image Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameTimeParametersImgSrc}"></Image>
+                        <ffimage:CachedImage Style="{StaticResource TopFrameImage}" Source="{Binding TopFrameTimeParametersImgSrc}"></ffimage:CachedImage>
                         <Label Margin="0,0,2,0" Style="{StaticResource TopFrameLabel}" Text="{Binding TopFrameTimeParameters}"></Label>
                     </StackLayout>
                 </Frame>
@@ -80,7 +81,7 @@
                             <Frame CornerRadius="25" BackgroundColor="{Binding FrameBackgroundColor}" BorderColor="#fafafa" Padding="0" Margin="15,0,15,0">
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
                                     <Label Text="{Binding EfficiencyString}" FontSize="18" TextColor="White" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="StartAndExpand"></Label>
-                                    <Image Source="date_range_white_24.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></Image>
+                                    <ffimage:CachedImage Source="date_range_white_24.png" VerticalOptions="Center" HorizontalOptions="EndAndExpand"></ffimage:CachedImage>
                                     <Label Text="{Binding DateTimeString}" FontSize="18" TextColor="White" VerticalOptions="Center" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="EndAndExpand"></Label>
                                 </StackLayout>
                             </Frame>

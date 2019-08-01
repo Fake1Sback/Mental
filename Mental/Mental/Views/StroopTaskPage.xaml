@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="Mental.Views.StroopTaskPage">
     <ContentPage.Content>
         <ScrollView>
@@ -44,13 +45,13 @@
                         <Frame Style="{StaticResource AfterFrameInternalFrame}">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                 <Button Style="{StaticResource AfterFrameButton}" Text="Restart" Command="{Binding RestartCommand}"></Button>
-                                <Image Style="{StaticResource AfterFrameImage}" Source="refresh_white_48.png"></Image>
+                                <ffimage:CachedImage Style="{StaticResource AfterFrameImage}" Source="refresh_white_48.png"></ffimage:CachedImage>
                             </StackLayout>
                         </Frame>
                         <Frame Style="{StaticResource AfterFrameInternalFrame}">
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                 <Button Style="{StaticResource AfterFrameButton}" Text="Statistics" Command="{Binding NavigateToStatisticsCommand}"></Button>
-                                <Image Style="{StaticResource AfterFrameImage}" Source="Statistics_48.png"></Image>
+                                <ffimage:CachedImage Style="{StaticResource AfterFrameImage}" Source="Statistics_48.png"></ffimage:CachedImage>
                             </StackLayout>
                         </Frame>
                     </StackLayout>

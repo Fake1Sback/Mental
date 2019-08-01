@@ -1,3 +1,7 @@
+FFImageLoading
+FFImageLoading.Forms
+FFImageLoading.Forms.Platform
+FFImageLoading.Platform
 FormsViewGroup
 Mental
 Microcharts
@@ -94,3 +98,4 @@ System.ComponentModel.Annotations
 System.Linq.Queryable
 System.Reflection.Extensions
 System.Collections.Concurrent
+System.Resources.ResourceManager
