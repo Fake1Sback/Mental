@@ -1,2 +1,0 @@
-Microsoft.EntityFrameworkCore.Relational, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60
-  Microsoft.EntityFrameworkCore.Properties.RelationalStrings.resources
