@@ -1,4 +1,11 @@
 .vs/*
 *.sln
+*.apk
 Mental/Mental/bin/
 Mental/Mental/obj/
+Mental/Mental.Android/obj/
+Mental/Mental.Android/bin/
+Mental/Mental.iOS/bin/
+Mental/Mental.iOS/obj/
+Mental/Mental.UWP/bin/
+Mental/Mental.UWP/obj/
