@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Reflection;
+using FFImageLoading.Forms;
 
 namespace Mental.UWP
 {
@@ -27,10 +29,9 @@ namespace Mental.UWP
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
-        {
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+        {                  
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            this.Suspending += OnSuspending;      
         }
 
         /// <summary>
@@ -40,7 +41,11 @@ namespace Mental.UWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            var assemblies = new List<Assembly>
+            {
+                typeof(CachedImage).GetTypeInfo().Assembly,
+                typeof(FFImageLoading.Forms.Platform.CachedImageRenderer).GetTypeInfo().Assembly
+            };
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -53,7 +58,9 @@ namespace Mental.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+                Xamarin.Forms.Forms.Init(e,assemblies);
+
+                FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -73,6 +80,7 @@ namespace Mental.UWP
             }
             // Ensure the current window is active
             Window.Current.Activate();
+           
         }
 
         /// <summary>

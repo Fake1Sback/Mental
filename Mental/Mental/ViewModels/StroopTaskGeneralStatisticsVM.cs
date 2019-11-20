@@ -105,7 +105,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, HoleRadius = 0 };
+                return new DonutChart() { Entries = _TimeOptionsChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, HoleRadius = 0, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -118,7 +118,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, HoleRadius = 0};
+                return new DonutChart() { Entries = _StroopTaskTypeChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, HoleRadius = 0, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -131,7 +131,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, ValueLabelOrientation = Orientation.Horizontal, LabelOrientation = Orientation.Horizontal, PointSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa")};
+                return new PointChart() { Entries = _AmountOfButtonsChart, PointAreaAlpha = 200, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, ValueLabelOrientation = Orientation.Horizontal, LabelOrientation = Orientation.Horizontal, PointSize = 40, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {

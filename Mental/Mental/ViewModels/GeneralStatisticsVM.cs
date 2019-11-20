@@ -114,7 +114,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TimeOptionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
+                return new DonutChart() { Entries = _TimeOptionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -127,7 +127,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _TaskTypeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize};
+                return new DonutChart() { Entries = _TaskTypeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -140,7 +140,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _DataTypeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize};
+                return new DonutChart() { Entries = _DataTypeChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -153,7 +153,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _RestrictionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
+                return new DonutChart() { Entries = _RestrictionsChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -166,7 +166,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _OperationsChart,  BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), LabelTextSize = StatisticsLabelTextSize, ValueLabelOrientation = Orientation.Horizontal, LabelOrientation = Orientation.Horizontal, PointSize = 40 };
+                return new PointChart() { Entries = _OperationsChart,  BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), LabelTextSize = StatisticsLabelTextSize, ValueLabelOrientation = Orientation.Horizontal, LabelOrientation = Orientation.Horizontal, PointSize = 40, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -179,7 +179,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new DonutChart() { Entries = _ChainLengthChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize };
+                return new DonutChart() { Entries = _ChainLengthChart, HoleRadius = 0, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), LabelTextSize = StatisticsLabelTextSize, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {
@@ -192,7 +192,7 @@ namespace Mental.ViewModels
         {
             get
             {
-                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), LabelTextSize = StatisticsLabelTextSize, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, PointSize = 40};
+                return new PointChart() { Entries = _MaxChainLengthChart, BackgroundColor = SkiaSharp.SKColor.Parse("#6699ff"), PointAreaAlpha = 200, LabelColor = SkiaSharp.SKColor.Parse("#fafafa"), LabelTextSize = StatisticsLabelTextSize, LabelOrientation = Orientation.Horizontal, ValueLabelOrientation = Orientation.Horizontal, PointSize = 40, IsAnimated = false, AnimationDuration = TimeSpan.FromSeconds(0) };
             }
             set
             {

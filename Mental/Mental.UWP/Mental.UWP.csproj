@@ -96,6 +96,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UwpDbPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -103,6 +104,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="access_time_white_24.png" />
+    <Content Include="access_time_white_36.png" />
+    <Content Include="Adjust_48.png" />
+    <Content Include="arrow_downward_white_24.png" />
+    <Content Include="arrow_left_white_24.png" />
+    <Content Include="arrow_right_white_24.png" />
+    <Content Include="arrow_upward_white_24.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -130,7 +138,49 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Broken_Chain_2_24.png" />
+    <Content Include="Buttons_Amount_24.png" />
+    <Content Include="Chain_24.png" />
+    <Content Include="circle_outline_white_24.png" />
+    <Content Include="clear_forever_white_24.png" />
+    <Content Include="clear_forever_white_36.png" />
+    <Content Include="Color_by_Text_24.png" />
+    <Content Include="date_range_white_24.png" />
+    <Content Include="delete_white_24.png" />
+    <Content Include="delete_white_36.png" />
+    <Content Include="done_black_18.png" />
+    <Content Include="Easy_Mode_24.png" />
+    <Content Include="expand_less_white_48.png" />
+    <Content Include="expand_more_white_48.png" />
+    <Content Include="Favorite_48.png" />
+    <Content Include="Favourite_36.png" />
+    <Content Include="Find_One_24.png" />
+    <Content Include="flag_blue_36.png" />
+    <Content Include="grid_on_white_24.png" />
+    <Content Include="help_outline_white_24.png" />
+    <Content Include="home_white_36.png" />
+    <Content Include="info_white_48.png" />
+    <Content Include="info_white_nt_48.png" />
+    <Content Include="list_numbered_white_24.png" />
+    <Content Include="loadmore_white_24.png" />
+    <Content Include="loadmore_white_36.png" />
+    <Content Include="MathOperations_200.png" />
+    <Content Include="NumbersType.png" />
+    <Content Include="outlined_flag_white_36.png" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="refresh_white_48.png" />
+    <Content Include="Restrictions_24.png" />
+    <Content Include="save_white_24.png" />
+    <Content Include="save_white_36.png" />
+    <Content Include="Schulte_Tables_200.png" />
+    <Content Include="settings_white_24.png" />
+    <Content Include="settings_white_36.png" />
+    <Content Include="Statistics_36.png" />
+    <Content Include="Statistics_48.png" />
+    <Content Include="statistics_blue_36.png" />
+    <Content Include="Stopwatch_24.png" />
+    <Content Include="Stroop_Ver2_200.png" />
+    <Content Include="True_False_24.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

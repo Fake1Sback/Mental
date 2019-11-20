@@ -51,7 +51,7 @@
             <StackLayout Margin="10,5,10,5" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
                 <BoxView BackgroundColor="#6699ff" HeightRequest="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="10,0,-10,0"></BoxView>
                 <Frame BorderColor="#6699ff" BackgroundColor="#6699ff" Padding="0" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Margin="10,5,10,5" FontAttributes="Bold" Text="{Binding PageCaption}" TextColor="#fafafa" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Margin="10,5,10,5" FontAttributes="Bold" Text="{Binding PageCaption}" TextColor="#fafafa" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
                 </Frame>
                 <BoxView BackgroundColor="#6699ff" HeightRequest="2" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Margin="-10,0,10,0"></BoxView>
             </StackLayout>
@@ -62,7 +62,7 @@
                             <Frame BackgroundColor="{Binding FrameBackgroundColor}" Margin="10,0,10,2" CornerRadius="25" Padding="0" BorderColor="#6699ff">
                                 <StackLayout Margin="10,0,10,0" HorizontalOptions="Center" VerticalOptions="Center" Orientation="Vertical" Padding="0">
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding Operations}" FontSize="20" FontAttributes="Bold"></Label>
+                                        <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding Operations}" FontSize="17" FontAttributes="Bold"></Label>
                                         <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="arrow_downward_white_24.png"></ffimageforms:CachedImage>
                                         <Label Style="{StaticResource FavouritesListLabel}" Text="{Binding MinValue}"></Label>
                                         <ffimageforms:CachedImage Style="{StaticResource FavouritesListImage}" Source="arrow_upward_white_24.png"></ffimageforms:CachedImage>
